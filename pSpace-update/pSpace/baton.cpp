@@ -608,7 +608,9 @@ SubBaton::~SubBaton()
 {
 	delete []tagName_;
 	uv_timer_stop(timer);
-	psAPI_Memory_FreeDataList(&subData_, tagCount_);
+	if(subData_!=NULL){
+      psAPI_Memory_FreeDataList(&subData_, tagCount_);
+	}
 	callback.Dispose();
 }
 
