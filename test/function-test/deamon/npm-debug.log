@@ -1,0 +1,2384 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install',
+1 verbose cli   'forever',
+1 verbose cli   '-g' ]
+2 info using npm@1.3.8
+3 info using node@v0.10.18
+4 verbose node symlink C:\Program Files\nodejs\\node.exe
+5 verbose cache add [ 'forever', null ]
+6 verbose cache add name=undefined spec="forever" args=["forever",null]
+7 verbose parsed url { protocol: null,
+7 verbose parsed url   slashes: null,
+7 verbose parsed url   auth: null,
+7 verbose parsed url   host: null,
+7 verbose parsed url   port: null,
+7 verbose parsed url   hostname: null,
+7 verbose parsed url   hash: null,
+7 verbose parsed url   search: null,
+7 verbose parsed url   query: null,
+7 verbose parsed url   pathname: 'forever',
+7 verbose parsed url   path: 'forever',
+7 verbose parsed url   href: 'forever' }
+8 silly lockFile e07f8c4a-forever forever
+9 verbose lock forever C:\Users\yingf\AppData\Roaming\npm-cache\e07f8c4a-forever.lock
+10 silly lockFile e07f8c4a-forever forever
+11 silly lockFile e07f8c4a-forever forever
+12 verbose addNamed [ 'forever', '' ]
+13 verbose addNamed [ null, '*' ]
+14 silly lockFile 28ef027b-forever forever@
+15 verbose lock forever@ C:\Users\yingf\AppData\Roaming\npm-cache\28ef027b-forever.lock
+16 silly addNameRange { name: 'forever', range: '*', hasData: false }
+17 verbose url raw forever
+18 verbose url resolving [ 'https://registry.npmjs.org/', './forever' ]
+19 verbose url resolved https://registry.npmjs.org/forever
+20 info trying registry request attempt 1 at 09:16:05
+21 http GET https://registry.npmjs.org/forever
+22 http 200 https://registry.npmjs.org/forever
+23 silly registry.get cb [ 200,
+23 silly registry.get   { date: 'Thu, 24 Apr 2014 01:16:07 GMT',
+23 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R14B04)',
+23 silly registry.get     etag: '"6O2B2983QEHRXLXZA6AF8V9MK"',
+23 silly registry.get     'content-type': 'application/json',
+23 silly registry.get     via: '1.1 varnish',
+23 silly registry.get     'cache-control': 'max-age=1',
+23 silly registry.get     'content-length': '62472',
+23 silly registry.get     'accept-ranges': 'bytes',
+23 silly registry.get     'x-served-by': 'cache-v37-ASH, cache-ty66-TYO',
+23 silly registry.get     'x-cache': 'HIT, MISS',
+23 silly registry.get     'x-cache-hits': '1, 0',
+23 silly registry.get     'x-timer': 'S1398301553.519497395,VS0,VS85,VE173,VE614062',
+23 silly registry.get     vary: 'Accept',
+23 silly registry.get     'keep-alive': 'timeout=10, max=50',
+23 silly registry.get     connection: 'Keep-Alive' } ]
+24 silly addNameRange number 2 { name: 'forever', range: '*', hasData: true }
+25 silly addNameRange versions [ 'forever',
+25 silly addNameRange   [ '0.6.0',
+25 silly addNameRange     '0.6.1',
+25 silly addNameRange     '0.6.2',
+25 silly addNameRange     '0.6.3',
+25 silly addNameRange     '0.6.4',
+25 silly addNameRange     '0.6.5',
+25 silly addNameRange     '0.6.6',
+25 silly addNameRange     '0.6.7',
+25 silly addNameRange     '0.6.8',
+25 silly addNameRange     '0.6.9',
+25 silly addNameRange     '0.7.0',
+25 silly addNameRange     '0.7.1',
+25 silly addNameRange     '0.7.2',
+25 silly addNameRange     '0.7.3',
+25 silly addNameRange     '0.7.4',
+25 silly addNameRange     '0.7.5',
+25 silly addNameRange     '0.8.0',
+25 silly addNameRange     '0.8.1',
+25 silly addNameRange     '0.8.2',
+25 silly addNameRange     '0.8.3',
+25 silly addNameRange     '0.8.4',
+25 silly addNameRange     '0.8.5',
+25 silly addNameRange     '0.9.0',
+25 silly addNameRange     '0.9.1',
+25 silly addNameRange     '0.9.2',
+25 silly addNameRange     '0.10.0',
+25 silly addNameRange     '0.10.5',
+25 silly addNameRange     '0.10.6',
+25 silly addNameRange     '0.10.7',
+25 silly addNameRange     '0.10.8',
+25 silly addNameRange     '0.10.9',
+25 silly addNameRange     '0.10.10',
+25 silly addNameRange     '0.10.11',
+25 silly addNameRange     '0.11.0' ] ]
+26 verbose addNamed [ 'forever', '0.11.0' ]
+27 verbose addNamed [ '0.11.0', '0.11.0' ]
+28 silly lockFile dd206152-forever-0-11-0 forever@0.11.0
+29 verbose lock forever@0.11.0 C:\Users\yingf\AppData\Roaming\npm-cache\dd206152-forever-0-11-0.lock
+30 silly lockFile 20c3d32f-s-org-forever-forever-0-11-0-tgz https://registry.npmjs.org/forever/-/forever-0.11.0.tgz
+31 verbose lock https://registry.npmjs.org/forever/-/forever-0.11.0.tgz C:\Users\yingf\AppData\Roaming\npm-cache\20c3d32f-s-org-forever-forever-0-11-0-tgz.lock
+32 verbose addRemoteTarball [ 'https://registry.npmjs.org/forever/-/forever-0.11.0.tgz',
+32 verbose addRemoteTarball   '97de678915c64dacce2ccbfb94620723b308d44f' ]
+33 info retry fetch attempt 1 at 09:16:14
+34 verbose fetch to= C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302174671-0.4304860639385879\tmp.tgz
+35 http GET https://registry.npmjs.org/forever/-/forever-0.11.0.tgz
+36 http 200 https://registry.npmjs.org/forever/-/forever-0.11.0.tgz
+37 verbose tar unpack C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302174671-0.4304860639385879\tmp.tgz
+38 silly lockFile e6cead1a-74671-0-4304860639385879-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302174671-0.4304860639385879\package
+39 verbose lock tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302174671-0.4304860639385879\package C:\Users\yingf\AppData\Roaming\npm-cache\e6cead1a-74671-0-4304860639385879-package.lock
+40 silly lockFile 6f9c5dae-74671-0-4304860639385879-tmp-tgz tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302174671-0.4304860639385879\tmp.tgz
+41 verbose lock tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302174671-0.4304860639385879\tmp.tgz C:\Users\yingf\AppData\Roaming\npm-cache\6f9c5dae-74671-0-4304860639385879-tmp-tgz.lock
+42 silly gunzTarPerm modes [ '755', '644' ]
+43 silly gunzTarPerm extractEntry package.json
+44 silly gunzTarPerm extractEntry .npmignore
+45 silly gunzTarPerm extractEntry README.md
+46 silly gunzTarPerm extractEntry LICENSE
+47 silly gunzTarPerm extractEntry .travis.yml
+48 silly gunzTarPerm extractEntry bin/forever
+49 silly gunzTarPerm extractEntry bin/foreverd
+50 silly gunzTarPerm extractEntry bin/monitor
+51 silly gunzTarPerm extractEntry lib/forever.js
+52 silly gunzTarPerm extractEntry lib/forever/cli.js
+53 silly gunzTarPerm extractEntry lib/forever/worker.js
+54 silly gunzTarPerm extractEntry lib/forever/service/cli.js
+55 silly gunzTarPerm extractEntry lib/forever/service/index.js
+56 silly gunzTarPerm extractEntry lib/forever/service/service.js
+57 silly gunzTarPerm extractEntry lib/forever/service/adapters/adapter.js
+58 silly gunzTarPerm extractEntry lib/forever/service/adapters/initd/index.js
+59 silly gunzTarPerm extractEntry lib/forever/service/adapters/systemv/index.js
+60 silly gunzTarPerm extractEntry lib/forever/service/adapters/systemv/foreverd
+61 silly gunzTarPerm extractEntry test/cli-test
+62 silly gunzTarPerm extractEntry test/core/tail-stopall-test.js
+63 silly gunzTarPerm extractEntry test/fixtures/log-on-interval.js
+64 silly gunzTarPerm extractEntry test/fixtures/server.js
+65 silly gunzTarPerm extractEntry test/fixtures/start-daemon.js
+66 silly gunzTarPerm extractEntry test/helpers/macros.js
+67 silly gunzTarPerm extractEntry test/helpers/mocks/child-process.js
+68 silly gunzTarPerm extractEntry test/helpers/mocks/monitor.js
+69 silly gunzTarPerm extractEntry test/helpers/mocks/stream.js
+70 silly gunzTarPerm extractEntry test/service/simple-test.js
+71 silly gunzTarPerm extractEntry test/worker/multiple-workers-test.js
+72 silly gunzTarPerm extractEntry test/worker/simple-test.js
+73 silly lockFile e6cead1a-74671-0-4304860639385879-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302174671-0.4304860639385879\package
+74 silly lockFile e6cead1a-74671-0-4304860639385879-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302174671-0.4304860639385879\package
+75 silly lockFile 6f9c5dae-74671-0-4304860639385879-tmp-tgz tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302174671-0.4304860639385879\tmp.tgz
+76 silly lockFile 6f9c5dae-74671-0-4304860639385879-tmp-tgz tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302174671-0.4304860639385879\tmp.tgz
+77 verbose tar pack [ 'C:\\Users\\yingf\\AppData\\Roaming\\npm-cache\\forever\\0.11.0\\package.tgz',
+77 verbose tar pack   'C:\\Users\\yingf\\AppData\\Local\\Temp\\npm-3532-AJJJv-CF\\1398302174671-0.4304860639385879\\package' ]
+78 verbose tarball C:\Users\yingf\AppData\Roaming\npm-cache\forever\0.11.0\package.tgz
+79 verbose folder C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302174671-0.4304860639385879\package
+80 silly lockFile e6cead1a-74671-0-4304860639385879-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302174671-0.4304860639385879\package
+81 verbose lock tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302174671-0.4304860639385879\package C:\Users\yingf\AppData\Roaming\npm-cache\e6cead1a-74671-0-4304860639385879-package.lock
+82 silly lockFile 734d3817-cache-forever-0-11-0-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\forever\0.11.0\package.tgz
+83 verbose lock tar://C:\Users\yingf\AppData\Roaming\npm-cache\forever\0.11.0\package.tgz C:\Users\yingf\AppData\Roaming\npm-cache\734d3817-cache-forever-0-11-0-package-tgz.lock
+84 silly lockFile e6cead1a-74671-0-4304860639385879-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302174671-0.4304860639385879\package
+85 silly lockFile e6cead1a-74671-0-4304860639385879-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302174671-0.4304860639385879\package
+86 silly lockFile 734d3817-cache-forever-0-11-0-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\forever\0.11.0\package.tgz
+87 silly lockFile 734d3817-cache-forever-0-11-0-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\forever\0.11.0\package.tgz
+88 silly lockFile a2bfcd5c-npm-cache-forever-0-11-0-package C:\Users\yingf\AppData\Roaming\npm-cache\forever\0.11.0\package
+89 verbose lock C:\Users\yingf\AppData\Roaming\npm-cache\forever\0.11.0\package C:\Users\yingf\AppData\Roaming\npm-cache\a2bfcd5c-npm-cache-forever-0-11-0-package.lock
+90 silly lockFile a2bfcd5c-npm-cache-forever-0-11-0-package C:\Users\yingf\AppData\Roaming\npm-cache\forever\0.11.0\package
+91 silly lockFile a2bfcd5c-npm-cache-forever-0-11-0-package C:\Users\yingf\AppData\Roaming\npm-cache\forever\0.11.0\package
+92 verbose tar unpack C:\Users\yingf\AppData\Roaming\npm-cache\forever\0.11.0\package.tgz
+93 silly lockFile c22ef0dd-npm-cache-forever-0-11-0-package tar://C:\Users\yingf\AppData\Roaming\npm-cache\forever\0.11.0\package
+94 verbose lock tar://C:\Users\yingf\AppData\Roaming\npm-cache\forever\0.11.0\package C:\Users\yingf\AppData\Roaming\npm-cache\c22ef0dd-npm-cache-forever-0-11-0-package.lock
+95 silly lockFile 734d3817-cache-forever-0-11-0-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\forever\0.11.0\package.tgz
+96 verbose lock tar://C:\Users\yingf\AppData\Roaming\npm-cache\forever\0.11.0\package.tgz C:\Users\yingf\AppData\Roaming\npm-cache\734d3817-cache-forever-0-11-0-package-tgz.lock
+97 silly gunzTarPerm modes [ '755', '644' ]
+98 silly gunzTarPerm extractEntry package.json
+99 silly gunzTarPerm modified mode [ 'package.json', 438, 420 ]
+100 silly gunzTarPerm extractEntry .npmignore
+101 silly gunzTarPerm modified mode [ '.npmignore', 438, 420 ]
+102 silly gunzTarPerm extractEntry README.md
+103 silly gunzTarPerm modified mode [ 'README.md', 438, 420 ]
+104 silly gunzTarPerm extractEntry LICENSE
+105 silly gunzTarPerm modified mode [ 'LICENSE', 438, 420 ]
+106 silly gunzTarPerm extractEntry .travis.yml
+107 silly gunzTarPerm modified mode [ '.travis.yml', 438, 420 ]
+108 silly gunzTarPerm extractEntry bin/forever
+109 silly gunzTarPerm modified mode [ 'bin/forever', 438, 420 ]
+110 silly gunzTarPerm extractEntry bin/foreverd
+111 silly gunzTarPerm modified mode [ 'bin/foreverd', 438, 420 ]
+112 silly gunzTarPerm extractEntry bin/monitor
+113 silly gunzTarPerm modified mode [ 'bin/monitor', 438, 420 ]
+114 silly gunzTarPerm extractEntry lib/forever.js
+115 silly gunzTarPerm modified mode [ 'lib/forever.js', 438, 420 ]
+116 silly gunzTarPerm extractEntry lib/forever/cli.js
+117 silly gunzTarPerm modified mode [ 'lib/forever/cli.js', 438, 420 ]
+118 silly gunzTarPerm extractEntry lib/forever/worker.js
+119 silly gunzTarPerm modified mode [ 'lib/forever/worker.js', 438, 420 ]
+120 silly gunzTarPerm extractEntry lib/forever/service/cli.js
+121 silly gunzTarPerm modified mode [ 'lib/forever/service/cli.js', 438, 420 ]
+122 silly gunzTarPerm extractEntry lib/forever/service/index.js
+123 silly gunzTarPerm modified mode [ 'lib/forever/service/index.js', 438, 420 ]
+124 silly gunzTarPerm extractEntry lib/forever/service/service.js
+125 silly gunzTarPerm modified mode [ 'lib/forever/service/service.js', 438, 420 ]
+126 silly gunzTarPerm extractEntry lib/forever/service/adapters/adapter.js
+127 silly gunzTarPerm modified mode [ 'lib/forever/service/adapters/adapter.js', 438, 420 ]
+128 silly gunzTarPerm extractEntry lib/forever/service/adapters/initd/index.js
+129 silly gunzTarPerm modified mode [ 'lib/forever/service/adapters/initd/index.js', 438, 420 ]
+130 silly gunzTarPerm extractEntry lib/forever/service/adapters/systemv/index.js
+131 silly gunzTarPerm modified mode [ 'lib/forever/service/adapters/systemv/index.js', 438, 420 ]
+132 silly gunzTarPerm extractEntry lib/forever/service/adapters/systemv/foreverd
+133 silly gunzTarPerm modified mode [ 'lib/forever/service/adapters/systemv/foreverd', 438, 420 ]
+134 silly gunzTarPerm extractEntry test/cli-test
+135 silly gunzTarPerm modified mode [ 'test/cli-test', 438, 420 ]
+136 silly gunzTarPerm extractEntry test/core/tail-stopall-test.js
+137 silly gunzTarPerm modified mode [ 'test/core/tail-stopall-test.js', 438, 420 ]
+138 silly gunzTarPerm extractEntry test/fixtures/log-on-interval.js
+139 silly gunzTarPerm modified mode [ 'test/fixtures/log-on-interval.js', 438, 420 ]
+140 silly gunzTarPerm extractEntry test/fixtures/server.js
+141 silly gunzTarPerm modified mode [ 'test/fixtures/server.js', 438, 420 ]
+142 silly gunzTarPerm extractEntry test/fixtures/start-daemon.js
+143 silly gunzTarPerm modified mode [ 'test/fixtures/start-daemon.js', 438, 420 ]
+144 silly gunzTarPerm extractEntry test/helpers/macros.js
+145 silly gunzTarPerm modified mode [ 'test/helpers/macros.js', 438, 420 ]
+146 silly gunzTarPerm extractEntry test/helpers/mocks/child-process.js
+147 silly gunzTarPerm modified mode [ 'test/helpers/mocks/child-process.js', 438, 420 ]
+148 silly gunzTarPerm extractEntry test/helpers/mocks/monitor.js
+149 silly gunzTarPerm modified mode [ 'test/helpers/mocks/monitor.js', 438, 420 ]
+150 silly gunzTarPerm extractEntry test/helpers/mocks/stream.js
+151 silly gunzTarPerm modified mode [ 'test/helpers/mocks/stream.js', 438, 420 ]
+152 silly gunzTarPerm extractEntry test/service/simple-test.js
+153 silly gunzTarPerm modified mode [ 'test/service/simple-test.js', 438, 420 ]
+154 silly gunzTarPerm extractEntry test/worker/multiple-workers-test.js
+155 silly gunzTarPerm modified mode [ 'test/worker/multiple-workers-test.js', 438, 420 ]
+156 silly gunzTarPerm extractEntry test/worker/simple-test.js
+157 silly gunzTarPerm modified mode [ 'test/worker/simple-test.js', 438, 420 ]
+158 silly lockFile c22ef0dd-npm-cache-forever-0-11-0-package tar://C:\Users\yingf\AppData\Roaming\npm-cache\forever\0.11.0\package
+159 silly lockFile c22ef0dd-npm-cache-forever-0-11-0-package tar://C:\Users\yingf\AppData\Roaming\npm-cache\forever\0.11.0\package
+160 silly lockFile 734d3817-cache-forever-0-11-0-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\forever\0.11.0\package.tgz
+161 silly lockFile 734d3817-cache-forever-0-11-0-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\forever\0.11.0\package.tgz
+162 verbose chmod C:\Users\yingf\AppData\Roaming\npm-cache\forever\0.11.0\package.tgz 644
+163 silly chown skipping for windows C:\Users\yingf\AppData\Roaming\npm-cache\forever\0.11.0\package.tgz
+164 silly lockFile 20c3d32f-s-org-forever-forever-0-11-0-tgz https://registry.npmjs.org/forever/-/forever-0.11.0.tgz
+165 silly lockFile 20c3d32f-s-org-forever-forever-0-11-0-tgz https://registry.npmjs.org/forever/-/forever-0.11.0.tgz
+166 silly lockFile dd206152-forever-0-11-0 forever@0.11.0
+167 silly lockFile dd206152-forever-0-11-0 forever@0.11.0
+168 silly lockFile 28ef027b-forever forever@
+169 silly lockFile 28ef027b-forever forever@
+170 silly resolved [ { name: 'forever',
+170 silly resolved     preferGlobal: 'true',
+170 silly resolved     description: 'A simple CLI tool for ensuring that a given node script runs continuously (i.e. forever)',
+170 silly resolved     version: '0.11.0',
+170 silly resolved     author: { name: 'Nodejitsu Inc.', email: 'info@nodejitsu.com' },
+170 silly resolved     maintainers: [ [Object], [Object], [Object] ],
+170 silly resolved     repository: { type: 'git', url: 'http://github.com/nodejitsu/forever.git' },
+170 silly resolved     keywords: [ 'cli', 'fault tolerant', 'sysadmin', 'tools' ],
+170 silly resolved     dependencies:
+170 silly resolved      { colors: '~0.6.2',
+170 silly resolved        cliff: '0.1.8',
+170 silly resolved        flatiron: '~0.3.11',
+170 silly resolved        'forever-monitor': '1.2.3',
+170 silly resolved        nconf: '~0.6.9',
+170 silly resolved        nssocket: '~0.5.1',
+170 silly resolved        optimist: '~0.6.0',
+170 silly resolved        pkginfo: '0.3.0',
+170 silly resolved        timespan: '~2.3.0',
+170 silly resolved        watch: '~0.8.0',
+170 silly resolved        utile: '~0.2.1',
+170 silly resolved        winston: '~0.7.2' },
+170 silly resolved     devDependencies:
+170 silly resolved      { broadway: '0.2.x',
+170 silly resolved        eventemitter2: '0.4.x',
+170 silly resolved        request: '2.x.x',
+170 silly resolved        vows: '0.7.x' },
+170 silly resolved     bin: { forever: './bin/forever', foreverd: './bin/foreverd' },
+170 silly resolved     main: './lib/forever',
+170 silly resolved     scripts: { test: 'vows test/**/*-test.js --spec -i' },
+170 silly resolved     engines: { node: '>= 0.8.x' },
+170 silly resolved     readme: '# forever [![Build Status](https://secure.travis-ci.org/nodejitsu/forever.png)](http://travis-ci.org/nodejitsu/forever)\n\nA simple CLI tool for ensuring that a given script runs continuously (i.e. forever).\n\n## Installation\n\n``` bash\n  $ [sudo] npm install forever -g\n```\n\n**Note:** If you are using forever _programatically_ you should install [forever-monitor][0].\n\n``` bash\n  $ cd /path/to/your/project\n  $ [sudo] npm install forever-monitor\n```\n\n## Usage\nThere are two distinct ways to use forever: through the command line interface, or by requiring the forever module in your own code. **Note:** If you are using forever _programatically_ you should install [forever-monitor][0].\n\n### Using forever from the command line\nYou can use forever to run any kind of script continuously (whether it is written in node.js or not). The usage options are simple:\n\n```\n  $ forever --help\n  usage: forever [action] [options] SCRIPT [script-options]\n\n  Monitors the script specified in the current process or as a daemon\n\n  actions:\n    start               Start SCRIPT as a daemon\n    stop                Stop the daemon SCRIPT\n    stopall             Stop all running forever scripts\n    restart             Restart the daemon SCRIPT\n    restartall          Restart all running forever scripts\n    list                List all running forever scripts\n    config              Lists all forever user configuration\n    set <key> <val>     Sets the specified forever config <key>\n    clear <key>         Clears the specified forever config <key>\n    logs                Lists log files for all forever processes\n    logs <script|index> Tails the logs for <script|index>\n    columns add <col>   Adds the specified column to the output in `forever list`\n    columns rm <col>    Removed the specified column from the output in `forever list`\n    columns set <cols>  Set all columns for the output in `forever list`\n    cleanlogs           [CAREFUL] Deletes all historical forever log files\n\n  options:\n    -m  MAX          Only run the specified script MAX times\n    -l  LOGFILE      Logs the forever output to LOGFILE\n    -o  OUTFILE      Logs stdout from child script to OUTFILE\n    -e  ERRFILE      Logs stderr from child script to ERRFILE\n    -p  PATH         Base path for all forever related files (pid files, etc.)\n    -c  COMMAND      COMMAND to execute (defaults to node)\n    -a, --append     Append logs\n    -f, --fifo       Stream logs to stdout\n    -n, --number     Number of log lines to print\n    --pidFile        The pid file\n    --sourceDir      The source directory for which SCRIPT is relative to\n    --minUptime      Minimum uptime (millis) for a script to not be considered "spinning"\n    --spinSleepTime  Time to wait (millis) between launches of a spinning script.\n    --colors         --no-colors will disable output coloring\n    --plain          Disable command line colors\n    -d, --debug      Forces forever to log debug output\n    -v, --verbose    Turns on the verbose messages from Forever\n    -s, --silent     Run the child script silencing stdout and stderr\n    -w, --watch      Watch for file changes\n    --watchDirectory Top-level directory to watch from\n    --watchIgnore    To ignore pattern when watch is enabled (multiple option is allowed)\n    --killSignal     Support exit signal customization (default is SIGKILL), \n                     used for restarting script gracefully eg. --killSignal=SIGTERM\n    -h, --help       You\'re staring at it\n\n  [Long Running Process]\n    The forever process will continue to run outputting log messages to the console.\n    ex. forever -o out.log -e err.log my-script.js\n\n  [Daemon]\n    The forever process will run as a daemon which will make the target process start\n    in the background. This is extremely useful for remote starting simple node.js scripts\n    without using nohup. It is recommended to run start with -o -l, & -e.\n    ex. forever start -l forever.log -o out.log -e err.log my-daemon.js\n        forever stop my-daemon.js\n```\n\nThere are [several examples][1] designed to test the fault tolerance of forever. Here\'s a simple usage example:\n\n``` bash\n  $ forever -m 5 examples/error-on-timer.js\n```\n\n## Using forever module from node.js\nIn addition to using a Forever object, the forever module also exposes some useful methods. Each method returns an instance of an EventEmitter which emits when complete. See the [forever cli commands][2] for sample usage.\n\n**Remark:** As of `forever@0.6.0` processes will not automatically be available in `forever.list()`. In order to get your processes into `forever.list()` or `forever list` you must instantiate the `forever` socket server:\n\n``` js\n  forever.startServer(child);\n```\n\n### forever.load (config)\n_Synchronously_ sets the specified configuration (config) for the forever module. There are two important options:\n\n* root:    Directory to put all default forever log files\n* pidPath: Directory to put all forever *.pid files\n\n### forever.start (file, options)\nStarts a script with forever.\n\n### forever.startDaemon (file, options)\nStarts a script with forever as a daemon. WARNING: Will daemonize the current process.\n\n### forever.stop (index)\nStops the forever daemon script at the specified index. These indices are the same as those returned by forever.list(). This method returns an EventEmitter that raises the \'stop\' event when complete.\n\n### forever.stopAll (format)\nStops all forever scripts currently running. This method returns an EventEmitter that raises the \'stopAll\' event when complete.\n\n### forever.list (format, callback)\nReturns a list of metadata objects about each process that is being run using forever. This method is synchronous and will return the list of metadata as such. Only processes which have invoked `forever.startServer()` will be available from `forever.list()`\n\n### forever.tail (target, options, callback)\nResponds with the logs from the target script(s) from `tail`. There are two important options:\n\n* `length` (numeric): is is used as the `-n` parameter to `tail`.\n* `stream` (boolean): is is used as the `-f` parameter to `tail`.\n\n### forever.cleanUp ()\nCleans up any extraneous forever *.pid files that are on the target system. This method returns an EventEmitter that raises the \'cleanUp\' event when complete.\n\n### forever.cleanLogsSync (processes)\nRemoves all log files from the root forever directory that do not belong to current running forever processes.\n\n## Run Tests\n\n``` bash\n  $ npm test\n```\n\n#### License: MIT\n#### Author: [Charlie Robbins](http://github.com/indexzero)\n#### Contributors: [Fedor Indutny](http://github.com/indutny), [James Halliday](http://substack.net/), [Charlie McConnell](http://github.com/avianflu), [Maciej Malecki](http://github.com/mmalecki), [John Lancaster](http://jlank.com)\n\n[0]: http://github.com/nodejitsu/forever-monitor\n[1]: http://github.com/nodejitsu/forever-monitor/tree/master/examples\n[2]: https://github.com/nodejitsu/forever/blob/master/lib/forever/cli.js\n',
+170 silly resolved     readmeFilename: 'README.md',
+170 silly resolved     bugs: { url: 'https://github.com/nodejitsu/forever/issues' },
+170 silly resolved     _id: 'forever@0.11.0',
+170 silly resolved     dist: { shasum: 'bf8d54d5ee1da6c2c22e89cde9f21589722c383d' },
+170 silly resolved     _from: 'forever@',
+170 silly resolved     _resolved: 'https://registry.npmjs.org/forever/-/forever-0.11.0.tgz' } ]
+171 info install forever@0.11.0 into C:\Users\yingf\AppData\Roaming\npm
+172 info installOne forever@0.11.0
+173 info C:\Users\yingf\AppData\Roaming\npm\node_modules\forever unbuild
+174 verbose tar unpack C:\Users\yingf\AppData\Roaming\npm-cache\forever\0.11.0\package.tgz
+175 silly lockFile 2611425c-Roaming-npm-node-modules-forever tar://C:\Users\yingf\AppData\Roaming\npm\node_modules\forever
+176 verbose lock tar://C:\Users\yingf\AppData\Roaming\npm\node_modules\forever C:\Users\yingf\AppData\Roaming\npm-cache\2611425c-Roaming-npm-node-modules-forever.lock
+177 silly lockFile 734d3817-cache-forever-0-11-0-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\forever\0.11.0\package.tgz
+178 verbose lock tar://C:\Users\yingf\AppData\Roaming\npm-cache\forever\0.11.0\package.tgz C:\Users\yingf\AppData\Roaming\npm-cache\734d3817-cache-forever-0-11-0-package-tgz.lock
+179 silly gunzTarPerm modes [ '755', '644' ]
+180 silly gunzTarPerm extractEntry package.json
+181 silly gunzTarPerm modified mode [ 'package.json', 438, 420 ]
+182 silly gunzTarPerm extractEntry .npmignore
+183 silly gunzTarPerm modified mode [ '.npmignore', 438, 420 ]
+184 silly gunzTarPerm extractEntry README.md
+185 silly gunzTarPerm modified mode [ 'README.md', 438, 420 ]
+186 silly gunzTarPerm extractEntry LICENSE
+187 silly gunzTarPerm modified mode [ 'LICENSE', 438, 420 ]
+188 silly gunzTarPerm extractEntry .travis.yml
+189 silly gunzTarPerm modified mode [ '.travis.yml', 438, 420 ]
+190 silly gunzTarPerm extractEntry bin/forever
+191 silly gunzTarPerm modified mode [ 'bin/forever', 438, 420 ]
+192 silly gunzTarPerm extractEntry bin/foreverd
+193 silly gunzTarPerm modified mode [ 'bin/foreverd', 438, 420 ]
+194 silly gunzTarPerm extractEntry bin/monitor
+195 silly gunzTarPerm modified mode [ 'bin/monitor', 438, 420 ]
+196 silly gunzTarPerm extractEntry lib/forever.js
+197 silly gunzTarPerm modified mode [ 'lib/forever.js', 438, 420 ]
+198 silly gunzTarPerm extractEntry lib/forever/cli.js
+199 silly gunzTarPerm modified mode [ 'lib/forever/cli.js', 438, 420 ]
+200 silly gunzTarPerm extractEntry lib/forever/worker.js
+201 silly gunzTarPerm modified mode [ 'lib/forever/worker.js', 438, 420 ]
+202 silly gunzTarPerm extractEntry lib/forever/service/cli.js
+203 silly gunzTarPerm modified mode [ 'lib/forever/service/cli.js', 438, 420 ]
+204 silly gunzTarPerm extractEntry lib/forever/service/index.js
+205 silly gunzTarPerm modified mode [ 'lib/forever/service/index.js', 438, 420 ]
+206 silly gunzTarPerm extractEntry lib/forever/service/service.js
+207 silly gunzTarPerm modified mode [ 'lib/forever/service/service.js', 438, 420 ]
+208 silly gunzTarPerm extractEntry lib/forever/service/adapters/adapter.js
+209 silly gunzTarPerm modified mode [ 'lib/forever/service/adapters/adapter.js', 438, 420 ]
+210 silly gunzTarPerm extractEntry lib/forever/service/adapters/initd/index.js
+211 silly gunzTarPerm modified mode [ 'lib/forever/service/adapters/initd/index.js', 438, 420 ]
+212 silly gunzTarPerm extractEntry lib/forever/service/adapters/systemv/index.js
+213 silly gunzTarPerm modified mode [ 'lib/forever/service/adapters/systemv/index.js', 438, 420 ]
+214 silly gunzTarPerm extractEntry lib/forever/service/adapters/systemv/foreverd
+215 silly gunzTarPerm modified mode [ 'lib/forever/service/adapters/systemv/foreverd', 438, 420 ]
+216 silly gunzTarPerm extractEntry test/cli-test
+217 silly gunzTarPerm modified mode [ 'test/cli-test', 438, 420 ]
+218 silly gunzTarPerm extractEntry test/core/tail-stopall-test.js
+219 silly gunzTarPerm modified mode [ 'test/core/tail-stopall-test.js', 438, 420 ]
+220 silly gunzTarPerm extractEntry test/fixtures/log-on-interval.js
+221 silly gunzTarPerm modified mode [ 'test/fixtures/log-on-interval.js', 438, 420 ]
+222 silly gunzTarPerm extractEntry test/fixtures/server.js
+223 silly gunzTarPerm modified mode [ 'test/fixtures/server.js', 438, 420 ]
+224 silly gunzTarPerm extractEntry test/fixtures/start-daemon.js
+225 silly gunzTarPerm modified mode [ 'test/fixtures/start-daemon.js', 438, 420 ]
+226 silly gunzTarPerm extractEntry test/helpers/macros.js
+227 silly gunzTarPerm modified mode [ 'test/helpers/macros.js', 438, 420 ]
+228 silly gunzTarPerm extractEntry test/helpers/mocks/child-process.js
+229 silly gunzTarPerm modified mode [ 'test/helpers/mocks/child-process.js', 438, 420 ]
+230 silly gunzTarPerm extractEntry test/helpers/mocks/monitor.js
+231 silly gunzTarPerm modified mode [ 'test/helpers/mocks/monitor.js', 438, 420 ]
+232 silly gunzTarPerm extractEntry test/helpers/mocks/stream.js
+233 silly gunzTarPerm modified mode [ 'test/helpers/mocks/stream.js', 438, 420 ]
+234 silly gunzTarPerm extractEntry test/service/simple-test.js
+235 silly gunzTarPerm modified mode [ 'test/service/simple-test.js', 438, 420 ]
+236 silly gunzTarPerm extractEntry test/worker/multiple-workers-test.js
+237 silly gunzTarPerm modified mode [ 'test/worker/multiple-workers-test.js', 438, 420 ]
+238 silly gunzTarPerm extractEntry test/worker/simple-test.js
+239 silly gunzTarPerm modified mode [ 'test/worker/simple-test.js', 438, 420 ]
+240 silly lockFile 2611425c-Roaming-npm-node-modules-forever tar://C:\Users\yingf\AppData\Roaming\npm\node_modules\forever
+241 silly lockFile 2611425c-Roaming-npm-node-modules-forever tar://C:\Users\yingf\AppData\Roaming\npm\node_modules\forever
+242 silly lockFile 734d3817-cache-forever-0-11-0-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\forever\0.11.0\package.tgz
+243 silly lockFile 734d3817-cache-forever-0-11-0-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\forever\0.11.0\package.tgz
+244 info preinstall forever@0.11.0
+245 verbose readDependencies using package.json deps
+246 verbose readDependencies using package.json deps
+247 verbose cache add [ 'colors@~0.6.2', null ]
+248 verbose cache add name=undefined spec="colors@~0.6.2" args=["colors@~0.6.2",null]
+249 verbose parsed url { protocol: null,
+249 verbose parsed url   slashes: null,
+249 verbose parsed url   auth: null,
+249 verbose parsed url   host: null,
+249 verbose parsed url   port: null,
+249 verbose parsed url   hostname: null,
+249 verbose parsed url   hash: null,
+249 verbose parsed url   search: null,
+249 verbose parsed url   query: null,
+249 verbose parsed url   pathname: 'colors@~0.6.2',
+249 verbose parsed url   path: 'colors@~0.6.2',
+249 verbose parsed url   href: 'colors@~0.6.2' }
+250 verbose cache add name="colors" spec="~0.6.2" args=["colors","~0.6.2"]
+251 verbose parsed url { protocol: null,
+251 verbose parsed url   slashes: null,
+251 verbose parsed url   auth: null,
+251 verbose parsed url   host: null,
+251 verbose parsed url   port: null,
+251 verbose parsed url   hostname: null,
+251 verbose parsed url   hash: null,
+251 verbose parsed url   search: null,
+251 verbose parsed url   query: null,
+251 verbose parsed url   pathname: '~0.6.2',
+251 verbose parsed url   path: '~0.6.2',
+251 verbose parsed url   href: '~0.6.2' }
+252 verbose addNamed [ 'colors', '~0.6.2' ]
+253 verbose addNamed [ null, '>=0.6.2-0 <0.7.0-0' ]
+254 silly lockFile f2380b4d-colors-0-6-2 colors@~0.6.2
+255 verbose lock colors@~0.6.2 C:\Users\yingf\AppData\Roaming\npm-cache\f2380b4d-colors-0-6-2.lock
+256 verbose cache add [ 'cliff@0.1.8', null ]
+257 verbose cache add name=undefined spec="cliff@0.1.8" args=["cliff@0.1.8",null]
+258 verbose parsed url { protocol: null,
+258 verbose parsed url   slashes: null,
+258 verbose parsed url   auth: null,
+258 verbose parsed url   host: null,
+258 verbose parsed url   port: null,
+258 verbose parsed url   hostname: null,
+258 verbose parsed url   hash: null,
+258 verbose parsed url   search: null,
+258 verbose parsed url   query: null,
+258 verbose parsed url   pathname: 'cliff@0.1.8',
+258 verbose parsed url   path: 'cliff@0.1.8',
+258 verbose parsed url   href: 'cliff@0.1.8' }
+259 verbose cache add name="cliff" spec="0.1.8" args=["cliff","0.1.8"]
+260 verbose parsed url { protocol: null,
+260 verbose parsed url   slashes: null,
+260 verbose parsed url   auth: null,
+260 verbose parsed url   host: null,
+260 verbose parsed url   port: null,
+260 verbose parsed url   hostname: null,
+260 verbose parsed url   hash: null,
+260 verbose parsed url   search: null,
+260 verbose parsed url   query: null,
+260 verbose parsed url   pathname: '0.1.8',
+260 verbose parsed url   path: '0.1.8',
+260 verbose parsed url   href: '0.1.8' }
+261 verbose addNamed [ 'cliff', '0.1.8' ]
+262 verbose addNamed [ '0.1.8', '0.1.8' ]
+263 silly lockFile a0c35da7-cliff-0-1-8 cliff@0.1.8
+264 verbose lock cliff@0.1.8 C:\Users\yingf\AppData\Roaming\npm-cache\a0c35da7-cliff-0-1-8.lock
+265 verbose cache add [ 'flatiron@~0.3.11', null ]
+266 verbose cache add name=undefined spec="flatiron@~0.3.11" args=["flatiron@~0.3.11",null]
+267 verbose parsed url { protocol: null,
+267 verbose parsed url   slashes: null,
+267 verbose parsed url   auth: null,
+267 verbose parsed url   host: null,
+267 verbose parsed url   port: null,
+267 verbose parsed url   hostname: null,
+267 verbose parsed url   hash: null,
+267 verbose parsed url   search: null,
+267 verbose parsed url   query: null,
+267 verbose parsed url   pathname: 'flatiron@~0.3.11',
+267 verbose parsed url   path: 'flatiron@~0.3.11',
+267 verbose parsed url   href: 'flatiron@~0.3.11' }
+268 verbose cache add name="flatiron" spec="~0.3.11" args=["flatiron","~0.3.11"]
+269 verbose parsed url { protocol: null,
+269 verbose parsed url   slashes: null,
+269 verbose parsed url   auth: null,
+269 verbose parsed url   host: null,
+269 verbose parsed url   port: null,
+269 verbose parsed url   hostname: null,
+269 verbose parsed url   hash: null,
+269 verbose parsed url   search: null,
+269 verbose parsed url   query: null,
+269 verbose parsed url   pathname: '~0.3.11',
+269 verbose parsed url   path: '~0.3.11',
+269 verbose parsed url   href: '~0.3.11' }
+270 verbose addNamed [ 'flatiron', '~0.3.11' ]
+271 verbose addNamed [ null, '>=0.3.11-0 <0.4.0-0' ]
+272 silly lockFile 99676c21-flatiron-0-3-11 flatiron@~0.3.11
+273 verbose lock flatiron@~0.3.11 C:\Users\yingf\AppData\Roaming\npm-cache\99676c21-flatiron-0-3-11.lock
+274 verbose cache add [ 'forever-monitor@1.2.3', null ]
+275 verbose cache add name=undefined spec="forever-monitor@1.2.3" args=["forever-monitor@1.2.3",null]
+276 verbose parsed url { protocol: null,
+276 verbose parsed url   slashes: null,
+276 verbose parsed url   auth: null,
+276 verbose parsed url   host: null,
+276 verbose parsed url   port: null,
+276 verbose parsed url   hostname: null,
+276 verbose parsed url   hash: null,
+276 verbose parsed url   search: null,
+276 verbose parsed url   query: null,
+276 verbose parsed url   pathname: 'forever-monitor@1.2.3',
+276 verbose parsed url   path: 'forever-monitor@1.2.3',
+276 verbose parsed url   href: 'forever-monitor@1.2.3' }
+277 verbose cache add name="forever-monitor" spec="1.2.3" args=["forever-monitor","1.2.3"]
+278 verbose parsed url { protocol: null,
+278 verbose parsed url   slashes: null,
+278 verbose parsed url   auth: null,
+278 verbose parsed url   host: null,
+278 verbose parsed url   port: null,
+278 verbose parsed url   hostname: null,
+278 verbose parsed url   hash: null,
+278 verbose parsed url   search: null,
+278 verbose parsed url   query: null,
+278 verbose parsed url   pathname: '1.2.3',
+278 verbose parsed url   path: '1.2.3',
+278 verbose parsed url   href: '1.2.3' }
+279 verbose addNamed [ 'forever-monitor', '1.2.3' ]
+280 verbose addNamed [ '1.2.3', '1.2.3' ]
+281 silly lockFile 355c84e8-forever-monitor-1-2-3 forever-monitor@1.2.3
+282 verbose lock forever-monitor@1.2.3 C:\Users\yingf\AppData\Roaming\npm-cache\355c84e8-forever-monitor-1-2-3.lock
+283 verbose cache add [ 'nconf@~0.6.9', null ]
+284 verbose cache add name=undefined spec="nconf@~0.6.9" args=["nconf@~0.6.9",null]
+285 verbose parsed url { protocol: null,
+285 verbose parsed url   slashes: null,
+285 verbose parsed url   auth: null,
+285 verbose parsed url   host: null,
+285 verbose parsed url   port: null,
+285 verbose parsed url   hostname: null,
+285 verbose parsed url   hash: null,
+285 verbose parsed url   search: null,
+285 verbose parsed url   query: null,
+285 verbose parsed url   pathname: 'nconf@~0.6.9',
+285 verbose parsed url   path: 'nconf@~0.6.9',
+285 verbose parsed url   href: 'nconf@~0.6.9' }
+286 verbose cache add name="nconf" spec="~0.6.9" args=["nconf","~0.6.9"]
+287 verbose parsed url { protocol: null,
+287 verbose parsed url   slashes: null,
+287 verbose parsed url   auth: null,
+287 verbose parsed url   host: null,
+287 verbose parsed url   port: null,
+287 verbose parsed url   hostname: null,
+287 verbose parsed url   hash: null,
+287 verbose parsed url   search: null,
+287 verbose parsed url   query: null,
+287 verbose parsed url   pathname: '~0.6.9',
+287 verbose parsed url   path: '~0.6.9',
+287 verbose parsed url   href: '~0.6.9' }
+288 verbose addNamed [ 'nconf', '~0.6.9' ]
+289 verbose addNamed [ null, '>=0.6.9-0 <0.7.0-0' ]
+290 silly lockFile eb32f077-nconf-0-6-9 nconf@~0.6.9
+291 verbose lock nconf@~0.6.9 C:\Users\yingf\AppData\Roaming\npm-cache\eb32f077-nconf-0-6-9.lock
+292 verbose cache add [ 'nssocket@~0.5.1', null ]
+293 verbose cache add name=undefined spec="nssocket@~0.5.1" args=["nssocket@~0.5.1",null]
+294 verbose parsed url { protocol: null,
+294 verbose parsed url   slashes: null,
+294 verbose parsed url   auth: null,
+294 verbose parsed url   host: null,
+294 verbose parsed url   port: null,
+294 verbose parsed url   hostname: null,
+294 verbose parsed url   hash: null,
+294 verbose parsed url   search: null,
+294 verbose parsed url   query: null,
+294 verbose parsed url   pathname: 'nssocket@~0.5.1',
+294 verbose parsed url   path: 'nssocket@~0.5.1',
+294 verbose parsed url   href: 'nssocket@~0.5.1' }
+295 verbose cache add name="nssocket" spec="~0.5.1" args=["nssocket","~0.5.1"]
+296 verbose parsed url { protocol: null,
+296 verbose parsed url   slashes: null,
+296 verbose parsed url   auth: null,
+296 verbose parsed url   host: null,
+296 verbose parsed url   port: null,
+296 verbose parsed url   hostname: null,
+296 verbose parsed url   hash: null,
+296 verbose parsed url   search: null,
+296 verbose parsed url   query: null,
+296 verbose parsed url   pathname: '~0.5.1',
+296 verbose parsed url   path: '~0.5.1',
+296 verbose parsed url   href: '~0.5.1' }
+297 verbose addNamed [ 'nssocket', '~0.5.1' ]
+298 verbose addNamed [ null, '>=0.5.1-0 <0.6.0-0' ]
+299 silly lockFile 936c2de0-nssocket-0-5-1 nssocket@~0.5.1
+300 verbose lock nssocket@~0.5.1 C:\Users\yingf\AppData\Roaming\npm-cache\936c2de0-nssocket-0-5-1.lock
+301 verbose cache add [ 'optimist@~0.6.0', null ]
+302 verbose cache add name=undefined spec="optimist@~0.6.0" args=["optimist@~0.6.0",null]
+303 verbose parsed url { protocol: null,
+303 verbose parsed url   slashes: null,
+303 verbose parsed url   auth: null,
+303 verbose parsed url   host: null,
+303 verbose parsed url   port: null,
+303 verbose parsed url   hostname: null,
+303 verbose parsed url   hash: null,
+303 verbose parsed url   search: null,
+303 verbose parsed url   query: null,
+303 verbose parsed url   pathname: 'optimist@~0.6.0',
+303 verbose parsed url   path: 'optimist@~0.6.0',
+303 verbose parsed url   href: 'optimist@~0.6.0' }
+304 verbose cache add name="optimist" spec="~0.6.0" args=["optimist","~0.6.0"]
+305 verbose parsed url { protocol: null,
+305 verbose parsed url   slashes: null,
+305 verbose parsed url   auth: null,
+305 verbose parsed url   host: null,
+305 verbose parsed url   port: null,
+305 verbose parsed url   hostname: null,
+305 verbose parsed url   hash: null,
+305 verbose parsed url   search: null,
+305 verbose parsed url   query: null,
+305 verbose parsed url   pathname: '~0.6.0',
+305 verbose parsed url   path: '~0.6.0',
+305 verbose parsed url   href: '~0.6.0' }
+306 verbose addNamed [ 'optimist', '~0.6.0' ]
+307 verbose addNamed [ null, '>=0.6.0-0 <0.7.0-0' ]
+308 silly lockFile 07193858-optimist-0-6-0 optimist@~0.6.0
+309 verbose lock optimist@~0.6.0 C:\Users\yingf\AppData\Roaming\npm-cache\07193858-optimist-0-6-0.lock
+310 verbose cache add [ 'pkginfo@0.3.0', null ]
+311 verbose cache add name=undefined spec="pkginfo@0.3.0" args=["pkginfo@0.3.0",null]
+312 verbose parsed url { protocol: null,
+312 verbose parsed url   slashes: null,
+312 verbose parsed url   auth: null,
+312 verbose parsed url   host: null,
+312 verbose parsed url   port: null,
+312 verbose parsed url   hostname: null,
+312 verbose parsed url   hash: null,
+312 verbose parsed url   search: null,
+312 verbose parsed url   query: null,
+312 verbose parsed url   pathname: 'pkginfo@0.3.0',
+312 verbose parsed url   path: 'pkginfo@0.3.0',
+312 verbose parsed url   href: 'pkginfo@0.3.0' }
+313 verbose cache add name="pkginfo" spec="0.3.0" args=["pkginfo","0.3.0"]
+314 verbose parsed url { protocol: null,
+314 verbose parsed url   slashes: null,
+314 verbose parsed url   auth: null,
+314 verbose parsed url   host: null,
+314 verbose parsed url   port: null,
+314 verbose parsed url   hostname: null,
+314 verbose parsed url   hash: null,
+314 verbose parsed url   search: null,
+314 verbose parsed url   query: null,
+314 verbose parsed url   pathname: '0.3.0',
+314 verbose parsed url   path: '0.3.0',
+314 verbose parsed url   href: '0.3.0' }
+315 verbose addNamed [ 'pkginfo', '0.3.0' ]
+316 verbose addNamed [ '0.3.0', '0.3.0' ]
+317 silly lockFile c6150d55-pkginfo-0-3-0 pkginfo@0.3.0
+318 verbose lock pkginfo@0.3.0 C:\Users\yingf\AppData\Roaming\npm-cache\c6150d55-pkginfo-0-3-0.lock
+319 verbose cache add [ 'timespan@~2.3.0', null ]
+320 verbose cache add name=undefined spec="timespan@~2.3.0" args=["timespan@~2.3.0",null]
+321 verbose parsed url { protocol: null,
+321 verbose parsed url   slashes: null,
+321 verbose parsed url   auth: null,
+321 verbose parsed url   host: null,
+321 verbose parsed url   port: null,
+321 verbose parsed url   hostname: null,
+321 verbose parsed url   hash: null,
+321 verbose parsed url   search: null,
+321 verbose parsed url   query: null,
+321 verbose parsed url   pathname: 'timespan@~2.3.0',
+321 verbose parsed url   path: 'timespan@~2.3.0',
+321 verbose parsed url   href: 'timespan@~2.3.0' }
+322 verbose cache add name="timespan" spec="~2.3.0" args=["timespan","~2.3.0"]
+323 verbose parsed url { protocol: null,
+323 verbose parsed url   slashes: null,
+323 verbose parsed url   auth: null,
+323 verbose parsed url   host: null,
+323 verbose parsed url   port: null,
+323 verbose parsed url   hostname: null,
+323 verbose parsed url   hash: null,
+323 verbose parsed url   search: null,
+323 verbose parsed url   query: null,
+323 verbose parsed url   pathname: '~2.3.0',
+323 verbose parsed url   path: '~2.3.0',
+323 verbose parsed url   href: '~2.3.0' }
+324 verbose addNamed [ 'timespan', '~2.3.0' ]
+325 verbose addNamed [ null, '>=2.3.0-0 <2.4.0-0' ]
+326 silly lockFile 572eaef7-timespan-2-3-0 timespan@~2.3.0
+327 verbose lock timespan@~2.3.0 C:\Users\yingf\AppData\Roaming\npm-cache\572eaef7-timespan-2-3-0.lock
+328 verbose cache add [ 'watch@~0.8.0', null ]
+329 verbose cache add name=undefined spec="watch@~0.8.0" args=["watch@~0.8.0",null]
+330 verbose parsed url { protocol: null,
+330 verbose parsed url   slashes: null,
+330 verbose parsed url   auth: null,
+330 verbose parsed url   host: null,
+330 verbose parsed url   port: null,
+330 verbose parsed url   hostname: null,
+330 verbose parsed url   hash: null,
+330 verbose parsed url   search: null,
+330 verbose parsed url   query: null,
+330 verbose parsed url   pathname: 'watch@~0.8.0',
+330 verbose parsed url   path: 'watch@~0.8.0',
+330 verbose parsed url   href: 'watch@~0.8.0' }
+331 verbose cache add name="watch" spec="~0.8.0" args=["watch","~0.8.0"]
+332 verbose parsed url { protocol: null,
+332 verbose parsed url   slashes: null,
+332 verbose parsed url   auth: null,
+332 verbose parsed url   host: null,
+332 verbose parsed url   port: null,
+332 verbose parsed url   hostname: null,
+332 verbose parsed url   hash: null,
+332 verbose parsed url   search: null,
+332 verbose parsed url   query: null,
+332 verbose parsed url   pathname: '~0.8.0',
+332 verbose parsed url   path: '~0.8.0',
+332 verbose parsed url   href: '~0.8.0' }
+333 verbose addNamed [ 'watch', '~0.8.0' ]
+334 verbose addNamed [ null, '>=0.8.0-0 <0.9.0-0' ]
+335 silly lockFile ecc5b56d-watch-0-8-0 watch@~0.8.0
+336 verbose lock watch@~0.8.0 C:\Users\yingf\AppData\Roaming\npm-cache\ecc5b56d-watch-0-8-0.lock
+337 verbose cache add [ 'utile@~0.2.1', null ]
+338 verbose cache add name=undefined spec="utile@~0.2.1" args=["utile@~0.2.1",null]
+339 verbose parsed url { protocol: null,
+339 verbose parsed url   slashes: null,
+339 verbose parsed url   auth: null,
+339 verbose parsed url   host: null,
+339 verbose parsed url   port: null,
+339 verbose parsed url   hostname: null,
+339 verbose parsed url   hash: null,
+339 verbose parsed url   search: null,
+339 verbose parsed url   query: null,
+339 verbose parsed url   pathname: 'utile@~0.2.1',
+339 verbose parsed url   path: 'utile@~0.2.1',
+339 verbose parsed url   href: 'utile@~0.2.1' }
+340 verbose cache add name="utile" spec="~0.2.1" args=["utile","~0.2.1"]
+341 verbose parsed url { protocol: null,
+341 verbose parsed url   slashes: null,
+341 verbose parsed url   auth: null,
+341 verbose parsed url   host: null,
+341 verbose parsed url   port: null,
+341 verbose parsed url   hostname: null,
+341 verbose parsed url   hash: null,
+341 verbose parsed url   search: null,
+341 verbose parsed url   query: null,
+341 verbose parsed url   pathname: '~0.2.1',
+341 verbose parsed url   path: '~0.2.1',
+341 verbose parsed url   href: '~0.2.1' }
+342 verbose addNamed [ 'utile', '~0.2.1' ]
+343 verbose addNamed [ null, '>=0.2.1-0 <0.3.0-0' ]
+344 silly lockFile 642d3b0d-utile-0-2-1 utile@~0.2.1
+345 verbose lock utile@~0.2.1 C:\Users\yingf\AppData\Roaming\npm-cache\642d3b0d-utile-0-2-1.lock
+346 verbose cache add [ 'winston@~0.7.2', null ]
+347 verbose cache add name=undefined spec="winston@~0.7.2" args=["winston@~0.7.2",null]
+348 verbose parsed url { protocol: null,
+348 verbose parsed url   slashes: null,
+348 verbose parsed url   auth: null,
+348 verbose parsed url   host: null,
+348 verbose parsed url   port: null,
+348 verbose parsed url   hostname: null,
+348 verbose parsed url   hash: null,
+348 verbose parsed url   search: null,
+348 verbose parsed url   query: null,
+348 verbose parsed url   pathname: 'winston@~0.7.2',
+348 verbose parsed url   path: 'winston@~0.7.2',
+348 verbose parsed url   href: 'winston@~0.7.2' }
+349 verbose cache add name="winston" spec="~0.7.2" args=["winston","~0.7.2"]
+350 verbose parsed url { protocol: null,
+350 verbose parsed url   slashes: null,
+350 verbose parsed url   auth: null,
+350 verbose parsed url   host: null,
+350 verbose parsed url   port: null,
+350 verbose parsed url   hostname: null,
+350 verbose parsed url   hash: null,
+350 verbose parsed url   search: null,
+350 verbose parsed url   query: null,
+350 verbose parsed url   pathname: '~0.7.2',
+350 verbose parsed url   path: '~0.7.2',
+350 verbose parsed url   href: '~0.7.2' }
+351 verbose addNamed [ 'winston', '~0.7.2' ]
+352 verbose addNamed [ null, '>=0.7.2-0 <0.8.0-0' ]
+353 silly lockFile f6c20987-winston-0-7-2 winston@~0.7.2
+354 verbose lock winston@~0.7.2 C:\Users\yingf\AppData\Roaming\npm-cache\f6c20987-winston-0-7-2.lock
+355 silly addNameRange { name: 'flatiron',
+355 silly addNameRange   range: '>=0.3.11-0 <0.4.0-0',
+355 silly addNameRange   hasData: false }
+356 silly addNameRange { name: 'nconf', range: '>=0.6.9-0 <0.7.0-0', hasData: false }
+357 silly addNameRange { name: 'nssocket', range: '>=0.5.1-0 <0.6.0-0', hasData: false }
+358 silly addNameRange { name: 'timespan', range: '>=2.3.0-0 <2.4.0-0', hasData: false }
+359 silly addNameRange { name: 'watch', range: '>=0.8.0-0 <0.9.0-0', hasData: false }
+360 silly addNameRange { name: 'utile', range: '>=0.2.1-0 <0.3.0-0', hasData: false }
+361 silly addNameRange { name: 'winston', range: '>=0.7.2-0 <0.8.0-0', hasData: false }
+362 verbose url raw cliff/0.1.8
+363 verbose url resolving [ 'https://registry.npmjs.org/', './cliff/0.1.8' ]
+364 verbose url resolved https://registry.npmjs.org/cliff/0.1.8
+365 info trying registry request attempt 1 at 09:16:19
+366 http GET https://registry.npmjs.org/cliff/0.1.8
+367 verbose url raw flatiron
+368 verbose url resolving [ 'https://registry.npmjs.org/', './flatiron' ]
+369 verbose url resolved https://registry.npmjs.org/flatiron
+370 info trying registry request attempt 1 at 09:16:19
+371 http GET https://registry.npmjs.org/flatiron
+372 verbose url raw forever-monitor/1.2.3
+373 verbose url resolving [ 'https://registry.npmjs.org/', './forever-monitor/1.2.3' ]
+374 verbose url resolved https://registry.npmjs.org/forever-monitor/1.2.3
+375 info trying registry request attempt 1 at 09:16:19
+376 http GET https://registry.npmjs.org/forever-monitor/1.2.3
+377 verbose url raw nconf
+378 verbose url resolving [ 'https://registry.npmjs.org/', './nconf' ]
+379 verbose url resolved https://registry.npmjs.org/nconf
+380 info trying registry request attempt 1 at 09:16:19
+381 http GET https://registry.npmjs.org/nconf
+382 silly addNameRange { name: 'colors', range: '>=0.6.2-0 <0.7.0-0', hasData: false }
+383 verbose url raw nssocket
+384 verbose url resolving [ 'https://registry.npmjs.org/', './nssocket' ]
+385 verbose url resolved https://registry.npmjs.org/nssocket
+386 info trying registry request attempt 1 at 09:16:19
+387 http GET https://registry.npmjs.org/nssocket
+388 verbose url raw pkginfo/0.3.0
+389 verbose url resolving [ 'https://registry.npmjs.org/', './pkginfo/0.3.0' ]
+390 verbose url resolved https://registry.npmjs.org/pkginfo/0.3.0
+391 info trying registry request attempt 1 at 09:16:19
+392 http GET https://registry.npmjs.org/pkginfo/0.3.0
+393 verbose url raw timespan
+394 verbose url resolving [ 'https://registry.npmjs.org/', './timespan' ]
+395 verbose url resolved https://registry.npmjs.org/timespan
+396 info trying registry request attempt 1 at 09:16:19
+397 http GET https://registry.npmjs.org/timespan
+398 verbose url raw watch
+399 verbose url resolving [ 'https://registry.npmjs.org/', './watch' ]
+400 verbose url resolved https://registry.npmjs.org/watch
+401 info trying registry request attempt 1 at 09:16:19
+402 http GET https://registry.npmjs.org/watch
+403 verbose url raw utile
+404 verbose url resolving [ 'https://registry.npmjs.org/', './utile' ]
+405 verbose url resolved https://registry.npmjs.org/utile
+406 info trying registry request attempt 1 at 09:16:19
+407 http GET https://registry.npmjs.org/utile
+408 verbose url raw winston
+409 verbose url resolving [ 'https://registry.npmjs.org/', './winston' ]
+410 verbose url resolved https://registry.npmjs.org/winston
+411 info trying registry request attempt 1 at 09:16:19
+412 http GET https://registry.npmjs.org/winston
+413 verbose url raw colors
+414 verbose url resolving [ 'https://registry.npmjs.org/', './colors' ]
+415 verbose url resolved https://registry.npmjs.org/colors
+416 info trying registry request attempt 1 at 09:16:19
+417 http GET https://registry.npmjs.org/colors
+418 silly addNameRange { name: 'optimist', range: '>=0.6.0-0 <0.7.0-0', hasData: false }
+419 verbose url raw optimist
+420 verbose url resolving [ 'https://registry.npmjs.org/', './optimist' ]
+421 verbose url resolved https://registry.npmjs.org/optimist
+422 info trying registry request attempt 1 at 09:16:19
+423 http GET https://registry.npmjs.org/optimist
+424 http 200 https://registry.npmjs.org/forever-monitor/1.2.3
+425 silly registry.get cb [ 200,
+425 silly registry.get   { date: 'Thu, 24 Apr 2014 01:16:18 GMT',
+425 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R14B04)',
+425 silly registry.get     etag: '"92GMOV1TXK3CCK0M5OTOYA058"',
+425 silly registry.get     'content-type': 'application/json',
+425 silly registry.get     via: '1.1 varnish',
+425 silly registry.get     'cache-control': 'max-age=1',
+425 silly registry.get     'content-length': '1400',
+425 silly registry.get     'accept-ranges': 'bytes',
+425 silly registry.get     age: '0',
+425 silly registry.get     'x-served-by': 'cache-v41-ASH, cache-ty67-TYO',
+425 silly registry.get     'x-cache': 'MISS, MISS',
+425 silly registry.get     'x-cache-hits': '0, 0',
+425 silly registry.get     'x-timer': 'S1398302178.729883671,VS0,VS84,VE176,VE262',
+425 silly registry.get     vary: 'Accept',
+425 silly registry.get     'keep-alive': 'timeout=10, max=50',
+425 silly registry.get     connection: 'Keep-Alive' } ]
+426 silly lockFile 00dcb118-onitor-forever-monitor-1-2-3-tgz https://registry.npmjs.org/forever-monitor/-/forever-monitor-1.2.3.tgz
+427 verbose lock https://registry.npmjs.org/forever-monitor/-/forever-monitor-1.2.3.tgz C:\Users\yingf\AppData\Roaming\npm-cache\00dcb118-onitor-forever-monitor-1-2-3-tgz.lock
+428 verbose addRemoteTarball [ 'https://registry.npmjs.org/forever-monitor/-/forever-monitor-1.2.3.tgz',
+428 verbose addRemoteTarball   'b27ac3acb6fdcc7315d6cd85830f2d004733028b' ]
+429 info retry fetch attempt 1 at 09:16:20
+430 verbose fetch to= C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302180337-0.4284990690648556\tmp.tgz
+431 http GET https://registry.npmjs.org/forever-monitor/-/forever-monitor-1.2.3.tgz
+432 http 200 https://registry.npmjs.org/pkginfo/0.3.0
+433 silly registry.get cb [ 200,
+433 silly registry.get   { date: 'Thu, 24 Apr 2014 01:16:19 GMT',
+433 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R16B)',
+433 silly registry.get     etag: '"99TSPNDAFG6GL7DH94HUT70D"',
+433 silly registry.get     'content-type': 'application/json',
+433 silly registry.get     via: '1.1 varnish',
+433 silly registry.get     'cache-control': 'max-age=1',
+433 silly registry.get     'content-length': '3441',
+433 silly registry.get     'accept-ranges': 'bytes',
+433 silly registry.get     age: '632126',
+433 silly registry.get     'x-served-by': 'cache-v44-ASH, cache-ty67-TYO',
+433 silly registry.get     'x-cache': 'HIT, MISS',
+433 silly registry.get     'x-cache-hits': '1991, 0',
+433 silly registry.get     'x-timer': 'S1398302179.116096497,VS0,VS84,VE84,VE179',
+433 silly registry.get     vary: 'Accept',
+433 silly registry.get     'keep-alive': 'timeout=10, max=49',
+433 silly registry.get     connection: 'Keep-Alive' } ]
+434 silly lockFile 0d38efc5-js-org-pkginfo-pkginfo-0-3-0-tgz https://registry.npmjs.org/pkginfo/-/pkginfo-0.3.0.tgz
+435 verbose lock https://registry.npmjs.org/pkginfo/-/pkginfo-0.3.0.tgz C:\Users\yingf\AppData\Roaming\npm-cache\0d38efc5-js-org-pkginfo-pkginfo-0-3-0-tgz.lock
+436 verbose addRemoteTarball [ 'https://registry.npmjs.org/pkginfo/-/pkginfo-0.3.0.tgz',
+436 verbose addRemoteTarball   '726411401039fe9b009eea86614295d5f3a54276' ]
+437 info retry fetch attempt 1 at 09:16:20
+438 verbose fetch to= C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302180637-0.1305623990483582\tmp.tgz
+439 http GET https://registry.npmjs.org/pkginfo/-/pkginfo-0.3.0.tgz
+440 http 200 https://registry.npmjs.org/forever-monitor/-/forever-monitor-1.2.3.tgz
+441 http 200 https://registry.npmjs.org/pkginfo/-/pkginfo-0.3.0.tgz
+442 verbose tar unpack C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302180337-0.4284990690648556\tmp.tgz
+443 silly lockFile dd08fbb8-80337-0-4284990690648556-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302180337-0.4284990690648556\package
+444 verbose lock tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302180337-0.4284990690648556\package C:\Users\yingf\AppData\Roaming\npm-cache\dd08fbb8-80337-0-4284990690648556-package.lock
+445 silly lockFile 08170e25-80337-0-4284990690648556-tmp-tgz tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302180337-0.4284990690648556\tmp.tgz
+446 verbose lock tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302180337-0.4284990690648556\tmp.tgz C:\Users\yingf\AppData\Roaming\npm-cache\08170e25-80337-0-4284990690648556-tmp-tgz.lock
+447 silly gunzTarPerm modes [ '755', '644' ]
+448 silly gunzTarPerm extractEntry package.json
+449 silly gunzTarPerm extractEntry .npmignore
+450 silly gunzTarPerm extractEntry README.md
+451 silly gunzTarPerm extractEntry LICENSE
+452 silly gunzTarPerm extractEntry .travis.yml
+453 silly gunzTarPerm extractEntry examples/all-env-vars.js
+454 silly gunzTarPerm extractEntry examples/custom-cwd.js
+455 silly gunzTarPerm extractEntry examples/env-server.js
+456 silly gunzTarPerm extractEntry examples/env-vars.js
+457 silly gunzTarPerm extractEntry examples/count-timer.js
+458 silly gunzTarPerm extractEntry examples/always-throw.js
+459 silly gunzTarPerm extractEntry examples/list-multiple.js
+460 silly gunzTarPerm extractEntry examples/log-on-interval.js
+461 silly gunzTarPerm extractEntry examples/multiple-processes.js
+462 silly gunzTarPerm extractEntry examples/process-send.js
+463 silly gunzTarPerm extractEntry examples/signal-ignore.js
+464 silly gunzTarPerm extractEntry examples/server.js
+465 silly gunzTarPerm extractEntry examples/error-on-timer.js
+466 silly gunzTarPerm extractEntry examples/spawn-and-error.js
+467 silly gunzTarPerm extractEntry examples/graceful-exit.js
+468 silly gunzTarPerm extractEntry examples/cli-multiple-start
+469 silly gunzTarPerm extractEntry lib/index.js
+470 silly gunzTarPerm extractEntry lib/forever-monitor/common.js
+471 silly gunzTarPerm extractEntry lib/forever-monitor/monitor.js
+472 silly gunzTarPerm extractEntry lib/forever-monitor/plugins/index.js
+473 silly gunzTarPerm extractEntry lib/forever-monitor/plugins/logger.js
+474 silly gunzTarPerm extractEntry lib/forever-monitor/plugins/watch.js
+475 silly gunzTarPerm extractEntry test/core/check-process-test.js
+476 silly gunzTarPerm extractEntry test/fixtures/fork.js
+477 silly gunzTarPerm extractEntry test/fixtures/gc.js
+478 silly gunzTarPerm extractEntry test/fixtures/logs.js
+479 silly gunzTarPerm extractEntry test/fixtures/send-pong.js
+480 silly gunzTarPerm extractEntry test/fixtures/testnode
+481 silly gunzTarPerm extractEntry test/fixtures/watch/daemon.js
+482 silly gunzTarPerm extractEntry test/fixtures/watch/.foreverignore
+483 silly gunzTarPerm extractEntry test/fixtures/watch/file
+484 silly gunzTarPerm extractEntry test/fixtures/watch/ignoredDir/file
+485 silly gunzTarPerm extractEntry test/fixtures/watch/removeMe
+486 silly gunzTarPerm extractEntry test/helpers/macros.js
+487 silly gunzTarPerm extractEntry test/monitor/env-spawn-test.js
+488 silly gunzTarPerm extractEntry test/monitor/fork-test.js
+489 silly gunzTarPerm extractEntry test/monitor/send-test.js
+490 silly gunzTarPerm extractEntry test/monitor/signal-test.js
+491 silly gunzTarPerm extractEntry test/monitor/simple-test.js
+492 silly gunzTarPerm extractEntry test/monitor/spin-test.js
+493 silly gunzTarPerm extractEntry test/plugins/logger-test.js
+494 silly gunzTarPerm extractEntry test/plugins/watch-test.js
+495 silly lockFile dd08fbb8-80337-0-4284990690648556-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302180337-0.4284990690648556\package
+496 silly lockFile dd08fbb8-80337-0-4284990690648556-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302180337-0.4284990690648556\package
+497 silly lockFile 08170e25-80337-0-4284990690648556-tmp-tgz tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302180337-0.4284990690648556\tmp.tgz
+498 silly lockFile 08170e25-80337-0-4284990690648556-tmp-tgz tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302180337-0.4284990690648556\tmp.tgz
+499 verbose tar pack [ 'C:\\Users\\yingf\\AppData\\Roaming\\npm-cache\\forever-monitor\\1.2.3\\package.tgz',
+499 verbose tar pack   'C:\\Users\\yingf\\AppData\\Local\\Temp\\npm-3532-AJJJv-CF\\1398302180337-0.4284990690648556\\package' ]
+500 verbose tarball C:\Users\yingf\AppData\Roaming\npm-cache\forever-monitor\1.2.3\package.tgz
+501 verbose folder C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302180337-0.4284990690648556\package
+502 silly lockFile dd08fbb8-80337-0-4284990690648556-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302180337-0.4284990690648556\package
+503 verbose lock tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302180337-0.4284990690648556\package C:\Users\yingf\AppData\Roaming\npm-cache\dd08fbb8-80337-0-4284990690648556-package.lock
+504 silly lockFile ffeeeab3-orever-monitor-1-2-3-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\forever-monitor\1.2.3\package.tgz
+505 verbose lock tar://C:\Users\yingf\AppData\Roaming\npm-cache\forever-monitor\1.2.3\package.tgz C:\Users\yingf\AppData\Roaming\npm-cache\ffeeeab3-orever-monitor-1-2-3-package-tgz.lock
+506 silly lockFile dd08fbb8-80337-0-4284990690648556-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302180337-0.4284990690648556\package
+507 silly lockFile dd08fbb8-80337-0-4284990690648556-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302180337-0.4284990690648556\package
+508 silly lockFile ffeeeab3-orever-monitor-1-2-3-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\forever-monitor\1.2.3\package.tgz
+509 silly lockFile ffeeeab3-orever-monitor-1-2-3-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\forever-monitor\1.2.3\package.tgz
+510 silly lockFile c0c02a48-he-forever-monitor-1-2-3-package C:\Users\yingf\AppData\Roaming\npm-cache\forever-monitor\1.2.3\package
+511 verbose lock C:\Users\yingf\AppData\Roaming\npm-cache\forever-monitor\1.2.3\package C:\Users\yingf\AppData\Roaming\npm-cache\c0c02a48-he-forever-monitor-1-2-3-package.lock
+512 silly lockFile c0c02a48-he-forever-monitor-1-2-3-package C:\Users\yingf\AppData\Roaming\npm-cache\forever-monitor\1.2.3\package
+513 silly lockFile c0c02a48-he-forever-monitor-1-2-3-package C:\Users\yingf\AppData\Roaming\npm-cache\forever-monitor\1.2.3\package
+514 verbose tar unpack C:\Users\yingf\AppData\Roaming\npm-cache\forever-monitor\1.2.3\package.tgz
+515 silly lockFile fc5339c9-he-forever-monitor-1-2-3-package tar://C:\Users\yingf\AppData\Roaming\npm-cache\forever-monitor\1.2.3\package
+516 verbose lock tar://C:\Users\yingf\AppData\Roaming\npm-cache\forever-monitor\1.2.3\package C:\Users\yingf\AppData\Roaming\npm-cache\fc5339c9-he-forever-monitor-1-2-3-package.lock
+517 silly lockFile ffeeeab3-orever-monitor-1-2-3-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\forever-monitor\1.2.3\package.tgz
+518 verbose lock tar://C:\Users\yingf\AppData\Roaming\npm-cache\forever-monitor\1.2.3\package.tgz C:\Users\yingf\AppData\Roaming\npm-cache\ffeeeab3-orever-monitor-1-2-3-package-tgz.lock
+519 silly gunzTarPerm modes [ '755', '644' ]
+520 silly gunzTarPerm extractEntry package.json
+521 silly gunzTarPerm modified mode [ 'package.json', 438, 420 ]
+522 silly gunzTarPerm extractEntry .npmignore
+523 silly gunzTarPerm modified mode [ '.npmignore', 438, 420 ]
+524 silly gunzTarPerm extractEntry README.md
+525 silly gunzTarPerm modified mode [ 'README.md', 438, 420 ]
+526 silly gunzTarPerm extractEntry LICENSE
+527 silly gunzTarPerm modified mode [ 'LICENSE', 438, 420 ]
+528 silly gunzTarPerm extractEntry .travis.yml
+529 silly gunzTarPerm modified mode [ '.travis.yml', 438, 420 ]
+530 silly gunzTarPerm extractEntry examples/all-env-vars.js
+531 silly gunzTarPerm modified mode [ 'examples/all-env-vars.js', 438, 420 ]
+532 silly gunzTarPerm extractEntry examples/custom-cwd.js
+533 silly gunzTarPerm modified mode [ 'examples/custom-cwd.js', 438, 420 ]
+534 silly gunzTarPerm extractEntry examples/env-server.js
+535 silly gunzTarPerm modified mode [ 'examples/env-server.js', 438, 420 ]
+536 silly gunzTarPerm extractEntry examples/env-vars.js
+537 silly gunzTarPerm modified mode [ 'examples/env-vars.js', 438, 420 ]
+538 silly gunzTarPerm extractEntry examples/count-timer.js
+539 silly gunzTarPerm modified mode [ 'examples/count-timer.js', 438, 420 ]
+540 silly gunzTarPerm extractEntry examples/always-throw.js
+541 silly gunzTarPerm modified mode [ 'examples/always-throw.js', 438, 420 ]
+542 silly gunzTarPerm extractEntry examples/list-multiple.js
+543 silly gunzTarPerm modified mode [ 'examples/list-multiple.js', 438, 420 ]
+544 silly gunzTarPerm extractEntry examples/log-on-interval.js
+545 silly gunzTarPerm modified mode [ 'examples/log-on-interval.js', 438, 420 ]
+546 silly gunzTarPerm extractEntry examples/multiple-processes.js
+547 silly gunzTarPerm modified mode [ 'examples/multiple-processes.js', 438, 420 ]
+548 silly gunzTarPerm extractEntry examples/process-send.js
+549 silly gunzTarPerm modified mode [ 'examples/process-send.js', 438, 420 ]
+550 silly gunzTarPerm extractEntry examples/signal-ignore.js
+551 silly gunzTarPerm modified mode [ 'examples/signal-ignore.js', 438, 420 ]
+552 silly gunzTarPerm extractEntry examples/server.js
+553 silly gunzTarPerm modified mode [ 'examples/server.js', 438, 420 ]
+554 silly gunzTarPerm extractEntry examples/error-on-timer.js
+555 silly gunzTarPerm modified mode [ 'examples/error-on-timer.js', 438, 420 ]
+556 silly gunzTarPerm extractEntry examples/spawn-and-error.js
+557 silly gunzTarPerm modified mode [ 'examples/spawn-and-error.js', 438, 420 ]
+558 silly gunzTarPerm extractEntry examples/graceful-exit.js
+559 silly gunzTarPerm modified mode [ 'examples/graceful-exit.js', 438, 420 ]
+560 silly gunzTarPerm extractEntry examples/cli-multiple-start
+561 silly gunzTarPerm modified mode [ 'examples/cli-multiple-start', 438, 420 ]
+562 silly gunzTarPerm extractEntry lib/index.js
+563 silly gunzTarPerm modified mode [ 'lib/index.js', 438, 420 ]
+564 silly gunzTarPerm extractEntry lib/forever-monitor/common.js
+565 silly gunzTarPerm modified mode [ 'lib/forever-monitor/common.js', 438, 420 ]
+566 silly gunzTarPerm extractEntry lib/forever-monitor/monitor.js
+567 silly gunzTarPerm modified mode [ 'lib/forever-monitor/monitor.js', 438, 420 ]
+568 silly gunzTarPerm extractEntry lib/forever-monitor/plugins/index.js
+569 silly gunzTarPerm modified mode [ 'lib/forever-monitor/plugins/index.js', 438, 420 ]
+570 silly gunzTarPerm extractEntry lib/forever-monitor/plugins/logger.js
+571 silly gunzTarPerm modified mode [ 'lib/forever-monitor/plugins/logger.js', 438, 420 ]
+572 silly gunzTarPerm extractEntry lib/forever-monitor/plugins/watch.js
+573 silly gunzTarPerm modified mode [ 'lib/forever-monitor/plugins/watch.js', 438, 420 ]
+574 silly gunzTarPerm extractEntry test/core/check-process-test.js
+575 silly gunzTarPerm modified mode [ 'test/core/check-process-test.js', 438, 420 ]
+576 silly gunzTarPerm extractEntry test/fixtures/fork.js
+577 silly gunzTarPerm modified mode [ 'test/fixtures/fork.js', 438, 420 ]
+578 silly gunzTarPerm extractEntry test/fixtures/gc.js
+579 silly gunzTarPerm modified mode [ 'test/fixtures/gc.js', 438, 420 ]
+580 silly gunzTarPerm extractEntry test/fixtures/logs.js
+581 silly gunzTarPerm modified mode [ 'test/fixtures/logs.js', 438, 420 ]
+582 silly gunzTarPerm extractEntry test/fixtures/send-pong.js
+583 silly gunzTarPerm modified mode [ 'test/fixtures/send-pong.js', 438, 420 ]
+584 silly gunzTarPerm extractEntry test/fixtures/testnode
+585 silly gunzTarPerm modified mode [ 'test/fixtures/testnode', 438, 420 ]
+586 silly gunzTarPerm extractEntry test/fixtures/watch/daemon.js
+587 silly gunzTarPerm modified mode [ 'test/fixtures/watch/daemon.js', 438, 420 ]
+588 silly gunzTarPerm extractEntry test/fixtures/watch/.foreverignore
+589 silly gunzTarPerm modified mode [ 'test/fixtures/watch/.foreverignore', 438, 420 ]
+590 silly gunzTarPerm extractEntry test/fixtures/watch/file
+591 silly gunzTarPerm modified mode [ 'test/fixtures/watch/file', 438, 420 ]
+592 silly gunzTarPerm extractEntry test/fixtures/watch/ignoredDir/file
+593 silly gunzTarPerm modified mode [ 'test/fixtures/watch/ignoredDir/file', 438, 420 ]
+594 silly gunzTarPerm extractEntry test/fixtures/watch/removeMe
+595 silly gunzTarPerm modified mode [ 'test/fixtures/watch/removeMe', 438, 420 ]
+596 silly gunzTarPerm extractEntry test/helpers/macros.js
+597 silly gunzTarPerm modified mode [ 'test/helpers/macros.js', 438, 420 ]
+598 silly gunzTarPerm extractEntry test/monitor/env-spawn-test.js
+599 silly gunzTarPerm modified mode [ 'test/monitor/env-spawn-test.js', 438, 420 ]
+600 silly gunzTarPerm extractEntry test/monitor/fork-test.js
+601 silly gunzTarPerm modified mode [ 'test/monitor/fork-test.js', 438, 420 ]
+602 silly gunzTarPerm extractEntry test/monitor/send-test.js
+603 silly gunzTarPerm modified mode [ 'test/monitor/send-test.js', 438, 420 ]
+604 silly gunzTarPerm extractEntry test/monitor/signal-test.js
+605 silly gunzTarPerm modified mode [ 'test/monitor/signal-test.js', 438, 420 ]
+606 silly gunzTarPerm extractEntry test/monitor/simple-test.js
+607 silly gunzTarPerm modified mode [ 'test/monitor/simple-test.js', 438, 420 ]
+608 silly gunzTarPerm extractEntry test/monitor/spin-test.js
+609 silly gunzTarPerm modified mode [ 'test/monitor/spin-test.js', 438, 420 ]
+610 silly gunzTarPerm extractEntry test/plugins/logger-test.js
+611 silly gunzTarPerm modified mode [ 'test/plugins/logger-test.js', 438, 420 ]
+612 silly gunzTarPerm extractEntry test/plugins/watch-test.js
+613 silly gunzTarPerm modified mode [ 'test/plugins/watch-test.js', 438, 420 ]
+614 silly lockFile fc5339c9-he-forever-monitor-1-2-3-package tar://C:\Users\yingf\AppData\Roaming\npm-cache\forever-monitor\1.2.3\package
+615 silly lockFile fc5339c9-he-forever-monitor-1-2-3-package tar://C:\Users\yingf\AppData\Roaming\npm-cache\forever-monitor\1.2.3\package
+616 silly lockFile ffeeeab3-orever-monitor-1-2-3-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\forever-monitor\1.2.3\package.tgz
+617 silly lockFile ffeeeab3-orever-monitor-1-2-3-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\forever-monitor\1.2.3\package.tgz
+618 verbose chmod C:\Users\yingf\AppData\Roaming\npm-cache\forever-monitor\1.2.3\package.tgz 644
+619 silly chown skipping for windows C:\Users\yingf\AppData\Roaming\npm-cache\forever-monitor\1.2.3\package.tgz
+620 silly lockFile 00dcb118-onitor-forever-monitor-1-2-3-tgz https://registry.npmjs.org/forever-monitor/-/forever-monitor-1.2.3.tgz
+621 silly lockFile 00dcb118-onitor-forever-monitor-1-2-3-tgz https://registry.npmjs.org/forever-monitor/-/forever-monitor-1.2.3.tgz
+622 silly lockFile 355c84e8-forever-monitor-1-2-3 forever-monitor@1.2.3
+623 silly lockFile 355c84e8-forever-monitor-1-2-3 forever-monitor@1.2.3
+624 http 200 https://registry.npmjs.org/cliff/0.1.8
+625 silly registry.get cb [ 200,
+625 silly registry.get   { date: 'Thu, 24 Apr 2014 01:16:20 GMT',
+625 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R16B)',
+625 silly registry.get     etag: '"W4GBAYVXJ49SRDFDG86ILZOC"',
+625 silly registry.get     'content-type': 'application/json',
+625 silly registry.get     via: '1.1 varnish',
+625 silly registry.get     'cache-control': 'max-age=1',
+625 silly registry.get     'content-length': '8257',
+625 silly registry.get     'accept-ranges': 'bytes',
+625 silly registry.get     age: '606',
+625 silly registry.get     'x-served-by': 'cache-v44-ASH, cache-ty66-TYO',
+625 silly registry.get     'x-cache': 'HIT, MISS',
+625 silly registry.get     'x-cache-hits': '3716, 0',
+625 silly registry.get     'x-timer': 'S1398301574.651692390,VS0,VS85,VE85,VE606223',
+625 silly registry.get     vary: 'Accept',
+625 silly registry.get     'keep-alive': 'timeout=10, max=50',
+625 silly registry.get     connection: 'Keep-Alive' } ]
+626 silly lockFile 3fad3ff6--npmjs-org-cliff-cliff-0-1-8-tgz https://registry.npmjs.org/cliff/-/cliff-0.1.8.tgz
+627 verbose lock https://registry.npmjs.org/cliff/-/cliff-0.1.8.tgz C:\Users\yingf\AppData\Roaming\npm-cache\3fad3ff6--npmjs-org-cliff-cliff-0-1-8-tgz.lock
+628 verbose addRemoteTarball [ 'https://registry.npmjs.org/cliff/-/cliff-0.1.8.tgz',
+628 verbose addRemoteTarball   '43ca8ad9fe3943489693ab62dce0cae22509d272' ]
+629 info retry fetch attempt 1 at 09:16:23
+630 verbose fetch to= C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302183614-0.7139865022618324\tmp.tgz
+631 http GET https://registry.npmjs.org/cliff/-/cliff-0.1.8.tgz
+632 http 200 https://registry.npmjs.org/timespan
+633 silly registry.get cb [ 200,
+633 silly registry.get   { date: 'Thu, 24 Apr 2014 01:16:19 GMT',
+633 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R14B04)',
+633 silly registry.get     etag: '"1AV9XS6KVWEKU75UQOFH0S7NW"',
+633 silly registry.get     'content-type': 'application/json',
+633 silly registry.get     via: '1.1 varnish',
+633 silly registry.get     'cache-control': 'max-age=1',
+633 silly registry.get     'content-length': '11852',
+633 silly registry.get     'accept-ranges': 'bytes',
+633 silly registry.get     age: '0',
+633 silly registry.get     'x-served-by': 'cache-v41-ASH, cache-ty67-TYO',
+633 silly registry.get     'x-cache': 'MISS, MISS',
+633 silly registry.get     'x-cache-hits': '0, 0',
+633 silly registry.get     'x-timer': 'S1398302179.415370226,VS0,VS84,VE176,VE271',
+633 silly registry.get     vary: 'Accept',
+633 silly registry.get     'keep-alive': 'timeout=10, max=48',
+633 silly registry.get     connection: 'Keep-Alive' } ]
+634 silly addNameRange number 2 { name: 'timespan', range: '>=2.3.0-0 <2.4.0-0', hasData: true }
+635 silly addNameRange versions [ 'timespan', [ '2.0.0', '2.0.1', '2.1.0', '2.2.0', '2.3.0' ] ]
+636 verbose addNamed [ 'timespan', '2.3.0' ]
+637 verbose addNamed [ '2.3.0', '2.3.0' ]
+638 silly lockFile dabd98fe-timespan-2-3-0 timespan@2.3.0
+639 verbose lock timespan@2.3.0 C:\Users\yingf\AppData\Roaming\npm-cache\dabd98fe-timespan-2-3-0.lock
+640 silly lockFile ccd7078f--org-timespan-timespan-2-3-0-tgz https://registry.npmjs.org/timespan/-/timespan-2.3.0.tgz
+641 verbose lock https://registry.npmjs.org/timespan/-/timespan-2.3.0.tgz C:\Users\yingf\AppData\Roaming\npm-cache\ccd7078f--org-timespan-timespan-2-3-0-tgz.lock
+642 verbose addRemoteTarball [ 'https://registry.npmjs.org/timespan/-/timespan-2.3.0.tgz',
+642 verbose addRemoteTarball   '4902ce040bd13d845c8f59b27e9d59bad6f39929' ]
+643 info retry fetch attempt 1 at 09:16:23
+644 verbose fetch to= C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302183899-0.9886864742729813\tmp.tgz
+645 http GET https://registry.npmjs.org/timespan/-/timespan-2.3.0.tgz
+646 verbose tar unpack C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302180637-0.1305623990483582\tmp.tgz
+647 silly lockFile d9f8a2dc-80637-0-1305623990483582-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302180637-0.1305623990483582\package
+648 verbose lock tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302180637-0.1305623990483582\package C:\Users\yingf\AppData\Roaming\npm-cache\d9f8a2dc-80637-0-1305623990483582-package.lock
+649 silly lockFile 713cad0d-80637-0-1305623990483582-tmp-tgz tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302180637-0.1305623990483582\tmp.tgz
+650 verbose lock tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302180637-0.1305623990483582\tmp.tgz C:\Users\yingf\AppData\Roaming\npm-cache\713cad0d-80637-0-1305623990483582-tmp-tgz.lock
+651 silly gunzTarPerm modes [ '755', '644' ]
+652 silly gunzTarPerm extractEntry package.json
+653 silly gunzTarPerm extractEntry .npmignore
+654 silly gunzTarPerm extractEntry README.md
+655 silly gunzTarPerm extractEntry LICENSE
+656 silly gunzTarPerm extractEntry docs/docco.css
+657 silly gunzTarPerm extractEntry docs/pkginfo.html
+658 silly gunzTarPerm extractEntry examples/package.json
+659 silly gunzTarPerm extractEntry examples/all-properties.js
+660 silly gunzTarPerm extractEntry examples/array-argument.js
+661 silly gunzTarPerm extractEntry examples/multiple-properties.js
+662 silly gunzTarPerm extractEntry examples/object-argument.js
+663 silly gunzTarPerm extractEntry examples/single-property.js
+664 silly gunzTarPerm extractEntry examples/target-dir.js
+665 silly gunzTarPerm extractEntry examples/subdir/package.json
+666 silly gunzTarPerm extractEntry lib/pkginfo.js
+667 silly gunzTarPerm extractEntry test/pkginfo-test.js
+668 silly lockFile d9f8a2dc-80637-0-1305623990483582-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302180637-0.1305623990483582\package
+669 silly lockFile d9f8a2dc-80637-0-1305623990483582-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302180637-0.1305623990483582\package
+670 silly lockFile 713cad0d-80637-0-1305623990483582-tmp-tgz tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302180637-0.1305623990483582\tmp.tgz
+671 silly lockFile 713cad0d-80637-0-1305623990483582-tmp-tgz tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302180637-0.1305623990483582\tmp.tgz
+672 verbose tar pack [ 'C:\\Users\\yingf\\AppData\\Roaming\\npm-cache\\pkginfo\\0.3.0\\package.tgz',
+672 verbose tar pack   'C:\\Users\\yingf\\AppData\\Local\\Temp\\npm-3532-AJJJv-CF\\1398302180637-0.1305623990483582\\package' ]
+673 verbose tarball C:\Users\yingf\AppData\Roaming\npm-cache\pkginfo\0.3.0\package.tgz
+674 verbose folder C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302180637-0.1305623990483582\package
+675 silly lockFile d9f8a2dc-80637-0-1305623990483582-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302180637-0.1305623990483582\package
+676 verbose lock tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302180637-0.1305623990483582\package C:\Users\yingf\AppData\Roaming\npm-cache\d9f8a2dc-80637-0-1305623990483582-package.lock
+677 silly lockFile 39ad2648--cache-pkginfo-0-3-0-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\pkginfo\0.3.0\package.tgz
+678 verbose lock tar://C:\Users\yingf\AppData\Roaming\npm-cache\pkginfo\0.3.0\package.tgz C:\Users\yingf\AppData\Roaming\npm-cache\39ad2648--cache-pkginfo-0-3-0-package-tgz.lock
+679 silly lockFile d9f8a2dc-80637-0-1305623990483582-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302180637-0.1305623990483582\package
+680 silly lockFile d9f8a2dc-80637-0-1305623990483582-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302180637-0.1305623990483582\package
+681 silly lockFile 39ad2648--cache-pkginfo-0-3-0-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\pkginfo\0.3.0\package.tgz
+682 silly lockFile 39ad2648--cache-pkginfo-0-3-0-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\pkginfo\0.3.0\package.tgz
+683 silly lockFile c8a940e7--npm-cache-pkginfo-0-3-0-package C:\Users\yingf\AppData\Roaming\npm-cache\pkginfo\0.3.0\package
+684 verbose lock C:\Users\yingf\AppData\Roaming\npm-cache\pkginfo\0.3.0\package C:\Users\yingf\AppData\Roaming\npm-cache\c8a940e7--npm-cache-pkginfo-0-3-0-package.lock
+685 silly lockFile c8a940e7--npm-cache-pkginfo-0-3-0-package C:\Users\yingf\AppData\Roaming\npm-cache\pkginfo\0.3.0\package
+686 silly lockFile c8a940e7--npm-cache-pkginfo-0-3-0-package C:\Users\yingf\AppData\Roaming\npm-cache\pkginfo\0.3.0\package
+687 verbose tar unpack C:\Users\yingf\AppData\Roaming\npm-cache\pkginfo\0.3.0\package.tgz
+688 silly lockFile 9d4a6dd5--npm-cache-pkginfo-0-3-0-package tar://C:\Users\yingf\AppData\Roaming\npm-cache\pkginfo\0.3.0\package
+689 verbose lock tar://C:\Users\yingf\AppData\Roaming\npm-cache\pkginfo\0.3.0\package C:\Users\yingf\AppData\Roaming\npm-cache\9d4a6dd5--npm-cache-pkginfo-0-3-0-package.lock
+690 silly lockFile 39ad2648--cache-pkginfo-0-3-0-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\pkginfo\0.3.0\package.tgz
+691 verbose lock tar://C:\Users\yingf\AppData\Roaming\npm-cache\pkginfo\0.3.0\package.tgz C:\Users\yingf\AppData\Roaming\npm-cache\39ad2648--cache-pkginfo-0-3-0-package-tgz.lock
+692 silly gunzTarPerm modes [ '755', '644' ]
+693 silly gunzTarPerm extractEntry package.json
+694 silly gunzTarPerm modified mode [ 'package.json', 438, 420 ]
+695 silly gunzTarPerm extractEntry .npmignore
+696 silly gunzTarPerm modified mode [ '.npmignore', 438, 420 ]
+697 silly gunzTarPerm extractEntry README.md
+698 silly gunzTarPerm modified mode [ 'README.md', 438, 420 ]
+699 silly gunzTarPerm extractEntry LICENSE
+700 silly gunzTarPerm modified mode [ 'LICENSE', 438, 420 ]
+701 silly gunzTarPerm extractEntry docs/docco.css
+702 silly gunzTarPerm modified mode [ 'docs/docco.css', 438, 420 ]
+703 silly gunzTarPerm extractEntry docs/pkginfo.html
+704 silly gunzTarPerm modified mode [ 'docs/pkginfo.html', 438, 420 ]
+705 silly gunzTarPerm extractEntry examples/package.json
+706 silly gunzTarPerm modified mode [ 'examples/package.json', 438, 420 ]
+707 silly gunzTarPerm extractEntry examples/all-properties.js
+708 silly gunzTarPerm modified mode [ 'examples/all-properties.js', 438, 420 ]
+709 silly gunzTarPerm extractEntry examples/array-argument.js
+710 silly gunzTarPerm modified mode [ 'examples/array-argument.js', 438, 420 ]
+711 silly gunzTarPerm extractEntry examples/multiple-properties.js
+712 silly gunzTarPerm modified mode [ 'examples/multiple-properties.js', 438, 420 ]
+713 silly gunzTarPerm extractEntry examples/object-argument.js
+714 silly gunzTarPerm modified mode [ 'examples/object-argument.js', 438, 420 ]
+715 silly gunzTarPerm extractEntry examples/single-property.js
+716 silly gunzTarPerm modified mode [ 'examples/single-property.js', 438, 420 ]
+717 silly gunzTarPerm extractEntry examples/target-dir.js
+718 silly gunzTarPerm modified mode [ 'examples/target-dir.js', 438, 420 ]
+719 silly gunzTarPerm extractEntry examples/subdir/package.json
+720 silly gunzTarPerm modified mode [ 'examples/subdir/package.json', 438, 420 ]
+721 silly gunzTarPerm extractEntry lib/pkginfo.js
+722 silly gunzTarPerm modified mode [ 'lib/pkginfo.js', 438, 420 ]
+723 silly gunzTarPerm extractEntry test/pkginfo-test.js
+724 silly gunzTarPerm modified mode [ 'test/pkginfo-test.js', 438, 420 ]
+725 silly lockFile 9d4a6dd5--npm-cache-pkginfo-0-3-0-package tar://C:\Users\yingf\AppData\Roaming\npm-cache\pkginfo\0.3.0\package
+726 silly lockFile 9d4a6dd5--npm-cache-pkginfo-0-3-0-package tar://C:\Users\yingf\AppData\Roaming\npm-cache\pkginfo\0.3.0\package
+727 silly lockFile 39ad2648--cache-pkginfo-0-3-0-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\pkginfo\0.3.0\package.tgz
+728 silly lockFile 39ad2648--cache-pkginfo-0-3-0-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\pkginfo\0.3.0\package.tgz
+729 verbose chmod C:\Users\yingf\AppData\Roaming\npm-cache\pkginfo\0.3.0\package.tgz 644
+730 silly chown skipping for windows C:\Users\yingf\AppData\Roaming\npm-cache\pkginfo\0.3.0\package.tgz
+731 silly lockFile 0d38efc5-js-org-pkginfo-pkginfo-0-3-0-tgz https://registry.npmjs.org/pkginfo/-/pkginfo-0.3.0.tgz
+732 silly lockFile 0d38efc5-js-org-pkginfo-pkginfo-0-3-0-tgz https://registry.npmjs.org/pkginfo/-/pkginfo-0.3.0.tgz
+733 silly lockFile c6150d55-pkginfo-0-3-0 pkginfo@0.3.0
+734 silly lockFile c6150d55-pkginfo-0-3-0 pkginfo@0.3.0
+735 http 200 https://registry.npmjs.org/timespan/-/timespan-2.3.0.tgz
+736 http 200 https://registry.npmjs.org/nssocket
+737 silly registry.get cb [ 200,
+737 silly registry.get   { date: 'Thu, 24 Apr 2014 01:16:19 GMT',
+737 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R14B04)',
+737 silly registry.get     etag: '"CXZT4EBJ4VXPVO0KV64CIQ101"',
+737 silly registry.get     'content-type': 'application/json',
+737 silly registry.get     via: '1.1 varnish',
+737 silly registry.get     'cache-control': 'max-age=1',
+737 silly registry.get     'content-length': '52798',
+737 silly registry.get     'accept-ranges': 'bytes',
+737 silly registry.get     age: '70',
+737 silly registry.get     'x-served-by': 'cache-v41-ASH, cache-ty67-TYO',
+737 silly registry.get     'x-cache': 'HIT, MISS',
+737 silly registry.get     'x-cache-hits': '1, 0',
+737 silly registry.get     'x-timer': 'S1398302179.173653126,VS0,VS84,VE176,VE262',
+737 silly registry.get     vary: 'Accept',
+737 silly registry.get     'keep-alive': 'timeout=10, max=50',
+737 silly registry.get     connection: 'Keep-Alive' } ]
+738 silly addNameRange number 2 { name: 'nssocket', range: '>=0.5.1-0 <0.6.0-0', hasData: true }
+739 silly addNameRange versions [ 'nssocket',
+739 silly addNameRange   [ '0.1.0',
+739 silly addNameRange     '0.1.1',
+739 silly addNameRange     '0.2.0',
+739 silly addNameRange     '0.2.1',
+739 silly addNameRange     '0.2.2',
+739 silly addNameRange     '0.2.3',
+739 silly addNameRange     '0.2.4',
+739 silly addNameRange     '0.2.5',
+739 silly addNameRange     '0.2.5-1',
+739 silly addNameRange     '0.3.0',
+739 silly addNameRange     '0.3.1',
+739 silly addNameRange     '0.3.2',
+739 silly addNameRange     '0.3.3',
+739 silly addNameRange     '0.3.4',
+739 silly addNameRange     '0.3.5',
+739 silly addNameRange     '0.3.6',
+739 silly addNameRange     '0.3.7',
+739 silly addNameRange     '0.3.8',
+739 silly addNameRange     '0.4.0',
+739 silly addNameRange     '0.5.0',
+739 silly addNameRange     '0.5.1' ] ]
+740 verbose addNamed [ 'nssocket', '0.5.1' ]
+741 verbose addNamed [ '0.5.1', '0.5.1' ]
+742 silly lockFile f616423b-nssocket-0-5-1 nssocket@0.5.1
+743 verbose lock nssocket@0.5.1 C:\Users\yingf\AppData\Roaming\npm-cache\f616423b-nssocket-0-5-1.lock
+744 silly lockFile 5ec41cf7--org-nssocket-nssocket-0-5-1-tgz https://registry.npmjs.org/nssocket/-/nssocket-0.5.1.tgz
+745 verbose lock https://registry.npmjs.org/nssocket/-/nssocket-0.5.1.tgz C:\Users\yingf\AppData\Roaming\npm-cache\5ec41cf7--org-nssocket-nssocket-0-5-1-tgz.lock
+746 verbose addRemoteTarball [ 'https://registry.npmjs.org/nssocket/-/nssocket-0.5.1.tgz',
+746 verbose addRemoteTarball   '11f0428335ad8d89ff9cf96ab2852a23b1b33b71' ]
+747 info retry fetch attempt 1 at 09:16:25
+748 verbose fetch to= C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302185137-0.11698884726502001\tmp.tgz
+749 http GET https://registry.npmjs.org/nssocket/-/nssocket-0.5.1.tgz
+750 verbose tar unpack C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302183899-0.9886864742729813\tmp.tgz
+751 silly lockFile 9c2380b3-83899-0-9886864742729813-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302183899-0.9886864742729813\package
+752 verbose lock tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302183899-0.9886864742729813\package C:\Users\yingf\AppData\Roaming\npm-cache\9c2380b3-83899-0-9886864742729813-package.lock
+753 silly lockFile 06a5a509-83899-0-9886864742729813-tmp-tgz tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302183899-0.9886864742729813\tmp.tgz
+754 verbose lock tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302183899-0.9886864742729813\tmp.tgz C:\Users\yingf\AppData\Roaming\npm-cache\06a5a509-83899-0-9886864742729813-tmp-tgz.lock
+755 silly gunzTarPerm modes [ '755', '644' ]
+756 silly gunzTarPerm extractEntry package.json
+757 silly gunzTarPerm extractEntry .npmignore
+758 silly gunzTarPerm extractEntry README.md
+759 silly gunzTarPerm extractEntry LICENSE
+760 silly gunzTarPerm extractEntry browser/TimeSpan-1.2.js
+761 silly gunzTarPerm extractEntry browser/TimeSpan-1.2.min.js
+762 silly gunzTarPerm extractEntry CHANGELOG.md
+763 silly gunzTarPerm extractEntry docs/docco.css
+764 silly gunzTarPerm extractEntry docs/time-span.html
+765 silly gunzTarPerm extractEntry lib/time-span.js
+766 silly gunzTarPerm extractEntry test/date-parser-test.js
+767 silly gunzTarPerm extractEntry test/helpers.js
+768 silly gunzTarPerm extractEntry test/time-span-test.js
+769 silly lockFile 9c2380b3-83899-0-9886864742729813-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302183899-0.9886864742729813\package
+770 silly lockFile 9c2380b3-83899-0-9886864742729813-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302183899-0.9886864742729813\package
+771 silly lockFile 06a5a509-83899-0-9886864742729813-tmp-tgz tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302183899-0.9886864742729813\tmp.tgz
+772 silly lockFile 06a5a509-83899-0-9886864742729813-tmp-tgz tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302183899-0.9886864742729813\tmp.tgz
+773 verbose tar pack [ 'C:\\Users\\yingf\\AppData\\Roaming\\npm-cache\\timespan\\2.3.0\\package.tgz',
+773 verbose tar pack   'C:\\Users\\yingf\\AppData\\Local\\Temp\\npm-3532-AJJJv-CF\\1398302183899-0.9886864742729813\\package' ]
+774 verbose tarball C:\Users\yingf\AppData\Roaming\npm-cache\timespan\2.3.0\package.tgz
+775 verbose folder C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302183899-0.9886864742729813\package
+776 silly lockFile 9c2380b3-83899-0-9886864742729813-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302183899-0.9886864742729813\package
+777 verbose lock tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302183899-0.9886864742729813\package C:\Users\yingf\AppData\Roaming\npm-cache\9c2380b3-83899-0-9886864742729813-package.lock
+778 silly lockFile 22f33240-cache-timespan-2-3-0-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\timespan\2.3.0\package.tgz
+779 verbose lock tar://C:\Users\yingf\AppData\Roaming\npm-cache\timespan\2.3.0\package.tgz C:\Users\yingf\AppData\Roaming\npm-cache\22f33240-cache-timespan-2-3-0-package-tgz.lock
+780 http 200 https://registry.npmjs.org/cliff/-/cliff-0.1.8.tgz
+781 silly lockFile 9c2380b3-83899-0-9886864742729813-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302183899-0.9886864742729813\package
+782 silly lockFile 9c2380b3-83899-0-9886864742729813-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302183899-0.9886864742729813\package
+783 silly lockFile 22f33240-cache-timespan-2-3-0-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\timespan\2.3.0\package.tgz
+784 silly lockFile 22f33240-cache-timespan-2-3-0-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\timespan\2.3.0\package.tgz
+785 silly lockFile edf6a501-npm-cache-timespan-2-3-0-package C:\Users\yingf\AppData\Roaming\npm-cache\timespan\2.3.0\package
+786 verbose lock C:\Users\yingf\AppData\Roaming\npm-cache\timespan\2.3.0\package C:\Users\yingf\AppData\Roaming\npm-cache\edf6a501-npm-cache-timespan-2-3-0-package.lock
+787 silly lockFile edf6a501-npm-cache-timespan-2-3-0-package C:\Users\yingf\AppData\Roaming\npm-cache\timespan\2.3.0\package
+788 silly lockFile edf6a501-npm-cache-timespan-2-3-0-package C:\Users\yingf\AppData\Roaming\npm-cache\timespan\2.3.0\package
+789 verbose tar unpack C:\Users\yingf\AppData\Roaming\npm-cache\timespan\2.3.0\package.tgz
+790 silly lockFile 2451d082-npm-cache-timespan-2-3-0-package tar://C:\Users\yingf\AppData\Roaming\npm-cache\timespan\2.3.0\package
+791 verbose lock tar://C:\Users\yingf\AppData\Roaming\npm-cache\timespan\2.3.0\package C:\Users\yingf\AppData\Roaming\npm-cache\2451d082-npm-cache-timespan-2-3-0-package.lock
+792 silly lockFile 22f33240-cache-timespan-2-3-0-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\timespan\2.3.0\package.tgz
+793 verbose lock tar://C:\Users\yingf\AppData\Roaming\npm-cache\timespan\2.3.0\package.tgz C:\Users\yingf\AppData\Roaming\npm-cache\22f33240-cache-timespan-2-3-0-package-tgz.lock
+794 silly gunzTarPerm modes [ '755', '644' ]
+795 silly gunzTarPerm extractEntry package.json
+796 silly gunzTarPerm modified mode [ 'package.json', 438, 420 ]
+797 silly gunzTarPerm extractEntry .npmignore
+798 silly gunzTarPerm modified mode [ '.npmignore', 438, 420 ]
+799 silly gunzTarPerm extractEntry README.md
+800 silly gunzTarPerm modified mode [ 'README.md', 438, 420 ]
+801 silly gunzTarPerm extractEntry LICENSE
+802 silly gunzTarPerm modified mode [ 'LICENSE', 438, 420 ]
+803 silly gunzTarPerm extractEntry browser/TimeSpan-1.2.js
+804 silly gunzTarPerm modified mode [ 'browser/TimeSpan-1.2.js', 438, 420 ]
+805 silly gunzTarPerm extractEntry browser/TimeSpan-1.2.min.js
+806 silly gunzTarPerm modified mode [ 'browser/TimeSpan-1.2.min.js', 438, 420 ]
+807 silly gunzTarPerm extractEntry CHANGELOG.md
+808 silly gunzTarPerm modified mode [ 'CHANGELOG.md', 438, 420 ]
+809 silly gunzTarPerm extractEntry docs/docco.css
+810 silly gunzTarPerm modified mode [ 'docs/docco.css', 438, 420 ]
+811 silly gunzTarPerm extractEntry docs/time-span.html
+812 silly gunzTarPerm modified mode [ 'docs/time-span.html', 438, 420 ]
+813 silly gunzTarPerm extractEntry lib/time-span.js
+814 silly gunzTarPerm modified mode [ 'lib/time-span.js', 438, 420 ]
+815 silly gunzTarPerm extractEntry test/date-parser-test.js
+816 silly gunzTarPerm modified mode [ 'test/date-parser-test.js', 438, 420 ]
+817 silly gunzTarPerm extractEntry test/helpers.js
+818 silly gunzTarPerm modified mode [ 'test/helpers.js', 438, 420 ]
+819 silly gunzTarPerm extractEntry test/time-span-test.js
+820 silly gunzTarPerm modified mode [ 'test/time-span-test.js', 438, 420 ]
+821 silly lockFile 2451d082-npm-cache-timespan-2-3-0-package tar://C:\Users\yingf\AppData\Roaming\npm-cache\timespan\2.3.0\package
+822 silly lockFile 2451d082-npm-cache-timespan-2-3-0-package tar://C:\Users\yingf\AppData\Roaming\npm-cache\timespan\2.3.0\package
+823 silly lockFile 22f33240-cache-timespan-2-3-0-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\timespan\2.3.0\package.tgz
+824 silly lockFile 22f33240-cache-timespan-2-3-0-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\timespan\2.3.0\package.tgz
+825 verbose chmod C:\Users\yingf\AppData\Roaming\npm-cache\timespan\2.3.0\package.tgz 644
+826 silly chown skipping for windows C:\Users\yingf\AppData\Roaming\npm-cache\timespan\2.3.0\package.tgz
+827 silly lockFile ccd7078f--org-timespan-timespan-2-3-0-tgz https://registry.npmjs.org/timespan/-/timespan-2.3.0.tgz
+828 silly lockFile ccd7078f--org-timespan-timespan-2-3-0-tgz https://registry.npmjs.org/timespan/-/timespan-2.3.0.tgz
+829 silly lockFile dabd98fe-timespan-2-3-0 timespan@2.3.0
+830 silly lockFile dabd98fe-timespan-2-3-0 timespan@2.3.0
+831 silly lockFile 572eaef7-timespan-2-3-0 timespan@~2.3.0
+832 silly lockFile 572eaef7-timespan-2-3-0 timespan@~2.3.0
+833 http 200 https://registry.npmjs.org/watch
+834 silly registry.get cb [ 200,
+834 silly registry.get   { date: 'Thu, 24 Apr 2014 01:16:22 GMT',
+834 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R16B)',
+834 silly registry.get     etag: '"A8YNZKAUR7KFGS396ENYYQ9RE"',
+834 silly registry.get     'content-type': 'application/json',
+834 silly registry.get     via: '1.1 varnish',
+834 silly registry.get     'cache-control': 'max-age=1',
+834 silly registry.get     'content-length': '14909',
+834 silly registry.get     'accept-ranges': 'bytes',
+834 silly registry.get     age: '600',
+834 silly registry.get     'x-served-by': 'cache-v41-ASH, cache-ty66-TYO',
+834 silly registry.get     'x-cache': 'HIT, MISS',
+834 silly registry.get     'x-cache-hits': '3, 0',
+834 silly registry.get     'x-timer': 'S1398301582.146593571,VS0,VS85,VE85,VE600516',
+834 silly registry.get     vary: 'Accept',
+834 silly registry.get     'keep-alive': 'timeout=10, max=49',
+834 silly registry.get     connection: 'Keep-Alive' } ]
+835 silly addNameRange number 2 { name: 'watch', range: '>=0.8.0-0 <0.9.0-0', hasData: true }
+836 silly addNameRange versions [ 'watch',
+836 silly addNameRange   [ '0.1.0',
+836 silly addNameRange     '0.2.0',
+836 silly addNameRange     '0.2.1',
+836 silly addNameRange     '0.3.0',
+836 silly addNameRange     '0.3.1',
+836 silly addNameRange     '0.3.2',
+836 silly addNameRange     '0.3.3',
+836 silly addNameRange     '0.4.0',
+836 silly addNameRange     '0.5.0',
+836 silly addNameRange     '0.5.1',
+836 silly addNameRange     '0.6.0',
+836 silly addNameRange     '0.7.0',
+836 silly addNameRange     '0.8.0',
+836 silly addNameRange     '0.9.0',
+836 silly addNameRange     '0.10.0' ] ]
+837 verbose addNamed [ 'watch', '0.8.0' ]
+838 verbose addNamed [ '0.8.0', '0.8.0' ]
+839 silly lockFile 1fd0cbc9-watch-0-8-0 watch@0.8.0
+840 verbose lock watch@0.8.0 C:\Users\yingf\AppData\Roaming\npm-cache\1fd0cbc9-watch-0-8-0.lock
+841 silly lockFile e5ccf6a2--npmjs-org-watch-watch-0-8-0-tgz https://registry.npmjs.org/watch/-/watch-0.8.0.tgz
+842 verbose lock https://registry.npmjs.org/watch/-/watch-0.8.0.tgz C:\Users\yingf\AppData\Roaming\npm-cache\e5ccf6a2--npmjs-org-watch-watch-0-8-0-tgz.lock
+843 verbose addRemoteTarball [ 'https://registry.npmjs.org/watch/-/watch-0.8.0.tgz',
+843 verbose addRemoteTarball   '1bb0eea53defe6e621e9c8c63c0358007ecbdbcc' ]
+844 info retry fetch attempt 1 at 09:16:25
+845 verbose fetch to= C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302185863-0.8037971034646034\tmp.tgz
+846 http GET https://registry.npmjs.org/watch/-/watch-0.8.0.tgz
+847 http 200 https://registry.npmjs.org/colors
+848 silly registry.get cb [ 200,
+848 silly registry.get   { date: 'Thu, 24 Apr 2014 01:16:24 GMT',
+848 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R14B04)',
+848 silly registry.get     etag: '"NPGPD6BDS4BD3ATI6C4O6YD"',
+848 silly registry.get     'content-type': 'application/json',
+848 silly registry.get     via: '1.1 varnish',
+848 silly registry.get     'cache-control': 'max-age=1',
+848 silly registry.get     'content-length': '7892',
+848 silly registry.get     'accept-ranges': 'bytes',
+848 silly registry.get     'x-served-by': 'cache-v44-ASH, cache-ty66-TYO',
+848 silly registry.get     'x-cache': 'MISS, MISS',
+848 silly registry.get     'x-cache-hits': '0, 0',
+848 silly registry.get     'x-timer': 'S1398302052.450410128,VS0,VS84,VE167,VE132451',
+848 silly registry.get     vary: 'Accept',
+848 silly registry.get     'keep-alive': 'timeout=10, max=48',
+848 silly registry.get     connection: 'Keep-Alive' } ]
+849 silly addNameRange number 2 { name: 'colors', range: '>=0.6.2-0 <0.7.0-0', hasData: true }
+850 silly addNameRange versions [ 'colors',
+850 silly addNameRange   [ '0.3.0', '0.5.0', '0.5.1', '0.6.0', '0.6.0-1', '0.6.1', '0.6.2' ] ]
+851 verbose addNamed [ 'colors', '0.6.2' ]
+852 verbose addNamed [ '0.6.2', '0.6.2' ]
+853 silly lockFile 1ce149d5-colors-0-6-2 colors@0.6.2
+854 verbose lock colors@0.6.2 C:\Users\yingf\AppData\Roaming\npm-cache\1ce149d5-colors-0-6-2.lock
+855 silly lockFile ab5efc36-pmjs-org-colors-colors-0-6-2-tgz https://registry.npmjs.org/colors/-/colors-0.6.2.tgz
+856 verbose lock https://registry.npmjs.org/colors/-/colors-0.6.2.tgz C:\Users\yingf\AppData\Roaming\npm-cache\ab5efc36-pmjs-org-colors-colors-0-6-2-tgz.lock
+857 verbose addRemoteTarball [ 'https://registry.npmjs.org/colors/-/colors-0.6.2.tgz',
+857 verbose addRemoteTarball   '2423fe6678ac0c5dae8852e5d0e5be08c997abcc' ]
+858 info retry fetch attempt 1 at 09:16:27
+859 verbose fetch to= C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302187511-0.45109806256368756\tmp.tgz
+860 http GET https://registry.npmjs.org/colors/-/colors-0.6.2.tgz
+861 http 200 https://registry.npmjs.org/watch/-/watch-0.8.0.tgz
+862 verbose tar unpack C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302185863-0.8037971034646034\tmp.tgz
+863 silly lockFile 8f5e3661-85863-0-8037971034646034-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302185863-0.8037971034646034\package
+864 verbose lock tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302185863-0.8037971034646034\package C:\Users\yingf\AppData\Roaming\npm-cache\8f5e3661-85863-0-8037971034646034-package.lock
+865 silly lockFile e651160a-85863-0-8037971034646034-tmp-tgz tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302185863-0.8037971034646034\tmp.tgz
+866 verbose lock tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302185863-0.8037971034646034\tmp.tgz C:\Users\yingf\AppData\Roaming\npm-cache\e651160a-85863-0-8037971034646034-tmp-tgz.lock
+867 silly gunzTarPerm modes [ '755', '644' ]
+868 silly gunzTarPerm extractEntry package.json
+869 silly gunzTarPerm extractEntry LICENSE
+870 silly gunzTarPerm extractEntry main.js
+871 silly gunzTarPerm extractEntry readme.mkd
+872 silly gunzTarPerm extractEntry test/test_monitor.js
+873 silly gunzTarPerm extractEntry test/test_watchTree.js
+874 silly gunzTarPerm extractEntry test/d/d/t
+875 silly gunzTarPerm extractEntry test/d/t
+876 silly lockFile 8f5e3661-85863-0-8037971034646034-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302185863-0.8037971034646034\package
+877 silly lockFile 8f5e3661-85863-0-8037971034646034-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302185863-0.8037971034646034\package
+878 silly lockFile e651160a-85863-0-8037971034646034-tmp-tgz tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302185863-0.8037971034646034\tmp.tgz
+879 silly lockFile e651160a-85863-0-8037971034646034-tmp-tgz tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302185863-0.8037971034646034\tmp.tgz
+880 verbose tar pack [ 'C:\\Users\\yingf\\AppData\\Roaming\\npm-cache\\watch\\0.8.0\\package.tgz',
+880 verbose tar pack   'C:\\Users\\yingf\\AppData\\Local\\Temp\\npm-3532-AJJJv-CF\\1398302185863-0.8037971034646034\\package' ]
+881 verbose tarball C:\Users\yingf\AppData\Roaming\npm-cache\watch\0.8.0\package.tgz
+882 verbose folder C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302185863-0.8037971034646034\package
+883 silly lockFile 8f5e3661-85863-0-8037971034646034-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302185863-0.8037971034646034\package
+884 verbose lock tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302185863-0.8037971034646034\package C:\Users\yingf\AppData\Roaming\npm-cache\8f5e3661-85863-0-8037971034646034-package.lock
+885 silly lockFile 79879597-pm-cache-watch-0-8-0-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\watch\0.8.0\package.tgz
+886 verbose lock tar://C:\Users\yingf\AppData\Roaming\npm-cache\watch\0.8.0\package.tgz C:\Users\yingf\AppData\Roaming\npm-cache\79879597-pm-cache-watch-0-8-0-package-tgz.lock
+887 silly lockFile 8f5e3661-85863-0-8037971034646034-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302185863-0.8037971034646034\package
+888 silly lockFile 8f5e3661-85863-0-8037971034646034-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302185863-0.8037971034646034\package
+889 silly lockFile 79879597-pm-cache-watch-0-8-0-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\watch\0.8.0\package.tgz
+890 silly lockFile 79879597-pm-cache-watch-0-8-0-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\watch\0.8.0\package.tgz
+891 silly lockFile 6e500ea2-ng-npm-cache-watch-0-8-0-package C:\Users\yingf\AppData\Roaming\npm-cache\watch\0.8.0\package
+892 verbose lock C:\Users\yingf\AppData\Roaming\npm-cache\watch\0.8.0\package C:\Users\yingf\AppData\Roaming\npm-cache\6e500ea2-ng-npm-cache-watch-0-8-0-package.lock
+893 silly lockFile 6e500ea2-ng-npm-cache-watch-0-8-0-package C:\Users\yingf\AppData\Roaming\npm-cache\watch\0.8.0\package
+894 silly lockFile 6e500ea2-ng-npm-cache-watch-0-8-0-package C:\Users\yingf\AppData\Roaming\npm-cache\watch\0.8.0\package
+895 verbose tar unpack C:\Users\yingf\AppData\Roaming\npm-cache\watch\0.8.0\package.tgz
+896 silly lockFile 47f287dd-ng-npm-cache-watch-0-8-0-package tar://C:\Users\yingf\AppData\Roaming\npm-cache\watch\0.8.0\package
+897 verbose lock tar://C:\Users\yingf\AppData\Roaming\npm-cache\watch\0.8.0\package C:\Users\yingf\AppData\Roaming\npm-cache\47f287dd-ng-npm-cache-watch-0-8-0-package.lock
+898 silly lockFile 79879597-pm-cache-watch-0-8-0-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\watch\0.8.0\package.tgz
+899 verbose lock tar://C:\Users\yingf\AppData\Roaming\npm-cache\watch\0.8.0\package.tgz C:\Users\yingf\AppData\Roaming\npm-cache\79879597-pm-cache-watch-0-8-0-package-tgz.lock
+900 silly gunzTarPerm modes [ '755', '644' ]
+901 silly gunzTarPerm extractEntry package.json
+902 silly gunzTarPerm modified mode [ 'package.json', 438, 420 ]
+903 silly gunzTarPerm extractEntry LICENSE
+904 silly gunzTarPerm modified mode [ 'LICENSE', 438, 420 ]
+905 silly gunzTarPerm extractEntry main.js
+906 silly gunzTarPerm modified mode [ 'main.js', 438, 420 ]
+907 silly gunzTarPerm extractEntry readme.mkd
+908 silly gunzTarPerm modified mode [ 'readme.mkd', 438, 420 ]
+909 silly gunzTarPerm extractEntry test/test_monitor.js
+910 silly gunzTarPerm modified mode [ 'test/test_monitor.js', 438, 420 ]
+911 silly gunzTarPerm extractEntry test/test_watchTree.js
+912 silly gunzTarPerm modified mode [ 'test/test_watchTree.js', 438, 420 ]
+913 silly gunzTarPerm extractEntry test/d/d/t
+914 silly gunzTarPerm modified mode [ 'test/d/d/t', 438, 420 ]
+915 silly gunzTarPerm extractEntry test/d/t
+916 silly gunzTarPerm modified mode [ 'test/d/t', 438, 420 ]
+917 silly lockFile 47f287dd-ng-npm-cache-watch-0-8-0-package tar://C:\Users\yingf\AppData\Roaming\npm-cache\watch\0.8.0\package
+918 silly lockFile 47f287dd-ng-npm-cache-watch-0-8-0-package tar://C:\Users\yingf\AppData\Roaming\npm-cache\watch\0.8.0\package
+919 silly lockFile 79879597-pm-cache-watch-0-8-0-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\watch\0.8.0\package.tgz
+920 silly lockFile 79879597-pm-cache-watch-0-8-0-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\watch\0.8.0\package.tgz
+921 verbose chmod C:\Users\yingf\AppData\Roaming\npm-cache\watch\0.8.0\package.tgz 644
+922 silly chown skipping for windows C:\Users\yingf\AppData\Roaming\npm-cache\watch\0.8.0\package.tgz
+923 silly lockFile e5ccf6a2--npmjs-org-watch-watch-0-8-0-tgz https://registry.npmjs.org/watch/-/watch-0.8.0.tgz
+924 silly lockFile e5ccf6a2--npmjs-org-watch-watch-0-8-0-tgz https://registry.npmjs.org/watch/-/watch-0.8.0.tgz
+925 silly lockFile 1fd0cbc9-watch-0-8-0 watch@0.8.0
+926 silly lockFile 1fd0cbc9-watch-0-8-0 watch@0.8.0
+927 silly lockFile ecc5b56d-watch-0-8-0 watch@~0.8.0
+928 silly lockFile ecc5b56d-watch-0-8-0 watch@~0.8.0
+929 http 200 https://registry.npmjs.org/colors/-/colors-0.6.2.tgz
+930 verbose tar unpack C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302187511-0.45109806256368756\tmp.tgz
+931 silly lockFile 8f871dbc-7511-0-45109806256368756-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302187511-0.45109806256368756\package
+932 verbose lock tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302187511-0.45109806256368756\package C:\Users\yingf\AppData\Roaming\npm-cache\8f871dbc-7511-0-45109806256368756-package.lock
+933 silly lockFile 76182b89-7511-0-45109806256368756-tmp-tgz tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302187511-0.45109806256368756\tmp.tgz
+934 verbose lock tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302187511-0.45109806256368756\tmp.tgz C:\Users\yingf\AppData\Roaming\npm-cache\76182b89-7511-0-45109806256368756-tmp-tgz.lock
+935 silly gunzTarPerm modes [ '755', '644' ]
+936 silly gunzTarPerm extractEntry package.json
+937 silly gunzTarPerm extractEntry colors.js
+938 silly gunzTarPerm extractEntry example.js
+939 silly gunzTarPerm extractEntry test.js
+940 silly gunzTarPerm extractEntry MIT-LICENSE.txt
+941 silly gunzTarPerm extractEntry ReadMe.md
+942 silly gunzTarPerm extractEntry example.html
+943 silly gunzTarPerm extractEntry themes/winston-dark.js
+944 silly gunzTarPerm extractEntry themes/winston-light.js
+945 silly lockFile 8f871dbc-7511-0-45109806256368756-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302187511-0.45109806256368756\package
+946 silly lockFile 8f871dbc-7511-0-45109806256368756-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302187511-0.45109806256368756\package
+947 silly lockFile 76182b89-7511-0-45109806256368756-tmp-tgz tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302187511-0.45109806256368756\tmp.tgz
+948 silly lockFile 76182b89-7511-0-45109806256368756-tmp-tgz tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302187511-0.45109806256368756\tmp.tgz
+949 verbose tar pack [ 'C:\\Users\\yingf\\AppData\\Roaming\\npm-cache\\colors\\0.6.2\\package.tgz',
+949 verbose tar pack   'C:\\Users\\yingf\\AppData\\Local\\Temp\\npm-3532-AJJJv-CF\\1398302187511-0.45109806256368756\\package' ]
+950 verbose tarball C:\Users\yingf\AppData\Roaming\npm-cache\colors\0.6.2\package.tgz
+951 verbose folder C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302187511-0.45109806256368756\package
+952 silly lockFile 8f871dbc-7511-0-45109806256368756-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302187511-0.45109806256368756\package
+953 verbose lock tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302187511-0.45109806256368756\package C:\Users\yingf\AppData\Roaming\npm-cache\8f871dbc-7511-0-45109806256368756-package.lock
+954 silly lockFile a0e1e55e-m-cache-colors-0-6-2-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\colors\0.6.2\package.tgz
+955 verbose lock tar://C:\Users\yingf\AppData\Roaming\npm-cache\colors\0.6.2\package.tgz C:\Users\yingf\AppData\Roaming\npm-cache\a0e1e55e-m-cache-colors-0-6-2-package-tgz.lock
+956 silly lockFile 8f871dbc-7511-0-45109806256368756-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302187511-0.45109806256368756\package
+957 silly lockFile 8f871dbc-7511-0-45109806256368756-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302187511-0.45109806256368756\package
+958 silly lockFile a0e1e55e-m-cache-colors-0-6-2-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\colors\0.6.2\package.tgz
+959 silly lockFile a0e1e55e-m-cache-colors-0-6-2-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\colors\0.6.2\package.tgz
+960 silly lockFile 69a6aac6-g-npm-cache-colors-0-6-2-package C:\Users\yingf\AppData\Roaming\npm-cache\colors\0.6.2\package
+961 verbose lock C:\Users\yingf\AppData\Roaming\npm-cache\colors\0.6.2\package C:\Users\yingf\AppData\Roaming\npm-cache\69a6aac6-g-npm-cache-colors-0-6-2-package.lock
+962 silly lockFile 69a6aac6-g-npm-cache-colors-0-6-2-package C:\Users\yingf\AppData\Roaming\npm-cache\colors\0.6.2\package
+963 silly lockFile 69a6aac6-g-npm-cache-colors-0-6-2-package C:\Users\yingf\AppData\Roaming\npm-cache\colors\0.6.2\package
+964 verbose tar unpack C:\Users\yingf\AppData\Roaming\npm-cache\colors\0.6.2\package.tgz
+965 silly lockFile ff0d61e0-g-npm-cache-colors-0-6-2-package tar://C:\Users\yingf\AppData\Roaming\npm-cache\colors\0.6.2\package
+966 verbose lock tar://C:\Users\yingf\AppData\Roaming\npm-cache\colors\0.6.2\package C:\Users\yingf\AppData\Roaming\npm-cache\ff0d61e0-g-npm-cache-colors-0-6-2-package.lock
+967 silly lockFile a0e1e55e-m-cache-colors-0-6-2-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\colors\0.6.2\package.tgz
+968 verbose lock tar://C:\Users\yingf\AppData\Roaming\npm-cache\colors\0.6.2\package.tgz C:\Users\yingf\AppData\Roaming\npm-cache\a0e1e55e-m-cache-colors-0-6-2-package-tgz.lock
+969 silly gunzTarPerm modes [ '755', '644' ]
+970 silly gunzTarPerm extractEntry package.json
+971 silly gunzTarPerm modified mode [ 'package.json', 438, 420 ]
+972 silly gunzTarPerm extractEntry colors.js
+973 silly gunzTarPerm modified mode [ 'colors.js', 438, 420 ]
+974 silly gunzTarPerm extractEntry example.js
+975 silly gunzTarPerm modified mode [ 'example.js', 438, 420 ]
+976 silly gunzTarPerm extractEntry test.js
+977 silly gunzTarPerm modified mode [ 'test.js', 438, 420 ]
+978 silly gunzTarPerm extractEntry example.html
+979 silly gunzTarPerm modified mode [ 'example.html', 438, 420 ]
+980 silly gunzTarPerm extractEntry MIT-LICENSE.txt
+981 silly gunzTarPerm modified mode [ 'MIT-LICENSE.txt', 438, 420 ]
+982 silly gunzTarPerm extractEntry ReadMe.md
+983 silly gunzTarPerm modified mode [ 'ReadMe.md', 438, 420 ]
+984 silly gunzTarPerm extractEntry themes/winston-dark.js
+985 silly gunzTarPerm modified mode [ 'themes/winston-dark.js', 438, 420 ]
+986 silly gunzTarPerm extractEntry themes/winston-light.js
+987 silly gunzTarPerm modified mode [ 'themes/winston-light.js', 438, 420 ]
+988 silly lockFile ff0d61e0-g-npm-cache-colors-0-6-2-package tar://C:\Users\yingf\AppData\Roaming\npm-cache\colors\0.6.2\package
+989 silly lockFile ff0d61e0-g-npm-cache-colors-0-6-2-package tar://C:\Users\yingf\AppData\Roaming\npm-cache\colors\0.6.2\package
+990 silly lockFile a0e1e55e-m-cache-colors-0-6-2-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\colors\0.6.2\package.tgz
+991 silly lockFile a0e1e55e-m-cache-colors-0-6-2-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\colors\0.6.2\package.tgz
+992 verbose chmod C:\Users\yingf\AppData\Roaming\npm-cache\colors\0.6.2\package.tgz 644
+993 silly chown skipping for windows C:\Users\yingf\AppData\Roaming\npm-cache\colors\0.6.2\package.tgz
+994 silly lockFile ab5efc36-pmjs-org-colors-colors-0-6-2-tgz https://registry.npmjs.org/colors/-/colors-0.6.2.tgz
+995 silly lockFile ab5efc36-pmjs-org-colors-colors-0-6-2-tgz https://registry.npmjs.org/colors/-/colors-0.6.2.tgz
+996 silly lockFile 1ce149d5-colors-0-6-2 colors@0.6.2
+997 silly lockFile 1ce149d5-colors-0-6-2 colors@0.6.2
+998 silly lockFile f2380b4d-colors-0-6-2 colors@~0.6.2
+999 silly lockFile f2380b4d-colors-0-6-2 colors@~0.6.2
+1000 http 200 https://registry.npmjs.org/flatiron
+1001 silly registry.get cb [ 200,
+1001 silly registry.get   { date: 'Thu, 24 Apr 2014 01:16:18 GMT',
+1001 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R16B)',
+1001 silly registry.get     etag: '"3VB0K4JP6RYK7NWRCQAMRVXP2"',
+1001 silly registry.get     'content-type': 'application/json',
+1001 silly registry.get     via: '1.1 varnish',
+1001 silly registry.get     'cache-control': 'max-age=1',
+1001 silly registry.get     'content-length': '59919',
+1001 silly registry.get     'accept-ranges': 'bytes',
+1001 silly registry.get     age: '70',
+1001 silly registry.get     'x-served-by': 'cache-v41-ASH, cache-ty68-TYO',
+1001 silly registry.get     'x-cache': 'HIT, MISS',
+1001 silly registry.get     'x-cache-hits': '1, 0',
+1001 silly registry.get     'x-timer': 'S1398302178.717256069,VS0,VS84,VE175,VE262',
+1001 silly registry.get     vary: 'Accept',
+1001 silly registry.get     'keep-alive': 'timeout=10, max=50',
+1001 silly registry.get     connection: 'Keep-Alive' } ]
+1002 silly addNameRange number 2 { name: 'flatiron', range: '>=0.3.11-0 <0.4.0-0', hasData: true }
+1003 silly addNameRange versions [ 'flatiron',
+1003 silly addNameRange   [ '0.1.2',
+1003 silly addNameRange     '0.1.3',
+1003 silly addNameRange     '0.1.4',
+1003 silly addNameRange     '0.1.5',
+1003 silly addNameRange     '0.1.5-1',
+1003 silly addNameRange     '0.1.6',
+1003 silly addNameRange     '0.1.7',
+1003 silly addNameRange     '0.1.7-1',
+1003 silly addNameRange     '0.1.8',
+1003 silly addNameRange     '0.1.9',
+1003 silly addNameRange     '0.1.10',
+1003 silly addNameRange     '0.1.11',
+1003 silly addNameRange     '0.1.12',
+1003 silly addNameRange     '0.1.12-1',
+1003 silly addNameRange     '0.1.13',
+1003 silly addNameRange     '0.1.14',
+1003 silly addNameRange     '0.1.15',
+1003 silly addNameRange     '0.1.16',
+1003 silly addNameRange     '0.1.17',
+1003 silly addNameRange     '0.2.0',
+1003 silly addNameRange     '0.2.1',
+1003 silly addNameRange     '0.2.2',
+1003 silly addNameRange     '0.2.3',
+1003 silly addNameRange     '0.2.4',
+1003 silly addNameRange     '0.2.5',
+1003 silly addNameRange     '0.2.6',
+1003 silly addNameRange     '0.2.7',
+1003 silly addNameRange     '0.2.8',
+1003 silly addNameRange     '0.3.0',
+1003 silly addNameRange     '0.3.2',
+1003 silly addNameRange     '0.3.3',
+1003 silly addNameRange     '0.3.4',
+1003 silly addNameRange     '0.3.5',
+1003 silly addNameRange     '0.3.6',
+1003 silly addNameRange     '0.3.7',
+1003 silly addNameRange     '0.3.8',
+1003 silly addNameRange     '0.3.9',
+1003 silly addNameRange     '0.3.10',
+1003 silly addNameRange     '0.3.11' ] ]
+1004 verbose addNamed [ 'flatiron', '0.3.11' ]
+1005 verbose addNamed [ '0.3.11', '0.3.11' ]
+1006 silly lockFile 4d7181da-flatiron-0-3-11 flatiron@0.3.11
+1007 verbose lock flatiron@0.3.11 C:\Users\yingf\AppData\Roaming\npm-cache\4d7181da-flatiron-0-3-11.lock
+1008 silly lockFile 48912921-org-flatiron-flatiron-0-3-11-tgz https://registry.npmjs.org/flatiron/-/flatiron-0.3.11.tgz
+1009 verbose lock https://registry.npmjs.org/flatiron/-/flatiron-0.3.11.tgz C:\Users\yingf\AppData\Roaming\npm-cache\48912921-org-flatiron-flatiron-0-3-11-tgz.lock
+1010 verbose addRemoteTarball [ 'https://registry.npmjs.org/flatiron/-/flatiron-0.3.11.tgz',
+1010 verbose addRemoteTarball   '1cb0190fc2bd9d860f018e04d95fd35f9bd12555' ]
+1011 info retry fetch attempt 1 at 09:16:31
+1012 verbose fetch to= C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302191363-0.07313820766285062\tmp.tgz
+1013 http GET https://registry.npmjs.org/flatiron/-/flatiron-0.3.11.tgz
+1014 http 200 https://registry.npmjs.org/flatiron/-/flatiron-0.3.11.tgz
+1015 verbose tar unpack C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302191363-0.07313820766285062\tmp.tgz
+1016 silly lockFile 842f0d4e-1363-0-07313820766285062-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302191363-0.07313820766285062\package
+1017 verbose lock tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302191363-0.07313820766285062\package C:\Users\yingf\AppData\Roaming\npm-cache\842f0d4e-1363-0-07313820766285062-package.lock
+1018 silly lockFile e700ac8e-1363-0-07313820766285062-tmp-tgz tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302191363-0.07313820766285062\tmp.tgz
+1019 verbose lock tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302191363-0.07313820766285062\tmp.tgz C:\Users\yingf\AppData\Roaming\npm-cache\e700ac8e-1363-0-07313820766285062-tmp-tgz.lock
+1020 silly gunzTarPerm modes [ '755', '644' ]
+1021 silly gunzTarPerm extractEntry package.json
+1022 silly gunzTarPerm extractEntry .npmignore
+1023 silly gunzTarPerm extractEntry README.md
+1024 silly gunzTarPerm extractEntry LICENSE
+1025 silly gunzTarPerm extractEntry .travis.yml
+1026 silly gunzTarPerm extractEntry bin/flatiron
+1027 silly gunzTarPerm extractEntry examples/http-sample.js
+1028 silly gunzTarPerm extractEntry examples/cli-sample/index.js
+1029 silly gunzTarPerm extractEntry examples/cli-sample/print.js
+1030 silly gunzTarPerm extractEntry examples/resourceful-app/package.json
+1031 silly gunzTarPerm extractEntry examples/resourceful-app/app.js
+1032 silly gunzTarPerm extractEntry examples/resourceful-app/app/resources/creature.js
+1033 silly gunzTarPerm extractEntry examples/socket.io/server.js
+1034 silly gunzTarPerm extractEntry examples/socket.io/index.html
+1035 silly gunzTarPerm extractEntry examples/static-app/package.json
+1036 silly gunzTarPerm extractEntry examples/static-app/app.js
+1037 silly gunzTarPerm extractEntry examples/static-app/app/assets/style.js
+1038 silly gunzTarPerm extractEntry examples/static-app/app/assets/style.css
+1039 silly gunzTarPerm extractEntry lib/flatiron.js
+1040 silly gunzTarPerm extractEntry lib/flatiron/app.js
+1041 silly gunzTarPerm extractEntry lib/flatiron/common.js
+1042 silly gunzTarPerm extractEntry lib/flatiron/constants.js
+1043 silly gunzTarPerm extractEntry lib/flatiron/cli/create.js
+1044 silly gunzTarPerm extractEntry lib/flatiron/plugins/cli.js
+1045 silly gunzTarPerm extractEntry lib/flatiron/plugins/http.js
+1046 silly gunzTarPerm extractEntry lib/flatiron/plugins/resourceful.js
+1047 silly gunzTarPerm extractEntry lib/flatiron/plugins/static.js
+1048 silly gunzTarPerm extractEntry scaffolds/cli/package.json
+1049 silly gunzTarPerm extractEntry scaffolds/cli/app.js
+1050 silly gunzTarPerm extractEntry scaffolds/cli/config/config.json
+1051 silly gunzTarPerm extractEntry scaffolds/cli/directories.json
+1052 silly gunzTarPerm extractEntry scaffolds/cli/files.json
+1053 silly gunzTarPerm extractEntry scaffolds/cli/lib/index.js
+1054 silly gunzTarPerm extractEntry scaffolds/http/package.json
+1055 silly gunzTarPerm extractEntry scaffolds/http/app.js
+1056 silly gunzTarPerm extractEntry scaffolds/http/config/config.json
+1057 silly gunzTarPerm extractEntry scaffolds/http/directories.json
+1058 silly gunzTarPerm extractEntry scaffolds/http/files.json
+1059 silly gunzTarPerm extractEntry test/flatiron-test.js
+1060 silly gunzTarPerm extractEntry test/fixtures/sample-app/app/new-york/controller.js
+1061 silly gunzTarPerm extractEntry test/fixtures/sample-app/app/new-york/index.js
+1062 silly gunzTarPerm extractEntry test/fixtures/sample-app/app/new-york/new-york.js
+1063 silly gunzTarPerm extractEntry test/plugins/resourceful-test.js
+1064 silly gunzTarPerm extractEntry test/plugins/static-test.js
+1065 silly lockFile 842f0d4e-1363-0-07313820766285062-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302191363-0.07313820766285062\package
+1066 silly lockFile 842f0d4e-1363-0-07313820766285062-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302191363-0.07313820766285062\package
+1067 silly lockFile e700ac8e-1363-0-07313820766285062-tmp-tgz tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302191363-0.07313820766285062\tmp.tgz
+1068 silly lockFile e700ac8e-1363-0-07313820766285062-tmp-tgz tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302191363-0.07313820766285062\tmp.tgz
+1069 verbose tar pack [ 'C:\\Users\\yingf\\AppData\\Roaming\\npm-cache\\flatiron\\0.3.11\\package.tgz',
+1069 verbose tar pack   'C:\\Users\\yingf\\AppData\\Local\\Temp\\npm-3532-AJJJv-CF\\1398302191363-0.07313820766285062\\package' ]
+1070 verbose tarball C:\Users\yingf\AppData\Roaming\npm-cache\flatiron\0.3.11\package.tgz
+1071 verbose folder C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302191363-0.07313820766285062\package
+1072 silly lockFile 842f0d4e-1363-0-07313820766285062-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302191363-0.07313820766285062\package
+1073 verbose lock tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302191363-0.07313820766285062\package C:\Users\yingf\AppData\Roaming\npm-cache\842f0d4e-1363-0-07313820766285062-package.lock
+1074 silly lockFile b6c10527-ache-flatiron-0-3-11-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\flatiron\0.3.11\package.tgz
+1075 verbose lock tar://C:\Users\yingf\AppData\Roaming\npm-cache\flatiron\0.3.11\package.tgz C:\Users\yingf\AppData\Roaming\npm-cache\b6c10527-ache-flatiron-0-3-11-package-tgz.lock
+1076 silly lockFile 842f0d4e-1363-0-07313820766285062-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302191363-0.07313820766285062\package
+1077 silly lockFile 842f0d4e-1363-0-07313820766285062-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302191363-0.07313820766285062\package
+1078 silly lockFile b6c10527-ache-flatiron-0-3-11-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\flatiron\0.3.11\package.tgz
+1079 silly lockFile b6c10527-ache-flatiron-0-3-11-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\flatiron\0.3.11\package.tgz
+1080 silly lockFile c75a7715-pm-cache-flatiron-0-3-11-package C:\Users\yingf\AppData\Roaming\npm-cache\flatiron\0.3.11\package
+1081 verbose lock C:\Users\yingf\AppData\Roaming\npm-cache\flatiron\0.3.11\package C:\Users\yingf\AppData\Roaming\npm-cache\c75a7715-pm-cache-flatiron-0-3-11-package.lock
+1082 silly lockFile c75a7715-pm-cache-flatiron-0-3-11-package C:\Users\yingf\AppData\Roaming\npm-cache\flatiron\0.3.11\package
+1083 silly lockFile c75a7715-pm-cache-flatiron-0-3-11-package C:\Users\yingf\AppData\Roaming\npm-cache\flatiron\0.3.11\package
+1084 verbose tar unpack C:\Users\yingf\AppData\Roaming\npm-cache\flatiron\0.3.11\package.tgz
+1085 silly lockFile 04c402cb-pm-cache-flatiron-0-3-11-package tar://C:\Users\yingf\AppData\Roaming\npm-cache\flatiron\0.3.11\package
+1086 verbose lock tar://C:\Users\yingf\AppData\Roaming\npm-cache\flatiron\0.3.11\package C:\Users\yingf\AppData\Roaming\npm-cache\04c402cb-pm-cache-flatiron-0-3-11-package.lock
+1087 silly lockFile b6c10527-ache-flatiron-0-3-11-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\flatiron\0.3.11\package.tgz
+1088 verbose lock tar://C:\Users\yingf\AppData\Roaming\npm-cache\flatiron\0.3.11\package.tgz C:\Users\yingf\AppData\Roaming\npm-cache\b6c10527-ache-flatiron-0-3-11-package-tgz.lock
+1089 silly gunzTarPerm modes [ '755', '644' ]
+1090 silly gunzTarPerm extractEntry package.json
+1091 silly gunzTarPerm modified mode [ 'package.json', 438, 420 ]
+1092 silly gunzTarPerm extractEntry .npmignore
+1093 silly gunzTarPerm modified mode [ '.npmignore', 438, 420 ]
+1094 silly gunzTarPerm extractEntry README.md
+1095 silly gunzTarPerm modified mode [ 'README.md', 438, 420 ]
+1096 silly gunzTarPerm extractEntry LICENSE
+1097 silly gunzTarPerm modified mode [ 'LICENSE', 438, 420 ]
+1098 silly gunzTarPerm extractEntry .travis.yml
+1099 silly gunzTarPerm modified mode [ '.travis.yml', 438, 420 ]
+1100 silly gunzTarPerm extractEntry bin/flatiron
+1101 silly gunzTarPerm modified mode [ 'bin/flatiron', 438, 420 ]
+1102 silly gunzTarPerm extractEntry examples/http-sample.js
+1103 silly gunzTarPerm modified mode [ 'examples/http-sample.js', 438, 420 ]
+1104 silly gunzTarPerm extractEntry examples/cli-sample/index.js
+1105 silly gunzTarPerm modified mode [ 'examples/cli-sample/index.js', 438, 420 ]
+1106 silly gunzTarPerm extractEntry examples/cli-sample/print.js
+1107 silly gunzTarPerm modified mode [ 'examples/cli-sample/print.js', 438, 420 ]
+1108 silly gunzTarPerm extractEntry examples/resourceful-app/package.json
+1109 silly gunzTarPerm modified mode [ 'examples/resourceful-app/package.json', 438, 420 ]
+1110 silly gunzTarPerm extractEntry examples/resourceful-app/app.js
+1111 silly gunzTarPerm modified mode [ 'examples/resourceful-app/app.js', 438, 420 ]
+1112 silly gunzTarPerm extractEntry examples/resourceful-app/app/resources/creature.js
+1113 silly gunzTarPerm modified mode [ 'examples/resourceful-app/app/resources/creature.js',
+1113 silly gunzTarPerm   438,
+1113 silly gunzTarPerm   420 ]
+1114 silly gunzTarPerm extractEntry examples/socket.io/server.js
+1115 silly gunzTarPerm modified mode [ 'examples/socket.io/server.js', 438, 420 ]
+1116 silly gunzTarPerm extractEntry examples/socket.io/index.html
+1117 silly gunzTarPerm modified mode [ 'examples/socket.io/index.html', 438, 420 ]
+1118 silly gunzTarPerm extractEntry examples/static-app/package.json
+1119 silly gunzTarPerm modified mode [ 'examples/static-app/package.json', 438, 420 ]
+1120 silly gunzTarPerm extractEntry examples/static-app/app.js
+1121 silly gunzTarPerm modified mode [ 'examples/static-app/app.js', 438, 420 ]
+1122 silly gunzTarPerm extractEntry examples/static-app/app/assets/style.js
+1123 silly gunzTarPerm modified mode [ 'examples/static-app/app/assets/style.js', 438, 420 ]
+1124 silly gunzTarPerm extractEntry examples/static-app/app/assets/style.css
+1125 silly gunzTarPerm modified mode [ 'examples/static-app/app/assets/style.css', 438, 420 ]
+1126 silly gunzTarPerm extractEntry lib/flatiron.js
+1127 silly gunzTarPerm modified mode [ 'lib/flatiron.js', 438, 420 ]
+1128 silly gunzTarPerm extractEntry lib/flatiron/app.js
+1129 silly gunzTarPerm modified mode [ 'lib/flatiron/app.js', 438, 420 ]
+1130 silly gunzTarPerm extractEntry lib/flatiron/common.js
+1131 silly gunzTarPerm modified mode [ 'lib/flatiron/common.js', 438, 420 ]
+1132 silly gunzTarPerm extractEntry lib/flatiron/constants.js
+1133 silly gunzTarPerm modified mode [ 'lib/flatiron/constants.js', 438, 420 ]
+1134 silly gunzTarPerm extractEntry lib/flatiron/cli/create.js
+1135 silly gunzTarPerm modified mode [ 'lib/flatiron/cli/create.js', 438, 420 ]
+1136 silly gunzTarPerm extractEntry lib/flatiron/plugins/cli.js
+1137 silly gunzTarPerm modified mode [ 'lib/flatiron/plugins/cli.js', 438, 420 ]
+1138 silly gunzTarPerm extractEntry lib/flatiron/plugins/http.js
+1139 silly gunzTarPerm modified mode [ 'lib/flatiron/plugins/http.js', 438, 420 ]
+1140 silly gunzTarPerm extractEntry lib/flatiron/plugins/resourceful.js
+1141 silly gunzTarPerm modified mode [ 'lib/flatiron/plugins/resourceful.js', 438, 420 ]
+1142 silly gunzTarPerm extractEntry lib/flatiron/plugins/static.js
+1143 silly gunzTarPerm modified mode [ 'lib/flatiron/plugins/static.js', 438, 420 ]
+1144 silly gunzTarPerm extractEntry scaffolds/cli/package.json
+1145 silly gunzTarPerm modified mode [ 'scaffolds/cli/package.json', 438, 420 ]
+1146 silly gunzTarPerm extractEntry scaffolds/cli/app.js
+1147 silly gunzTarPerm modified mode [ 'scaffolds/cli/app.js', 438, 420 ]
+1148 silly gunzTarPerm extractEntry scaffolds/cli/config/config.json
+1149 silly gunzTarPerm modified mode [ 'scaffolds/cli/config/config.json', 438, 420 ]
+1150 silly gunzTarPerm extractEntry scaffolds/cli/directories.json
+1151 silly gunzTarPerm modified mode [ 'scaffolds/cli/directories.json', 438, 420 ]
+1152 silly gunzTarPerm extractEntry scaffolds/cli/files.json
+1153 silly gunzTarPerm modified mode [ 'scaffolds/cli/files.json', 438, 420 ]
+1154 silly gunzTarPerm extractEntry scaffolds/cli/lib/index.js
+1155 silly gunzTarPerm modified mode [ 'scaffolds/cli/lib/index.js', 438, 420 ]
+1156 silly gunzTarPerm extractEntry scaffolds/http/package.json
+1157 silly gunzTarPerm modified mode [ 'scaffolds/http/package.json', 438, 420 ]
+1158 silly gunzTarPerm extractEntry scaffolds/http/app.js
+1159 silly gunzTarPerm modified mode [ 'scaffolds/http/app.js', 438, 420 ]
+1160 silly gunzTarPerm extractEntry scaffolds/http/config/config.json
+1161 silly gunzTarPerm modified mode [ 'scaffolds/http/config/config.json', 438, 420 ]
+1162 silly gunzTarPerm extractEntry scaffolds/http/directories.json
+1163 silly gunzTarPerm modified mode [ 'scaffolds/http/directories.json', 438, 420 ]
+1164 silly gunzTarPerm extractEntry scaffolds/http/files.json
+1165 silly gunzTarPerm modified mode [ 'scaffolds/http/files.json', 438, 420 ]
+1166 silly gunzTarPerm extractEntry test/flatiron-test.js
+1167 silly gunzTarPerm modified mode [ 'test/flatiron-test.js', 438, 420 ]
+1168 silly gunzTarPerm extractEntry test/fixtures/sample-app/app/new-york/controller.js
+1169 silly gunzTarPerm modified mode [ 'test/fixtures/sample-app/app/new-york/controller.js',
+1169 silly gunzTarPerm   438,
+1169 silly gunzTarPerm   420 ]
+1170 silly gunzTarPerm extractEntry test/fixtures/sample-app/app/new-york/index.js
+1171 silly gunzTarPerm modified mode [ 'test/fixtures/sample-app/app/new-york/index.js', 438, 420 ]
+1172 silly gunzTarPerm extractEntry test/fixtures/sample-app/app/new-york/new-york.js
+1173 silly gunzTarPerm modified mode [ 'test/fixtures/sample-app/app/new-york/new-york.js', 438, 420 ]
+1174 silly gunzTarPerm extractEntry test/plugins/resourceful-test.js
+1175 silly gunzTarPerm modified mode [ 'test/plugins/resourceful-test.js', 438, 420 ]
+1176 silly gunzTarPerm extractEntry test/plugins/static-test.js
+1177 silly gunzTarPerm modified mode [ 'test/plugins/static-test.js', 438, 420 ]
+1178 http 200 https://registry.npmjs.org/winston
+1179 silly registry.get cb [ 200,
+1179 silly registry.get   { date: 'Thu, 24 Apr 2014 01:16:24 GMT',
+1179 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R14B04)',
+1179 silly registry.get     etag: '"6BVHTHAEHWMFBQ7HSUXXMVA0V"',
+1179 silly registry.get     'content-type': 'application/json',
+1179 silly registry.get     via: '1.1 varnish',
+1179 silly registry.get     'cache-control': 'max-age=1',
+1179 silly registry.get     'content-length': '65160',
+1179 silly registry.get     'accept-ranges': 'bytes',
+1179 silly registry.get     age: '29',
+1179 silly registry.get     'x-served-by': 'cache-v36-ASH, cache-ty67-TYO',
+1179 silly registry.get     'x-cache': 'HIT, MISS',
+1179 silly registry.get     'x-cache-hits': '1, 0',
+1179 silly registry.get     'x-timer': 'S1398302183.909850121,VS0,VS85,VE180,VE607',
+1179 silly registry.get     vary: 'Accept',
+1179 silly registry.get     'keep-alive': 'timeout=10, max=49',
+1179 silly registry.get     connection: 'Keep-Alive' } ]
+1180 silly addNameRange number 2 { name: 'winston', range: '>=0.7.2-0 <0.8.0-0', hasData: true }
+1181 silly addNameRange versions [ 'winston',
+1181 silly addNameRange   [ '0.2.11',
+1181 silly addNameRange     '0.3.3',
+1181 silly addNameRange     '0.3.4',
+1181 silly addNameRange     '0.3.5',
+1181 silly addNameRange     '0.4.0',
+1181 silly addNameRange     '0.4.1',
+1181 silly addNameRange     '0.5.0',
+1181 silly addNameRange     '0.5.1',
+1181 silly addNameRange     '0.5.2',
+1181 silly addNameRange     '0.5.3',
+1181 silly addNameRange     '0.5.4',
+1181 silly addNameRange     '0.5.5',
+1181 silly addNameRange     '0.5.6',
+1181 silly addNameRange     '0.5.7',
+1181 silly addNameRange     '0.5.8',
+1181 silly addNameRange     '0.5.9',
+1181 silly addNameRange     '0.5.10',
+1181 silly addNameRange     '0.5.11',
+1181 silly addNameRange     '0.6.1',
+1181 silly addNameRange     '0.6.2',
+1181 silly addNameRange     '0.7.0',
+1181 silly addNameRange     '0.7.1',
+1181 silly addNameRange     '0.7.2',
+1181 silly addNameRange     '0.7.3' ] ]
+1182 verbose addNamed [ 'winston', '0.7.3' ]
+1183 verbose addNamed [ '0.7.3', '0.7.3' ]
+1184 silly lockFile bed49444-winston-0-7-3 winston@0.7.3
+1185 verbose lock winston@0.7.3 C:\Users\yingf\AppData\Roaming\npm-cache\bed49444-winston-0-7-3.lock
+1186 silly lockFile e7e896fd-js-org-winston-winston-0-7-3-tgz https://registry.npmjs.org/winston/-/winston-0.7.3.tgz
+1187 verbose lock https://registry.npmjs.org/winston/-/winston-0.7.3.tgz C:\Users\yingf\AppData\Roaming\npm-cache\e7e896fd-js-org-winston-winston-0-7-3-tgz.lock
+1188 verbose addRemoteTarball [ 'https://registry.npmjs.org/winston/-/winston-0.7.3.tgz',
+1188 verbose addRemoteTarball   '7ae313ba73fcdc2ecb4aa2f9cd446e8298677266' ]
+1189 info retry fetch attempt 1 at 09:16:33
+1190 verbose fetch to= C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302193523-0.004272784339264035\tmp.tgz
+1191 http GET https://registry.npmjs.org/winston/-/winston-0.7.3.tgz
+1192 silly lockFile 04c402cb-pm-cache-flatiron-0-3-11-package tar://C:\Users\yingf\AppData\Roaming\npm-cache\flatiron\0.3.11\package
+1193 silly lockFile 04c402cb-pm-cache-flatiron-0-3-11-package tar://C:\Users\yingf\AppData\Roaming\npm-cache\flatiron\0.3.11\package
+1194 silly lockFile b6c10527-ache-flatiron-0-3-11-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\flatiron\0.3.11\package.tgz
+1195 silly lockFile b6c10527-ache-flatiron-0-3-11-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\flatiron\0.3.11\package.tgz
+1196 verbose chmod C:\Users\yingf\AppData\Roaming\npm-cache\flatiron\0.3.11\package.tgz 644
+1197 silly chown skipping for windows C:\Users\yingf\AppData\Roaming\npm-cache\flatiron\0.3.11\package.tgz
+1198 silly lockFile 48912921-org-flatiron-flatiron-0-3-11-tgz https://registry.npmjs.org/flatiron/-/flatiron-0.3.11.tgz
+1199 silly lockFile 48912921-org-flatiron-flatiron-0-3-11-tgz https://registry.npmjs.org/flatiron/-/flatiron-0.3.11.tgz
+1200 silly lockFile 4d7181da-flatiron-0-3-11 flatiron@0.3.11
+1201 silly lockFile 4d7181da-flatiron-0-3-11 flatiron@0.3.11
+1202 silly lockFile 99676c21-flatiron-0-3-11 flatiron@~0.3.11
+1203 silly lockFile 99676c21-flatiron-0-3-11 flatiron@~0.3.11
+1204 http 200 https://registry.npmjs.org/winston/-/winston-0.7.3.tgz
+1205 verbose tar unpack C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302193523-0.004272784339264035\tmp.tgz
+1206 silly lockFile 1ecc32cf-523-0-004272784339264035-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302193523-0.004272784339264035\package
+1207 verbose lock tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302193523-0.004272784339264035\package C:\Users\yingf\AppData\Roaming\npm-cache\1ecc32cf-523-0-004272784339264035-package.lock
+1208 silly lockFile 09320f28-523-0-004272784339264035-tmp-tgz tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302193523-0.004272784339264035\tmp.tgz
+1209 verbose lock tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302193523-0.004272784339264035\tmp.tgz C:\Users\yingf\AppData\Roaming\npm-cache\09320f28-523-0-004272784339264035-tmp-tgz.lock
+1210 silly gunzTarPerm modes [ '755', '644' ]
+1211 silly gunzTarPerm extractEntry package.json
+1212 silly gunzTarPerm extractEntry .npmignore
+1213 silly gunzTarPerm extractEntry README.md
+1214 silly gunzTarPerm extractEntry LICENSE
+1215 silly gunzTarPerm extractEntry .travis.yml
+1216 silly gunzTarPerm extractEntry CHANGELOG.md
+1217 silly gunzTarPerm extractEntry docs/transports.md
+1218 silly gunzTarPerm extractEntry examples/couchdb.js
+1219 silly gunzTarPerm extractEntry examples/custom-levels.js
+1220 silly gunzTarPerm extractEntry examples/exception.js
+1221 silly gunzTarPerm extractEntry examples/raw-mode.js
+1222 silly gunzTarPerm extractEntry examples/webhook-post.js
+1223 silly gunzTarPerm extractEntry lib/winston.js
+1224 silly gunzTarPerm extractEntry lib/winston/common.js
+1225 silly gunzTarPerm extractEntry lib/winston/config.js
+1226 silly gunzTarPerm extractEntry lib/winston/container.js
+1227 silly gunzTarPerm extractEntry lib/winston/exception.js
+1228 silly gunzTarPerm extractEntry lib/winston/logger.js
+1229 silly gunzTarPerm extractEntry lib/winston/transports.js
+1230 silly gunzTarPerm extractEntry lib/winston/config/cli-config.js
+1231 silly gunzTarPerm extractEntry lib/winston/config/npm-config.js
+1232 silly gunzTarPerm extractEntry lib/winston/config/syslog-config.js
+1233 silly gunzTarPerm extractEntry lib/winston/transports/console.js
+1234 silly gunzTarPerm extractEntry lib/winston/transports/daily-rotate-file.js
+1235 silly gunzTarPerm extractEntry lib/winston/transports/file.js
+1236 silly gunzTarPerm extractEntry lib/winston/transports/http.js
+1237 silly gunzTarPerm extractEntry lib/winston/transports/memory.js
+1238 silly gunzTarPerm extractEntry lib/winston/transports/transport.js
+1239 silly gunzTarPerm extractEntry lib/winston/transports/webhook.js
+1240 silly gunzTarPerm extractEntry test/cli-test.js
+1241 silly gunzTarPerm extractEntry test/custom-timestamp-test.js
+1242 silly gunzTarPerm extractEntry test/exception-test.js
+1243 silly gunzTarPerm extractEntry test/logger-test.js
+1244 silly gunzTarPerm extractEntry test/helpers.js
+1245 silly gunzTarPerm extractEntry test/container-test.js
+1246 silly gunzTarPerm extractEntry test/log-rewriter-test.js
+1247 silly gunzTarPerm extractEntry test/logger-levels-test.js
+1248 silly gunzTarPerm extractEntry test/winston-test.js
+1249 silly gunzTarPerm extractEntry test/log-exception-test.js
+1250 silly gunzTarPerm extractEntry test/fixtures/.gitkeep
+1251 silly gunzTarPerm extractEntry test/fixtures/keys/agent2-cert.pem
+1252 silly gunzTarPerm extractEntry test/fixtures/keys/agent2-key.pem
+1253 silly gunzTarPerm extractEntry test/fixtures/logs/.gitkeep
+1254 silly gunzTarPerm extractEntry test/fixtures/scripts/default-exceptions.js
+1255 silly gunzTarPerm extractEntry test/fixtures/scripts/exit-on-error.js
+1256 silly gunzTarPerm extractEntry test/fixtures/scripts/log-exceptions.js
+1257 silly gunzTarPerm extractEntry test/fixtures/scripts/unhandle-exceptions.js
+1258 silly gunzTarPerm extractEntry test/transports/console-test.js
+1259 silly gunzTarPerm extractEntry test/transports/daily-rotate-file-test.js
+1260 silly gunzTarPerm extractEntry test/transports/file-maxfiles-test.js
+1261 silly gunzTarPerm extractEntry test/transports/file-maxsize-test.js
+1262 silly gunzTarPerm extractEntry test/transports/file-test.js
+1263 silly gunzTarPerm extractEntry test/transports/memory-test.js
+1264 silly gunzTarPerm extractEntry test/transports/transport.js
+1265 silly gunzTarPerm extractEntry test/transports/webhook-test.js
+1266 silly lockFile 1ecc32cf-523-0-004272784339264035-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302193523-0.004272784339264035\package
+1267 silly lockFile 1ecc32cf-523-0-004272784339264035-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302193523-0.004272784339264035\package
+1268 silly lockFile 09320f28-523-0-004272784339264035-tmp-tgz tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302193523-0.004272784339264035\tmp.tgz
+1269 silly lockFile 09320f28-523-0-004272784339264035-tmp-tgz tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302193523-0.004272784339264035\tmp.tgz
+1270 verbose tar pack [ 'C:\\Users\\yingf\\AppData\\Roaming\\npm-cache\\winston\\0.7.3\\package.tgz',
+1270 verbose tar pack   'C:\\Users\\yingf\\AppData\\Local\\Temp\\npm-3532-AJJJv-CF\\1398302193523-0.004272784339264035\\package' ]
+1271 verbose tarball C:\Users\yingf\AppData\Roaming\npm-cache\winston\0.7.3\package.tgz
+1272 verbose folder C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302193523-0.004272784339264035\package
+1273 silly lockFile 1ecc32cf-523-0-004272784339264035-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302193523-0.004272784339264035\package
+1274 verbose lock tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302193523-0.004272784339264035\package C:\Users\yingf\AppData\Roaming\npm-cache\1ecc32cf-523-0-004272784339264035-package.lock
+1275 silly lockFile 7c2112c3--cache-winston-0-7-3-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\winston\0.7.3\package.tgz
+1276 verbose lock tar://C:\Users\yingf\AppData\Roaming\npm-cache\winston\0.7.3\package.tgz C:\Users\yingf\AppData\Roaming\npm-cache\7c2112c3--cache-winston-0-7-3-package-tgz.lock
+1277 silly lockFile 1ecc32cf-523-0-004272784339264035-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302193523-0.004272784339264035\package
+1278 silly lockFile 1ecc32cf-523-0-004272784339264035-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302193523-0.004272784339264035\package
+1279 silly lockFile 7c2112c3--cache-winston-0-7-3-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\winston\0.7.3\package.tgz
+1280 silly lockFile 7c2112c3--cache-winston-0-7-3-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\winston\0.7.3\package.tgz
+1281 silly lockFile b2562fb2--npm-cache-winston-0-7-3-package C:\Users\yingf\AppData\Roaming\npm-cache\winston\0.7.3\package
+1282 verbose lock C:\Users\yingf\AppData\Roaming\npm-cache\winston\0.7.3\package C:\Users\yingf\AppData\Roaming\npm-cache\b2562fb2--npm-cache-winston-0-7-3-package.lock
+1283 silly lockFile b2562fb2--npm-cache-winston-0-7-3-package C:\Users\yingf\AppData\Roaming\npm-cache\winston\0.7.3\package
+1284 silly lockFile b2562fb2--npm-cache-winston-0-7-3-package C:\Users\yingf\AppData\Roaming\npm-cache\winston\0.7.3\package
+1285 verbose tar unpack C:\Users\yingf\AppData\Roaming\npm-cache\winston\0.7.3\package.tgz
+1286 silly lockFile 8b41c828--npm-cache-winston-0-7-3-package tar://C:\Users\yingf\AppData\Roaming\npm-cache\winston\0.7.3\package
+1287 verbose lock tar://C:\Users\yingf\AppData\Roaming\npm-cache\winston\0.7.3\package C:\Users\yingf\AppData\Roaming\npm-cache\8b41c828--npm-cache-winston-0-7-3-package.lock
+1288 silly lockFile 7c2112c3--cache-winston-0-7-3-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\winston\0.7.3\package.tgz
+1289 verbose lock tar://C:\Users\yingf\AppData\Roaming\npm-cache\winston\0.7.3\package.tgz C:\Users\yingf\AppData\Roaming\npm-cache\7c2112c3--cache-winston-0-7-3-package-tgz.lock
+1290 silly gunzTarPerm modes [ '755', '644' ]
+1291 silly gunzTarPerm extractEntry package.json
+1292 silly gunzTarPerm modified mode [ 'package.json', 438, 420 ]
+1293 silly gunzTarPerm extractEntry .npmignore
+1294 silly gunzTarPerm modified mode [ '.npmignore', 438, 420 ]
+1295 silly gunzTarPerm extractEntry README.md
+1296 silly gunzTarPerm modified mode [ 'README.md', 438, 420 ]
+1297 silly gunzTarPerm extractEntry LICENSE
+1298 silly gunzTarPerm modified mode [ 'LICENSE', 438, 420 ]
+1299 silly gunzTarPerm extractEntry .travis.yml
+1300 silly gunzTarPerm modified mode [ '.travis.yml', 438, 420 ]
+1301 silly gunzTarPerm extractEntry CHANGELOG.md
+1302 silly gunzTarPerm modified mode [ 'CHANGELOG.md', 438, 420 ]
+1303 silly gunzTarPerm extractEntry docs/transports.md
+1304 silly gunzTarPerm modified mode [ 'docs/transports.md', 438, 420 ]
+1305 silly gunzTarPerm extractEntry examples/couchdb.js
+1306 silly gunzTarPerm modified mode [ 'examples/couchdb.js', 438, 420 ]
+1307 silly gunzTarPerm extractEntry examples/custom-levels.js
+1308 silly gunzTarPerm modified mode [ 'examples/custom-levels.js', 438, 420 ]
+1309 silly gunzTarPerm extractEntry examples/exception.js
+1310 silly gunzTarPerm modified mode [ 'examples/exception.js', 438, 420 ]
+1311 silly gunzTarPerm extractEntry examples/raw-mode.js
+1312 silly gunzTarPerm modified mode [ 'examples/raw-mode.js', 438, 420 ]
+1313 silly gunzTarPerm extractEntry examples/webhook-post.js
+1314 silly gunzTarPerm modified mode [ 'examples/webhook-post.js', 438, 420 ]
+1315 silly gunzTarPerm extractEntry lib/winston.js
+1316 silly gunzTarPerm modified mode [ 'lib/winston.js', 438, 420 ]
+1317 silly gunzTarPerm extractEntry lib/winston/common.js
+1318 silly gunzTarPerm modified mode [ 'lib/winston/common.js', 438, 420 ]
+1319 silly gunzTarPerm extractEntry lib/winston/config.js
+1320 silly gunzTarPerm modified mode [ 'lib/winston/config.js', 438, 420 ]
+1321 silly gunzTarPerm extractEntry lib/winston/container.js
+1322 silly gunzTarPerm modified mode [ 'lib/winston/container.js', 438, 420 ]
+1323 silly gunzTarPerm extractEntry lib/winston/exception.js
+1324 silly gunzTarPerm modified mode [ 'lib/winston/exception.js', 438, 420 ]
+1325 silly gunzTarPerm extractEntry lib/winston/logger.js
+1326 silly gunzTarPerm modified mode [ 'lib/winston/logger.js', 438, 420 ]
+1327 silly gunzTarPerm extractEntry lib/winston/transports.js
+1328 silly gunzTarPerm modified mode [ 'lib/winston/transports.js', 438, 420 ]
+1329 silly gunzTarPerm extractEntry lib/winston/config/cli-config.js
+1330 silly gunzTarPerm modified mode [ 'lib/winston/config/cli-config.js', 438, 420 ]
+1331 silly gunzTarPerm extractEntry lib/winston/config/npm-config.js
+1332 silly gunzTarPerm modified mode [ 'lib/winston/config/npm-config.js', 438, 420 ]
+1333 silly gunzTarPerm extractEntry lib/winston/config/syslog-config.js
+1334 silly gunzTarPerm modified mode [ 'lib/winston/config/syslog-config.js', 438, 420 ]
+1335 silly gunzTarPerm extractEntry lib/winston/transports/console.js
+1336 silly gunzTarPerm modified mode [ 'lib/winston/transports/console.js', 438, 420 ]
+1337 silly gunzTarPerm extractEntry lib/winston/transports/daily-rotate-file.js
+1338 silly gunzTarPerm modified mode [ 'lib/winston/transports/daily-rotate-file.js', 438, 420 ]
+1339 silly gunzTarPerm extractEntry lib/winston/transports/file.js
+1340 silly gunzTarPerm modified mode [ 'lib/winston/transports/file.js', 438, 420 ]
+1341 silly gunzTarPerm extractEntry lib/winston/transports/http.js
+1342 silly gunzTarPerm modified mode [ 'lib/winston/transports/http.js', 438, 420 ]
+1343 silly gunzTarPerm extractEntry lib/winston/transports/memory.js
+1344 silly gunzTarPerm modified mode [ 'lib/winston/transports/memory.js', 438, 420 ]
+1345 silly gunzTarPerm extractEntry lib/winston/transports/transport.js
+1346 silly gunzTarPerm modified mode [ 'lib/winston/transports/transport.js', 438, 420 ]
+1347 silly gunzTarPerm extractEntry lib/winston/transports/webhook.js
+1348 silly gunzTarPerm modified mode [ 'lib/winston/transports/webhook.js', 438, 420 ]
+1349 silly gunzTarPerm extractEntry test/cli-test.js
+1350 silly gunzTarPerm modified mode [ 'test/cli-test.js', 438, 420 ]
+1351 silly gunzTarPerm extractEntry test/custom-timestamp-test.js
+1352 silly gunzTarPerm modified mode [ 'test/custom-timestamp-test.js', 438, 420 ]
+1353 silly gunzTarPerm extractEntry test/exception-test.js
+1354 silly gunzTarPerm modified mode [ 'test/exception-test.js', 438, 420 ]
+1355 silly gunzTarPerm extractEntry test/logger-test.js
+1356 silly gunzTarPerm modified mode [ 'test/logger-test.js', 438, 420 ]
+1357 silly gunzTarPerm extractEntry test/helpers.js
+1358 silly gunzTarPerm modified mode [ 'test/helpers.js', 438, 420 ]
+1359 silly gunzTarPerm extractEntry test/container-test.js
+1360 silly gunzTarPerm modified mode [ 'test/container-test.js', 438, 420 ]
+1361 silly gunzTarPerm extractEntry test/log-rewriter-test.js
+1362 silly gunzTarPerm modified mode [ 'test/log-rewriter-test.js', 438, 420 ]
+1363 silly gunzTarPerm extractEntry test/logger-levels-test.js
+1364 silly gunzTarPerm modified mode [ 'test/logger-levels-test.js', 438, 420 ]
+1365 silly gunzTarPerm extractEntry test/winston-test.js
+1366 silly gunzTarPerm modified mode [ 'test/winston-test.js', 438, 420 ]
+1367 silly gunzTarPerm extractEntry test/log-exception-test.js
+1368 silly gunzTarPerm modified mode [ 'test/log-exception-test.js', 438, 420 ]
+1369 silly gunzTarPerm extractEntry test/fixtures/.gitkeep
+1370 silly gunzTarPerm modified mode [ 'test/fixtures/.gitkeep', 438, 420 ]
+1371 silly gunzTarPerm extractEntry test/fixtures/keys/agent2-cert.pem
+1372 silly gunzTarPerm modified mode [ 'test/fixtures/keys/agent2-cert.pem', 438, 420 ]
+1373 silly gunzTarPerm extractEntry test/fixtures/keys/agent2-key.pem
+1374 silly gunzTarPerm modified mode [ 'test/fixtures/keys/agent2-key.pem', 438, 420 ]
+1375 silly gunzTarPerm extractEntry test/fixtures/logs/.gitkeep
+1376 silly gunzTarPerm modified mode [ 'test/fixtures/logs/.gitkeep', 438, 420 ]
+1377 silly gunzTarPerm extractEntry test/fixtures/scripts/default-exceptions.js
+1378 silly gunzTarPerm modified mode [ 'test/fixtures/scripts/default-exceptions.js', 438, 420 ]
+1379 silly gunzTarPerm extractEntry test/fixtures/scripts/exit-on-error.js
+1380 silly gunzTarPerm modified mode [ 'test/fixtures/scripts/exit-on-error.js', 438, 420 ]
+1381 silly gunzTarPerm extractEntry test/fixtures/scripts/log-exceptions.js
+1382 silly gunzTarPerm modified mode [ 'test/fixtures/scripts/log-exceptions.js', 438, 420 ]
+1383 silly gunzTarPerm extractEntry test/fixtures/scripts/unhandle-exceptions.js
+1384 silly gunzTarPerm modified mode [ 'test/fixtures/scripts/unhandle-exceptions.js', 438, 420 ]
+1385 silly gunzTarPerm extractEntry test/transports/console-test.js
+1386 silly gunzTarPerm modified mode [ 'test/transports/console-test.js', 438, 420 ]
+1387 silly gunzTarPerm extractEntry test/transports/daily-rotate-file-test.js
+1388 silly gunzTarPerm modified mode [ 'test/transports/daily-rotate-file-test.js', 438, 420 ]
+1389 silly gunzTarPerm extractEntry test/transports/file-maxfiles-test.js
+1390 silly gunzTarPerm modified mode [ 'test/transports/file-maxfiles-test.js', 438, 420 ]
+1391 silly gunzTarPerm extractEntry test/transports/file-maxsize-test.js
+1392 silly gunzTarPerm modified mode [ 'test/transports/file-maxsize-test.js', 438, 420 ]
+1393 silly gunzTarPerm extractEntry test/transports/file-test.js
+1394 silly gunzTarPerm modified mode [ 'test/transports/file-test.js', 438, 420 ]
+1395 silly gunzTarPerm extractEntry test/transports/memory-test.js
+1396 silly gunzTarPerm modified mode [ 'test/transports/memory-test.js', 438, 420 ]
+1397 silly gunzTarPerm extractEntry test/transports/transport.js
+1398 silly gunzTarPerm modified mode [ 'test/transports/transport.js', 438, 420 ]
+1399 silly gunzTarPerm extractEntry test/transports/webhook-test.js
+1400 silly gunzTarPerm modified mode [ 'test/transports/webhook-test.js', 438, 420 ]
+1401 silly lockFile 8b41c828--npm-cache-winston-0-7-3-package tar://C:\Users\yingf\AppData\Roaming\npm-cache\winston\0.7.3\package
+1402 silly lockFile 8b41c828--npm-cache-winston-0-7-3-package tar://C:\Users\yingf\AppData\Roaming\npm-cache\winston\0.7.3\package
+1403 silly lockFile 7c2112c3--cache-winston-0-7-3-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\winston\0.7.3\package.tgz
+1404 silly lockFile 7c2112c3--cache-winston-0-7-3-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\winston\0.7.3\package.tgz
+1405 verbose chmod C:\Users\yingf\AppData\Roaming\npm-cache\winston\0.7.3\package.tgz 644
+1406 silly chown skipping for windows C:\Users\yingf\AppData\Roaming\npm-cache\winston\0.7.3\package.tgz
+1407 silly lockFile e7e896fd-js-org-winston-winston-0-7-3-tgz https://registry.npmjs.org/winston/-/winston-0.7.3.tgz
+1408 silly lockFile e7e896fd-js-org-winston-winston-0-7-3-tgz https://registry.npmjs.org/winston/-/winston-0.7.3.tgz
+1409 silly lockFile bed49444-winston-0-7-3 winston@0.7.3
+1410 silly lockFile bed49444-winston-0-7-3 winston@0.7.3
+1411 silly lockFile f6c20987-winston-0-7-2 winston@~0.7.2
+1412 silly lockFile f6c20987-winston-0-7-2 winston@~0.7.2
+1413 verbose tar unpack C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302183614-0.7139865022618324\tmp.tgz
+1414 silly lockFile eaeb7bd5-83614-0-7139865022618324-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302183614-0.7139865022618324\package
+1415 verbose lock tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302183614-0.7139865022618324\package C:\Users\yingf\AppData\Roaming\npm-cache\eaeb7bd5-83614-0-7139865022618324-package.lock
+1416 silly lockFile cb3c1921-83614-0-7139865022618324-tmp-tgz tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302183614-0.7139865022618324\tmp.tgz
+1417 verbose lock tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302183614-0.7139865022618324\tmp.tgz C:\Users\yingf\AppData\Roaming\npm-cache\cb3c1921-83614-0-7139865022618324-tmp-tgz.lock
+1418 silly gunzTarPerm modes [ '755', '644' ]
+1419 silly gunzTarPerm extractEntry .npmignore
+1420 silly gunzTarPerm extractEntry assets/
+1421 silly gunzTarPerm extractEntry assets/inspect.png
+1422 silly gunzTarPerm extractEntry assets/put-object-rows.png
+1423 silly gunzTarPerm extractEntry assets/put-object.png
+1424 silly gunzTarPerm extractEntry assets/put-rows-colors.png
+1425 silly gunzTarPerm extractEntry assets/put-rows.png
+1426 silly gunzTarPerm extractEntry assets/string-object-rows.png
+1427 silly gunzTarPerm extractEntry assets/string-rows.png
+1428 silly gunzTarPerm extractEntry examples/
+1429 silly gunzTarPerm extractEntry examples/inspect.js
+1430 silly gunzTarPerm extractEntry examples/put-object-rows.js
+1431 silly gunzTarPerm extractEntry examples/put-object.js
+1432 silly gunzTarPerm extractEntry examples/put-rows-colors.js
+1433 silly gunzTarPerm extractEntry examples/put-rows.js
+1434 silly gunzTarPerm extractEntry examples/string-object-rows.js
+1435 silly gunzTarPerm extractEntry examples/string-rows.js
+1436 silly gunzTarPerm extractEntry lib/
+1437 silly gunzTarPerm extractEntry lib/cliff.js
+1438 silly gunzTarPerm extractEntry LICENSE
+1439 silly gunzTarPerm extractEntry package.json
+1440 silly gunzTarPerm extractEntry README.md
+1441 silly gunzTarPerm extractEntry test/
+1442 silly gunzTarPerm extractEntry test/cliff-test.js
+1443 silly lockFile eaeb7bd5-83614-0-7139865022618324-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302183614-0.7139865022618324\package
+1444 silly lockFile eaeb7bd5-83614-0-7139865022618324-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302183614-0.7139865022618324\package
+1445 silly lockFile cb3c1921-83614-0-7139865022618324-tmp-tgz tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302183614-0.7139865022618324\tmp.tgz
+1446 silly lockFile cb3c1921-83614-0-7139865022618324-tmp-tgz tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302183614-0.7139865022618324\tmp.tgz
+1447 verbose tar pack [ 'C:\\Users\\yingf\\AppData\\Roaming\\npm-cache\\cliff\\0.1.8\\package.tgz',
+1447 verbose tar pack   'C:\\Users\\yingf\\AppData\\Local\\Temp\\npm-3532-AJJJv-CF\\1398302183614-0.7139865022618324\\package' ]
+1448 verbose tarball C:\Users\yingf\AppData\Roaming\npm-cache\cliff\0.1.8\package.tgz
+1449 verbose folder C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302183614-0.7139865022618324\package
+1450 silly lockFile eaeb7bd5-83614-0-7139865022618324-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302183614-0.7139865022618324\package
+1451 verbose lock tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302183614-0.7139865022618324\package C:\Users\yingf\AppData\Roaming\npm-cache\eaeb7bd5-83614-0-7139865022618324-package.lock
+1452 silly lockFile 5e879289-pm-cache-cliff-0-1-8-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\cliff\0.1.8\package.tgz
+1453 verbose lock tar://C:\Users\yingf\AppData\Roaming\npm-cache\cliff\0.1.8\package.tgz C:\Users\yingf\AppData\Roaming\npm-cache\5e879289-pm-cache-cliff-0-1-8-package-tgz.lock
+1454 silly lockFile eaeb7bd5-83614-0-7139865022618324-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302183614-0.7139865022618324\package
+1455 silly lockFile eaeb7bd5-83614-0-7139865022618324-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302183614-0.7139865022618324\package
+1456 silly lockFile 5e879289-pm-cache-cliff-0-1-8-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\cliff\0.1.8\package.tgz
+1457 silly lockFile 5e879289-pm-cache-cliff-0-1-8-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\cliff\0.1.8\package.tgz
+1458 silly lockFile f65dff2d-ng-npm-cache-cliff-0-1-8-package C:\Users\yingf\AppData\Roaming\npm-cache\cliff\0.1.8\package
+1459 verbose lock C:\Users\yingf\AppData\Roaming\npm-cache\cliff\0.1.8\package C:\Users\yingf\AppData\Roaming\npm-cache\f65dff2d-ng-npm-cache-cliff-0-1-8-package.lock
+1460 silly lockFile f65dff2d-ng-npm-cache-cliff-0-1-8-package C:\Users\yingf\AppData\Roaming\npm-cache\cliff\0.1.8\package
+1461 silly lockFile f65dff2d-ng-npm-cache-cliff-0-1-8-package C:\Users\yingf\AppData\Roaming\npm-cache\cliff\0.1.8\package
+1462 verbose tar unpack C:\Users\yingf\AppData\Roaming\npm-cache\cliff\0.1.8\package.tgz
+1463 silly lockFile ab55865e-ng-npm-cache-cliff-0-1-8-package tar://C:\Users\yingf\AppData\Roaming\npm-cache\cliff\0.1.8\package
+1464 verbose lock tar://C:\Users\yingf\AppData\Roaming\npm-cache\cliff\0.1.8\package C:\Users\yingf\AppData\Roaming\npm-cache\ab55865e-ng-npm-cache-cliff-0-1-8-package.lock
+1465 silly lockFile 5e879289-pm-cache-cliff-0-1-8-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\cliff\0.1.8\package.tgz
+1466 verbose lock tar://C:\Users\yingf\AppData\Roaming\npm-cache\cliff\0.1.8\package.tgz C:\Users\yingf\AppData\Roaming\npm-cache\5e879289-pm-cache-cliff-0-1-8-package-tgz.lock
+1467 silly gunzTarPerm modes [ '755', '644' ]
+1468 silly gunzTarPerm extractEntry package.json
+1469 silly gunzTarPerm modified mode [ 'package.json', 438, 420 ]
+1470 silly gunzTarPerm extractEntry .npmignore
+1471 silly gunzTarPerm modified mode [ '.npmignore', 438, 420 ]
+1472 silly gunzTarPerm extractEntry README.md
+1473 silly gunzTarPerm modified mode [ 'README.md', 438, 420 ]
+1474 silly gunzTarPerm extractEntry LICENSE
+1475 silly gunzTarPerm modified mode [ 'LICENSE', 438, 420 ]
+1476 silly gunzTarPerm extractEntry assets/inspect.png
+1477 silly gunzTarPerm modified mode [ 'assets/inspect.png', 438, 420 ]
+1478 silly gunzTarPerm extractEntry assets/put-object-rows.png
+1479 silly gunzTarPerm modified mode [ 'assets/put-object-rows.png', 438, 420 ]
+1480 silly gunzTarPerm extractEntry assets/put-object.png
+1481 silly gunzTarPerm modified mode [ 'assets/put-object.png', 438, 420 ]
+1482 silly gunzTarPerm extractEntry assets/put-rows-colors.png
+1483 silly gunzTarPerm modified mode [ 'assets/put-rows-colors.png', 438, 420 ]
+1484 silly gunzTarPerm extractEntry assets/put-rows.png
+1485 silly gunzTarPerm modified mode [ 'assets/put-rows.png', 438, 420 ]
+1486 silly gunzTarPerm extractEntry assets/string-object-rows.png
+1487 silly gunzTarPerm modified mode [ 'assets/string-object-rows.png', 438, 420 ]
+1488 silly gunzTarPerm extractEntry assets/string-rows.png
+1489 silly gunzTarPerm modified mode [ 'assets/string-rows.png', 438, 420 ]
+1490 silly gunzTarPerm extractEntry examples/inspect.js
+1491 silly gunzTarPerm modified mode [ 'examples/inspect.js', 438, 420 ]
+1492 silly gunzTarPerm extractEntry examples/put-object-rows.js
+1493 silly gunzTarPerm modified mode [ 'examples/put-object-rows.js', 438, 420 ]
+1494 silly gunzTarPerm extractEntry examples/put-object.js
+1495 silly gunzTarPerm modified mode [ 'examples/put-object.js', 438, 420 ]
+1496 silly gunzTarPerm extractEntry examples/put-rows-colors.js
+1497 silly gunzTarPerm modified mode [ 'examples/put-rows-colors.js', 438, 420 ]
+1498 silly gunzTarPerm extractEntry examples/put-rows.js
+1499 silly gunzTarPerm modified mode [ 'examples/put-rows.js', 438, 420 ]
+1500 silly gunzTarPerm extractEntry examples/string-object-rows.js
+1501 silly gunzTarPerm modified mode [ 'examples/string-object-rows.js', 438, 420 ]
+1502 silly gunzTarPerm extractEntry examples/string-rows.js
+1503 silly gunzTarPerm modified mode [ 'examples/string-rows.js', 438, 420 ]
+1504 silly gunzTarPerm extractEntry lib/cliff.js
+1505 silly gunzTarPerm modified mode [ 'lib/cliff.js', 438, 420 ]
+1506 silly gunzTarPerm extractEntry test/cliff-test.js
+1507 silly gunzTarPerm modified mode [ 'test/cliff-test.js', 438, 420 ]
+1508 silly lockFile ab55865e-ng-npm-cache-cliff-0-1-8-package tar://C:\Users\yingf\AppData\Roaming\npm-cache\cliff\0.1.8\package
+1509 silly lockFile ab55865e-ng-npm-cache-cliff-0-1-8-package tar://C:\Users\yingf\AppData\Roaming\npm-cache\cliff\0.1.8\package
+1510 silly lockFile 5e879289-pm-cache-cliff-0-1-8-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\cliff\0.1.8\package.tgz
+1511 silly lockFile 5e879289-pm-cache-cliff-0-1-8-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\cliff\0.1.8\package.tgz
+1512 verbose chmod C:\Users\yingf\AppData\Roaming\npm-cache\cliff\0.1.8\package.tgz 644
+1513 silly chown skipping for windows C:\Users\yingf\AppData\Roaming\npm-cache\cliff\0.1.8\package.tgz
+1514 silly lockFile 3fad3ff6--npmjs-org-cliff-cliff-0-1-8-tgz https://registry.npmjs.org/cliff/-/cliff-0.1.8.tgz
+1515 silly lockFile 3fad3ff6--npmjs-org-cliff-cliff-0-1-8-tgz https://registry.npmjs.org/cliff/-/cliff-0.1.8.tgz
+1516 silly lockFile a0c35da7-cliff-0-1-8 cliff@0.1.8
+1517 silly lockFile a0c35da7-cliff-0-1-8 cliff@0.1.8
+1518 http 200 https://registry.npmjs.org/optimist
+1519 silly registry.get cb [ 200,
+1519 silly registry.get   { date: 'Thu, 24 Apr 2014 01:16:26 GMT',
+1519 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R14B04)',
+1519 silly registry.get     etag: '"S3CQUMQYK1RMBRMFJLWOPW2V"',
+1519 silly registry.get     'content-type': 'application/json',
+1519 silly registry.get     via: '1.1 varnish',
+1519 silly registry.get     'cache-control': 'max-age=1',
+1519 silly registry.get     'content-length': '47665',
+1519 silly registry.get     'accept-ranges': 'bytes',
+1519 silly registry.get     age: '18',
+1519 silly registry.get     'x-served-by': 'cache-v44-ASH, cache-v42-ASH, cache-ty66-TYO',
+1519 silly registry.get     'x-cache': 'HIT, HIT, HIT',
+1519 silly registry.get     'x-cache-hits': '6, 124717, 1',
+1519 silly registry.get     'x-timer': 'S1398278281.469538450,VS0,VS89,VE89,VE23905007',
+1519 silly registry.get     vary: 'Accept',
+1519 silly registry.get     'keep-alive': 'timeout=10, max=47',
+1519 silly registry.get     connection: 'Keep-Alive' } ]
+1520 silly addNameRange number 2 { name: 'optimist', range: '>=0.6.0-0 <0.7.0-0', hasData: true }
+1521 silly addNameRange versions [ 'optimist',
+1521 silly addNameRange   [ '0.0.1',
+1521 silly addNameRange     '0.0.2',
+1521 silly addNameRange     '0.0.4',
+1521 silly addNameRange     '0.0.5',
+1521 silly addNameRange     '0.0.6',
+1521 silly addNameRange     '0.0.7',
+1521 silly addNameRange     '0.1.0',
+1521 silly addNameRange     '0.1.1',
+1521 silly addNameRange     '0.1.2',
+1521 silly addNameRange     '0.1.3',
+1521 silly addNameRange     '0.1.4',
+1521 silly addNameRange     '0.1.5',
+1521 silly addNameRange     '0.1.6',
+1521 silly addNameRange     '0.1.7',
+1521 silly addNameRange     '0.1.8',
+1521 silly addNameRange     '0.1.9',
+1521 silly addNameRange     '0.0.3',
+1521 silly addNameRange     '0.2.0',
+1521 silly addNameRange     '0.2.1',
+1521 silly addNameRange     '0.2.2',
+1521 silly addNameRange     '0.2.3',
+1521 silly addNameRange     '0.2.4',
+1521 silly addNameRange     '0.2.5',
+1521 silly addNameRange     '0.2.6',
+1521 silly addNameRange     '0.2.7',
+1521 silly addNameRange     '0.2.8',
+1521 silly addNameRange     '0.3.0',
+1521 silly addNameRange     '0.3.1',
+1521 silly addNameRange     '0.3.3',
+1521 silly addNameRange     '0.3.4',
+1521 silly addNameRange     '0.3.5',
+1521 silly addNameRange     '0.3.6',
+1521 silly addNameRange     '0.3.7',
+1521 silly addNameRange     '0.4.0',
+1521 silly addNameRange     '0.5.0',
+1521 silly addNameRange     '0.5.1',
+1521 silly addNameRange     '0.5.2',
+1521 silly addNameRange     '0.6.0',
+1521 silly addNameRange     '0.6.1' ] ]
+1522 verbose addNamed [ 'optimist', '0.6.1' ]
+1523 verbose addNamed [ '0.6.1', '0.6.1' ]
+1524 silly lockFile 0fc74eb8-optimist-0-6-1 optimist@0.6.1
+1525 verbose lock optimist@0.6.1 C:\Users\yingf\AppData\Roaming\npm-cache\0fc74eb8-optimist-0-6-1.lock
+1526 silly lockFile e99091a3--org-optimist-optimist-0-6-1-tgz https://registry.npmjs.org/optimist/-/optimist-0.6.1.tgz
+1527 verbose lock https://registry.npmjs.org/optimist/-/optimist-0.6.1.tgz C:\Users\yingf\AppData\Roaming\npm-cache\e99091a3--org-optimist-optimist-0-6-1-tgz.lock
+1528 verbose addRemoteTarball [ 'https://registry.npmjs.org/optimist/-/optimist-0.6.1.tgz',
+1528 verbose addRemoteTarball   'da3ea74686fa21a19a111c326e90eb15a0196686' ]
+1529 info retry fetch attempt 1 at 09:16:51
+1530 verbose fetch to= C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302211526-0.19432832556776702\tmp.tgz
+1531 http GET https://registry.npmjs.org/optimist/-/optimist-0.6.1.tgz
+1532 http 200 https://registry.npmjs.org/optimist/-/optimist-0.6.1.tgz
+1533 verbose tar unpack C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302211526-0.19432832556776702\tmp.tgz
+1534 silly lockFile bf6c9483-1526-0-19432832556776702-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302211526-0.19432832556776702\package
+1535 verbose lock tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302211526-0.19432832556776702\package C:\Users\yingf\AppData\Roaming\npm-cache\bf6c9483-1526-0-19432832556776702-package.lock
+1536 silly lockFile 11bc12fb-1526-0-19432832556776702-tmp-tgz tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302211526-0.19432832556776702\tmp.tgz
+1537 verbose lock tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302211526-0.19432832556776702\tmp.tgz C:\Users\yingf\AppData\Roaming\npm-cache\11bc12fb-1526-0-19432832556776702-tmp-tgz.lock
+1538 silly gunzTarPerm modes [ '755', '644' ]
+1539 silly gunzTarPerm extractEntry package.json
+1540 silly gunzTarPerm extractEntry LICENSE
+1541 silly gunzTarPerm extractEntry index.js
+1542 silly gunzTarPerm extractEntry .travis.yml
+1543 silly gunzTarPerm extractEntry example/bool.js
+1544 silly gunzTarPerm extractEntry example/default_singles.js
+1545 silly gunzTarPerm extractEntry example/divide.js
+1546 silly gunzTarPerm extractEntry example/line_count.js
+1547 silly gunzTarPerm extractEntry example/default_hash.js
+1548 silly gunzTarPerm extractEntry example/line_count_wrap.js
+1549 silly gunzTarPerm extractEntry example/nonopt.js
+1550 silly gunzTarPerm extractEntry example/reflect.js
+1551 silly gunzTarPerm extractEntry example/short.js
+1552 silly gunzTarPerm extractEntry example/string.js
+1553 silly gunzTarPerm extractEntry example/boolean_single.js
+1554 silly gunzTarPerm extractEntry example/usage-options.js
+1555 silly gunzTarPerm extractEntry example/boolean_double.js
+1556 silly gunzTarPerm extractEntry example/xup.js
+1557 silly gunzTarPerm extractEntry example/line_count_options.js
+1558 silly gunzTarPerm extractEntry readme.markdown
+1559 silly gunzTarPerm extractEntry test/_.js
+1560 silly gunzTarPerm extractEntry test/dash.js
+1561 silly gunzTarPerm extractEntry test/parse.js
+1562 silly gunzTarPerm extractEntry test/parse_modified.js
+1563 silly gunzTarPerm extractEntry test/short.js
+1564 silly gunzTarPerm extractEntry test/usage.js
+1565 silly gunzTarPerm extractEntry test/whitespace.js
+1566 silly gunzTarPerm extractEntry test/_/argv.js
+1567 silly gunzTarPerm extractEntry test/_/bin.js
+1568 silly lockFile bf6c9483-1526-0-19432832556776702-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302211526-0.19432832556776702\package
+1569 silly lockFile bf6c9483-1526-0-19432832556776702-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302211526-0.19432832556776702\package
+1570 silly lockFile 11bc12fb-1526-0-19432832556776702-tmp-tgz tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302211526-0.19432832556776702\tmp.tgz
+1571 silly lockFile 11bc12fb-1526-0-19432832556776702-tmp-tgz tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302211526-0.19432832556776702\tmp.tgz
+1572 verbose tar pack [ 'C:\\Users\\yingf\\AppData\\Roaming\\npm-cache\\optimist\\0.6.1\\package.tgz',
+1572 verbose tar pack   'C:\\Users\\yingf\\AppData\\Local\\Temp\\npm-3532-AJJJv-CF\\1398302211526-0.19432832556776702\\package' ]
+1573 verbose tarball C:\Users\yingf\AppData\Roaming\npm-cache\optimist\0.6.1\package.tgz
+1574 verbose folder C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302211526-0.19432832556776702\package
+1575 silly lockFile bf6c9483-1526-0-19432832556776702-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302211526-0.19432832556776702\package
+1576 verbose lock tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302211526-0.19432832556776702\package C:\Users\yingf\AppData\Roaming\npm-cache\bf6c9483-1526-0-19432832556776702-package.lock
+1577 silly lockFile 19f4dfbf-cache-optimist-0-6-1-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\optimist\0.6.1\package.tgz
+1578 verbose lock tar://C:\Users\yingf\AppData\Roaming\npm-cache\optimist\0.6.1\package.tgz C:\Users\yingf\AppData\Roaming\npm-cache\19f4dfbf-cache-optimist-0-6-1-package-tgz.lock
+1579 silly lockFile bf6c9483-1526-0-19432832556776702-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302211526-0.19432832556776702\package
+1580 silly lockFile bf6c9483-1526-0-19432832556776702-package tar://C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302211526-0.19432832556776702\package
+1581 silly lockFile 19f4dfbf-cache-optimist-0-6-1-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\optimist\0.6.1\package.tgz
+1582 silly lockFile 19f4dfbf-cache-optimist-0-6-1-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\optimist\0.6.1\package.tgz
+1583 silly lockFile 2f353a2f-npm-cache-optimist-0-6-1-package C:\Users\yingf\AppData\Roaming\npm-cache\optimist\0.6.1\package
+1584 verbose lock C:\Users\yingf\AppData\Roaming\npm-cache\optimist\0.6.1\package C:\Users\yingf\AppData\Roaming\npm-cache\2f353a2f-npm-cache-optimist-0-6-1-package.lock
+1585 silly lockFile 2f353a2f-npm-cache-optimist-0-6-1-package C:\Users\yingf\AppData\Roaming\npm-cache\optimist\0.6.1\package
+1586 silly lockFile 2f353a2f-npm-cache-optimist-0-6-1-package C:\Users\yingf\AppData\Roaming\npm-cache\optimist\0.6.1\package
+1587 verbose tar unpack C:\Users\yingf\AppData\Roaming\npm-cache\optimist\0.6.1\package.tgz
+1588 silly lockFile 5c36183c-npm-cache-optimist-0-6-1-package tar://C:\Users\yingf\AppData\Roaming\npm-cache\optimist\0.6.1\package
+1589 verbose lock tar://C:\Users\yingf\AppData\Roaming\npm-cache\optimist\0.6.1\package C:\Users\yingf\AppData\Roaming\npm-cache\5c36183c-npm-cache-optimist-0-6-1-package.lock
+1590 silly lockFile 19f4dfbf-cache-optimist-0-6-1-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\optimist\0.6.1\package.tgz
+1591 verbose lock tar://C:\Users\yingf\AppData\Roaming\npm-cache\optimist\0.6.1\package.tgz C:\Users\yingf\AppData\Roaming\npm-cache\19f4dfbf-cache-optimist-0-6-1-package-tgz.lock
+1592 silly gunzTarPerm modes [ '755', '644' ]
+1593 silly gunzTarPerm extractEntry package.json
+1594 silly gunzTarPerm modified mode [ 'package.json', 438, 420 ]
+1595 silly gunzTarPerm extractEntry LICENSE
+1596 silly gunzTarPerm modified mode [ 'LICENSE', 438, 420 ]
+1597 silly gunzTarPerm extractEntry index.js
+1598 silly gunzTarPerm modified mode [ 'index.js', 438, 420 ]
+1599 silly gunzTarPerm extractEntry .travis.yml
+1600 silly gunzTarPerm modified mode [ '.travis.yml', 438, 420 ]
+1601 silly gunzTarPerm extractEntry example/bool.js
+1602 silly gunzTarPerm modified mode [ 'example/bool.js', 438, 420 ]
+1603 silly gunzTarPerm extractEntry example/default_singles.js
+1604 silly gunzTarPerm modified mode [ 'example/default_singles.js', 438, 420 ]
+1605 silly gunzTarPerm extractEntry example/divide.js
+1606 silly gunzTarPerm modified mode [ 'example/divide.js', 438, 420 ]
+1607 silly gunzTarPerm extractEntry example/line_count.js
+1608 silly gunzTarPerm modified mode [ 'example/line_count.js', 438, 420 ]
+1609 silly gunzTarPerm extractEntry example/default_hash.js
+1610 silly gunzTarPerm modified mode [ 'example/default_hash.js', 438, 420 ]
+1611 silly gunzTarPerm extractEntry example/line_count_wrap.js
+1612 silly gunzTarPerm modified mode [ 'example/line_count_wrap.js', 438, 420 ]
+1613 silly gunzTarPerm extractEntry example/nonopt.js
+1614 silly gunzTarPerm modified mode [ 'example/nonopt.js', 438, 420 ]
+1615 silly gunzTarPerm extractEntry example/reflect.js
+1616 silly gunzTarPerm modified mode [ 'example/reflect.js', 438, 420 ]
+1617 silly gunzTarPerm extractEntry example/short.js
+1618 silly gunzTarPerm modified mode [ 'example/short.js', 438, 420 ]
+1619 silly gunzTarPerm extractEntry example/string.js
+1620 silly gunzTarPerm modified mode [ 'example/string.js', 438, 420 ]
+1621 silly gunzTarPerm extractEntry example/boolean_single.js
+1622 silly gunzTarPerm modified mode [ 'example/boolean_single.js', 438, 420 ]
+1623 silly gunzTarPerm extractEntry example/usage-options.js
+1624 silly gunzTarPerm modified mode [ 'example/usage-options.js', 438, 420 ]
+1625 silly gunzTarPerm extractEntry example/boolean_double.js
+1626 silly gunzTarPerm modified mode [ 'example/boolean_double.js', 438, 420 ]
+1627 silly gunzTarPerm extractEntry example/xup.js
+1628 silly gunzTarPerm modified mode [ 'example/xup.js', 438, 420 ]
+1629 silly gunzTarPerm extractEntry example/line_count_options.js
+1630 silly gunzTarPerm modified mode [ 'example/line_count_options.js', 438, 420 ]
+1631 silly gunzTarPerm extractEntry readme.markdown
+1632 silly gunzTarPerm modified mode [ 'readme.markdown', 438, 420 ]
+1633 silly gunzTarPerm extractEntry test/dash.js
+1634 silly gunzTarPerm modified mode [ 'test/dash.js', 438, 420 ]
+1635 silly gunzTarPerm extractEntry test/parse.js
+1636 silly gunzTarPerm modified mode [ 'test/parse.js', 438, 420 ]
+1637 silly gunzTarPerm extractEntry test/parse_modified.js
+1638 silly gunzTarPerm modified mode [ 'test/parse_modified.js', 438, 420 ]
+1639 silly gunzTarPerm extractEntry test/short.js
+1640 silly gunzTarPerm modified mode [ 'test/short.js', 438, 420 ]
+1641 silly gunzTarPerm extractEntry test/usage.js
+1642 silly gunzTarPerm modified mode [ 'test/usage.js', 438, 420 ]
+1643 silly gunzTarPerm extractEntry test/whitespace.js
+1644 silly gunzTarPerm modified mode [ 'test/whitespace.js', 438, 420 ]
+1645 silly gunzTarPerm extractEntry test/_.js
+1646 silly gunzTarPerm modified mode [ 'test/_.js', 438, 420 ]
+1647 silly gunzTarPerm extractEntry test/_/argv.js
+1648 silly gunzTarPerm modified mode [ 'test/_/argv.js', 438, 420 ]
+1649 silly gunzTarPerm extractEntry test/_/bin.js
+1650 silly gunzTarPerm modified mode [ 'test/_/bin.js', 438, 420 ]
+1651 silly lockFile 5c36183c-npm-cache-optimist-0-6-1-package tar://C:\Users\yingf\AppData\Roaming\npm-cache\optimist\0.6.1\package
+1652 silly lockFile 5c36183c-npm-cache-optimist-0-6-1-package tar://C:\Users\yingf\AppData\Roaming\npm-cache\optimist\0.6.1\package
+1653 silly lockFile 19f4dfbf-cache-optimist-0-6-1-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\optimist\0.6.1\package.tgz
+1654 silly lockFile 19f4dfbf-cache-optimist-0-6-1-package-tgz tar://C:\Users\yingf\AppData\Roaming\npm-cache\optimist\0.6.1\package.tgz
+1655 verbose chmod C:\Users\yingf\AppData\Roaming\npm-cache\optimist\0.6.1\package.tgz 644
+1656 silly chown skipping for windows C:\Users\yingf\AppData\Roaming\npm-cache\optimist\0.6.1\package.tgz
+1657 silly lockFile e99091a3--org-optimist-optimist-0-6-1-tgz https://registry.npmjs.org/optimist/-/optimist-0.6.1.tgz
+1658 silly lockFile e99091a3--org-optimist-optimist-0-6-1-tgz https://registry.npmjs.org/optimist/-/optimist-0.6.1.tgz
+1659 silly lockFile 0fc74eb8-optimist-0-6-1 optimist@0.6.1
+1660 silly lockFile 0fc74eb8-optimist-0-6-1 optimist@0.6.1
+1661 silly lockFile 07193858-optimist-0-6-0 optimist@~0.6.0
+1662 silly lockFile 07193858-optimist-0-6-0 optimist@~0.6.0
+1663 http 200 https://registry.npmjs.org/nssocket/-/nssocket-0.5.1.tgz
+1664 silly lockFile 5ec41cf7--org-nssocket-nssocket-0-5-1-tgz https://registry.npmjs.org/nssocket/-/nssocket-0.5.1.tgz
+1665 silly lockFile 5ec41cf7--org-nssocket-nssocket-0-5-1-tgz https://registry.npmjs.org/nssocket/-/nssocket-0.5.1.tgz
+1666 silly lockFile f616423b-nssocket-0-5-1 nssocket@0.5.1
+1667 silly lockFile f616423b-nssocket-0-5-1 nssocket@0.5.1
+1668 silly lockFile 936c2de0-nssocket-0-5-1 nssocket@~0.5.1
+1669 silly lockFile 936c2de0-nssocket-0-5-1 nssocket@~0.5.1
+1670 verbose about to build C:\Users\yingf\AppData\Roaming\npm\node_modules\forever
+1671 info C:\Users\yingf\AppData\Roaming\npm\node_modules\forever unbuild
+1672 info preuninstall forever@0.11.0
+1673 info uninstall forever@0.11.0
+1674 verbose true,C:\Users\yingf\AppData\Roaming\npm\node_modules,C:\Users\yingf\AppData\Roaming\npm\node_modules unbuild forever@0.11.0
+1675 verbose C:\Users\yingf\AppData\Roaming\npm,[object Object] binRoot
+1676 info postuninstall forever@0.11.0
+1677 error Error: shasum check failed for C:\Users\yingf\AppData\Local\Temp\npm-3532-AJJJv-CF\1398302185137-0.11698884726502001\tmp.tgz
+1677 error Expected: 11f0428335ad8d89ff9cf96ab2852a23b1b33b71
+1677 error Actual:   da39a3ee5e6b4b0d3255bfef95601890afd80709
+1677 error     at C:\Program Files\nodejs\node_modules\npm\node_modules\sha\index.js:38:8
+1677 error     at ReadStream.<anonymous> (C:\Program Files\nodejs\node_modules\npm\node_modules\sha\index.js:85:7)
+1677 error     at ReadStream.EventEmitter.emit (events.js:117:20)
+1677 error     at _stream_readable.js:920:16
+1677 error     at process._tickCallback (node.js:415:13)
+1678 error If you need help, you may report this log at:
+1678 error     <http://github.com/isaacs/npm/issues>
+1678 error or email it to:
+1678 error     <npm-@googlegroups.com>
+1679 error System Windows_NT 6.1.7601
+1680 error command "C:\\Program Files\\nodejs\\\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install" "forever" "-g"
+1681 error cwd F:\pTest\pspace\deamon
+1682 error node -v v0.10.18
+1683 error npm -v 1.3.8
+1684 verbose exit [ 1, true ]
