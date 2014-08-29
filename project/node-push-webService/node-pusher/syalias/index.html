@@ -1,0 +1,100 @@
+<script src="/socket.io/socket.io.js"></script>
+<script src="/javascripts/dataSource.js"></script>
+<script language="javascript" src="/jquery-v1.7.2/jquery-1.7.2.js"></script>
+<script language="javascript" src="/jquery-v1.7.2/jquery-1.7.2.min.js"></script>
+<script>
+var socket = io.connect('http://localhost:3000');
+socket.on("new_data",function(data){
+	if(data){
+		for(var i=0;i<data.length;i++){
+			dataCache[data[i].name] = data[i].value;
+			dataCache[data[i].name].state = true;
+		}
+	}
+});
+
+socket.on('onDataChanged',function(data){
+		if(data){
+			//to do user
+			console.log(data);
+		}
+});
+
+socket.on('message',function(msg){
+		//console.log(msg);
+	});
+
+
+
+var da = new DataSource();
+var tagName = ["/tag5/tag6","/tag5/tag9"];
+da.read(tagName,function(err,data){
+	if(err){
+		console.log(err);
+	}else{
+		console.log(data);
+	}
+});
+
+var writeJson = {name : "/tag5/tag9", value:{value :55.58,time:new Date(),quality:"good"}};
+da.write(writeJson);
+
+socket.on('reconnecting',function(){
+	console.log("reconnecting");
+});
+socket.on('reconnect',function(){
+	sub(tagName,function(err,data){
+		if(err){
+			console.log(err);
+		}else{
+			console.log(data);
+		}
+	});
+});
+/*
+//读取文件中的数据,读取config文件中的json数据
+$.ajax({
+  type : "GET",
+  url : "/config/config.read", 
+  dataType : "json" ,
+  success : function(data){ // 成功获取该文件  data是Server返回的relationship.json对象
+	console.log(data);
+  },
+	errer:function(){console.log('error!')}
+})
+*/
+//读取config文件夹中的数据
+$.ajax({
+  type : "GET",
+  url : "/config.read", 
+  dataType : "json" ,
+  success : function(data){ // 成功获取该文件  data是Server返回的relationship.json对象
+	for(var i in data){
+		console.log(data[i])
+	}
+  },
+	errer:function(){console.log('error!')}
+})
+/*
+
+// 向test文件夹下的a.json文件写数据，如果文件不存在，则创建文件，如果test文件夹不在，
+//那么会创建test文件夹,如果test文件夹的上一层目录还是不存在，则写入文件失败
+var pram = {
+	"a" : "1" ,
+	"b" : "2" 
+}
+$.ajax({
+  type : "GET",
+  url : "/configure/test.write", 
+  dataType : "json" ,
+  data :pram,
+  success : function(){ // 如果Server端成功写入数据，则调用本方法
+	console.log(" write success ")
+  },
+  error: function(){
+	console.log("write fail::");
+}
+
+})
+*/
+</script>

@@ -1,0 +1,13 @@
+{
+	
+	"pSpace":{
+		"host":"localhost:8889",
+		"user":"admin",
+		"password":"admin888"
+	},
+
+	"pusher":{
+		"host":"localhost",
+		"port":3000
+	}
+}

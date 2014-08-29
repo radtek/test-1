@@ -1,0 +1,53 @@
+<script src="/socket.io/socket.io.js"></script>
+<script src="/javascripts/dataSource.js"></script>
+<script>
+var socket = io.connect('http://localhost:3000');
+socket.on("new_data",function(data){
+	if(data){
+		for(var i=0;i<data.length;i++){
+			dataCache[data[i].name] = data[i].value;
+			dataCache[data[i].name].state = true;
+		}
+	}
+});
+
+socket.on('onDataChanged',function(data){
+		if(data){
+			//to do user
+			console.log(data);
+		}
+});
+
+socket.on('message',function(msg){
+		//console.log(msg);
+	});
+
+
+
+var da = new DataSource();
+var tagName = ["/tag5/tag6","/tag5/tag9"];
+da.read(tagName,function(err,data){
+	if(err){
+		console.log(err);
+	}else{
+		console.log(data);
+	}
+});
+
+var writeJson = {name : "/tag5/tag9", value:{value :55.58,time:new Date(),quality:"good"}};
+da.write(writeJson);
+
+socket.on('reconnecting',function(){
+	console.log("reconnecting");
+});
+socket.on('reconnect',function(){
+	sub(tagName,function(err,data){
+		if(err){
+			console.log(err);
+		}else{
+			console.log(data);
+		}
+	});
+});
+
+</script>

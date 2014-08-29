@@ -1,0 +1,14 @@
+{
+  "name": "dataWrite",
+  "version": "0.0.1",
+  "private": true,
+  "license": "sunwayland.com.cn",
+  "author": "yingf",
+  "scripts": {
+    "start": "node ./dataWrite.js"
+  },
+  "dependencies": {
+    "pSpace": "0.0.1",
+    "csv": "0.3.6"
+  }
+}

@@ -1,0 +1,9 @@
+﻿{
+            "name" : "NewApp1",
+            "parent" : "",
+            "type" : "stage",
+            "width" : "100%",
+            "height" : "100%",
+            "color" : "#2e8b57",
+            "transparent" :true
+ }
