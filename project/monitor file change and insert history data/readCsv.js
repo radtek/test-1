@@ -2,7 +2,27 @@ var csv = require("csv");
 var fs = require('fs');
 var addon = require('pSpace');
 var configure = require('configure');
+var sql = require('msnodesql');
+var iconv = require('iconv-lite');
 var ps  = new addon();
+
+function Appendzero(obj)
+{
+     if(obj<10) return "0" +""+ obj;
+     else return obj;     
+}
+var formatDate = function(now){
+	var   year=now.getFullYear();     
+    var   month=now.getMonth()+1;     
+    var   date=now.getDate();     
+    var   hour=now.getHours();     
+    var   minute=now.getMinutes();    
+    var   second=now.getSeconds(); 
+   // var   milSecond = now.getMilliseconds(); 
+    //console.log("milsecond:",milSecond);    
+   return   year+"-"+Appendzero(month)+"-"+Appendzero(date)+" "+Appendzero(hour)+":"+Appendzero(minute)+":"+Appendzero(second);     
+}
+
 //新建连接对象
 var con = new Object();
 //断线重连的操作
@@ -34,96 +54,162 @@ function task (filePath,dirPath) {
 	var fileData = fs.readFileSync(filePath, 'ASCII');
 	var first = fileData.indexOf('\n');
 	var two = fileData.indexOf('\n',first+1);
-	csv()
-	.from.path(filePath,{
-	 columns:true,
-	 start:two,
-	 encoding: 'ASCII'
-	})
-	.transform(function(data,index){
-	 	 return data;
-	})
-	.to.array( function(data){
-		//获取数据的行数
-		var len = data.length;
-		//获取所有的字段
-		var keys = Object.keys(data[0]);
-		//将数据一条一条的插入
-		for(var i=0;i<len;i++){
-			for(var j=1;j<keys.length;j++){
-				var tagName = "/新蚌埠路站/xbbl_"+keys[j]+".his.insertReplace";
-				var hisData = {
-					"value":data[i][keys[j]],
-					"time":new Date(data[i]["SIXLOG Timestamp"])
-				};
-				var res = con.write(tagName,hisData);
-				if(res instanceof ps.Err){
-					console.log(res.errString);
-					continue;
-				}
-			}
+	//获取站名
+	var pp = filePath.indexOf("_"); 
+	var station = filePath.substring(0,pp);
+	var pp1 = station.lastIndexOf("\/");
+	var stationName = station.substring(pp1+1);
+	///////////////////////////
+	//console.log("stationName:",stationName);
+	var configPath = configure.configPath;
+	fs.exists(configPath,function(exists){
+		if(!exists){
+			console.log("配置文件不存在.");
+			return;
+		}else{
+			csv()
+			.from.path(filePath,{
+			 columns:true,
+			 start:two,
+			 encoding: 'ASCII'
+			})
+			.transform(function(data,index){
+			 	 return data;
+			})
+			.to.array( function(data){
+				csv()
+				.from.path(configPath,{
+					columns:true,
+					encoding: 'binary'
+				})
+				.transform(function(data,index){
+			 	 	return data;
+				})
+				.to.array(function(configData){
+					//获取配置文件的行数
+					var confLine = configData.length;
+					//获取配置文件所有的字段
+					var confKeys = Object.keys(configData[0]);
+					for(var i=0;i<confLine;i++){
+						if(stationName==configData[i]["PLC_Station_Name"]){
+							//console.log("message:",configData[i]["PLC_Station_Name"]);
+							//获取数据的行数
+							var len = data.length;
+							//获取所有的字段
+							var keys = Object.keys(data[0]);
+							for(var k=0;k<keys.length;k++){
+								if(configData[i]["PLC_TagName"]===keys[k]){
+									//获取长名
+									var tagLongName = configData[i]["pSpace_LongTagname"];
+									
+									//长名格式转化
+									tagLongName = tagLongName.replace(/[\\]/g,"/")+".his.insertReplace";
+									var buf = new Buffer(tagLongName, 'binary');
+									var strName = iconv.decode(buf, 'gbk');
+									//console.log("tagName:",strName);
+									//将数据一条一条的插入
+									for(var s=0;s<len;s++){
+										//console.log(data[s][keys[k]]);
+										var hisData = {
+											"value":Number(data[s][keys[k]]),
+											"time":new Date(data[s]["Time"]),
+											"quality":"good"
+										};
+										var res = con.write(strName,hisData);
+										if(res instanceof ps.Err){
+											console.log(res.errString);
+											continue;
+										}else{
+											//
+											
+										}
+									}
+
+								}
+							}
+
+						}
+					}
+					//是否需要转储
+					if(configure.isSaveToSql){
+						toSqlserver(configData,data,stationName);
+					}
+					//处理完毕，改变文件状态，备份并删除文件
+					//截取备份文件文件名
+					if (filePath.indexOf(configPath)<0) {
+						var p = filePath.lastIndexOf('\/');
+				        var fileName = filePath.substring(p);
+						//要备份的文件夹是否存在
+						fs.exists(dirPath+"/backup", function(exits){
+							if(!exits){
+								//不存在，创建并拷贝
+								fs.mkdirSync(dirPath+"\/backup");
+								fs.writeFile(dirPath+"\/backup"+"\/"+fileName,fileData, function(err){ 
+									if(err){
+										console.log("备份文件错误.");
+										return;
+									}else{
+										//删除原文件
+										fs.unlink(filePath, function(err) {
+											if(err){
+												console.log(err);
+												return;
+											}else{
+												//删除文件状态
+												delete fileLock[filePath];
+											}
+										});
+									}
+								});
+				               
+							}else{
+								fs.writeFile(dirPath+"\/backup"+"\/"+fileName,fileData, function(err){ 
+									if(err){
+										console.log("备份文件错误.");
+										return;
+									}else{
+										//删除原文件
+										fs.unlink(filePath, function(err) {
+											if(err){
+												console.log(err);
+												return;
+											}else{
+												//删除文件状态
+												delete fileLock[filePath];
+											}
+										});
+									}
+								});
+
+							}
+						});
+			
+					}
+
+				})
+				
+				.on('close', function(count){
+
+				})
+				.on('error', function(error){
+			  		console.log(error.message);
+				});	
+
+			})
+			.on('close', function(count){
+
+			})
+			.on('error', function(error){
+			  console.log(error.message);
+			});	
+
 		}
-		//处理完毕，改变文件状态，备份并删除文件
-		//截取备份文件文件名
-		var p = filePath.lastIndexOf('\/');
-        var fileName = filePath.substring(p);
-		//要备份的文件夹是否存在
-		fs.exists(dirPath+"/backup", function(exits){
-			if(!exits){
-				//不存在，创建并拷贝
-				fs.mkdirSync(dirPath+"\/backup");
-				fs.writeFile(dirPath+"\/backup"+"\/"+fileName,fileData, function(err){ 
-					if(err){
-						console.log("备份文件错误.");
-						return;
-					}else{
-						//删除原文件
-						fs.unlink(filePath, function(err) {
-							if(err){
-								console.log(err);
-								return;
-							}else{
-								//删除文件状态
-								delete fileLock[filePath];
-							}
-						});
-					}
-				});
-               
-			}else{
-				fs.writeFile(dirPath+"\/backup"+"\/"+fileName,fileData, function(err){ 
-					if(err){
-						console.log("备份文件错误.");
-						return;
-					}else{
-						//删除原文件
-						fs.unlink(filePath, function(err) {
-							if(err){
-								console.log(err);
-								return;
-							}else{
-								//删除文件状态
-								delete fileLock[filePath];
-							}
-						});
-					}
-				});
-
-			}
-		});
-	})
-	.on('close', function(count){
-
-	})
-	.on('error', function(error){
-	  console.log(error.message);
-	});	
+	});
 }
 
 //对给定的文件夹进行处理
 function dealWithFile(path)
 {
-	console.log(path);
 	//保存csv文件名
 	fs.exists(path,function(exists){
         if(!exists){
@@ -158,11 +244,51 @@ function dealWithFile(path)
   			 		}
         		}
         	}
-
         }
     });
 }
+
+function toSqlserver (configData,data,stationName)
+{
+	sql.open(configure.sqlserver, function( err, sqlCon) {
+		if(err){
+			console.log(err);
+		}else{
+				var confLine = configData.length;
+				//获取配置文件所有的字段
+				var confKeys = Object.keys(configData[0]);
+				for(var i=0;i<confLine;i++){
+					if(stationName==configData[i]["PLC_Station_Name"]){
+						//获取数据的行数
+						var len = data.length;
+						//获取所有的字段
+						var keys = Object.keys(data[0]);
+						for(var k=0;k<keys.length;k++){
+							for(var s=0;s<len;s++){
+								if(configData[i]["PLC_TagName"]===keys[k]){	
+									var sqlStr = "INSERT INTO "+configData[i]["table_Name"]+ "(Time,tagName,value) VALUES ";
+									var time = new Date(data[s]["Time"]);
+									var str = formatDate(time);
+									var strTime = "'"+str+"'";
+									var sql_TagName = configData[i]["sql_TagName"];
+									var val = strTime+","+sql_TagName+","+data[s][keys[k]];
+									sqlStr += "("+val+")";
+									sqlStr = sqlStr + ";";
+									console.log(sqlStr);
+									conn.queryRaw(sqlStr, function(err) {
+										if(err){
+											console.log("table:",err);
+										}	
+					                });
+								}
+							}
+						}
+					}
+				}
+		}
+	});
+}
 //周期检查文件
-setInterval(dealWithFile,2000,configure.workPath);
+setInterval(dealWithFile,configure.interVal,configure.workPath);
 setInterval(fun,1000);
 
