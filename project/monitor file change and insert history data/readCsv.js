@@ -82,8 +82,8 @@ function task (filePath,dirPath) {
 					columns:true,
 					encoding: 'binary'
 				})
-				.transform(function(data,index){
-			 	 	return data;
+				.transform(function(configData,index){
+			 	 	return configData;
 				})
 				.to.array(function(configData){
 					//获取配置文件的行数
@@ -101,7 +101,6 @@ function task (filePath,dirPath) {
 								if(configData[i]["PLC_TagName"]===keys[k]){
 									//获取长名
 									var tagLongName = configData[i]["pSpace_LongTagname"];
-									
 									//长名格式转化
 									tagLongName = tagLongName.replace(/[\\]/g,"/")+".his.insertReplace";
 									var buf = new Buffer(tagLongName, 'binary');
@@ -194,7 +193,6 @@ function task (filePath,dirPath) {
 				.on('error', function(error){
 			  		console.log(error.message);
 				});	
-
 			})
 			.on('close', function(count){
 
@@ -233,8 +231,7 @@ function dealWithFile(path)
   			 			if(stats.isFile() && fileLock[files[i]]===undefined){
   			 				//设置文件正在被处理
   			 				fileLock[files[i]] = true;
-  			 				//直接下至数据task()
-  			 						
+  			 				//直接下至数据task()	
   			 				task(files[i],path);
   			 			}else{
   			 					//暂时什么也不做
@@ -248,6 +245,7 @@ function dealWithFile(path)
     });
 }
 
+var isFirstCreateTable = true;
 function toSqlserver (configData,data,stationName)
 {
 	sql.open(configure.sqlserver, function( err, sqlCon) {
@@ -266,20 +264,32 @@ function toSqlserver (configData,data,stationName)
 						for(var k=0;k<keys.length;k++){
 							for(var s=0;s<len;s++){
 								if(configData[i]["PLC_TagName"]===keys[k]){	
-									var sqlStr = "INSERT INTO "+configData[i]["table_Name"]+ "(Time,tagName,value) VALUES ";
-									var time = new Date(data[s]["Time"]);
-									var str = formatDate(time);
-									var strTime = "'"+str+"'";
-									var sql_TagName = configData[i]["sql_TagName"];
-									var val = strTime+","+sql_TagName+","+data[s][keys[k]];
-									sqlStr += "("+val+")";
-									sqlStr = sqlStr + ";";
-									console.log(sqlStr);
-									conn.queryRaw(sqlStr, function(err) {
+									var tableName = configData[i]["table_Name"];
+									(function(idx,idx1,idx2){
+										sqlCon.queryRaw("if OBJECT_ID ('"+tableName+"') is null create table ["+tableName+"](Time datetime,tagName nvarchar(255),PV float);",function(err,res){
 										if(err){
-											console.log("table:",err);
-										}	
-					                });
+											console.log("jugeErr:",err);
+										}else{
+											var sqlStr = "INSERT INTO "+tableName+ "(Time,tagName,PV) VALUES ";
+											var time = new Date(data[idx]["Time"]);
+											var str = formatDate(time);
+											var strTime = "'"+str+"'";
+											var sql_TagName = "'"+configData[idx1]["sql_TagName"]+"'";
+											var val = strTime+","+sql_TagName+","+data[idx][keys[idx2]];
+											sqlStr += "("+val+")";
+											//sqlStr = sqlStr + ";";
+											//console.log(sqlStr);
+											sqlCon.queryRaw(sqlStr, function(err) {
+												if(err){
+													console.log("table:",err);
+												}else{
+													//转储成功一条数据
+													//console.log("succeed");
+												}	
+							                });
+										}
+									});
+									})(s,i,k);
 								}
 							}
 						}
