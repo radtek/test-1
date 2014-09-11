@@ -131,7 +131,12 @@ function task (filePath,dirPath) {
 					}
 					//是否需要转储
 					if(configure.isSaveToSql){
-						toSqlserver(configData,data,stationName);
+						if(configData[0].hasOwnProperty("table_Name") && configData[0].hasOwnProperty("sql_TagName")){
+							toSqlserver(configData,data,stationName);
+						}else{
+							console.log("配置文件有错误，请检查!");
+						}
+						
 					}
 					//处理完毕，改变文件状态，备份并删除文件
 					//截取备份文件文件名
