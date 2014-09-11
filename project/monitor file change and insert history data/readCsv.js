@@ -25,6 +25,8 @@ var formatDate = function(now){
 
 //新建连接对象
 var con = new Object();
+//保存文件状态
+var fileLock = [];
 //断线重连的操作
 function handleError () {
     ps.open(configure.pSpace,function (err,conn) {
@@ -32,12 +34,14 @@ function handleError () {
             console.log('error when connecting to db:', err);
         }else{
            con = conn;
+          
         }
     });
 }
 //监听数据库是否连接的事件
 process.on('isConnect',function(){
 	if(!ps.isConnected()){
+		fileLock=[];
 		handleError();
 	}
 });
@@ -46,10 +50,11 @@ var fun = function()
 	process.emit('isConnect',null);
 }
 handleError();
-//保存文件状态
-var fileLock = [];
+
+
 //任务
 function task (filePath,dirPath) {
+	var dataWrite = [];
 	//计算文件第三行的起始位置
 	var fileData = fs.readFileSync(filePath, 'ASCII');
 	var first = fileData.indexOf('\n');
@@ -119,8 +124,7 @@ function task (filePath,dirPath) {
 											console.log(res.errString);
 											continue;
 										}else{
-											//
-											
+											dataWrite.push(true);
 										}
 									}
 
@@ -129,64 +133,67 @@ function task (filePath,dirPath) {
 
 						}
 					}
+					if(dataWrite.length===data.length){
+						dataWrite=[];
 					//是否需要转储
-					if(configure.isSaveToSql){
-						if(configData[0].hasOwnProperty("table_Name") && configData[0].hasOwnProperty("sql_TagName")){
-							toSqlserver(configData,data,stationName);
-						}else{
-							console.log("配置文件有错误，请检查!");
-						}
-						
-					}
-					//处理完毕，改变文件状态，备份并删除文件
-					//截取备份文件文件名
-					if (filePath.indexOf(configPath)<0) {
-						var p = filePath.lastIndexOf('\/');
-				        var fileName = filePath.substring(p);
-						//要备份的文件夹是否存在
-						fs.exists(dirPath+"/backup", function(exits){
-							if(!exits){
-								//不存在，创建并拷贝
-								fs.mkdirSync(dirPath+"\/backup");
-								fs.writeFile(dirPath+"\/backup"+"\/"+fileName,fileData, function(err){ 
-									if(err){
-										console.log("备份文件错误.");
-										return;
-									}else{
-										//删除原文件
-										fs.unlink(filePath, function(err) {
-											if(err){
-												console.log(err);
-												return;
-											}else{
-												//删除文件状态
-												delete fileLock[filePath];
-											}
-										});
-									}
-								});
-				               
+						if(configure.isSaveToSql){
+							if(configData[0].hasOwnProperty("table_Name") && configData[0].hasOwnProperty("sql_TagName")){
+								toSqlserver(configData,data,stationName);
 							}else{
-								fs.writeFile(dirPath+"\/backup"+"\/"+fileName,fileData, function(err){ 
-									if(err){
-										console.log("备份文件错误.");
-										return;
-									}else{
-										//删除原文件
-										fs.unlink(filePath, function(err) {
-											if(err){
-												console.log(err);
-												return;
-											}else{
-												//删除文件状态
-												delete fileLock[filePath];
-											}
-										});
-									}
-								});
-
+								console.log("配置文件有错误，请检查!");
 							}
-						});
+							
+						}
+						//处理完毕，改变文件状态，备份并删除文件
+						//截取备份文件文件名
+						if (filePath.indexOf(configPath)<0) {
+							var p = filePath.lastIndexOf('\/');
+					        var fileName = filePath.substring(p);
+							//要备份的文件夹是否存在
+							fs.exists(dirPath+"/backup", function(exits){
+								if(!exits){
+									//不存在，创建并拷贝
+									fs.mkdirSync(dirPath+"\/backup");
+									fs.writeFile(dirPath+"\/backup"+"\/"+fileName,fileData, function(err){ 
+										if(err){
+											console.log("备份文件错误.");
+											return;
+										}else{
+											//删除原文件
+											fs.unlink(filePath, function(err) {
+												if(err){
+													console.log(err);
+													return;
+												}else{
+													//删除文件状态
+													delete fileLock[filePath];
+												}
+											});
+										}
+									});
+					               
+								}else{
+									fs.writeFile(dirPath+"\/backup"+"\/"+fileName,fileData, function(err){ 
+										if(err){
+											console.log("备份文件错误.");
+											return;
+										}else{
+											//删除原文件
+											fs.unlink(filePath, function(err) {
+												if(err){
+													console.log(err);
+													return;
+												}else{
+													//删除文件状态
+													delete fileLock[filePath];
+												}
+											});
+										}
+									});
+
+								}
+							});
+					}
 			
 					}
 
