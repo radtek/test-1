@@ -1,0 +1,676 @@
+[2014-09-14 17:13:32.248] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 17:13:32.251] [INFO] dateFileLog - 连接pSpace成功,开始数据处理!
+[2014-09-14 17:13:32.293] [INFO] dateFileLog - 不需要转储.
+[2014-09-14 17:13:32.294] [INFO] dateFileLog - 转储完毕，开始备份文件.
+[2014-09-14 17:13:32.294] [INFO] dateFileLog - 配置文件名不属于csv文件名的字串，开始备份.
+[2014-09-14 17:13:32.296] [INFO] dateFileLog - backup已经存在将备份.
+[2014-09-14 17:13:32.297] [INFO] dateFileLog - 文件备份完毕.
+[2014-09-14 17:13:32.298] [INFO] dateFileLog - 备份文件成功.
+[2014-09-14 17:13:32.298] [ERROR] dateFileLog - 删除文件状态.
+[2014-09-14 17:13:32.299] [INFO] dateFileLog - 删除文件成功.
+[2014-09-14 17:13:32.299] [INFO] dateFileLog - 数据处理成功.
+[2014-09-14 17:15:34.285] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 17:15:34.285] [INFO] dateFileLog - 连接pSpace成功,开始数据处理!
+[2014-09-14 17:15:34.332] [INFO] dateFileLog - 不需要转储.
+[2014-09-14 17:15:34.332] [INFO] dateFileLog - 转储完毕，开始备份文件.
+[2014-09-14 17:15:34.332] [INFO] dateFileLog - 配置文件名不属于csv文件名的字串，开始备份.
+[2014-09-14 17:15:34.332] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 17:15:34.332] [INFO] dateFileLog - 连接pSpace成功,开始数据处理!
+[2014-09-14 17:15:34.332] [INFO] dateFileLog - 不需要转储.
+[2014-09-14 17:15:34.332] [INFO] dateFileLog - 转储完毕，开始备份文件.
+[2014-09-14 17:15:34.332] [INFO] dateFileLog - 配置文件名不属于csv文件名的字串，开始备份.
+[2014-09-14 17:15:34.332] [INFO] dateFileLog - backup已经存在将备份.
+[2014-09-14 17:15:34.332] [INFO] dateFileLog - backup已经存在将备份.
+[2014-09-14 17:15:34.332] [INFO] dateFileLog - 文件备份完毕.
+[2014-09-14 17:15:34.332] [INFO] dateFileLog - 备份文件成功.
+[2014-09-14 17:15:34.332] [INFO] dateFileLog - 文件备份完毕.
+[2014-09-14 17:15:34.332] [INFO] dateFileLog - 备份文件成功.
+[2014-09-14 17:15:34.332] [INFO] dateFileLog - 删除文件状态.
+[2014-09-14 17:15:34.332] [INFO] dateFileLog - 删除文件成功.
+[2014-09-14 17:15:34.332] [INFO] dateFileLog - 数据处理成功.
+[2014-09-14 17:15:34.332] [INFO] dateFileLog - 删除文件状态.
+[2014-09-14 17:15:34.332] [INFO] dateFileLog - 删除文件成功.
+[2014-09-14 17:15:34.332] [INFO] dateFileLog - 数据处理成功.
+[2014-09-14 17:16:01.378] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 17:16:28.368] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 17:16:28.368] [INFO] dateFileLog - 连接pSpace成功,开始数据处理!
+[2014-09-14 17:16:28.602] [INFO] dateFileLog - 不需要转储.
+[2014-09-14 17:16:28.602] [INFO] dateFileLog - 转储完毕，开始备份文件.
+[2014-09-14 17:16:28.602] [INFO] dateFileLog - 配置文件名不属于csv文件名的字串，开始备份.
+[2014-09-14 17:16:28.602] [INFO] dateFileLog - backup已经存在将备份.
+[2014-09-14 17:16:28.634] [INFO] dateFileLog - 文件备份完毕.
+[2014-09-14 17:16:28.634] [INFO] dateFileLog - 备份文件成功.
+[2014-09-14 17:20:20.903] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 17:20:20.907] [INFO] dateFileLog - 连接pSpace成功,开始数据处理!
+[2014-09-14 17:20:20.948] [INFO] dateFileLog - 不需要转储.
+[2014-09-14 17:20:20.949] [INFO] dateFileLog - 转储完毕，开始备份文件.
+[2014-09-14 17:20:20.949] [INFO] dateFileLog - 配置文件名不属于csv文件名的字串，开始备份.
+[2014-09-14 17:20:20.950] [INFO] dateFileLog - backup已经存在将备份.
+[2014-09-14 17:20:20.951] [INFO] dateFileLog - 文件备份完毕.
+[2014-09-14 17:20:20.952] [INFO] dateFileLog - 备份文件成功.
+[2014-09-14 17:20:20.954] [INFO] dateFileLog - 删除文件状态.
+[2014-09-14 17:20:20.954] [INFO] dateFileLog - 删除文件成功.
+[2014-09-14 17:20:20.954] [INFO] dateFileLog - 数据处理成功.
+[2014-09-14 17:20:35.934] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 17:20:35.934] [INFO] dateFileLog - 连接pSpace成功,开始数据处理!
+[2014-09-14 17:20:35.934] [INFO] dateFileLog - 不需要转储.
+[2014-09-14 17:20:35.934] [INFO] dateFileLog - 转储完毕，开始备份文件.
+[2014-09-14 17:20:35.934] [INFO] dateFileLog - 配置文件名不属于csv文件名的字串，开始备份.
+[2014-09-14 17:20:35.934] [INFO] dateFileLog - backup已经存在将备份.
+[2014-09-14 17:20:35.934] [INFO] dateFileLog - 文件备份完毕.
+[2014-09-14 17:20:35.934] [INFO] dateFileLog - 备份文件成功.
+[2014-09-14 17:20:35.934] [INFO] dateFileLog - 删除文件状态.
+[2014-09-14 17:20:35.934] [INFO] dateFileLog - 删除文件成功.
+[2014-09-14 17:20:35.934] [INFO] dateFileLog - 数据处理成功.
+[2014-09-14 17:20:45.005] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 17:20:57.193] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 17:20:57.193] [INFO] dateFileLog - 连接pSpace成功,开始数据处理!
+[2014-09-14 17:20:57.489] [INFO] dateFileLog - 不需要转储.
+[2014-09-14 17:20:57.489] [INFO] dateFileLog - 转储完毕，开始备份文件.
+[2014-09-14 17:20:57.489] [INFO] dateFileLog - 配置文件名不属于csv文件名的字串，开始备份.
+[2014-09-14 17:20:57.489] [INFO] dateFileLog - backup已经存在将备份.
+[2014-09-14 17:20:57.489] [INFO] dateFileLog - 文件备份完毕.
+[2014-09-14 17:20:57.489] [INFO] dateFileLog - 备份文件成功.
+[2014-09-14 17:20:57.489] [INFO] dateFileLog - 删除文件状态.
+[2014-09-14 17:20:57.489] [INFO] dateFileLog - 删除文件成功.
+[2014-09-14 17:20:57.489] [INFO] dateFileLog - 数据处理成功.
+[2014-09-14 17:21:25.079] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 17:21:25.079] [INFO] dateFileLog - 连接pSpace成功,开始数据处理!
+[2014-09-14 17:21:25.157] [INFO] dateFileLog - 不需要转储.
+[2014-09-14 17:21:25.157] [INFO] dateFileLog - 转储完毕，开始备份文件.
+[2014-09-14 17:21:25.157] [INFO] dateFileLog - 配置文件名不属于csv文件名的字串，开始备份.
+[2014-09-14 17:21:25.157] [INFO] dateFileLog - backup已经存在将备份.
+[2014-09-14 17:21:25.157] [INFO] dateFileLog - 文件备份完毕.
+[2014-09-14 17:21:25.157] [INFO] dateFileLog - 备份文件成功.
+[2014-09-14 17:21:25.157] [INFO] dateFileLog - 删除文件状态.
+[2014-09-14 17:21:25.157] [INFO] dateFileLog - 删除文件成功.
+[2014-09-14 17:21:25.157] [INFO] dateFileLog - 数据处理成功.
+[2014-09-14 17:21:34.079] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 17:21:54.633] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 17:21:54.633] [INFO] dateFileLog - 连接pSpace成功,开始数据处理!
+[2014-09-14 17:21:54.852] [INFO] dateFileLog - 不需要转储.
+[2014-09-14 17:21:54.852] [INFO] dateFileLog - 转储完毕，开始备份文件.
+[2014-09-14 17:21:54.852] [INFO] dateFileLog - 配置文件名不属于csv文件名的字串，开始备份.
+[2014-09-14 17:21:54.852] [INFO] dateFileLog - backup已经存在将备份.
+[2014-09-14 17:21:54.852] [INFO] dateFileLog - 文件备份完毕.
+[2014-09-14 17:21:54.852] [INFO] dateFileLog - 备份文件成功.
+[2014-09-14 17:21:54.852] [INFO] dateFileLog - 删除文件状态.
+[2014-09-14 17:21:54.852] [INFO] dateFileLog - 删除文件成功.
+[2014-09-14 17:21:54.867] [INFO] dateFileLog - 数据处理成功.
+[2014-09-14 17:22:24.758] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 17:22:34.848] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 17:22:34.848] [INFO] dateFileLog - 连接pSpace成功,开始数据处理!
+[2014-09-14 17:22:35.394] [INFO] dateFileLog - 不需要转储.
+[2014-09-14 17:22:35.394] [INFO] dateFileLog - 转储完毕，开始备份文件.
+[2014-09-14 17:22:35.394] [INFO] dateFileLog - 配置文件名不属于csv文件名的字串，开始备份.
+[2014-09-14 17:22:35.394] [INFO] dateFileLog - backup已经存在将备份.
+[2014-09-14 17:22:35.394] [INFO] dateFileLog - 文件备份完毕.
+[2014-09-14 17:22:35.394] [INFO] dateFileLog - 备份文件成功.
+[2014-09-14 17:22:35.394] [INFO] dateFileLog - 删除文件状态.
+[2014-09-14 17:22:35.394] [INFO] dateFileLog - 删除文件成功.
+[2014-09-14 17:22:35.394] [INFO] dateFileLog - 数据处理成功.
+[2014-09-14 17:30:09.539] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 17:29:50.202] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:29:52.298] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:29:54.416] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:29:56.538] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:29:58.634] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:30:00.754] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:30:02.860] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:30:04.968] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:30:07.082] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:30:09.178] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:30:11.269] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:30:13.422] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:30:15.519] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:30:17.640] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:30:19.761] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:30:21.859] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:30:23.980] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:30:26.101] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:30:28.198] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:30:30.310] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:30:33.897] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 17:30:33.899] [INFO] dateFileLog - 连接pSpace成功,开始数据处理!
+[2014-09-14 17:30:34.179] [INFO] dateFileLog - 不需要转储.
+[2014-09-14 17:30:34.179] [INFO] dateFileLog - 转储完毕，开始备份文件.
+[2014-09-14 17:30:34.179] [INFO] dateFileLog - 配置文件名不属于csv文件名的字串，开始备份.
+[2014-09-14 17:30:34.179] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 17:30:34.179] [INFO] dateFileLog - 连接pSpace成功,开始数据处理!
+[2014-09-14 17:30:34.179] [INFO] dateFileLog - 不需要转储.
+[2014-09-14 17:30:34.179] [INFO] dateFileLog - 转储完毕，开始备份文件.
+[2014-09-14 17:30:34.179] [INFO] dateFileLog - 配置文件名不属于csv文件名的字串，开始备份.
+[2014-09-14 17:30:34.179] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 17:30:34.179] [INFO] dateFileLog - 连接pSpace成功,开始数据处理!
+[2014-09-14 17:30:34.179] [INFO] dateFileLog - 不需要转储.
+[2014-09-14 17:30:34.179] [INFO] dateFileLog - 转储完毕，开始备份文件.
+[2014-09-14 17:30:34.179] [INFO] dateFileLog - 配置文件名不属于csv文件名的字串，开始备份.
+[2014-09-14 17:30:34.179] [INFO] dateFileLog - backup已经存在将备份.
+[2014-09-14 17:30:34.195] [INFO] dateFileLog - backup已经存在将备份.
+[2014-09-14 17:30:34.195] [INFO] dateFileLog - backup已经存在将备份.
+[2014-09-14 17:30:34.195] [INFO] dateFileLog - 文件备份完毕.
+[2014-09-14 17:30:34.195] [INFO] dateFileLog - 备份文件成功.
+[2014-09-14 17:30:34.195] [INFO] dateFileLog - 文件备份完毕.
+[2014-09-14 17:30:34.195] [INFO] dateFileLog - 备份文件成功.
+[2014-09-14 17:30:34.195] [INFO] dateFileLog - 文件备份完毕.
+[2014-09-14 17:30:34.195] [INFO] dateFileLog - 备份文件成功.
+[2014-09-14 17:30:34.195] [INFO] dateFileLog - 删除文件状态.
+[2014-09-14 17:30:34.195] [INFO] dateFileLog - 删除文件成功.
+[2014-09-14 17:30:34.195] [INFO] dateFileLog - 删除文件状态.
+[2014-09-14 17:30:34.195] [INFO] dateFileLog - 删除文件成功.
+[2014-09-14 17:30:34.195] [INFO] dateFileLog - 数据处理成功.
+[2014-09-14 17:30:34.195] [INFO] dateFileLog - 数据处理成功.
+[2014-09-14 17:30:34.195] [INFO] dateFileLog - 删除文件状态.
+[2014-09-14 17:30:34.195] [INFO] dateFileLog - 删除文件成功.
+[2014-09-14 17:30:34.195] [INFO] dateFileLog - 数据处理成功.
+[2014-09-14 17:33:11.076] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 17:33:11.076] [INFO] dateFileLog - 连接pSpace成功,开始数据处理!
+[2014-09-14 17:33:11.107] [INFO] dateFileLog - 不需要转储.
+[2014-09-14 17:33:11.107] [INFO] dateFileLog - 转储完毕，开始备份文件.
+[2014-09-14 17:33:11.107] [INFO] dateFileLog - 配置文件名不属于csv文件名的字串，开始备份.
+[2014-09-14 17:33:11.107] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 17:33:11.107] [INFO] dateFileLog - 连接pSpace成功,开始数据处理!
+[2014-09-14 17:33:11.123] [INFO] dateFileLog - 不需要转储.
+[2014-09-14 17:33:11.123] [INFO] dateFileLog - 转储完毕，开始备份文件.
+[2014-09-14 17:33:11.123] [INFO] dateFileLog - 配置文件名不属于csv文件名的字串，开始备份.
+[2014-09-14 17:33:11.123] [INFO] dateFileLog - backup已经存在将备份.
+[2014-09-14 17:33:11.123] [INFO] dateFileLog - backup已经存在将备份.
+[2014-09-14 17:33:11.123] [INFO] dateFileLog - 文件备份完毕.
+[2014-09-14 17:33:11.123] [INFO] dateFileLog - 备份文件成功.
+[2014-09-14 17:33:11.123] [INFO] dateFileLog - 文件备份完毕.
+[2014-09-14 17:33:11.123] [INFO] dateFileLog - 备份文件成功.
+[2014-09-14 17:33:11.123] [INFO] dateFileLog - 删除文件状态.
+[2014-09-14 17:33:11.123] [INFO] dateFileLog - 删除文件成功.
+[2014-09-14 17:33:11.123] [INFO] dateFileLog - 数据处理成功.
+[2014-09-14 17:33:11.123] [INFO] dateFileLog - 删除文件状态.
+[2014-09-14 17:33:11.123] [INFO] dateFileLog - 删除文件成功.
+[2014-09-14 17:33:11.123] [INFO] dateFileLog - 数据处理成功.
+[2014-09-14 17:33:56.221] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 17:33:56.221] [ERROR] dateFileLog - pSpace已经断开连接!
+[2014-09-14 17:33:58.306] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:34:00.423] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:34:02.527] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:34:04.624] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:34:06.746] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:34:08.851] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:34:10.947] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:34:13.053] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:34:15.159] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:34:17.255] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:35:27.863] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 17:35:27.865] [INFO] dateFileLog - 连接pSpace成功,开始数据处理!
+[2014-09-14 17:35:27.903] [INFO] dateFileLog - 不需要转储.
+[2014-09-14 17:35:27.903] [INFO] dateFileLog - 转储完毕，开始备份文件.
+[2014-09-14 17:35:27.903] [INFO] dateFileLog - 配置文件名不属于csv文件名的字串，开始备份.
+[2014-09-14 17:35:27.903] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 17:35:27.904] [INFO] dateFileLog - 连接pSpace成功,开始数据处理!
+[2014-09-14 17:35:27.907] [INFO] dateFileLog - 不需要转储.
+[2014-09-14 17:35:27.907] [INFO] dateFileLog - 转储完毕，开始备份文件.
+[2014-09-14 17:35:27.907] [INFO] dateFileLog - 配置文件名不属于csv文件名的字串，开始备份.
+[2014-09-14 17:35:27.908] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 17:35:27.908] [INFO] dateFileLog - 连接pSpace成功,开始数据处理!
+[2014-09-14 17:35:27.911] [INFO] dateFileLog - 不需要转储.
+[2014-09-14 17:35:27.912] [INFO] dateFileLog - 转储完毕，开始备份文件.
+[2014-09-14 17:35:27.912] [INFO] dateFileLog - 配置文件名不属于csv文件名的字串，开始备份.
+[2014-09-14 17:35:27.913] [INFO] dateFileLog - backup已经存在将备份.
+[2014-09-14 17:35:27.913] [INFO] dateFileLog - backup已经存在将备份.
+[2014-09-14 17:35:27.915] [INFO] dateFileLog - backup已经存在将备份.
+[2014-09-14 17:35:27.916] [INFO] dateFileLog - 文件备份完毕.
+[2014-09-14 17:35:27.916] [INFO] dateFileLog - 备份文件成功.
+[2014-09-14 17:35:27.916] [INFO] dateFileLog - 文件备份完毕.
+[2014-09-14 17:35:27.916] [INFO] dateFileLog - 备份文件成功.
+[2014-09-14 17:35:27.917] [INFO] dateFileLog - 文件备份完毕.
+[2014-09-14 17:35:27.917] [INFO] dateFileLog - 备份文件成功.
+[2014-09-14 17:35:27.917] [INFO] dateFileLog - 删除文件状态.
+[2014-09-14 17:35:27.917] [INFO] dateFileLog - 删除文件成功.
+[2014-09-14 17:35:27.917] [INFO] dateFileLog - 数据处理成功.
+[2014-09-14 17:35:27.918] [INFO] dateFileLog - 删除文件状态.
+[2014-09-14 17:35:27.918] [INFO] dateFileLog - 删除文件成功.
+[2014-09-14 17:35:27.918] [INFO] dateFileLog - 删除文件状态.
+[2014-09-14 17:35:27.918] [INFO] dateFileLog - 删除文件成功.
+[2014-09-14 17:35:27.918] [INFO] dateFileLog - 数据处理成功.
+[2014-09-14 17:35:27.918] [INFO] dateFileLog - 数据处理成功.
+[2014-09-14 17:35:39.911] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 17:35:39.912] [ERROR] dateFileLog - pSpace已经断开连接!
+[2014-09-14 17:35:42.012] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:35:44.134] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:35:46.229] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:35:48.350] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:35:50.472] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:35:52.569] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:35:54.690] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:35:56.812] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:35:57.608] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 17:35:57.608] [INFO] dateFileLog - 连接pSpace成功,开始数据处理!
+[2014-09-14 17:35:57.868] [INFO] dateFileLog - 不需要转储.
+[2014-09-14 17:40:52.232] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 17:40:52.235] [INFO] dateFileLog - 连接pSpace成功,开始数据处理!
+[2014-09-14 17:40:52.276] [INFO] dateFileLog - 不需要转储.
+[2014-09-14 17:40:52.276] [INFO] dateFileLog - 转储完毕，开始备份文件.
+[2014-09-14 17:40:52.276] [INFO] dateFileLog - 配置文件名不属于csv文件名的字串，开始备份.
+[2014-09-14 17:40:52.278] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 17:40:52.278] [INFO] dateFileLog - 连接pSpace成功,开始数据处理!
+[2014-09-14 17:40:52.281] [INFO] dateFileLog - 不需要转储.
+[2014-09-14 17:40:52.281] [INFO] dateFileLog - 转储完毕，开始备份文件.
+[2014-09-14 17:40:52.281] [INFO] dateFileLog - 配置文件名不属于csv文件名的字串，开始备份.
+[2014-09-14 17:40:52.282] [INFO] dateFileLog - backup已经存在将备份.
+[2014-09-14 17:40:52.283] [INFO] dateFileLog - backup已经存在将备份.
+[2014-09-14 17:40:52.283] [INFO] dateFileLog - 文件备份完毕.
+[2014-09-14 17:40:52.284] [INFO] dateFileLog - 备份文件成功.
+[2014-09-14 17:40:52.284] [INFO] dateFileLog - 文件备份完毕.
+[2014-09-14 17:40:52.284] [INFO] dateFileLog - 备份文件成功.
+[2014-09-14 17:40:52.285] [INFO] dateFileLog - 删除文件状态.
+[2014-09-14 17:40:52.285] [INFO] dateFileLog - 删除文件成功.
+[2014-09-14 17:40:52.286] [INFO] dateFileLog - 删除文件状态.
+[2014-09-14 17:40:52.286] [INFO] dateFileLog - 删除文件成功.
+[2014-09-14 17:40:52.286] [INFO] dateFileLog - 数据处理成功.
+[2014-09-14 17:40:52.286] [INFO] dateFileLog - 数据处理成功.
+[2014-09-14 17:41:13.323] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 17:41:13.323] [ERROR] dateFileLog - pSpace已经断开连接!
+[2014-09-14 17:41:15.429] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:41:17.525] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:41:19.647] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:41:21.750] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:41:23.831] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:41:25.953] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:41:28.074] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:41:30.171] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:41:32.293] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:41:34.389] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:43:23.752] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 17:43:23.752] [INFO] dateFileLog - 连接pSpace成功,开始数据处理!
+[2014-09-14 17:43:23.799] [INFO] dateFileLog - 不需要转储.
+[2014-09-14 17:43:23.799] [INFO] dateFileLog - 转储完毕，开始备份文件.
+[2014-09-14 17:43:23.799] [INFO] dateFileLog - 配置文件名不属于csv文件名的字串，开始备份.
+[2014-09-14 17:43:23.799] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 17:43:23.799] [INFO] dateFileLog - 连接pSpace成功,开始数据处理!
+[2014-09-14 17:43:23.799] [INFO] dateFileLog - 不需要转储.
+[2014-09-14 17:43:23.799] [INFO] dateFileLog - 转储完毕，开始备份文件.
+[2014-09-14 17:43:23.799] [INFO] dateFileLog - 配置文件名不属于csv文件名的字串，开始备份.
+[2014-09-14 17:43:23.799] [INFO] dateFileLog - backup已经存在将备份.
+[2014-09-14 17:43:23.799] [INFO] dateFileLog - backup已经存在将备份.
+[2014-09-14 17:43:23.799] [INFO] dateFileLog - 文件备份完毕.
+[2014-09-14 17:43:23.799] [INFO] dateFileLog - 备份文件成功.
+[2014-09-14 17:43:23.799] [INFO] dateFileLog - 文件备份完毕.
+[2014-09-14 17:43:23.799] [INFO] dateFileLog - 备份文件成功.
+[2014-09-14 17:43:23.799] [INFO] dateFileLog - 删除文件状态.
+[2014-09-14 17:43:23.799] [INFO] dateFileLog - 删除文件成功.
+[2014-09-14 17:43:23.799] [INFO] dateFileLog - 数据处理成功.
+[2014-09-14 17:43:23.799] [INFO] dateFileLog - 删除文件状态.
+[2014-09-14 17:43:23.799] [INFO] dateFileLog - 删除文件成功.
+[2014-09-14 17:43:23.799] [INFO] dateFileLog - 数据处理成功.
+[2014-09-14 17:43:38.809] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 17:43:38.809] [ERROR] dateFileLog - pSpace已经断开连接!
+[2014-09-14 17:43:40.901] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:43:43.025] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:43:45.147] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:43:47.250] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:43:49.369] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:43:51.490] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:43:53.562] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:43:55.662] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:51:50.078] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 17:51:50.078] [INFO] dateFileLog - 连接pSpace成功,开始数据处理!
+[2014-09-14 17:51:50.140] [INFO] dateFileLog - 不需要转储.
+[2014-09-14 17:51:50.140] [INFO] dateFileLog - 转储完毕，开始备份文件.
+[2014-09-14 17:51:50.140] [INFO] dateFileLog - 配置文件名不属于csv文件名的字串，开始备份.
+[2014-09-14 17:51:50.140] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 17:51:50.140] [INFO] dateFileLog - 连接pSpace成功,开始数据处理!
+[2014-09-14 17:51:50.140] [INFO] dateFileLog - 不需要转储.
+[2014-09-14 17:51:50.140] [INFO] dateFileLog - 转储完毕，开始备份文件.
+[2014-09-14 17:51:50.140] [INFO] dateFileLog - 配置文件名不属于csv文件名的字串，开始备份.
+[2014-09-14 17:51:50.140] [INFO] dateFileLog - backup已经存在将备份.
+[2014-09-14 17:51:50.140] [INFO] dateFileLog - backup已经存在将备份.
+[2014-09-14 17:51:50.140] [INFO] dateFileLog - 文件备份完毕.
+[2014-09-14 17:51:50.156] [INFO] dateFileLog - 备份文件成功.
+[2014-09-14 17:51:50.156] [INFO] dateFileLog - 文件备份完毕.
+[2014-09-14 17:51:50.156] [INFO] dateFileLog - 备份文件成功.
+[2014-09-14 17:51:50.156] [INFO] dateFileLog - 删除文件状态.
+[2014-09-14 17:51:50.156] [INFO] dateFileLog - 删除文件成功.
+[2014-09-14 17:51:50.156] [INFO] dateFileLog - 数据处理成功.
+[2014-09-14 17:51:50.156] [INFO] dateFileLog - 删除文件状态.
+[2014-09-14 17:51:50.156] [INFO] dateFileLog - 删除文件成功.
+[2014-09-14 17:51:50.156] [INFO] dateFileLog - 数据处理成功.
+[2014-09-14 17:52:14.132] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 17:52:14.132] [ERROR] dateFileLog - pSpace已经断开连接!
+[2014-09-14 17:52:14.132] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 17:52:14.132] [ERROR] dateFileLog - pSpace已经断开连接!
+[2014-09-14 17:52:14.132] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 17:52:14.132] [ERROR] dateFileLog - pSpace已经断开连接!
+[2014-09-14 17:55:39.947] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 17:55:39.963] [INFO] dateFileLog - 连接pSpace成功,开始数据处理!
+[2014-09-14 17:55:40.556] [INFO] dateFileLog - 不需要转储.
+[2014-09-14 17:55:40.556] [INFO] dateFileLog - 转储完毕，开始备份文件.
+[2014-09-14 17:55:40.556] [INFO] dateFileLog - 配置文件名不属于csv文件名的字串，开始备份.
+[2014-09-14 17:55:40.556] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 17:55:40.556] [INFO] dateFileLog - 连接pSpace成功,开始数据处理!
+[2014-09-14 17:55:40.571] [INFO] dateFileLog - 不需要转储.
+[2014-09-14 17:55:40.571] [INFO] dateFileLog - 转储完毕，开始备份文件.
+[2014-09-14 17:55:40.571] [INFO] dateFileLog - 配置文件名不属于csv文件名的字串，开始备份.
+[2014-09-14 17:55:40.571] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 17:55:40.571] [INFO] dateFileLog - 连接pSpace成功,开始数据处理!
+[2014-09-14 17:55:40.587] [INFO] dateFileLog - 不需要转储.
+[2014-09-14 17:55:40.587] [INFO] dateFileLog - 转储完毕，开始备份文件.
+[2014-09-14 17:55:40.587] [INFO] dateFileLog - 配置文件名不属于csv文件名的字串，开始备份.
+[2014-09-14 17:55:40.587] [INFO] dateFileLog - backup已经存在将备份.
+[2014-09-14 17:55:40.587] [INFO] dateFileLog - backup已经存在将备份.
+[2014-09-14 17:55:40.587] [INFO] dateFileLog - backup已经存在将备份.
+[2014-09-14 17:55:40.587] [INFO] dateFileLog - 文件备份完毕.
+[2014-09-14 17:55:40.602] [INFO] dateFileLog - 备份文件成功.
+[2014-09-14 17:55:40.602] [INFO] dateFileLog - 文件备份完毕.
+[2014-09-14 17:55:40.602] [INFO] dateFileLog - 备份文件成功.
+[2014-09-14 17:55:40.602] [INFO] dateFileLog - 删除文件状态.
+[2014-09-14 17:55:40.602] [INFO] dateFileLog - 删除文件成功.
+[2014-09-14 17:55:40.602] [INFO] dateFileLog - 文件备份完毕.
+[2014-09-14 17:55:40.602] [INFO] dateFileLog - 备份文件成功.
+[2014-09-14 17:55:40.602] [INFO] dateFileLog - 数据处理成功.
+[2014-09-14 17:55:40.602] [INFO] dateFileLog - 删除文件状态.
+[2014-09-14 17:55:40.602] [INFO] dateFileLog - 删除文件成功.
+[2014-09-14 17:55:40.602] [INFO] dateFileLog - 数据处理成功.
+[2014-09-14 17:55:40.602] [INFO] dateFileLog - 删除文件状态.
+[2014-09-14 17:55:40.602] [INFO] dateFileLog - 删除文件成功.
+[2014-09-14 17:55:40.602] [INFO] dateFileLog - 数据处理成功.
+[2014-09-14 17:55:58.018] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 17:55:58.018] [ERROR] dateFileLog - pSpace已经断开连接!
+[2014-09-14 17:56:00.120] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:56:02.242] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:56:03.880] [INFO] dateFileLog - 连接pSpace成功,开始数据处理!
+[2014-09-14 17:56:04.379] [INFO] dateFileLog - 不需要转储.
+[2014-09-14 17:56:04.379] [INFO] dateFileLog - 转储完毕，开始备份文件.
+[2014-09-14 17:56:04.379] [INFO] dateFileLog - 配置文件名不属于csv文件名的字串，开始备份.
+[2014-09-14 17:56:04.379] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 17:56:04.379] [INFO] dateFileLog - 连接pSpace成功,开始数据处理!
+[2014-09-14 17:56:04.379] [INFO] dateFileLog - 不需要转储.
+[2014-09-14 17:56:04.379] [INFO] dateFileLog - 转储完毕，开始备份文件.
+[2014-09-14 17:56:04.379] [INFO] dateFileLog - 配置文件名不属于csv文件名的字串，开始备份.
+[2014-09-14 17:56:04.379] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 17:57:55.731] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 17:57:55.734] [INFO] dateFileLog - 连接pSpace成功,开始数据处理!
+[2014-09-14 17:57:55.796] [INFO] dateFileLog - 不需要转储.
+[2014-09-14 17:57:55.796] [INFO] dateFileLog - 转储完毕，开始备份文件.
+[2014-09-14 17:57:55.796] [INFO] dateFileLog - 配置文件名不属于csv文件名的字串，开始备份.
+[2014-09-14 17:57:55.796] [INFO] dateFileLog - backup已经存在将备份.
+[2014-09-14 17:57:55.796] [INFO] dateFileLog - 文件备份完毕.
+[2014-09-14 17:57:55.796] [INFO] dateFileLog - 备份文件成功.
+[2014-09-14 17:57:55.812] [INFO] dateFileLog - 删除文件状态.
+[2014-09-14 17:57:55.812] [INFO] dateFileLog - 删除文件成功.
+[2014-09-14 17:57:55.812] [INFO] dateFileLog - 数据处理成功.
+[2014-09-14 17:58:01.755] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 17:58:01.755] [INFO] dateFileLog - 连接pSpace成功,开始数据处理!
+[2014-09-14 17:58:01.755] [INFO] dateFileLog - 不需要转储.
+[2014-09-14 17:58:01.755] [INFO] dateFileLog - 转储完毕，开始备份文件.
+[2014-09-14 17:58:01.755] [INFO] dateFileLog - 配置文件名不属于csv文件名的字串，开始备份.
+[2014-09-14 17:58:01.755] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 17:58:01.755] [INFO] dateFileLog - 连接pSpace成功,开始数据处理!
+[2014-09-14 17:58:01.771] [INFO] dateFileLog - 不需要转储.
+[2014-09-14 17:58:01.771] [INFO] dateFileLog - 转储完毕，开始备份文件.
+[2014-09-14 17:58:01.771] [INFO] dateFileLog - 配置文件名不属于csv文件名的字串，开始备份.
+[2014-09-14 17:58:01.771] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 17:58:01.771] [INFO] dateFileLog - 连接pSpace成功,开始数据处理!
+[2014-09-14 17:58:01.786] [INFO] dateFileLog - 不需要转储.
+[2014-09-14 17:58:01.786] [INFO] dateFileLog - 转储完毕，开始备份文件.
+[2014-09-14 17:58:01.786] [INFO] dateFileLog - 配置文件名不属于csv文件名的字串，开始备份.
+[2014-09-14 17:58:01.786] [INFO] dateFileLog - backup已经存在将备份.
+[2014-09-14 17:58:01.786] [INFO] dateFileLog - backup已经存在将备份.
+[2014-09-14 17:58:01.786] [INFO] dateFileLog - backup已经存在将备份.
+[2014-09-14 17:58:01.786] [INFO] dateFileLog - 文件备份完毕.
+[2014-09-14 17:58:01.786] [INFO] dateFileLog - 备份文件成功.
+[2014-09-14 17:58:01.802] [INFO] dateFileLog - 文件备份完毕.
+[2014-09-14 17:58:01.802] [INFO] dateFileLog - 备份文件成功.
+[2014-09-14 17:58:01.802] [INFO] dateFileLog - 文件备份完毕.
+[2014-09-14 17:58:01.802] [INFO] dateFileLog - 备份文件成功.
+[2014-09-14 17:58:01.802] [INFO] dateFileLog - 删除文件状态.
+[2014-09-14 17:58:01.802] [INFO] dateFileLog - 删除文件成功.
+[2014-09-14 17:58:01.802] [INFO] dateFileLog - 数据处理成功.
+[2014-09-14 17:58:01.802] [INFO] dateFileLog - 删除文件状态.
+[2014-09-14 17:58:01.802] [INFO] dateFileLog - 删除文件成功.
+[2014-09-14 17:58:01.802] [INFO] dateFileLog - 数据处理成功.
+[2014-09-14 17:58:01.802] [INFO] dateFileLog - 删除文件状态.
+[2014-09-14 17:58:01.802] [INFO] dateFileLog - 删除文件成功.
+[2014-09-14 17:58:01.802] [INFO] dateFileLog - 数据处理成功.
+[2014-09-14 17:58:16.773] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 17:58:16.773] [ERROR] dateFileLog - pSpace已经断开连接!
+[2014-09-14 17:58:18.865] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:58:20.975] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:58:23.081] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:58:25.154] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 17:58:27.410] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 17:58:27.410] [INFO] dateFileLog - 连接pSpace成功,开始数据处理!
+[2014-09-14 17:58:27.769] [INFO] dateFileLog - 不需要转储.
+[2014-09-14 17:58:27.769] [INFO] dateFileLog - 转储完毕，开始备份文件.
+[2014-09-14 17:58:27.769] [INFO] dateFileLog - 配置文件名不属于csv文件名的字串，开始备份.
+[2014-09-14 18:02:39.360] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 18:02:39.360] [INFO] dateFileLog - 连接pSpace成功,开始数据处理!
+[2014-09-14 18:02:39.407] [INFO] dateFileLog - 不需要转储.
+[2014-09-14 18:02:39.407] [INFO] dateFileLog - 转储完毕，开始备份文件.
+[2014-09-14 18:02:39.407] [INFO] dateFileLog - 配置文件名不属于csv文件名的字串，开始备份.
+[2014-09-14 18:02:39.407] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 18:02:39.407] [INFO] dateFileLog - 连接pSpace成功,开始数据处理!
+[2014-09-14 18:02:39.407] [INFO] dateFileLog - 不需要转储.
+[2014-09-14 18:02:39.407] [INFO] dateFileLog - 转储完毕，开始备份文件.
+[2014-09-14 18:02:39.407] [INFO] dateFileLog - 配置文件名不属于csv文件名的字串，开始备份.
+[2014-09-14 18:02:39.407] [INFO] dateFileLog - backup已经存在将备份.
+[2014-09-14 18:02:39.407] [INFO] dateFileLog - backup已经存在将备份.
+[2014-09-14 18:02:39.407] [INFO] dateFileLog - 文件备份完毕.
+[2014-09-14 18:02:39.407] [INFO] dateFileLog - 备份文件成功.
+[2014-09-14 18:02:39.407] [INFO] dateFileLog - 文件备份完毕.
+[2014-09-14 18:02:39.407] [INFO] dateFileLog - 备份文件成功.
+[2014-09-14 18:02:39.407] [INFO] dateFileLog - 删除文件状态.
+[2014-09-14 18:02:39.407] [INFO] dateFileLog - 删除文件成功.
+[2014-09-14 18:02:39.407] [INFO] dateFileLog - 数据处理成功.
+[2014-09-14 18:02:39.407] [INFO] dateFileLog - 删除文件状态.
+[2014-09-14 18:02:39.407] [INFO] dateFileLog - 删除文件成功.
+[2014-09-14 18:02:39.407] [INFO] dateFileLog - 数据处理成功.
+[2014-09-14 18:02:54.398] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 18:02:54.398] [ERROR] dateFileLog - pSpace已经断开连接!
+[2014-09-14 18:02:56.495] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 18:02:58.601] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 18:03:00.697] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 18:03:02.789] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 18:03:04.910] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 18:03:07.007] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 18:03:09.128] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 18:03:11.250] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 18:03:12.896] [INFO] dateFileLog - 连接pSpace成功,开始数据处理!
+[2014-09-14 18:03:13.314] [INFO] dateFileLog - 不需要转储.
+[2014-09-14 18:03:13.314] [INFO] dateFileLog - 转储完毕，开始备份文件.
+[2014-09-14 18:03:13.314] [INFO] dateFileLog - 配置文件名不属于csv文件名的字串，开始备份.
+[2014-09-14 18:03:13.364] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 18:03:13.365] [INFO] dateFileLog - 连接pSpace成功,开始数据处理!
+[2014-09-14 18:03:13.370] [INFO] dateFileLog - 不需要转储.
+[2014-09-14 18:03:13.370] [INFO] dateFileLog - 转储完毕，开始备份文件.
+[2014-09-14 18:03:13.370] [INFO] dateFileLog - 配置文件名不属于csv文件名的字串，开始备份.
+[2014-09-14 18:03:13.371] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 18:03:13.371] [INFO] dateFileLog - 连接pSpace成功,开始数据处理!
+[2014-09-14 18:03:13.376] [INFO] dateFileLog - 不需要转储.
+[2014-09-14 18:03:13.376] [INFO] dateFileLog - 转储完毕，开始备份文件.
+[2014-09-14 18:03:13.376] [INFO] dateFileLog - 配置文件名不属于csv文件名的字串，开始备份.
+[2014-09-14 18:03:13.400] [INFO] dateFileLog - backup已经存在将备份.
+[2014-09-14 18:03:13.420] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 18:03:13.421] [INFO] dateFileLog - 连接pSpace成功,开始数据处理!
+[2014-09-14 18:03:13.425] [INFO] dateFileLog - 不需要转储.
+[2014-09-14 18:03:13.425] [INFO] dateFileLog - 转储完毕，开始备份文件.
+[2014-09-14 18:03:13.425] [INFO] dateFileLog - 配置文件名不属于csv文件名的字串，开始备份.
+[2014-09-14 18:03:13.425] [INFO] dateFileLog - 文件备份完毕.
+[2014-09-14 18:03:13.425] [INFO] dateFileLog - 备份文件成功.
+[2014-09-14 18:03:13.425] [INFO] dateFileLog - backup已经存在将备份.
+[2014-09-14 18:03:13.425] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 18:03:13.426] [INFO] dateFileLog - 连接pSpace成功,开始数据处理!
+[2014-09-14 18:03:13.430] [INFO] dateFileLog - 不需要转储.
+[2014-09-14 18:03:13.430] [INFO] dateFileLog - 转储完毕，开始备份文件.
+[2014-09-14 18:03:13.430] [INFO] dateFileLog - 配置文件名不属于csv文件名的字串，开始备份.
+[2014-09-14 18:03:13.442] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 18:03:13.442] [INFO] dateFileLog - 连接pSpace成功,开始数据处理!
+[2014-09-14 18:03:13.447] [INFO] dateFileLog - 不需要转储.
+[2014-09-14 18:03:13.447] [INFO] dateFileLog - 转储完毕，开始备份文件.
+[2014-09-14 18:03:13.447] [INFO] dateFileLog - 配置文件名不属于csv文件名的字串，开始备份.
+[2014-09-14 18:03:13.448] [INFO] dateFileLog - 文件备份完毕.
+[2014-09-14 18:03:13.449] [INFO] dateFileLog - 备份文件成功.
+[2014-09-14 18:03:13.450] [INFO] dateFileLog - backup已经存在将备份.
+[2014-09-14 18:03:13.450] [INFO] dateFileLog - 删除文件状态.
+[2014-09-14 18:03:13.450] [INFO] dateFileLog - 删除文件成功.
+[2014-09-14 18:03:13.451] [INFO] dateFileLog - backup已经存在将备份.
+[2014-09-14 18:03:13.451] [INFO] dateFileLog - 数据处理成功.
+[2014-09-14 18:03:13.451] [INFO] dateFileLog - backup已经存在将备份.
+[2014-09-14 18:03:13.452] [INFO] dateFileLog - backup已经存在将备份.
+[2014-09-14 18:03:13.452] [INFO] dateFileLog - 删除文件状态.
+[2014-09-14 18:03:13.452] [INFO] dateFileLog - 删除文件成功.
+[2014-09-14 18:03:13.453] [INFO] dateFileLog - 数据处理成功.
+[2014-09-14 18:03:13.453] [INFO] dateFileLog - 文件备份完毕.
+[2014-09-14 18:03:13.453] [INFO] dateFileLog - 备份文件成功.
+[2014-09-14 18:03:13.455] [INFO] dateFileLog - 文件备份完毕.
+[2014-09-14 18:03:13.458] [INFO] dateFileLog - 备份文件成功.
+[2014-09-14 18:03:13.458] [INFO] dateFileLog - 文件备份完毕.
+[2014-09-14 18:03:13.458] [INFO] dateFileLog - 备份文件成功.
+[2014-09-14 18:03:13.458] [INFO] dateFileLog - 删除文件状态.
+[2014-09-14 18:03:13.458] [INFO] dateFileLog - 删除文件成功.
+[2014-09-14 18:03:13.459] [INFO] dateFileLog - 文件备份完毕.
+[2014-09-14 18:03:13.459] [INFO] dateFileLog - 备份文件成功.
+[2014-09-14 18:03:13.460] [ERROR] dateFileLog - 删除文件失败.
+[2014-09-14 18:03:13.460] [ERROR] dateFileLog - 数据处理失败，重新处理.
+[2014-09-14 18:03:13.460] [INFO] dateFileLog - 数据处理成功.
+[2014-09-14 18:03:13.460] [ERROR] dateFileLog - 删除文件失败.
+[2014-09-14 18:03:13.460] [ERROR] dateFileLog - 数据处理失败，重新处理.
+[2014-09-14 18:03:13.461] [ERROR] dateFileLog - 删除文件失败.
+[2014-09-14 18:03:13.461] [ERROR] dateFileLog - 数据处理失败，重新处理.
+[2014-09-14 18:03:40.441] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 18:03:40.441] [ERROR] dateFileLog - pSpace已经断开连接!
+[2014-09-14 18:03:42.562] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 18:03:44.659] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 18:03:46.780] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 18:03:48.876] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 18:03:50.968] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 18:03:53.074] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 18:03:55.170] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 18:03:57.280] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 18:03:59.402] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 18:04:01.498] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 18:04:03.620] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 18:04:05.741] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 18:04:07.916] [INFO] dateFileLog - 连接pSpace成功,开始数据处理!
+[2014-09-14 18:06:06.796] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 18:06:06.796] [INFO] dateFileLog - 连接pSpace成功,开始数据处理!
+[2014-09-14 18:06:06.874] [INFO] dateFileLog - 不需要转储.
+[2014-09-14 18:06:06.874] [INFO] dateFileLog - 转储完毕，开始备份文件.
+[2014-09-14 18:06:06.874] [INFO] dateFileLog - 配置文件名不属于csv文件名的字串，开始备份.
+[2014-09-14 18:06:06.874] [INFO] dateFileLog - backup已经存在将备份.
+[2014-09-14 18:06:06.874] [INFO] dateFileLog - 文件备份完毕.
+[2014-09-14 18:06:06.874] [INFO] dateFileLog - 备份文件成功.
+[2014-09-14 18:06:06.874] [INFO] dateFileLog - 删除文件状态.
+[2014-09-14 18:06:06.874] [INFO] dateFileLog - 删除文件成功.
+[2014-09-14 18:06:06.874] [INFO] dateFileLog - 数据处理成功.
+[2014-09-14 18:06:15.832] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 18:06:15.832] [INFO] dateFileLog - 连接pSpace成功,开始数据处理!
+[2014-09-14 18:06:15.848] [INFO] dateFileLog - 不需要转储.
+[2014-09-14 18:06:15.848] [INFO] dateFileLog - 转储完毕，开始备份文件.
+[2014-09-14 18:06:15.848] [INFO] dateFileLog - 配置文件名不属于csv文件名的字串，开始备份.
+[2014-09-14 18:06:15.848] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 18:06:15.848] [INFO] dateFileLog - 连接pSpace成功,开始数据处理!
+[2014-09-14 18:06:15.848] [INFO] dateFileLog - 不需要转储.
+[2014-09-14 18:06:15.848] [INFO] dateFileLog - 转储完毕，开始备份文件.
+[2014-09-14 18:06:15.863] [INFO] dateFileLog - 配置文件名不属于csv文件名的字串，开始备份.
+[2014-09-14 18:06:15.863] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 18:06:15.863] [INFO] dateFileLog - 连接pSpace成功,开始数据处理!
+[2014-09-14 18:06:15.863] [INFO] dateFileLog - 不需要转储.
+[2014-09-14 18:06:15.863] [INFO] dateFileLog - 转储完毕，开始备份文件.
+[2014-09-14 18:06:15.863] [INFO] dateFileLog - 配置文件名不属于csv文件名的字串，开始备份.
+[2014-09-14 18:06:15.863] [INFO] dateFileLog - backup已经存在将备份.
+[2014-09-14 18:06:15.863] [INFO] dateFileLog - backup已经存在将备份.
+[2014-09-14 18:06:15.863] [INFO] dateFileLog - backup已经存在将备份.
+[2014-09-14 18:06:15.863] [INFO] dateFileLog - 文件备份完毕.
+[2014-09-14 18:06:15.863] [INFO] dateFileLog - 备份文件成功.
+[2014-09-14 18:06:15.863] [INFO] dateFileLog - 文件备份完毕.
+[2014-09-14 18:06:15.863] [INFO] dateFileLog - 备份文件成功.
+[2014-09-14 18:06:15.863] [INFO] dateFileLog - 文件备份完毕.
+[2014-09-14 18:06:15.863] [INFO] dateFileLog - 备份文件成功.
+[2014-09-14 18:06:15.863] [INFO] dateFileLog - 删除文件状态.
+[2014-09-14 18:06:15.863] [INFO] dateFileLog - 删除文件成功.
+[2014-09-14 18:06:15.863] [INFO] dateFileLog - 数据处理成功.
+[2014-09-14 18:06:15.863] [INFO] dateFileLog - 删除文件状态.
+[2014-09-14 18:06:15.863] [INFO] dateFileLog - 删除文件成功.
+[2014-09-14 18:06:15.863] [INFO] dateFileLog - 删除文件状态.
+[2014-09-14 18:06:15.863] [INFO] dateFileLog - 删除文件成功.
+[2014-09-14 18:06:15.863] [INFO] dateFileLog - 数据处理成功.
+[2014-09-14 18:06:15.879] [INFO] dateFileLog - 数据处理成功.
+[2014-09-14 18:06:24.839] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 18:06:24.839] [ERROR] dateFileLog - pSpace已经断开连接!
+[2014-09-14 18:06:26.935] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 18:06:29.041] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 18:06:31.138] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 18:06:32.179] [INFO] dateFileLog - 连接pSpace成功,开始数据处理!
+[2014-09-14 18:06:32.410] [INFO] dateFileLog - 不需要转储.
+[2014-09-14 18:06:32.410] [INFO] dateFileLog - 转储完毕，开始备份文件.
+[2014-09-14 18:06:32.410] [INFO] dateFileLog - 配置文件名不属于csv文件名的字串，开始备份.
+[2014-09-14 18:06:32.411] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 18:06:32.411] [INFO] dateFileLog - 连接pSpace成功,开始数据处理!
+[2014-09-14 18:06:32.414] [INFO] dateFileLog - 不需要转储.
+[2014-09-14 18:06:32.414] [INFO] dateFileLog - 转储完毕，开始备份文件.
+[2014-09-14 18:06:32.414] [INFO] dateFileLog - 配置文件名不属于csv文件名的字串，开始备份.
+[2014-09-14 18:06:32.416] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 18:06:32.416] [INFO] dateFileLog - 连接pSpace成功,开始数据处理!
+[2014-09-14 18:06:32.418] [INFO] dateFileLog - 不需要转储.
+[2014-09-14 18:06:32.418] [INFO] dateFileLog - 转储完毕，开始备份文件.
+[2014-09-14 18:06:32.419] [INFO] dateFileLog - 配置文件名不属于csv文件名的字串，开始备份.
+[2014-09-14 18:06:32.419] [INFO] dateFileLog - backup已经存在将备份.
+[2014-09-14 18:06:32.419] [INFO] dateFileLog - backup已经存在将备份.
+[2014-09-14 18:06:32.420] [INFO] dateFileLog - backup已经存在将备份.
+[2014-09-14 18:06:32.421] [INFO] dateFileLog - 文件备份完毕.
+[2014-09-14 18:06:32.421] [INFO] dateFileLog - 备份文件成功.
+[2014-09-14 18:06:32.421] [INFO] dateFileLog - 文件备份完毕.
+[2014-09-14 18:06:32.421] [INFO] dateFileLog - 备份文件成功.
+[2014-09-14 18:06:32.421] [INFO] dateFileLog - 文件备份完毕.
+[2014-09-14 18:06:32.421] [INFO] dateFileLog - 备份文件成功.
+[2014-09-14 18:06:32.422] [INFO] dateFileLog - 删除文件状态.
+[2014-09-14 18:06:32.422] [INFO] dateFileLog - 删除文件成功.
+[2014-09-14 18:06:32.422] [INFO] dateFileLog - 数据处理成功.
+[2014-09-14 18:06:32.423] [INFO] dateFileLog - 删除文件状态.
+[2014-09-14 18:06:32.424] [INFO] dateFileLog - 删除文件成功.
+[2014-09-14 18:06:32.424] [INFO] dateFileLog - 删除文件状态.
+[2014-09-14 18:06:32.424] [INFO] dateFileLog - 删除文件成功.
+[2014-09-14 18:06:32.424] [INFO] dateFileLog - 数据处理成功.
+[2014-09-14 18:06:32.425] [INFO] dateFileLog - 数据处理成功.
+[2014-09-14 18:06:59.522] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 18:06:59.537] [ERROR] dateFileLog - pSpace已经断开连接!
+[2014-09-14 18:07:01.618] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 18:07:03.711] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 18:07:05.832] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 18:07:07.924] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 18:07:10.035] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 18:07:12.156] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 18:07:14.236] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 18:07:16.342] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 18:07:18.464] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 18:07:20.549] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 18:07:22.671] [ERROR] dateFileLog - connect error:  连接失败 
+[2014-09-14 18:07:24.325] [INFO] dateFileLog - 连接pSpace成功,开始数据处理!
+[2014-09-14 18:07:24.777] [INFO] dateFileLog - 不需要转储.
+[2014-09-14 18:07:24.777] [INFO] dateFileLog - 转储完毕，开始备份文件.
+[2014-09-14 18:07:24.777] [INFO] dateFileLog - 配置文件名不属于csv文件名的字串，开始备份.
+[2014-09-14 18:07:24.777] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 18:07:24.777] [INFO] dateFileLog - 连接pSpace成功,开始数据处理!
+[2014-09-14 18:07:24.777] [INFO] dateFileLog - 不需要转储.
+[2014-09-14 18:07:24.777] [INFO] dateFileLog - 转储完毕，开始备份文件.
+[2014-09-14 18:07:24.777] [INFO] dateFileLog - 配置文件名不属于csv文件名的字串，开始备份.
+[2014-09-14 18:07:24.793] [INFO] dateFileLog - 处理文件成功，开始处理数据.
+[2014-09-14 18:07:24.793] [INFO] dateFileLog - 连接pSpace成功,开始数据处理!
+[2014-09-14 18:07:24.793] [INFO] dateFileLog - 不需要转储.
+[2014-09-14 18:07:24.793] [INFO] dateFileLog - 转储完毕，开始备份文件.
+[2014-09-14 18:07:24.793] [INFO] dateFileLog - 配置文件名不属于csv文件名的字串，开始备份.
+[2014-09-14 18:07:24.793] [INFO] dateFileLog - backup已经存在将备份.
+[2014-09-14 18:07:24.793] [INFO] dateFileLog - backup已经存在将备份.
+[2014-09-14 18:07:24.793] [INFO] dateFileLog - backup已经存在将备份.
+[2014-09-14 18:07:24.793] [INFO] dateFileLog - 文件备份完毕.
+[2014-09-14 18:07:24.793] [INFO] dateFileLog - 备份文件成功.
+[2014-09-14 18:07:24.793] [INFO] dateFileLog - 删除文件状态.
+[2014-09-14 18:07:24.793] [INFO] dateFileLog - 删除文件成功.
+[2014-09-14 18:07:24.793] [INFO] dateFileLog - 数据处理成功.
+[2014-09-14 18:07:24.793] [INFO] dateFileLog - 文件备份完毕.
+[2014-09-14 18:07:24.793] [INFO] dateFileLog - 备份文件成功.
+[2014-09-14 18:07:24.793] [INFO] dateFileLog - 文件备份完毕.
+[2014-09-14 18:07:24.793] [INFO] dateFileLog - 备份文件成功.
+[2014-09-14 18:07:24.793] [INFO] dateFileLog - 删除文件状态.
+[2014-09-14 18:07:24.793] [INFO] dateFileLog - 删除文件成功.
+[2014-09-14 18:07:24.793] [INFO] dateFileLog - 数据处理成功.
+[2014-09-14 18:07:24.793] [INFO] dateFileLog - 删除文件状态.
+[2014-09-14 18:07:24.793] [INFO] dateFileLog - 删除文件成功.
+[2014-09-14 18:07:24.793] [INFO] dateFileLog - 数据处理成功.
