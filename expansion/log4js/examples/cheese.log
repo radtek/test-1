@@ -1,0 +1,10 @@
+[2014-09-12 15:49:49.605] [ERROR] console - AAArgh! Something went wrong { some: 'otherObject', useful_for: 'debug purposes' }
+[2014-09-12 15:49:49.621] [ERROR] cheese - Cheese gouda is too ripe!
+[2014-09-12 15:49:49.636] [FATAL] cheese - Cheese was breeding ground for listeria.
+[2014-09-12 16:06:07.165] [ERROR] console - AAArgh! Something went wrong { some: 'otherObject', useful_for: 'debug purposes' }
+[2014-09-12 16:06:07.180] [TRACE] cheese - Entering cheese testing
+[2014-09-12 16:06:07.180] [DEBUG] cheese - Got cheese.
+[2014-09-12 16:06:07.180] [INFO] cheese - Cheese is Gouda.
+[2014-09-12 16:06:07.180] [WARN] cheese - Cheese is quite smelly.
+[2014-09-12 16:06:07.180] [ERROR] cheese - Cheese gouda is too ripe!
+[2014-09-12 16:06:07.196] [FATAL] cheese - Cheese was breeding ground for listeria.
