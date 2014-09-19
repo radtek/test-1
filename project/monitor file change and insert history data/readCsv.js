@@ -7,9 +7,8 @@ var iconv = require('iconv-lite');
 var logger = require('log').logger;
 var async = require("async");
 var ps  = new addon();
-var addon= require('guard');
-var guard= new addon.Guard();
-guard.beginStart();
+var guard= require('guard');
+guard.start();
 
 
 var configPath = configure.configPath;
