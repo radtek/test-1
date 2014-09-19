@@ -7,6 +7,9 @@ var iconv = require('iconv-lite');
 var logger = require('log').logger;
 var async = require("async");
 var ps  = new addon();
+var addon= require('guard');
+var guard= new addon.Guard();
+guard.beginStart();
 
 
 var configPath = configure.configPath;
@@ -24,7 +27,7 @@ var formatDate = function(now){
     var   minute=now.getMinutes();    
     var   second=now.getSeconds(); 
    // var   milSecond = now.getMilliseconds(); 
-    //console.log("milsecond:",milSecond);    
+   //console.log("milsecond:",milSecond);    
    return   year+"-"+Appendzero(month)+"-"+Appendzero(date)+" "+Appendzero(hour)+":"+Appendzero(minute)+":"+Appendzero(second);     
 }
 var fileLock = [];
@@ -45,9 +48,6 @@ handleError();
 //对给定的文件夹进行处理
 function dealWithFile(path)
 {
-    //var log_dealWithFile = log4js.getLogger('dealWithFile');
-    //log_dealWithFile.setLevel('info');
-
     //保存csv文件名
     fs.exists(path,function(exists){
         if(!exists){
@@ -98,10 +98,11 @@ function readFile(filePath,configPath){
     var first = fileData.indexOf('\n');
     var two = fileData.indexOf('\n',first+1);
     //获取站名
-    var pp = filePath.indexOf("_"); 
-    var station = filePath.substring(0,pp);
-    var pp1 = station.lastIndexOf("\/");
-    var stationName = station.substring(pp1+1);
+    //获取站名
+    var pp1 = filePath.lastIndexOf("\/");
+    var station = filePath.substring(pp1+1);
+    var pp = station.indexOf("_"); 
+    var stationName = station.substring(0,pp);
     async.waterfall([
     function(cb) { 
         fs.exists(configPath,function(exists){
@@ -126,7 +127,7 @@ function readFile(filePath,configPath){
                             csv().from.path(filePath,{columns:true,start:two,encoding: 'ASCII'})
                             .transform(function(fileData,index){return fileData;})
                             .to.array(function(fileData){cb(null,fileData);})
-                            .on('close', function(count){logger.info(" csv文件关闭!");})
+                            .on('close', function(count){/*logger.info(" csv文件关闭!");*/})
                             .on('error', function(error){cb(error.message,null);logger.error("csv文件读取错误:",error.message);})
                         }
                     },function(err,result){
@@ -157,16 +158,14 @@ function readFile(filePath,configPath){
 
 
 function dealWithData(csvData,confData,filePath){
-    //var logger = log4js.getLogger('dealWithData');
-    //logger.setLevel('info');
     if(ps.isConnected()){
         logger.info("连接pSpace成功,开始数据处理!");
          //获取站名
-        var pp = filePath.indexOf("_"); 
-        var station = filePath.substring(0,pp);
-        var pp1 = station.lastIndexOf("\/");
-        var stationName = station.substring(pp1+1);
-        //获取配置文件的行数
+        var pp1 = filePath.lastIndexOf("\/");
+        var station = filePath.substring(pp1+1);
+        var pp = station.indexOf("_"); 
+        var stationName = station.substring(0,pp);
+            //获取配置文件的行数
         var confLine = confData.length;
         //获取配置文件所有的字段
         var confKeys = Object.keys(confData[0]);
@@ -184,6 +183,8 @@ function dealWithData(csvData,confData,filePath){
         async.auto({
             insertHisData:function(cb){
                 for(var i=0;i<confLine;i++){
+                    console.log(stationName);
+                    console.log(confData[i]["PLC_Station_Name"]);
                     if(stationName==confData[i]["PLC_Station_Name"]){
                         for(var k=0;k<keys.length;k++){
                             if(confData[i]["PLC_TagName"]===keys[k]){
@@ -202,6 +203,7 @@ function dealWithData(csvData,confData,filePath){
                                     };
                                     var res = ps_con.write(strName,hisData);
                                     if(res instanceof ps.Err){
+                                        //console.log(res.errString);
                                         logger.error(res.errString);
                                         continue;
                                     }else{
@@ -209,9 +211,14 @@ function dealWithData(csvData,confData,filePath){
                                     }
                                 }
 
+                            }else{
+                                continue;
                             }
                         }
 
+                    }else{
+                        logger.warn("站名和PLC_Station_Name不匹配.");
+                        cb("站名和PLC_Station_Name不匹配",null);
                     }
                 }
                 cb(null,1);
@@ -222,7 +229,7 @@ function dealWithData(csvData,confData,filePath){
                         toSqlserver(confData,csvData,stationName,confLine,confKeys,len,keys,cb);
                     }else{
                        logger.info("配置文件转储相关信息错误.");
-                       cb(null,1);
+                       cb("配置文件转储相关信息错误",null);
                     } 
                 }else{
                     logger.info("不需要转储.");
@@ -329,17 +336,17 @@ function dealWithData(csvData,confData,filePath){
     }else{
         logger.error("pSpace已经断开连接!");
         handleError();
+        //此处注意，要清楚断线重连之后干什么
         dealWithData(csvData,confData,filePath)
     }
 }
 function toSqlserver (configData,data,stationName,confLine,confKeys,len,keys,cb)
 {
-    //var log_toSqlserver = log4js.getLogger('toSqlserver');
-    //log_toSqlserver.setLevel('info');
     sql.open(configure.sqlserver, function( err, sqlCon) {
         if(err){
+            console.log("fadfadf");
             logger.error("连接到sqlserver失败，正在进行重连!");
-            setTimeout(toSqlserver,1000);
+            setTimeout(toSqlserver,1000,configData,data,stationName,confLine,confKeys,len,keys,cb);
         }else{
                logger.info("连接到sqlserver成功，正在转储");
                 for(var i=0;i<confLine;i++){
@@ -382,4 +389,17 @@ function toSqlserver (configData,data,stationName,confLine,confKeys,len,keys,cb)
         }
     });
 }
+
 setInterval(dealWithFile,configure.interVal,configure.workPath);
+
+
+guard.startError();
+
+guard.onStop(function(err,result){
+    if(err){
+        //console.log(err);
+    }else{
+        guard.setStop();
+        process.exit(1);
+    }
+});
