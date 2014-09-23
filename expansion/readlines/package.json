@@ -1,0 +1,49 @@
+{
+  "name": "readlines",
+  "version": "0.0.8",
+  "description": "Read file line as array",
+  "main": "./index.js",
+  "bin": {
+    "readlines": "./bin/readlines"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "test": "make test-all"
+  },
+  "dependencies": {
+    "commander": "*"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "should": "*",
+    "travis-cov": "*",
+    "blanket": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/booxood/readlines.git"
+  },
+  "keywords": [
+    "readfile",
+    "readlines",
+    "readline"
+  ],
+  "author": {
+    "name": "liucw"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/booxood/readlines/issues"
+  },
+  "readme": "# Readlines\n\n\n[![Build Status](https://travis-ci.org/booxood/readlines.png?branch=master)](https://travis-ci.org/booxood/readlines)\n\nRead file line as array.\n\n## Install\n\n```\nnpm install readlines\n\nor\n\nnpm install -g readlines\n```\n\nExample:\n```javascript\n  var fd = require('readlines');\n  var lines = fd.readlinesSync('example.txt');\n  for(var line in lines){\n    console.log(lines[line]);\n  };\n```\n\n\n## API\n\n### readlinesSync(filename, [options])\nSync read file by line return an array.\n```javascript\n  var lines = fd.readlinesSync(filePath);\n```\n\n### readlines(filename, [options], callback)\n**Async** read file by line return an array.\n```javascript\n  fd.readlines(filePath, function(err, lines){\n      console.log(lines);\n  });\n```\n\n### readlineSync(filename, [options], lineNum)\nSync read file by line return specific line.\n```javascript\n  var line = fd.readlinSync(filePath, 3);\n```\n\n### readline(filename, [options], lineNum, callback)\n**Async** read file by line return specific line.\n```javascript\n  fd.readline(filePath, 3, function(err, line){\n      console.log(line);\n  });\n```\n\n## License\n[The MIT License](https://github.com/booxood/readlines/blob/master/LICENSE)\n\n  \n",
+  "readmeFilename": "README.md",
+  "_id": "readlines@0.0.8",
+  "dist": {
+    "shasum": "bbd44e047c18b6ddea7b5dbd8fe26ed3f546b34f"
+  },
+  "_from": "readlines@",
+  "_resolved": "https://registry.npmjs.org/readlines/-/readlines-0.0.8.tgz"
+}
