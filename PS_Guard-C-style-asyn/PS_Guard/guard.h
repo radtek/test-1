@@ -14,5 +14,11 @@ using namespace std;
 	return ThrowException(Exception::TypeError(String::New("Argument " #I " must be a function")));  \
 	Local<Function> VAR = Local<Function>::Cast(args[I]);
 
+Local<Function> cb;
+struct Baton{
+	bool isStop;
+	Local<Function> cb;
+}baton={false,cb};
+
 
 #endif
