@@ -4,12 +4,11 @@ var addon = require('pSpace');
 var configure = require('configure');
 var sql = require('msnodesql');
 var iconv = require('iconv-lite');
-var logger = require('log').logger;
+var logger = require('log').initLog(__dirname);;
 var async = require("async");
 var ps  = new addon();
 var guard= require('guard');
 guard.start();
-
 
 var configPath = configure.configPath;
 var ps_con;
@@ -173,17 +172,17 @@ function dealWithData(csvData,confData,filePath){
         //获取csv文件所有的字段
         var keys = Object.keys(csvData[0]);
         //filePath = filePath.replace(/[\\]/g,"/");
-        //文件数据
-        var fileData = fs.readFileSync(filePath, 'ASCII');
         //如果配置文件名和csv文件名相同，不处理此文件，跳出这个函数return
         if(configPath==filePath){
             return;
         }
+        //文件数据
+        var fileData = fs.readFileSync(filePath, 'ASCII');
+        
         async.auto({
             insertHisData:function(cb){
+                var isExec = false;
                 for(var i=0;i<confLine;i++){
-                    console.log(stationName);
-                    console.log(confData[i]["PLC_Station_Name"]);
                     if(stationName==confData[i]["PLC_Station_Name"]){
                         for(var k=0;k<keys.length;k++){
                             if(confData[i]["PLC_TagName"]===keys[k]){
@@ -193,6 +192,7 @@ function dealWithData(csvData,confData,filePath){
                                 tagLongName = tagLongName.replace(/[\\]/g,"/")+".his.insertReplace";
                                 var buf = new Buffer(tagLongName, 'binary');
                                 var strName = iconv.decode(buf, 'gbk');
+                                isExec = true;
                                 //将数据一条一条的插入
                                 for(var s=0;s<len;s++){
                                     var hisData = {
@@ -218,9 +218,16 @@ function dealWithData(csvData,confData,filePath){
                     }else{
                         logger.warn("站名和PLC_Station_Name不匹配.");
                         cb("站名和PLC_Station_Name不匹配",null);
+                        //continue;
                     }
                 }
-                cb(null,1);
+                if(isExec){
+                   cb(null,1); 
+               }else{
+                    logger.warn('跳过此文件');
+                    cb("配置文件不匹配",null);
+               }
+                
             },
             toSqlServer:["insertHisData",function(cb){
                 if(configure.isSaveToSql){
@@ -343,7 +350,6 @@ function toSqlserver (configData,data,stationName,confLine,confKeys,len,keys,cb)
 {
     sql.open(configure.sqlserver, function( err, sqlCon) {
         if(err){
-            console.log("fadfadf");
             logger.error("连接到sqlserver失败，正在进行重连!");
             setTimeout(toSqlserver,1000,configData,data,stationName,confLine,confKeys,len,keys,cb);
         }else{
@@ -398,7 +404,7 @@ guard.onStop(function(err,result){
     if(err){
         //console.log(err);
     }else{
-        guard.setStop();
+        //guard.setStop();
         process.exit(1);
     }
 });
