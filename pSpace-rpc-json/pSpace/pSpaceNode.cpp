@@ -5860,8 +5860,9 @@ void PspaceNode::batchReadWork(uv_work_t* req)
 		if(t->psNode->hHanle_ == PSHANDLE_UNUSED) {
 			throw PsException("Connection already closed");
 		}else{
+			PSUINT32 *tagIDs = *(t->getTagIDList(t->tagName_,t->psNode->hHanle_,t->tagCount_));
 			nRet = psAPI_Real_ReadList(t->psNode->hHanle_, t->tagCount_, 
-										*(t->getTagIDList(t->tagName_,t->psNode->hHanle_,t->tagCount_)), 
+										tagIDs, 
 										&(t->realData_), &pAPIErrors);
 			if ( PSERR(nRet) )
 			{
@@ -5870,6 +5871,7 @@ void PspaceNode::batchReadWork(uv_work_t* req)
 				//std::cout<<t->errString->c_str()<<std::endl;
 			}
 			//std::cout<<(t->realData_+1)->Value.Double<<std::endl;
+			psAPI_Memory_FreeAndNull((PSVOID**)&tagIDs);
 			psAPI_Memory_FreeAndNull((PSVOID**)&pAPIErrors);
 		}	
 	}catch(PsException &ex) {
@@ -5997,7 +5999,7 @@ Handle<Value> PspaceNode::batRealReadSyn(const Arguments& args)
 	PspaceNode* ps = ObjectWrap::Unwrap<PspaceNode>(args.This());
 	BatchBaton* bat;
 	try {
-		Handle<Object> robj = Object::New();
+		//Handle<Object> robj = Object::New();
 		bat = new BatchBaton(ps,NULL);
 		REQ_ARRAY_ARG(0,tagArr);
 		bat->tagCount_ = tagArr->Length();
@@ -6008,10 +6010,13 @@ Handle<Value> PspaceNode::batRealReadSyn(const Arguments& args)
 			const char* IDStr = ToCString(iStr);
 			std::vector<std::string> result=split(IDStr,".");
 			//bat->tagName_[i] = (PSSTR)replace_all(result[0],"/","\\").c_str();
-			const char* str = replace_all(result[0],"/","\\").c_str();
+			string utf8Name = UTF8ToGBK(replace_all(result[0],"/","\\"));
+			const char* str = utf8Name.c_str();
+			//std::cout<<"str:"<<str<<std::endl;
 			bat->tagName_[i] = new char[strlen(str)+1];
 			strcpy(bat->tagName_[i],str);
 			bat->tagName_[i][strlen(bat->tagName_[i])] = 0;
+
 		}
 		uv_work_t* req = new uv_work_t();
 		req->data = bat;
@@ -6023,8 +6028,10 @@ Handle<Value> PspaceNode::batRealReadSyn(const Arguments& args)
 			Local<Object> errObj = Error::newObj();
 			errObj->Set(String::New("code"),Number::New(bat->code_));
 			errObj->Set(String::New("errString"),String::New(GBKToUtf8(bat->errString->c_str())));
+			free(req->loop);
+			delete req;
 			delete bat;
-			return errObj;
+			return scope.Close(errObj);
 		}
 		//  ³É¹¦
 		Local<Array> arrObj = Array::New(bat->tagCount_);
@@ -6032,10 +6039,13 @@ Handle<Value> PspaceNode::batRealReadSyn(const Arguments& args)
 		{
 			arrObj->Set(n,getRealObj(bat->realData_+n));		
 		}
-
+		//delete req->data;
+		free(req->loop);
+		delete req;
 		delete bat;
 		return scope.Close(arrObj);
 	} catch(PsException &ex) {
+		delete bat;
 		return ThrowException(Exception::Error(String::New(ex.what())));
 	}	
 }

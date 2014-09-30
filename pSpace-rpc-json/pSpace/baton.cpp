@@ -892,6 +892,7 @@ TagHis::TagHis(PspaceNode* psNode,v8::Handle<v8::Function>* callback)
 }
 TagHis::~TagHis()
 {
+	
 	delete []pTimeStamps_;
 	delete []pQualities_;
 	delete []tagIds_;
@@ -949,14 +950,22 @@ BatchBaton::BatchBaton(PspaceNode* psNode,v8::Handle<v8::Function>* callback)
 }
 BatchBaton::~BatchBaton()
 {
-	//delete []tagID_;
+	
 	delete []dataValues_;
+	
+	for (int i=0;i<this->tagCount_;i++)
+	{
+		delete []tagName_[i];
+		
+	}
 	delete []qualitys_;
 	delete []tagName_;
+	
 	delete errString;
 	if (timeStamps_!=NULL)
 	{
 		delete []timeStamps_;
+		
 	}
 	psAPI_Memory_FreeDataList(&realData_, tagCount_);
 	callback.Dispose();
