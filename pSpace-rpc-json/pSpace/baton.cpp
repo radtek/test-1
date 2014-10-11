@@ -606,6 +606,10 @@ SubBaton::SubBaton(PspaceNode* psNode,v8::Handle<v8::Function>* callback)
 }
 SubBaton::~SubBaton()
 {
+	for (int i=0;i<this->tagCount_;i++)
+	{
+		delete []tagName_[i];
+	}
 	delete []tagName_;
 	uv_timer_stop(timer);
 	if (subData_!=NULL)
