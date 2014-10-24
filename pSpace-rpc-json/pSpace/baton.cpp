@@ -49,16 +49,13 @@ PSUINT32** Baton::getTagIDList(PSSTR *tagNames,PSHANDLE h,int tagCount)
 	PSAPIStatus *pAPIErrors = PSNULL;
 	PSUINT32 *pTagIds = PSNULL;
 	nRet = psAPI_Tag_GetIdListByLongName(h, tagCount, tagNames, &pTagIds, &pAPIErrors);
-	
-	
+
 	if (PSERR(nRet))
 	{
 		
 		psAPI_Memory_FreeAndNull((PSVOID**)&pAPIErrors);
 		return NULL;
 	}
-	
-
 	psAPI_Memory_FreeAndNull((PSVOID**)&pAPIErrors);
 	for (int i=0;i<tagCount;i++)
 	{

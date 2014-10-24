@@ -66,6 +66,35 @@ int PS_VARIANT2INT(const PS_VARIANT &var)
 	}
 	return intRet;
 }
+
+int64_t PS_VARIANT2INT64(const PS_VARIANT &var)
+{
+	int intRet = 0;
+	switch (var.DataType)
+	{
+	case PSDATATYPE_INT64 :
+		intRet = var.Int64;
+		break;
+	case PSDATATYPE_INT8 :
+	case PSDATATYPE_INT16 :
+	case PSDATATYPE_INT32 :	
+	case PSDATATYPE_UINT8 :
+	case PSDATATYPE_UINT32 :
+	case PSDATATYPE_UINT16 :
+	case PSDATATYPE_DOUBLE :
+	case PSDATATYPE_FLOAT:
+	case PSDATATYPE_BOOL: 
+	case PSDATATYPE_UINT64 :
+	case PSDATATYPE_TIME :		
+	case PSDATATYPE_STRING:
+	case PSDATATYPE_WSTRING:
+	case PSDATATYPE_BLOB:
+	default:
+		break;
+	}
+	return intRet;
+
+}
 unsigned int PS_VARIANT2UINT(const PS_VARIANT &var)
 {
 	unsigned int uintRet = 0;
@@ -415,18 +444,24 @@ void V8DATE2PSTIME(PS_TIME* d,v8::Handle<Value> dateVal)
 		return;
 	}
 	SYSTEMTIME s ;
-	v8date_to_systemtime(dateVal,&s);
-	d->Second = 0;
+	Local<Date> number = Date::Cast(*dateVal);
+	long long  num = number->NumberValue();
+	long long sec = num/1000;
+	//long long mmin = sec/60;
+	
+	//v8date_to_systemtime(dateVal,&s);
+	d->Second =sec;
 	d->Millisec = 0;
-	d->Millisec=(PSUINT32)s.wMilliseconds;
-	tm tm_struct;
+	d->Millisec=(PSUINT32)(num-sec*1000);
+	/*tm tm_struct;
 	tm_struct.tm_mon=s.wMonth-1;
 	tm_struct.tm_mday=s.wDay;
 	tm_struct.tm_hour=s.wHour+8;
 	tm_struct.tm_min=s.wMinute;
 	tm_struct.tm_sec=s.wSecond;
 	tm_struct.tm_year=s.wYear-1900;
-	d->Second= (PSUINT32)mktime(&tm_struct);
+	std::cout<<PSTIME2STR(*d)<<std::endl;*/
+	//d->Second= (PSUINT32)mktime(&tm_struct);
 }
 
 Handle<Value> PSTIME2V8DATE(PS_TIME d)
@@ -434,7 +469,7 @@ Handle<Value> PSTIME2V8DATE(PS_TIME d)
 	time_t tick;
 	struct tm tm;
 	tick = d.Second;
-	tm = *localtime(&tick);
+	/*tm = *localtime(&tick);
 	SYSTEMTIME st;
 	st.wYear = tm.tm_year+1900;
 	st.wMonth = tm.tm_mon+1;
@@ -442,8 +477,9 @@ Handle<Value> PSTIME2V8DATE(PS_TIME d)
 	st.wHour = tm.tm_hour-8;
 	st.wMinute = tm.tm_min;
 	st.wSecond = tm.tm_sec;
-	st.wMilliseconds = d.Millisec;
-	return systemtime_to_v8date(&st);
+	st.wMilliseconds = d.Millisec;*/
+	return v8::Date::New((double)(tick*1000+d.Millisec));
+	//return systemtime_to_v8date(&st);
 }
 
 Local<Object> getRealObj(PS_DATA *psData)
@@ -461,6 +497,7 @@ Local<Object> getRealObj(PS_DATA *psData)
 	case PSDATATYPE_INT64 :
 		robj->Set(String::New("value"),Int32::New(PS_VARIANT2INT(psData->Value)));
 		break;
+		//robj->Set(String::New("value"),)
 	case PSDATATYPE_UINT64 :
 	case PSDATATYPE_UINT8 :
 	case PSDATATYPE_UINT32 :

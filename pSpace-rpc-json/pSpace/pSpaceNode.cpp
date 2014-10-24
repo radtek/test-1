@@ -769,7 +769,7 @@ void PspaceNode::subValueWork(uv_work_t* req)
 			if (tagIDs==NULL)
 			{
 				sbton->code_ = -1;
-				sbton->errString = new std::string("测点不存在或参数错误!");
+				sbton->errString = new std::string("有测点不存在或参数错误!");
 			}else{
 				nRet = psAPI_Real_NewSubscribeAndRead(sbton->psNode->hHanle_, sbton->tagCount_, 
 					tagIDs,sbton->Real_CallbackFunction, (PSVOID*)nNewSubscribe++, &nSubscribeID, &(sbton->subData_), &pAPIErrors);
@@ -859,7 +859,6 @@ void PspaceNode::aftersubValue(uv_work_t* req, int status)
 		argv[3] = Undefined();
 		node::MakeCallback(Context::GetCurrent()->Global(), sbaton->callback, 4, argv);
 	}
-	
 	delete sbaton;
 	
 }
@@ -5866,6 +5865,7 @@ void PspaceNode::batchReadWork(uv_work_t* req)
 			throw PsException("Connection already closed");
 		}else{
 			PSUINT32 *tagIDs = *(t->getTagIDList(t->tagName_,t->psNode->hHanle_,t->tagCount_));
+			
 			nRet = psAPI_Real_ReadList(t->psNode->hHanle_, t->tagCount_, 
 										tagIDs, 
 										&(t->realData_), &pAPIErrors);
