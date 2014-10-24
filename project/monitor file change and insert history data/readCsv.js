@@ -44,7 +44,7 @@ handleError();
 
 
 //对给定的文件夹进行处理
-function dealWithFile(path)
+function dealWithFile(path,sqlCon)
 {
     //保存csv文件名
     fs.exists(path,function(exists){
@@ -73,7 +73,7 @@ function dealWithFile(path)
                         if(stats.isFile() && fileLock[files[i]]===undefined){
                             //设置文件正在被处理
                             fileLock[files[i]] = true;
-                            readFile(files[i],configPath);
+                            readFile(files[i],configPath,sqlCon);
                            
                         }else{
                                 continue;
@@ -88,7 +88,7 @@ function dealWithFile(path)
 }
 
 
-function readFile(filePath,configPath){
+function readFile(filePath,configPath,sqlCon){
     //var log_readFile = log4js.getLogger('readFile');
     //log_readFile.setLevel('info');
     //计算文件第三行的起始位置
@@ -97,10 +97,10 @@ function readFile(filePath,configPath){
     var two = fileData.indexOf('\n',first+1);
     //获取站名
     //获取站名
-    var pp1 = filePath.lastIndexOf("\/");
-    var station = filePath.substring(pp1+1);
-    var pp = station.indexOf("_"); 
-    var stationName = station.substring(0,pp);
+    //var pp1 = filePath.lastIndexOf("\/");
+    //var station = filePath.substring(pp1+1);
+    //var pp = station.indexOf("_"); 
+    //var stationName = station.substring(0,pp);
     async.waterfall([
     function(cb) { 
         fs.exists(configPath,function(exists){
@@ -149,20 +149,31 @@ function readFile(filePath,configPath){
             //readFile(filePath,configPath);
         }else{
            logger.info("处理文件成功，开始处理数据."); 
-           dealWithData(csvData,confData,filePath);
+           dealWithData(csvData,confData,filePath,sqlCon);
         }
     });
 }
 
 
-function dealWithData(csvData,confData,filePath){
+function dealWithData(csvData,confData,filePath,sqlCon){
     if(ps.isConnected()){
         logger.info("连接pSpace成功,开始数据处理!");
          //获取站名
         var pp1 = filePath.lastIndexOf("\/");
         var station = filePath.substring(pp1+1);
-        var pp = station.indexOf("_"); 
-        var stationName = station.substring(0,pp);
+
+        var stationName='';
+        if(filePath.indexOf('_bak_')>=0){
+            var first_ = station.indexOf('_');
+            var two_ = station.indexOf('_',first_+1);
+            stationName = station.substring(0,two_);
+            //console.log(stationName);
+        }else{
+            
+            var pp = station.indexOf("_"); 
+            stationName = station.substring(0,pp);
+            //console.log(stationName);
+        }
             //获取配置文件的行数
         var confLine = confData.length;
         //获取配置文件所有的字段
@@ -216,9 +227,9 @@ function dealWithData(csvData,confData,filePath){
                         }
 
                     }else{
-                        logger.warn("站名和PLC_Station_Name不匹配.");
-                        cb("站名和PLC_Station_Name不匹配",null);
-                        //continue;
+                        logger.trace("站名和PLC_Station_Name不匹配.");
+                        //cb("站名和PLC_Station_Name不匹配",null);
+                        continue;
                     }
                 }
                 if(isExec){
@@ -232,7 +243,7 @@ function dealWithData(csvData,confData,filePath){
             toSqlServer:["insertHisData",function(cb){
                 if(configure.isSaveToSql){
                     if(confData[0].hasOwnProperty("table_Name") && confData[0].hasOwnProperty("sql_TagName")){
-                        toSqlserver(confData,csvData,stationName,confLine,confKeys,len,keys,cb);
+                        toSqlserver(confData,csvData,stationName,confLine,confKeys,len,keys,sqlCon,cb);
                     }else{
                        logger.info("配置文件转储相关信息错误.");
                        cb("配置文件转储相关信息错误",null);
@@ -261,14 +272,14 @@ function dealWithData(csvData,confData,filePath){
                                         createBackupFile:function(cb21){
                                             fs.mkdir(dirPath+"\/backup",function(err){
                                                 if(err){
-                                                    cb21("创建backup错误",null);
+                                                    cb21(err,null);
                                                 }else{
                                                     cb21(null,1);
                                                 }
                                             });
                                         },
                                         backupFIle:function(cb22){
-                                            log.info("backup创建完毕，将备份.");
+                                            logger.info("backup创建完毕，将备份.");
                                             //console.log(csvData);
                                             fs.writeFile(dirPath+"\/backup"+"\/"+fileName,fileData, function(err){ 
                                                 if(err){
@@ -300,7 +311,7 @@ function dealWithData(csvData,confData,filePath){
                         }
                         ], function (err, result) {
                             if(err){
-                                logger.error("备份文件错误。");
+                                logger.error("备份文件错误:",err);
                                  cb("备份文件错误",null);
                             }else{
                                logger.info("备份文件成功."); 
@@ -346,60 +357,69 @@ function dealWithData(csvData,confData,filePath){
         dealWithData(csvData,confData,filePath)
     }
 }
-function toSqlserver (configData,data,stationName,confLine,confKeys,len,keys,cb)
+function toSqlserver (configData,data,stationName,confLine,confKeys,len,keys,sqlCon,cb)
 {
-    sql.open(configure.sqlserver, function( err, sqlCon) {
-        if(err){
-            logger.error("连接到sqlserver失败，正在进行重连!");
-            setTimeout(toSqlserver,1000,configData,data,stationName,confLine,confKeys,len,keys,cb);
-        }else{
-               logger.info("连接到sqlserver成功，正在转储");
-                for(var i=0;i<confLine;i++){
-                    if(stationName==configData[i]["PLC_Station_Name"]){
-                        for(var k=0;k<keys.length;k++){
-                            for(var s=0;s<len;s++){
-                                if(configData[i]["PLC_TagName"]===keys[k]){ 
-                                    var tableName = configData[i]["table_Name"];
-                                    (function(idx,idx1,idx2){
-                                        sqlCon.queryRaw("if OBJECT_ID ('"+tableName+"') is null create table ["+tableName+"](Time datetime,tagName nvarchar(255),PV float);",function(err,res){
-                                        if(err){
-                                             logger.error("judge error:",err);
-                                        }else{
-                                            var sqlStr = "INSERT INTO "+tableName+ "(Time,tagName,PV) VALUES ";
-                                            var time = new Date(data[idx]["Time"]);
-                                            var str = formatDate(time);
-                                            var strTime = "'"+str+"'";
-                                            var sql_TagName = "'"+configData[idx1]["sql_TagName"]+"'";
-                                            var val = strTime+","+sql_TagName+","+data[idx][keys[idx2]];
-                                            sqlStr += "("+val+")";
-                                            sqlStr = sqlStr + ";";
-                                            //console.log(sqlStr);
-                                            sqlCon.queryRaw(sqlStr, function(err) {
-                                                if(err){
-                                                    logger.error("exec sql error:",err);
-                                                }else{
-                                                    //转储成功一条数据
-                                                    //console.log("succeed");
-                                                }   
-                                            });
-                                        }
-                                    });
-                                    })(s,i,k);
-                                }
+   logger.info("连接到sqlserver成功，正在转储");
+    for(var i=0;i<confLine;i++){
+        if(stationName==configData[i]["PLC_Station_Name"]){
+            for(var k=0;k<keys.length;k++){
+                for(var s=0;s<len;s++){
+                    if(configData[i]["PLC_TagName"]===keys[k]){ 
+                        var tableName = configData[i]["table_Name"];
+                        (function(idx,idx1,idx2){
+                            sqlCon.queryRaw("if OBJECT_ID ('"+tableName+"') is null create table ["+tableName+"](Time datetime,tagName nvarchar(255),PV float);",function(err,res){
+                            if(err){
+                                 logger.error("judge error:",err);
+                            }else{
+                                var sqlStr = "INSERT INTO "+tableName+ "(Time,tagName,PV) VALUES ";
+                                var time = new Date(data[idx]["Time"]);
+                                var str = formatDate(time);
+                                var strTime = "'"+str+"'";
+                                var sql_TagName = "'"+configData[idx1]["sql_TagName"]+"'";
+                                var val = strTime+","+sql_TagName+","+data[idx][keys[idx2]];
+                                sqlStr += "("+val+")";
+                                sqlStr = sqlStr + ";";
+                                //console.log(sqlStr);
+                                sqlCon.queryRaw(sqlStr, function(err) {
+                                    if(err){
+                                        logger.error("exec sql error:",err);
+                                    }else{
+                                        //转储成功一条数据
+                                        //console.log("succeed");
+                                    }   
+                                });
                             }
-                        }
+                        });
+                        })(s,i,k);
                     }
                 }
-                cb(null,1);
+            }
         }
-    });
+    }
+    cb(null,1);
+
 }
 
-setInterval(dealWithFile,configure.interVal,configure.workPath);
+function main(){
+    if(configure.isSaveToSql){
+        sql.open(configure.sqlserver, function( err, sqlCon) {
+            if(err){
+                logger.error("连接到sqlserver失败，正在进行重连!");
+                setTimeout(main,1000);
+            }else{
+                dealWithFile(configure.workPath,sqlCon);
+                setInterval(dealWithFile,configure.interVal,configure.workPath,sqlCon);  
+            }
+        });
+    }else{
+        var sqlCon = undefined;
+        dealWithFile(configure.workPath,sqlCon);
+        setInterval(dealWithFile,configure.interVal,configure.workPath,sqlCon);
+    }
+}
 
-
+main();
 guard.startError();
-
 guard.onStop(function(err,result){
     if(err){
         //console.log(err);
