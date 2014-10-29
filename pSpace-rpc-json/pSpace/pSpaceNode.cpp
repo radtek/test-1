@@ -761,7 +761,7 @@ void PspaceNode::subValueWork(uv_work_t* req)
 		}else{ 
 			PSAPIStatus *pAPIErrors = PSNULL;
 			PSUINT32 nSubscribeID = 0;
-			static PSUINT32 nNewSubscribe = 0;
+			//static PSUINT32 nNewSubscribe = 0;
 			PSAPIStatus nRet = PSRET_OK;
 			//PSUINT32 **tagID = sbton->getTagIDList(sbton->tagName_,sbton->psNode->hHanle_,sbton->tagCount_);
 			PSUINT32 *tagIDs = *(sbton->getTagIDList(sbton->tagName_,sbton->psNode->hHanle_,sbton->tagCount_));
@@ -772,12 +772,13 @@ void PspaceNode::subValueWork(uv_work_t* req)
 				sbton->errString = new std::string("有测点不存在或参数错误!");
 			}else{
 				nRet = psAPI_Real_NewSubscribeAndRead(sbton->psNode->hHanle_, sbton->tagCount_, 
-					tagIDs,sbton->Real_CallbackFunction, (PSVOID*)nNewSubscribe++, &nSubscribeID, &(sbton->subData_), &pAPIErrors);
+					tagIDs,sbton->Real_CallbackFunction, (PSVOID*)0, &nSubscribeID, &(sbton->subData_), &pAPIErrors);
 				if (PSERR(nRet) && nRet != PSERR_FAIL_IN_BATCH)
 				{
 					psAPI_Memory_FreeAndNull((PSVOID**)&tagIDs);
 					sbton->code_ = nRet;
 					sbton->errString = new std::string(psAPI_Commom_GetErrorDesc(nRet));
+					psAPI_Memory_FreeAndNull((PSVOID**)&tagIDs);
 				} 
 				if (nRet == PSERR_FAIL_IN_BATCH)
 				{

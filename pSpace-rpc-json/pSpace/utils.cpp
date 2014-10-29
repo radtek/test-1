@@ -443,43 +443,15 @@ void V8DATE2PSTIME(PS_TIME* d,v8::Handle<Value> dateVal)
 		d->Second=0;
 		return;
 	}
-	SYSTEMTIME s ;
 	Local<Date> number = Date::Cast(*dateVal);
 	long long  num = number->NumberValue();
-	long long sec = num/1000;
-	//long long mmin = sec/60;
-	
-	//v8date_to_systemtime(dateVal,&s);
-	d->Second =sec;
-	d->Millisec = 0;
-	d->Millisec=(PSUINT32)(num-sec*1000);
-	/*tm tm_struct;
-	tm_struct.tm_mon=s.wMonth-1;
-	tm_struct.tm_mday=s.wDay;
-	tm_struct.tm_hour=s.wHour+8;
-	tm_struct.tm_min=s.wMinute;
-	tm_struct.tm_sec=s.wSecond;
-	tm_struct.tm_year=s.wYear-1900;
-	std::cout<<PSTIME2STR(*d)<<std::endl;*/
-	//d->Second= (PSUINT32)mktime(&tm_struct);
+	d->Second =num/1000;
+	d->Millisec=(PSUINT32)(num%1000);
 }
 
 Handle<Value> PSTIME2V8DATE(PS_TIME d)
 {
-	time_t tick;
-	struct tm tm;
-	tick = d.Second;
-	/*tm = *localtime(&tick);
-	SYSTEMTIME st;
-	st.wYear = tm.tm_year+1900;
-	st.wMonth = tm.tm_mon+1;
-	st.wDay = tm.tm_mday;
-	st.wHour = tm.tm_hour-8;
-	st.wMinute = tm.tm_min;
-	st.wSecond = tm.tm_sec;
-	st.wMilliseconds = d.Millisec;*/
-	return v8::Date::New((double)(tick*1000+d.Millisec));
-	//return systemtime_to_v8date(&st);
+	return v8::Date::New((double)(d.Second)*1000+d.Millisec%1000);
 }
 
 Local<Object> getRealObj(PS_DATA *psData)
