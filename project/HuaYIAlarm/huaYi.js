@@ -10,19 +10,41 @@ var ps  = new addon();
 var guard= require('guard');
 guard.start();
 
+var intervalID = undefined;
+var isFirstExec = true;
 //
 var ps_con = new Object();
 var data = {};
 var datakeys = [];
-function handleError () {
-   var conn = ps.open(configure.pSpace);
-   if(conn instanceof ps.Err){
-    logger.error("connect error:",conn.errString);
-    handleError();
-   }else{
-    ps_con=conn;
-   }
+function handleError (sqlCon) {
+  /*
+   ps.open(configure.pSpace,function(err,conn){
+    if(err){
+      logger.error("connect error:",err);
+      return;
+    }else{
+      ps_con=conn;
+      work(sqlCon);
+    }
+   });
+*/
+  var conn = ps.open(configure.pSpace);
+  if(conn instanceof ps.Err){
+    logger.error("connect pSpace error:",conn.errString);
+    return;
+  }else{
+    ps_con = conn;
+    work(sqlCon);
+  }
 }
+
+function checkPSConnect(sqlCon){
+  if(!ps.isConnected()){
+    console.log("check fail");
+    handleError(sqlCon);
+  }
+}
+
 //读取配置文件并填充字典
 function readCsv(done){
   bits.readFile(configure.configurePath,logger,function(err,confData){
@@ -50,11 +72,34 @@ function readCsv(done){
   });
 }
 
-//连接数据库
-handleError();
 
+function sub(sqlCon,done){
+  if(ps.isConnected()){
+    ps_con.sub(datakeys,function(err,subid,curVal,value){
+      if(err){
+        console.log("sub error");
+        logger.error("订阅失败：",err);
+        done("订阅失败",null);
+      }else{
+        if(curVal){
+          console.log("current.");
+          //将初始状态均写入历史和实时
+          sqlExec.initTable(sqlCon,curVal,logger,data,datakeys,done);
+        }else if(value){
+          console.log("Hello new");
+          //更新实时，插入历史
+          sqlExec.update(sqlCon,value,logger,data,datakeys,done);
+        }
+      }
+    });
+  }else{
+    logger.error("pSpace数据库连接已经断开，将重连.");
+    done(null,"pSpace数据库连接已经断开");
+  }
+}
 
 function work(sqlCon){
+  console.log("work");
   async.series([
     function(done){
       //读取配置文件
@@ -69,32 +114,36 @@ function work(sqlCon){
         },
         function(cnt,done) {
           if(cnt==0){
-
             //表不存在
             var createSql = "create table ["+configure.real_table+"](风场名称 nvarchar(255),风机名称 nvarchar(255),时间 datetime,故障描述 nvarchar(255) primary key(风场名称,风机名称,时间,故障描述));";
             sqlExec.execQuerySql(sqlCon,createSql,logger,done);
             logger.trace("实时表创建成功"); 
           }else{
-            //表存在，删除创建
-            async.series([
-              function(done){
-                var dropStr = "drop table "+configure.real_table+";";
-                sqlExec.execQuerySql(sqlCon,dropStr,logger,done);
-                logger.trace("实时表删除成功.");
-              },
-              function(done){
-                var createSql = "create table ["+configure.real_table+"](风场名称 nvarchar(255),风机名称 nvarchar(255),时间 datetime,故障描述 nvarchar(255) primary key(风场名称,风机名称,时间,故障描述));";
-                sqlExec.execQuerySql(sqlCon,createSql,logger,done);
-                logger.trace("实时表创建成功"); 
-              }
-              ],function(err,result){
-                if(err){
-                  done(err);
-                }else{
-                  done();
+            //表存在，删除创建(只有程序第一次运行的时候删除重建)
+            if(isFirstExec){
+              async.series([
+                function(done){
+                  var dropStr = "drop table "+configure.real_table+";";
+                  sqlExec.execQuerySql(sqlCon,dropStr,logger,done);
+                  logger.trace("实时表删除成功.");
+                },
+                function(done){
+                  var createSql = "create table ["+configure.real_table+"](风场名称 nvarchar(255),风机名称 nvarchar(255),时间 datetime,故障描述 nvarchar(255) primary key(风场名称,风机名称,时间,故障描述));";
+                  sqlExec.execQuerySql(sqlCon,createSql,logger,done);
+                  isFirstExec = false;
+                  logger.trace("实时表创建成功"); 
                 }
-            });
-
+                ],function(err,result){
+                  if(err){
+                    done(err);
+                  }else{
+                    done();
+                  }
+              });
+            }else{
+              logger.trace("实时表创建成功");
+              done();
+            }
           }
         }
         ],function(err,result){
@@ -114,31 +163,23 @@ function work(sqlCon){
     },
     function(done){
       //数据库已经连接就订阅
-      if(ps.isConnected()){
-        ps_con.sub(datakeys,function(err,subid,curVal,value){
-          if(err){
-            logger.error("订阅失败：",err);
-            done("订阅失败",null);
-          }else{
-            if(curVal){
-              //将初始状态均写入历史和实时
-              sqlExec.initTable(sqlCon,curVal,logger,data,datakeys,done);
-            }else if(value){
-              //更新实时，插入历史
-              sqlExec.update(sqlCon,value,logger,data,datakeys,done);
-            }
-          }
-        });
-      }else{
-        logger.error("pSpace数据库连接已经断开，将重连.");
-        handleError();
-        done(null,"pSpace数据库连接已经断开");
-      }
+      sub(sqlCon,done);
     }
     ],function(err,result){
       if(err){
          logger.error("启动任务失败，将重新执行");
-         main();
+         //重启之前关闭setInterval
+         if(intervalID!=undefined){
+          logger.trace("关闭setInterval");
+          clearInterval(intervalID);
+         }
+         //重启之前关闭关闭pSpace连接
+         if(ps.isConnected()){
+          logger.trace("关闭pSpace");
+          ps_con.close();
+         }
+         //1s后重启
+         setTimeout(main,2000);
          return;
       }else{
         logger.info("这个点操作结束.");
@@ -151,11 +192,16 @@ function work(sqlCon){
   logger.trace("开始连接sqlserver");
   sql.open(configure.sqlserver, function( err, sqlCon) {
     if(err){
+      console.log("sqlcon err");
       logger.error("sqlserver连接失败，将重连：",err);
       setTimeout(main,1000);
       return;
     }else{
-      work(sqlCon);  
+      //连接数据库
+      checkPSConnect(sqlCon);
+      //检测
+      intervalID = setInterval(checkPSConnect,1000,sqlCon);
+      //work(sqlCon);  
     }
   });
  }

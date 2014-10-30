@@ -694,6 +694,7 @@ PSVOID PSAPI SubBaton::Real_CallbackFunction(
 	PSIN PS_DATA *pRealDataList
 	)
 {
+	std::cout<<"subID::"<<nSubscribeId<<std::endl;
 	list<CallbackData> pushTmp;
 	for (int n = 0; n < nCount; n++)
 	{
