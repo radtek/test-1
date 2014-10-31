@@ -17,23 +17,13 @@ var ps_con = new Object();
 var data = {};
 var datakeys = [];
 function handleError (sqlCon) {
-  /*
-   ps.open(configure.pSpace,function(err,conn){
-    if(err){
-      logger.error("connect error:",err);
-      return;
-    }else{
-      ps_con=conn;
-      work(sqlCon);
-    }
-   });
-*/
   var conn = ps.open(configure.pSpace);
   if(conn instanceof ps.Err){
     logger.error("connect pSpace error:",conn.errString);
     return;
   }else{
     ps_con = conn;
+    conn.del(0);
     work(sqlCon);
   }
 }
@@ -175,6 +165,8 @@ function work(sqlCon){
          }
          //重启之前关闭关闭pSpace连接
          if(ps.isConnected()){
+          //删除所有订阅
+          ps_con.del(0);
           logger.trace("关闭pSpace");
           ps_con.close();
          }
