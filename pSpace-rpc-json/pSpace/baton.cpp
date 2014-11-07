@@ -49,7 +49,6 @@ PSUINT32** Baton::getTagIDList(PSSTR *tagNames,PSHANDLE h,int tagCount)
 	PSAPIStatus *pAPIErrors = PSNULL;
 	PSUINT32 *pTagIds = PSNULL;
 	nRet = psAPI_Tag_GetIdListByLongName(h, tagCount, tagNames, &pTagIds, &pAPIErrors);
-
 	if (PSERR(nRet))
 	{
 		
@@ -73,9 +72,8 @@ std::string Baton::getTagName(PSUINT32 nTagID)
 	std::map<PSUINT32, std::string>::iterator iter = id2TagName_.find(nTagID);
 	if (iter != id2TagName_.end())
 	{
-		return iter->second;
+		return iter->second;	
 	}
-
 	return "";
 }
 
@@ -613,7 +611,10 @@ SubBaton::~SubBaton()
 	{
 		psAPI_Memory_FreeDataList(&subData_, tagCount_);
 	}
-	
+	if (errString)
+	{
+		delete errString;
+	}
 	callback.Dispose();
 }
 
@@ -681,8 +682,14 @@ DelSubBaton::DelSubBaton(PspaceNode* psNode,v8::Handle<v8::Function>* callback)
 }
 DelSubBaton::~DelSubBaton()
 {
-	callback.Dispose();
+	for (int i=0;i<this->tagCount_;i++)
+	{
+		delete []tagName_[i];
+	}
 	delete tagName_;
+	delete []tagName_;
+	callback.Dispose();
+	
 }
 
 PSVOID PSAPI SubBaton::Real_CallbackFunction(
@@ -694,7 +701,6 @@ PSVOID PSAPI SubBaton::Real_CallbackFunction(
 	PSIN PS_DATA *pRealDataList
 	)
 {
-	std::cout<<"subID::"<<nSubscribeId<<std::endl;
 	list<CallbackData> pushTmp;
 	for (int n = 0; n < nCount; n++)
 	{
@@ -715,6 +721,7 @@ PSVOID PSAPI SubBaton::Real_CallbackFunction(
 		pushTmp.push_back(callBackData);
 	}
 	mapData_.insert(map<PSUINT32,list<CallbackData>>::value_type(nSubscribeId,pushTmp));
+	
 }
 
 PSVOID PSAPI SubBaton::Tag_CallbackFunction( PSIN PSHANDLE hServer,
@@ -757,52 +764,39 @@ PSVOID PSAPI SubBaton::Tag_CallbackFunction( PSIN PSHANDLE hServer,
 
 void SubBaton::timer_cb(uv_timer_t *handle,int status)
 {
+	
+	HandleScope scope;
 	Handle<Value> argv[4];
 	SubBaton* sbaton = static_cast<SubBaton*>(handle->data);
-	Local<Array> arrObj1 = Array::New(sbaton->tagCount_);
+	//Local<Array> arrObj1 = Array::New(sbaton->tagCount_);
 	list<CallbackData> callData = sbaton->getSubMapData(sbaton->subID);
+
 	if (callData.size()>=1)
 	{
 		int len = callData.size();
 		Local<Array> arrObj = Array::New(len);
+		
 		for (int i=0;i<len;i++)
 		{
 			Local<Object> tmpObj = Object::New();
 			SubBaton::CallbackData callBackData = callData.front();
 			callData.pop_front();
-			tmpObj->Set(String::New("name"),String::New(GBKToUtf8(replace_all(sbaton->getTagName(callBackData.tagID),"\\","/").c_str())));
+			//char * name = GBKToUtf8(replace_all(sbaton->getTagName(callBackData.tagID),"\\","/").c_str());
+			tmpObj->Set(String::New("name"),String::New(GBK2UTF8(replace_all(sbaton->getTagName(callBackData.tagID),"\\","/").c_str()).c_str()));
 			tmpObj->Set(String::New("value"),getRealObj(&callBackData.date));
 			arrObj->Set(i,tmpObj);
+			//delete []name;
 		}
+		
 		argv[0] = Undefined();
 		argv[1] = Uint32::New(sbaton->subID);
 		argv[2] =  Undefined();
 		argv[3] = arrObj;
+		//scope.Close(arrObj);
 		//异步回调执行cb
 		node::MakeCallback(Context::GetCurrent()->Global(), sbaton->callback, 4, argv);
 	}
-	//if(sbaton->callbackData_.size() >=1)
-	//{
-	//	int len = sbaton->callbackData_.size();
-	//	Local<Array> arrObj = Array::New(len);
-	//	
-	//	for (int i=0;i<len;i++)
-	//	{
-	//		Local<Object> tmpObj = Object::New();
-	//		SubBaton::CallbackData callBackData = sbaton->callbackData_.front();
-	//		sbaton->callbackData_.pop_front();
-	//		tmpObj->Set(String::New("name"),String::New(replace_all(sbaton->getTagName(callBackData.tagID),"\\","/").c_str()));
-	//		tmpObj->Set(String::New("value"),getRealObj(&callBackData.date));
-	//		arrObj->Set(i,tmpObj);
-	//	}
-	//	argv[0] = Undefined();
-	//	argv[1] = Uint32::New(sbaton->subID);
-	//	argv[2] =  Undefined();
-	//	argv[3] = arrObj;
-	//	//异步回调执行cb
-	//	node::MakeCallback(Context::GetCurrent()->Global(), sbaton->callback, 4, argv);
-	//}
-
+	
 }
 
 void SubBaton::time_propCb(uv_timer_t *handle,int status)

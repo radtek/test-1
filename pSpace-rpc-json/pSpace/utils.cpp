@@ -280,6 +280,23 @@ char* PSVARIANT2STRHELP(char* pszVariant, PS_VARIANT *pVariant)
 	return temp;
 }
 
+std::string GBK2UTF8(const char* strGBK)
+{
+	
+	int len = MultiByteToWideChar(CP_ACP, 0, strGBK, -1, NULL, 0);  
+	wchar_t* wstr = new wchar_t[len+1];  
+	memset(wstr, 0, len+1);  
+	MultiByteToWideChar(CP_ACP, 0, strGBK, -1, wstr, len);  
+	len = WideCharToMultiByte(CP_UTF8, 0, wstr, -1, NULL, 0, NULL, NULL);  
+	char* str = new char[len+1];  
+	memset(str, 0, len+1);  
+	WideCharToMultiByte(CP_UTF8, 0, wstr, -1, str, len, NULL, NULL);  
+	string strTemp = str;  
+	if(wstr) delete[] wstr;  
+	if(str) delete[] str;  
+	return strTemp;  
+			 
+}
 char* GBKToUtf8(const char* strGBK)
 { 
 	int len=MultiByteToWideChar(CP_ACP, 0, (LPCCH)strGBK, -1, NULL,0); 
@@ -290,6 +307,7 @@ char* GBKToUtf8(const char* strGBK)
 	char *szUtf8=new char[len + 1]; 
 	memset(szUtf8, 0, len + 1); 
 	WideCharToMultiByte (CP_UTF8, 0, (LPCWSTR)wszUtf8, -1, (LPSTR)szUtf8, len, NULL,NULL);
+	delete []wszUtf8;
 	return szUtf8; 
 }
 
@@ -484,7 +502,12 @@ Local<Object> getRealObj(PS_DATA *psData)
 		break;
 	case PSDATATYPE_STRING:
 	case PSDATATYPE_WSTRING:
-		robj->Set(String::New("value"),String::New(GBKToUtf8(psData->Value.String.Data)));
+		{
+			char * strData = GBKToUtf8(psData->Value.String.Data);
+			robj->Set(String::New("value"),String::New(strData));
+			delete []strData;
+		}
+		
 		break;
 	case PSDATATYPE_BLOB: 
 		robj->Set(String::New("value"),Undefined());

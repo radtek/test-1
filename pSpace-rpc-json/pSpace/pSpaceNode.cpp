@@ -790,6 +790,8 @@ void PspaceNode::subValueWork(uv_work_t* req)
 				sbton->subID = nSubscribeID;
 				sbton->tagName = sbton->getTagName(sbton->id);
 				psAPI_Memory_FreeAndNull((PSVOID**)&tagIDs);
+				
+			    
 			}
 		}	
 	}catch(PsException &ex) {
@@ -809,10 +811,12 @@ void PspaceNode::aftersubValue(uv_work_t* req, int status)
 	try {
 		if(sbaton->errString){
 			Handle<Value> argv[4];
-			argv[0] = Exception::Error(String::New(GBKToUtf8(sbaton->errString->c_str())));
+			char *err = GBKToUtf8(sbaton->errString->c_str());
+			argv[0] = Exception::Error(String::New(err));
 			argv[1] = Undefined();
 			argv[2] = Undefined();
 			argv[3] = Undefined();
+			delete []err;
 			node::MakeCallback(Context::GetCurrent()->Global(),sbaton->callback, 4, argv);
 		}else{
 			Handle<Value> argv[4];
@@ -822,11 +826,12 @@ void PspaceNode::aftersubValue(uv_work_t* req, int status)
 			for (int i=0;i<sbaton->tagCount_;i++)
 			{
 				Local<Object> tmpObj = Object::New();
-				std::string tmpStr= GBKToUtf8(sbaton->tagName_[i]); 
-				
+				char * tagName = GBKToUtf8(sbaton->tagName_[i]);
+				std::string tmpStr= tagName; 
 				tmpObj->Set(String::New("name"),String::New(replace_all(tmpStr,"\\","/").c_str()));
 				tmpObj->Set(String::New("value"),getRealObj(sbaton->subData_+i));
 				arrObj1->Set(i,tmpObj);
+				delete []tagName;
 			}
 			
 			argv[2] = arrObj1;
@@ -860,7 +865,9 @@ void PspaceNode::aftersubValue(uv_work_t* req, int status)
 		argv[3] = Undefined();
 		node::MakeCallback(Context::GetCurrent()->Global(), sbaton->callback, 4, argv);
 	}
+	scope.Close(Undefined());
 	delete sbaton;
+	
 	
 }
 /*
@@ -1028,13 +1035,14 @@ void PspaceNode::delSubWork(uv_work_t* req)
 				uv_timer_stop(*(delBaton->psNode->getTimer(delBaton->subID)));
 				delBaton->psNode->delMapTimer(delBaton->subID);
 			}
-			
+			PSUINT32 *tagIDs = *(delBaton->getTagIDList(delBaton->tagName_,delBaton->psNode->hHanle_,delBaton->tagCount_));
 			nRet = psAPI_Real_DelSubscribe(delBaton->psNode->hHanle_, delBaton->subID, 
-				delBaton->tagCount_, *(delBaton->getTagIDList(delBaton->tagName_,delBaton->psNode->hHanle_,delBaton->tagCount_)), &pAPIErrors);
+				delBaton->tagCount_,tagIDs, &pAPIErrors);
 			if (PSERR(nRet))
 			{
 				delBaton->code_ = nRet;
 				delBaton->errString = new std::string(psAPI_Commom_GetErrorDesc(nRet));
+				psAPI_Memory_FreeAndNull((PSVOID**)&tagIDs);
 			}
 			if (nRet == PSERR_FAIL_IN_BATCH)
 			{
@@ -1042,9 +1050,12 @@ void PspaceNode::delSubWork(uv_work_t* req)
 				{
 					delBaton->code_ = n;
 					delBaton->errString = new std::string(psAPI_Commom_GetErrorDesc(n));
+					
 				}
 				psAPI_Memory_FreeAndNull((PSVOID**)pAPIErrors);
+				psAPI_Memory_FreeAndNull((PSVOID**)&tagIDs);
 			}
+			psAPI_Memory_FreeAndNull((PSVOID**)&tagIDs);
 		}	
 	}catch(PsException &ex) {
 		delBaton->errString = new string(ex.what());

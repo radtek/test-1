@@ -146,6 +146,7 @@ char* PSVARIANT2STRHELP(char* pszVariant, PS_VARIANT *pVariant);
 //string& getParentName(std::vector<std::string>& s);
 //±àÂë×ª»»
 char* GBKToUtf8(const char* strGBK);
+std::string GBK2UTF8(const char* strGBK);
 //±àÂë×ª»»
 void UnicodeToUTF_8(char* pOut,wchar_t* pText);
 void Gb2312ToUnicode(wchar_t* pOut,char *gbBuffer);
