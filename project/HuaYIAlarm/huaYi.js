@@ -30,7 +30,7 @@ function handleError (sqlCon) {
 
 function checkPSConnect(sqlCon){
   if(!ps.isConnected()){
-    console.log("check fail");
+    //console.log("check fail");
     handleError(sqlCon);
   }
 }
@@ -52,7 +52,9 @@ function readCsv(done){
       var errDescName = new Buffer(confData[j].Error_Desc, 'binary');
       var errName = iconv.decode(errDescName, 'gbk');
       for(var k in datakeys){
-        if(confData[j].TagName==datakeys[k]){
+        var confTagName_buffer = new Buffer(confData[j].TagName,"binary"); 
+        var confTagName = iconv.decode(confTagName_buffer, 'gbk');
+        if(confTagName==datakeys[k]){
           data[datakeys[k]]["error"].push(errName);
           data[datakeys[k]]["bit"].push(confData[j].Address);
         }
@@ -67,16 +69,16 @@ function sub(sqlCon,done){
   if(ps.isConnected()){
     ps_con.sub(datakeys,function(err,subid,curVal,value){
       if(err){
-        console.log("sub error");
+        //console.log("sub error");
         logger.error("订阅失败：",err);
         done("订阅失败",null);
       }else{
         if(curVal){
-          console.log("current.");
+         // console.log("current.");
           //将初始状态均写入历史和实时
           sqlExec.initTable(sqlCon,curVal,logger,data,datakeys,done);
         }else if(value){
-          console.log("Hello new");
+         // console.log("Hello new");
           //更新实时，插入历史
           sqlExec.update(sqlCon,value,logger,data,datakeys,done);
         }
@@ -89,7 +91,7 @@ function sub(sqlCon,done){
 }
 
 function work(sqlCon){
-  console.log("work");
+  //console.log("work");
   async.series([
     function(done){
       //读取配置文件
@@ -174,7 +176,7 @@ function work(sqlCon){
          setTimeout(main,2000);
          return;
       }else{
-        logger.info("这个点操作结束.");
+        logger.trace("这个点操作结束.");
         return;
       }
     });
@@ -184,7 +186,7 @@ function work(sqlCon){
   logger.trace("开始连接sqlserver");
   sql.open(configure.sqlserver, function( err, sqlCon) {
     if(err){
-      console.log("sqlcon err");
+      //console.log("sqlcon err");
       logger.error("sqlserver连接失败，将重连：",err);
       setTimeout(main,1000);
       return;
