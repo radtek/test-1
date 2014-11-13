@@ -32,6 +32,9 @@ function checkPSConnect(sqlCon){
   if(!ps.isConnected()){
     //console.log("check fail");
     handleError(sqlCon);
+    return;
+  }else{
+    return;
   }
 }
 
@@ -63,7 +66,29 @@ function readCsv(done){
     done();
   });
 }
-
+//将数据拆分成32位，保存在数组中
+function int2bits(number){
+  var arr = bits.parse(number);
+  var bitsArr = [];
+  for(var i=0;i<32;i++){
+    bitsArr.push(configure.normal);
+  }
+  if(arr.length>32){
+    logger.error("数据非法，无法拆分");
+    return false;
+  }
+  if(arr.length<32){
+    var j = 31;
+    for(var i=arr.length-1;i>=0;i--){
+      if(arr[i]==1){
+        bitsArr[j]=1;
+      }
+      --j;
+    }
+  }
+  delete arr;
+  return bitsArr.reverse();
+}
 
 function sub(sqlCon,done){
   if(ps.isConnected()){
@@ -76,11 +101,30 @@ function sub(sqlCon,done){
         if(curVal){
          // console.log("current.");
           //将初始状态均写入历史和实时
-          sqlExec.initTable(sqlCon,curVal,logger,data,datakeys,done);
+          for(var i in curVal){
+            for(var j in datakeys){
+                if(curVal[i].name==datakeys[j]){
+                    var valueBits = int2bits(curVal[i].value.value);
+                    if(valueBits){
+                        logger.info("初始化实时表,历史表");
+                        sqlExec.initTable(sqlCon,data,curVal[i].name,valueBits,curVal[i].value.time,logger,done);
+                        //return;/////
+                    }
+                }
+            }
+        }
+          //sqlExec.initTable(sqlCon,curVal,logger,data,datakeys,done);
         }else if(value){
-         // console.log("Hello new");
           //更新实时，插入历史
-          sqlExec.update(sqlCon,value,logger,data,datakeys,done);
+          for(var i in value){
+            for(var j in datakeys){
+              if(value[i].name==datakeys[j]){
+                var valueBits = int2bits(value[i].value.value);
+                if(valueBits)
+                  sqlExec.update(sqlCon,data,value[i].name,valueBits,value[i].value.time,logger,done); 
+              }
+            }
+          }
         }
       }
     });
@@ -91,10 +135,12 @@ function sub(sqlCon,done){
 }
 
 function work(sqlCon){
-  //console.log("work");
+  logger.trace("测试是否运行过程中重启！！！！！！！！！！！！！！！！！！！！！！！！！！！！");
   async.series([
     function(done){
       //读取配置文件
+      delete data;
+      delete datakeys;
       readCsv(done);
     },
     function(done){
@@ -107,7 +153,7 @@ function work(sqlCon){
         function(cnt,done) {
           if(cnt==0){
             //表不存在
-            var createSql = "create table ["+configure.real_table+"](风场名称 nvarchar(255),风机名称 nvarchar(255),时间 datetime,故障描述 nvarchar(255) primary key(风场名称,风机名称,时间,故障描述));";
+            var createSql = "create table ["+configure.real_table+"](风场名称 nvarchar(255),风机名称 nvarchar(255),时间 datetime,故障描述 nvarchar(255) primary key(风场名称,风机名称,故障描述));";
             sqlExec.execQuerySql(sqlCon,createSql,logger,done);
             logger.trace("实时表创建成功"); 
           }else{
@@ -120,7 +166,7 @@ function work(sqlCon){
                   logger.trace("实时表删除成功.");
                 },
                 function(done){
-                  var createSql = "create table ["+configure.real_table+"](风场名称 nvarchar(255),风机名称 nvarchar(255),时间 datetime,故障描述 nvarchar(255) primary key(风场名称,风机名称,时间,故障描述));";
+                  var createSql = "create table ["+configure.real_table+"](风场名称 nvarchar(255),风机名称 nvarchar(255),时间 datetime,故障描述 nvarchar(255) primary key(风场名称,风机名称,故障描述));";
                   sqlExec.execQuerySql(sqlCon,createSql,logger,done);
                   isFirstExec = false;
                   logger.trace("实时表创建成功"); 
@@ -149,12 +195,13 @@ function work(sqlCon){
     },
     function(done){
       //判断历史表是否存在，不存在就创建，存在不做处理
-      var createSql = "if OBJECT_ID ('"+configure.his_table+"') is null create table ["+configure.his_table+"](风场名称 nvarchar(255),风机名称 nvarchar(255),时间 datetime,报警状态 nvarchar(20),故障描述 nvarchar(255));";
+      var createSql = "if OBJECT_ID ('"+configure.his_table+"') is null create table ["+configure.his_table+"](风场名称 nvarchar(255),风机名称 nvarchar(255),时间 datetime,报警状态 nvarchar(20),故障描述 nvarchar(255) primary key(风场名称,风机名称,时间,报警状态,故障描述));";
       sqlExec.execQuerySql(sqlCon,createSql,logger,done);
       logger.trace("历史表创建成功");
     },
     function(done){
       //数据库已经连接就订阅
+      //sqlCon.close();
       sub(sqlCon,done);
     }
     ],function(err,result){
@@ -176,7 +223,7 @@ function work(sqlCon){
          setTimeout(main,2000);
          return;
       }else{
-        logger.trace("这个点操作结束.");
+        //logger.trace("这个点操作结束.");
         return;
       }
     });
