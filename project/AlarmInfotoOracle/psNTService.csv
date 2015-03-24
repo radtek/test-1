@@ -1,0 +1,3 @@
+AppPath,AppVersion,AppDesc,StartTimeOut,RestartTimes,IntervalTime,ExceptionTimers,HeartThrob,StopTimeOut,AutoStart,DesktopUser
+程序名称(相对路径或者绝对路径),程序版本号(备用版本号psTray先尝试读取程序文件版本号),程序说明,启动超时(S),启动失败时重启次数,重启间隔时间(S),发生异常重启次数,心跳超时(S),停止超时(S),守护服务启动时一起启动,尝试以当前桌面用户启动(带界面程序启动)
+C:\Program Files (x86)\pSpace6\AlarmInfotoOracle\node.exe C:\Program Files (x86)\pSpace6\AlarmInfotoOracle\dumpProps.js,1.0.0.1,AlarmInfotoOracle,600,3,10,3,60,600,1,1

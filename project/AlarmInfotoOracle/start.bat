@@ -1,0 +1,1 @@
+start C:\AlarmInfotoOraclecle\node.exe C:\AlarmInfotoOraclecle\dumpProps.js  
