@@ -25,4 +25,10 @@ ConnectBaton::ConnectBaton(Client* client,v8::Handle<v8::Function>* callback)
 
 ConnectBaton::~ConnectBaton() {
 	callback_.Dispose();
+    if (this->errString_ != PSNULL)
+    {
+        delete this->errString_;
+        this->errString_ = PSNULL;
+    }
+    
 }

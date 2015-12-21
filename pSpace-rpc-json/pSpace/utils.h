@@ -12,7 +12,7 @@
 #include <iostream>
 #include <map>
 #include "psAPISDK.h"
-
+#include <algorithm>
 
 using namespace std;
 using namespace node;
@@ -120,6 +120,23 @@ using namespace v8;
 	return ThrowException(Exception::TypeError(String::New("Argument  must be a number")));    \
 }                                                                                       \
 }
+
+#define FREE_MEMORY(newM)                                                       \
+{                                                                           \
+    if (newM != NULL)                                                                        \
+    {                                                                        \
+        delete newM;                                                                        \
+        newM == NULL;                                                                        \
+    }                                                                        \
+}
+#define FREE_MEMORY_ARRAY(newM)                                                       \
+{                                                                           \
+    if (newM != NULL)                                                                        \
+    {                                                                        \
+        delete newM;                                                                        \
+        newM == NULL;                                                                        \
+    }                                                                        \
+}
 /*返回分割后的字符串*/
 std::vector<std::string> split(std::string str,std::string pattern);
 /*替换指定的字符串*/
@@ -145,7 +162,7 @@ char* PSVARIANT2STRHELP(char* pszVariant, PS_VARIANT *pVariant);
 //获取父节点
 //string& getParentName(std::vector<std::string>& s);
 //编码转换
-char* GBKToUtf8(const char* strGBK);
+//char* GBKToUtf8(const char* strGBK);
 std::string GBK2UTF8(const char* strGBK);
 //编码转换
 void UnicodeToUTF_8(char* pOut,wchar_t* pText);

@@ -75,6 +75,15 @@ public:
 	{
 		PS_DATA date;
 		PSUINT32 tagID;
+        CallbackData(){};
+        ~CallbackData()
+        {
+            if (date.Value.DataType ==PSDATATYPE_STRING)
+            {
+                delete [] date.Value.String.Data;
+            }
+        };
+
 	}CallbackData;
 	//属性数据结构
 	typedef struct CallbackProp{
@@ -82,6 +91,14 @@ public:
 		PSUINT32 tagID;
 		PSUINT32 propID;
 		PSUINT32 changeType;
+        CallbackProp(){};
+        ~CallbackProp()
+        {
+            if (propData.DataType ==PSDATATYPE_STRING)
+            {
+                delete [] propData.String.Data;
+            }
+        };
 	}CallbackProp;
 	//typedef struct CallbackOtherProp{
 	//	PSUINT32 propCount;

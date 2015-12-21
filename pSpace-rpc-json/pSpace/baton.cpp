@@ -1,6 +1,24 @@
 #include "baton.h"
 #include "pSpaceNode.h"
 #define PSVARIANT2STR(pVariant) PSVARIANT2STRHELP((char*)alloca(256),pVariant)
+
+class DataBuffer
+{
+public:
+    DataBuffer(){};
+    ~DataBuffer(){
+        std::map<std::string,PS_TAG_PROP_INFO>::iterator it = propName2PropInfo.begin();
+        for (;it!=propName2PropInfo.end();++it)
+        {
+            delete []it->second.Name;
+            delete []it->second.Desc;
+        }
+        propName2PropInfo.clear();
+    }
+std::map<std::string,PS_TAG_PROP_INFO> propName2PropInfo;
+protected:
+private:
+};
 //std::list<SubBaton::CallbackData> SubBaton::callbackData_;
 std::map<PSUINT32,list<SubBaton::CallbackData>> SubBaton::mapData_;
 std::map<PSUINT32,list<SubBaton::CallbackProp>> SubBaton::mapPropData_;
@@ -17,12 +35,12 @@ std::map<std::string, PSUINT32> Baton::tagName2ID_;
 //std::map<std::string,PS_QUALITY_ENUM> TagHis::qualityMap_;
 //std::map<std::string,PS_HIS_AGGREGATE_ENUM> TagHis::aggregates_;
 std::map<std::string,PSUINT16> propName2ID;
-std::map<std::string,PS_TAG_PROP_INFO> propName2PropInfo;
+
 std::map<std::string,PS_DATATYPE_ENUM> dataTypeMap;
 std::map<std::string,PS_QUALITY_ENUM> qualityMap;
 std::map<std::string,PS_HIS_AGGREGATE_ENUM> aggregateMap;
 std::map<std::string,PS_DATATYPE_ENUM> name2DataType;
-
+DataBuffer dataBuffer;
 //std::map<std::string, PSUINT32> tagName2ID_;
 //std::map<PSUINT32, std::string> id2TagName_;
 PSUINT32 Baton::getTagID(const char* pszTagName,PSHANDLE h)
@@ -97,8 +115,8 @@ PSUINT16 Baton::getPropID(const char* pszPropName,PSHANDLE h)
 }
 PS_TAG_PROP_INFO Baton::getPropInfo(const char* pszPropName,PSHANDLE h)
 {
-	std::map<std::string,PS_TAG_PROP_INFO>::iterator iter = propName2PropInfo.find(str2Upper(pszPropName));
-	if (iter != propName2PropInfo.end())
+	std::map<std::string,PS_TAG_PROP_INFO>::iterator iter = dataBuffer.propName2PropInfo.find(str2Upper(pszPropName));
+	if (iter != dataBuffer.propName2PropInfo.end())
 	{
 		return iter->second;
 	}
@@ -129,7 +147,7 @@ PS_TAG_PROP_INFO Baton::getPropInfo(const char* pszPropName,PSHANDLE h)
 			strcpy(prop.Desc,(pTagPropInfos+n)->Desc);
 			prop.Desc[strlen(prop.Name)]=0;
 			prop.ReadOnly = (pTagPropInfos+n)->ReadOnly;
-			propName2PropInfo[str2Upper(pszPropName)] = prop;
+			dataBuffer.propName2PropInfo[str2Upper(pszPropName)] = prop;
 			return prop;
 		}
 	}
@@ -580,6 +598,16 @@ RealReadBaton::RealReadBaton(PspaceNode*psNode,v8::Handle<v8::Function>* callbac
 RealReadBaton::~RealReadBaton()
 {
 	 callback.Dispose();
+     FREE_MEMORY(this->errString);
+     FREE_MEMORY(this->time_);
+     if (this->realData_ != PSNULL)
+     {
+         psAPI_Memory_FreeDataList(&this->realData_, 1);
+     }
+     if (this->varData_.DataType == PSDATATYPE_STRING)
+     {
+         delete this->varData_.String.Data;
+     }
 }
 
 SubBaton::SubBaton(PspaceNode* psNode,v8::Handle<v8::Function>* callback)
@@ -596,24 +624,33 @@ SubBaton::SubBaton(PspaceNode* psNode,v8::Handle<v8::Function>* callback)
 	this->tagName_ = PSNULL;
 	this->subData_ = PSNULL;
 	this->tagCount_ = 0;
-	this->timer = NULL;
 	this->timer = new uv_timer_t();  
 }
 SubBaton::~SubBaton()
 {
-	for (int i=0;i<this->tagCount_;i++)
-	{
-		delete []tagName_[i];
-	}
-	delete []tagName_;
+    if (this->tagName_ != PSNULL)
+    {
+        for (int i=0;i<this->tagCount_;i++)
+        {
+            delete []this->tagName_[i];
+        }
+        delete []this->tagName_;
+        this->tagName_ = PSNULL;
+    }
+
 	uv_timer_stop(timer);
-	if (subData_!=NULL)
+    delete this->timer;
+    this->timer = NULL;
+	
+    if (subData_!=NULL)
 	{
 		psAPI_Memory_FreeDataList(&subData_, tagCount_);
+        this->subData_ = PSNULL;
 	}
-	if (errString)
+	if (this->errString != NULL)
 	{
 		delete errString;
+        this->errString = NULL;
 	}
 	callback.Dispose();
 }
@@ -682,13 +719,21 @@ DelSubBaton::DelSubBaton(PspaceNode* psNode,v8::Handle<v8::Function>* callback)
 }
 DelSubBaton::~DelSubBaton()
 {
-	for (int i=0;i<this->tagCount_;i++)
-	{
-		delete []tagName_[i];
-	}
-	delete tagName_;
-	delete []tagName_;
+    if (this->tagName_ != PSNULL)
+    {
+        for (int i=0;i<this->tagCount_;i++)
+        {
+            delete []tagName_[i];
+        }
+        delete tagName_;
+        this->tagName_ = PSNULL;
+    }
 	callback.Dispose();
+    if (this->errString != NULL)
+    {
+        delete this->errString;
+        this->errString = NULL;
+    }
 	
 }
 
@@ -704,7 +749,7 @@ PSVOID PSAPI SubBaton::Real_CallbackFunction(
 	list<CallbackData> pushTmp;
 	for (int n = 0; n < nCount; n++)
 	{
-		SubBaton::CallbackData callBackData = {};
+		SubBaton::CallbackData callBackData;
 		//字符串类型变量单独处理
 		callBackData.tagID = *(pTagIds+n);
 		if ((pRealDataList+n)->Value.DataType==PSDATATYPE_STRING )
@@ -736,7 +781,7 @@ PSVOID PSAPI SubBaton::Tag_CallbackFunction( PSIN PSHANDLE hServer,
 	list<CallbackProp> dataTmp;
 	for (int n = 0; n < nPropCount; n++)
 	{
-		CallbackProp proData = {};
+		CallbackProp proData;
 		////
 		//proData.propData = NULL;
 		
@@ -781,11 +826,9 @@ void SubBaton::timer_cb(uv_timer_t *handle,int status)
 			Local<Object> tmpObj = Object::New();
 			SubBaton::CallbackData callBackData = callData.front();
 			callData.pop_front();
-			//char * name = GBKToUtf8(replace_all(sbaton->getTagName(callBackData.tagID),"\\","/").c_str());
 			tmpObj->Set(String::New("name"),String::New(GBK2UTF8(replace_all(sbaton->getTagName(callBackData.tagID),"\\","/").c_str()).c_str()));
 			tmpObj->Set(String::New("value"),getRealObj(&callBackData.date));
 			arrObj->Set(i,tmpObj);
-			//delete []name;
 		}
 		
 		argv[0] = Undefined();
@@ -820,7 +863,7 @@ void SubBaton::time_propCb(uv_timer_t *handle,int status)
 			tmpObj->Set(String::New("changeType"),Uint32::New(callBackData.changeType));
 			
 			tmpObj->Set(String::New("propID"),Uint32::New(callBackData.propID));
-			tmpObj->Set(String::New("name"),String::New(GBKToUtf8(replace_all(sbaton->getTagName(callBackData.tagID),"\\","/").c_str())));
+			tmpObj->Set(String::New("name"),String::New(GBK2UTF8(replace_all(sbaton->getTagName(callBackData.tagID),"\\","/").c_str()).c_str()));
 			getpropValue(&(callBackData.propData),tmpObj);
 		
 			arrObj->Set(i,tmpObj);
@@ -845,22 +888,38 @@ Tag::Tag(PspaceNode* psNode,v8::Handle<v8::Function>* callback)
 	this->tagName = "";
 	this->parentTagId_ = PSTAGID_UNUSED;
 	this->propCount_ = 0;
-	this->pPropIds_ = PSNULL/*new PSUINT16[this->propCount_]*/;
-	this->pPropValues_ = PSNULL/*new PS_VARIANT[this->propCount_]*/;
+	this->pPropIds_ = PSNULL;
+	this->pPropValues_ = PSNULL;
 	this->propArr = PSNULL;
-	this->rName_ = NULL;
-
+    this->rName_ = NULL;
 }
-
 
 Tag::~Tag()
 {
 	callback.Dispose();
-	delete []pPropIds_;
-	delete []pPropValues_;
+
+    if (this->pPropIds_ != PSNULL)
+    {
+        delete []pPropIds_;
+        this->pPropIds_ = PSNULL;
+    }
+	
+    if (this->pPropValues_ != PSNULL)
+    {
+        for (int i=0;i<this->propCount_;i++)
+        {
+
+        }
+        delete []pPropValues_;
+        this->pPropValues_ = PSNULL;
+    }
 	
 	delete []propArr;
-	
+	if (this->errString != NULL)
+	{
+        delete this->errString;
+        this->errString = NULL;
+	}
 }
 
 TagHis::TagHis(PspaceNode* psNode,v8::Handle<v8::Function>* callback)
@@ -896,6 +955,11 @@ TagHis::~TagHis()
 	delete []dataStatus_;
 	psAPI_Memory_FreeTagHisDataList(&(this->pHisDataList_),this->tagCount_);
 	callback.Dispose();
+    if (this->errString = NULL)
+    {
+        delete this->errString;
+        this->errString = NULL;
+    }
 }
 Alarm::Alarm(PspaceNode* psNode,v8::Handle<v8::Function>* callback)
 {
@@ -917,15 +981,20 @@ Alarm::Alarm(PspaceNode* psNode,v8::Handle<v8::Function>* callback)
 	this->ackUserId_ = PSUSERID_UNUSED;
 	this->alarmIds_ = PSNULL;
 	this->ackCount_ = 0;
+    this->errString = PSNULL;
 	
 }
 
 Alarm::~Alarm()
 {
-	
 	delete []alarmIds_;
 	psAPI_Memory_FreeAlarmList(&alarms_, alarmCount_);
 	callback.Dispose();
+    if (this->errString = PSNULL)
+    {
+        delete this->errString;
+        this->errString = PSNULL;
+    }
 }
 
 BatchBaton::BatchBaton(PspaceNode* psNode,v8::Handle<v8::Function>* callback)
@@ -946,24 +1015,40 @@ BatchBaton::BatchBaton(PspaceNode* psNode,v8::Handle<v8::Function>* callback)
 }
 BatchBaton::~BatchBaton()
 {
-	
-	delete []dataValues_;
-	
-	for (int i=0;i<this->tagCount_;i++)
-	{
-		delete []tagName_[i];
-		
-	}
-	delete []qualitys_;
-	delete []tagName_;
-	
-	delete errString;
-	if (timeStamps_!=NULL)
-	{
-		delete []timeStamps_;
-		
-	}
-	psAPI_Memory_FreeDataList(&realData_, tagCount_);
+     if (this->dataValues_ != NULL)
+    {
+      delete []dataValues_;
+      this->dataValues_ = NULL;
+    }
+    for (int i=0;i<this->tagCount_;i++)
+    {
+      delete []tagName_[i];
+      delete []qualitys_[i];
+    }
+    this->tagCount_=0;
+    if (this->tagName_ != PSNULL)
+    {
+      delete []tagName_;
+      this->tagName_ = PSNULL;
+    }
+    if (this->qualitys_ != NULL)
+    {
+      delete []qualitys_;
+      this->qualitys_ = NULL;
+    }
+
+    if (this->errString != NULL)
+    {
+      delete errString;
+      this->errString = NULL;
+    }
+    if (timeStamps_!=NULL)
+    {
+      delete []timeStamps_;
+      this->timeStamps_ = NULL;
+
+    }
+	//psAPI_Memory_FreeDataList(&realData_, tagCount_);
 	callback.Dispose();
 
 }
@@ -985,6 +1070,7 @@ TagQuery::TagQuery(PspaceNode* psNode,v8::Handle<v8::Function>* callback)
 	this->tagCount_ = 0;
 	this->tagPropValues_ = PSNULL;
 	this->propArr_ = PSNULL;
+    this->errString_ = PSNULL;
 }
 
 TagQuery::~TagQuery()
@@ -995,7 +1081,11 @@ TagQuery::~TagQuery()
 		delete []fieldPropids_;
 		delete []fieldPropValues_;
 	}
-	delete errString_;
+    if (this->errString_ != PSNULL)
+    {
+        delete errString_;
+        this->errString_ = PSNULL;
+    }
 	delete propArr_;
 	psAPI_Memory_FreeTagPropList(&(tagPropValues_),tagCount_);
 	callback_.Dispose();

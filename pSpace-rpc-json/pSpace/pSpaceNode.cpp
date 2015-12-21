@@ -105,16 +105,15 @@ Handle<Value> PspaceNode::realReadSyn(const Arguments& args)
 	HandleScope scope;
 	PspaceNode* ps = ObjectWrap::Unwrap<PspaceNode>(args.This());
 	RealReadBaton* rbaton;
+    uv_work_t* req;
 	try {
-		Handle<Object> robj = Object::New();
+		    Handle<Object> robj = Object::New();
 			rbaton = new RealReadBaton(ps,NULL);
 			PS_DATA *pRealData = PSNULL;
 			String::Utf8Value str(args[0]);
 			const char * pstr = ToCString(str);
 			std::vector<std::string> result=split(pstr,".");
-		//	std::cout<<ps->hHanle_<<std::endl;
 			rbaton->id = rbaton->getTagID(UTF8ToGBK(replace_all(result[0],"/","\\").c_str()).c_str(),ps->hHanle_);
-			//std::cout<<rbaton->id<<std::endl;
 			if (rbaton->id==PSTAGID_UNUSED)
 			{
 				Local<Object> errObj = Error::newObj();
@@ -125,7 +124,7 @@ Handle<Value> PspaceNode::realReadSyn(const Arguments& args)
 				errObj->Set(String::New("errString"),String::New("tag not found!"));
 				return errObj;
 			}
-			uv_work_t* req = new uv_work_t();
+			req = new uv_work_t();
 			req->data = rbaton;
 
 			rbaton->psNode->Ref();
@@ -136,14 +135,19 @@ Handle<Value> PspaceNode::realReadSyn(const Arguments& args)
 				Local<Object> errObj = Error::newObj();
 				errObj->Set(String::New("code"),Number::New(rbaton->code_));
 				std:string *s =rbaton->errString;
-				errObj->Set(String::New("errString"),String::New(GBKToUtf8(s->c_str())));
+				errObj->Set(String::New("errString"),String::New(GBK2UTF8(s->c_str()).c_str()));
 				delete rbaton;
+                delete req;
 				return errObj;
 			}
 			//成功
-			return getRealObj(rbaton->realData_);
-			delete rbaton;
+            Local<Object> resObj = getRealObj(rbaton->realData_);
+            delete req;
+            delete rbaton;
+			return resObj;
 		} catch(PsException &ex) {
+            delete rbaton;
+            delete req;
 			return ThrowException(Exception::Error(String::New(ex.what())));
 	}	
 }
@@ -179,7 +183,7 @@ void PspaceNode::afterRealRead(uv_work_t* req, int status)
 	try {
 		if(rbaton->errString){
 			Handle<Value> argv[3];
-			argv[0] = Exception::Error(String::New(GBKToUtf8(rbaton->errString->c_str())));
+			argv[0] = Exception::Error(String::New(GBK2UTF8(rbaton->errString->c_str()).c_str()));
 			argv[1] = Undefined();
 			argv[2] = Undefined();
 			node::MakeCallback(Context::GetCurrent()->Global(), rbaton->callback, 3, argv);
@@ -200,12 +204,21 @@ void PspaceNode::afterRealRead(uv_work_t* req, int status)
 		node::MakeCallback(Context::GetCurrent()->Global(), rbaton->callback, 3, argv);
 	} catch(const exception &ex) {
 		Handle<Value> argv[3];
-		argv[0] = Exception::Error(String::New(GBKToUtf8(rbaton->errString->c_str())));
+		argv[0] = Exception::Error(String::New(GBK2UTF8(rbaton->errString->c_str()).c_str()));
 		argv[1] = Undefined();
 		argv[2] = Undefined();
 		node::MakeCallback(Context::GetCurrent()->Global(), rbaton->callback, 3, argv);
 	}
-	delete rbaton;
+    if (rbaton != NULL)
+    {
+        delete rbaton;
+        rbaton = NULL;
+    }
+    if (req != NULL)
+    {
+        delete req;
+        req = NULL;
+    }
 }
 Handle<Value> PspaceNode::realReadAsy(const Arguments& args)
 {
@@ -215,20 +228,30 @@ Handle<Value> PspaceNode::realReadAsy(const Arguments& args)
 	const char * pstr = ToCString(str);
 	std::vector<std::string> result=split(pstr,".");
 	REQ_FUN_ARG(1, callback);
-	RealReadBaton* rbaton;
+	RealReadBaton* rbaton = NULL;
+    uv_work_t* req = NULL;
 	try {
 		rbaton = new RealReadBaton(ps, &callback);
 		rbaton->tagName = result[0];
 		rbaton->id = rbaton->getTagID(UTF8ToGBK(replace_all(result[0],"/","\\").c_str()).c_str(),ps->hHanle_);
-
-	} catch(PsException &ex) {
-		return scope.Close(ThrowException(Exception::Error(String::New(ex.what()))));
-	}
-	uv_work_t* req = new uv_work_t();
-	req->data = rbaton;
-	uv_queue_work(uv_default_loop(), req, realReadWork, (uv_after_work_cb)afterRealRead);
-	ps->Ref();
-	return scope.Close(Undefined());
+	    req = new uv_work_t();
+	    req->data = rbaton;
+	    uv_queue_work(uv_default_loop(), req, realReadWork, (uv_after_work_cb)afterRealRead);
+	    ps->Ref();
+	    return scope.Close(Undefined());
+    } catch(PsException &ex) {
+        if (rbaton != NULL)
+        {
+            delete rbaton;
+            rbaton = NULL;
+        }
+        if (req != NULL)
+        {
+            delete req;
+            req = NULL;
+        }
+        return scope.Close(ThrowException(Exception::Error(String::New(ex.what()))));
+    }
 
 }
 
@@ -265,7 +288,8 @@ Handle<Value> PspaceNode::realWriteSyn(const Arguments& args)
 {
 	HandleScope scope;
 	PspaceNode* ps = ObjectWrap::Unwrap<PspaceNode>(args.This());
-	RealReadBaton* rbaton;
+	RealReadBaton* rbaton = NULL;
+    uv_work_t* req = NULL;
 	try { 
 		Handle<Object> robj = Object::New();
 		rbaton = new RealReadBaton(ps,NULL);
@@ -273,7 +297,6 @@ Handle<Value> PspaceNode::realWriteSyn(const Arguments& args)
 		const char * pstr = ToCString(str);
 		std::vector<std::string> result=split(pstr,".");
 		std::string strName = result[0];
-		//std::cout<<result[0]<<std::endl;
 		if (args[1]->IsObject())
 		{
 			REQ_OBJECT_ARG(1, settings);
@@ -288,7 +311,6 @@ Handle<Value> PspaceNode::realWriteSyn(const Arguments& args)
 				{
 					rbaton->varData_.DataType = PSDATATYPE_BOOL;
 					rbaton->varData_.Bool =obj->ToBoolean()->Value();
-					//std::cout<<rbaton->varData_.Bool<<std::endl;
 				}else if (obj->IsNumber())
 				{
 					
@@ -316,7 +338,7 @@ Handle<Value> PspaceNode::realWriteSyn(const Arguments& args)
 			//时间戳
 			if (settings->Has(v8::String::New("time"))) 
 			{
-				rbaton->time_ = new PS_TIME[sizeof(PS_TIME)];
+				rbaton->time_ = new PS_TIME;
 				Local<v8::Value> val = settings->Get(v8::String::New("time"));
 				v8::Local<v8::Date> date = v8::Local<v8::Date>::Cast(val);
 				V8DATE2PSTIME(rbaton->time_,date);
@@ -350,10 +372,9 @@ Handle<Value> PspaceNode::realWriteSyn(const Arguments& args)
 				String::Utf8Value str(args[2]);
 				const char * pstr1 = ToCString(str);
 				rbaton->quality_ = (PS_QUALITY_ENUM)rbaton->getQuality(pstr1);
-				//rbaton->quality_ = args[2]->ToUint32()->Value();
 			}else if (!args[3]->IsNull() && args[3]->IsDate())
 			{
-				rbaton->time_ = new PS_TIME[sizeof(PS_TIME)];
+				rbaton->time_ = new PS_TIME;
 				v8::Local<v8::Date> date = v8::Local<v8::Date>::Cast(args[3]);
 				V8DATE2PSTIME(rbaton->time_,date);
 			}
@@ -369,7 +390,7 @@ Handle<Value> PspaceNode::realWriteSyn(const Arguments& args)
 			return errObj;
 		}
 		
-		uv_work_t* req = new uv_work_t();
+		req = new uv_work_t();
 		req->data = rbaton;
 		rbaton->psNode->Ref();
 		realWriteWork(req);
@@ -378,16 +399,18 @@ Handle<Value> PspaceNode::realWriteSyn(const Arguments& args)
 		if(rbaton->errString) {
 			Local<Object> errObj = Error::newObj();
 			errObj->Set(String::New("code"),Number::New(rbaton->code_));
-			std:string *s =rbaton->errString;
-			errObj->Set(String::New("errString"),String::New(GBKToUtf8(s->c_str())));
-			delete rbaton;
+			errObj->Set(String::New("errString"),String::New(GBK2UTF8(rbaton->errString->c_str()).c_str()));
+            FREE_MEMORY(rbaton);
+            FREE_MEMORY(req);
 			return errObj;
 		}
 		//成功返回测点长名
-		//std::cout<<rbaton->tagName<<std::endl;
+        FREE_MEMORY(rbaton);
+        FREE_MEMORY(req);
 		return String::New(strName.c_str());
-		delete rbaton;
 	} catch(PsException &ex) {
+        FREE_MEMORY(rbaton);
+        FREE_MEMORY(req);
 		return ThrowException(Exception::Error(String::New(ex.what())));
 	}	
 }
@@ -399,7 +422,7 @@ void PspaceNode::afterRealWrite(uv_work_t* req, int status)
 	try {
 		if(rbaton->errString){
 			Handle<Value> argv[2];
-			argv[0] = Exception::Error(String::New(GBKToUtf8(rbaton->errString->c_str())));
+			argv[0] = Exception::Error(String::New(GBK2UTF8(rbaton->errString->c_str()).c_str()));
 			argv[1] = Undefined();
 			node::MakeCallback(Context::GetCurrent()->Global(), rbaton->callback, 2, argv);
 		}else{
@@ -416,11 +439,12 @@ void PspaceNode::afterRealWrite(uv_work_t* req, int status)
 		node::MakeCallback(Context::GetCurrent()->Global(), rbaton->callback, 2, argv);
 	} catch(const exception &ex) {
 		Handle<Value> argv[2];
-		argv[0] = Exception::Error(String::New(GBKToUtf8(rbaton->errString->c_str())));
+		argv[0] = Exception::Error(String::New(GBK2UTF8(rbaton->errString->c_str()).c_str()));
 		argv[1] = Undefined();
 		node::MakeCallback(Context::GetCurrent()->Global(), rbaton->callback, 2, argv);
 	}
-	delete rbaton;
+    FREE_MEMORY(rbaton);
+    FREE_MEMORY(req);
 	
 }
 Handle<Value> PspaceNode::realWriteAsy(const Arguments& args)
@@ -431,7 +455,7 @@ Handle<Value> PspaceNode::realWriteAsy(const Arguments& args)
 	const char * pstr = ToCString(str);
 	std::vector<std::string> result=split(pstr,".");
 	
-	RealReadBaton* rbaton;
+	RealReadBaton* rbaton = NULL;
 	try {
 		REQ_FUN_ARG(args.Length()-1, callback);
 		rbaton = new RealReadBaton(ps, &callback);
@@ -451,10 +475,8 @@ Handle<Value> PspaceNode::realWriteAsy(const Arguments& args)
 				{
 					rbaton->varData_.DataType = PSDATATYPE_BOOL;
 					rbaton->varData_.Bool =obj->ToBoolean()->Value();
-					//std::cout<<rbaton->varData_.Bool<<std::endl;
 				}else if (obj->IsNumber())
 				{
-
 					rbaton->varData_.DataType = PSDATATYPE_DOUBLE;
 					GET_NUMBER(settings, "value", rbaton->varData_.Double);
 
@@ -476,12 +498,11 @@ Handle<Value> PspaceNode::realWriteAsy(const Arguments& args)
 				String::Utf8Value str(settings->Get(String::New("quality")));
 				const char * pstr1 = ToCString(str);
 				rbaton->quality_ = (PS_QUALITY_ENUM)rbaton->getQuality(pstr1);
-				//GET_UINTER(settings,"quality",rbaton->quality_);
 			}
 			//时间戳
 			if (settings->Has(v8::String::New("time"))) 
 			{
-				rbaton->time_ = new PS_TIME[sizeof(PS_TIME)];
+				rbaton->time_ = new PS_TIME;
 				Local<v8::Value> value = settings->Get(v8::String::New("time"));
 				v8::Local<v8::Date> date = v8::Local<v8::Date>::Cast(value);
 				V8DATE2PSTIME(rbaton->time_,date);
@@ -519,10 +540,9 @@ Handle<Value> PspaceNode::realWriteAsy(const Arguments& args)
 				String::Utf8Value str(args[2]);
 				const char * pstr1 = ToCString(str);
 				rbaton->quality_ = (PS_QUALITY_ENUM)rbaton->getQuality(pstr1);
-				//rbaton->quality_ = args[2]->ToUint32()->Value();
 			}else if (!args[3]->IsNull()&& args[3]->IsDate())
 			{
-				rbaton->time_ = new PS_TIME[sizeof(PS_TIME)];
+				rbaton->time_ = new PS_TIME;
 				v8::Local<v8::Date> date = v8::Local<v8::Date>::Cast(args[3]);
 				V8DATE2PSTIME(rbaton->time_,date);
 			}	
@@ -531,7 +551,8 @@ Handle<Value> PspaceNode::realWriteAsy(const Arguments& args)
 	} catch(PsException &ex) {
 		return scope.Close(ThrowException(Exception::Error(String::New(ex.what()))));
 	}
-	uv_work_t* req = new uv_work_t();
+    uv_work_t* req = NULL;
+	req = new uv_work_t();
 	req->data = rbaton;
 	
 	uv_queue_work(uv_default_loop(), req, realWriteWork, (uv_after_work_cb)afterRealWrite);
@@ -564,14 +585,14 @@ Handle<Value> PspaceNode::read(const Arguments& args)
 			{
 				Local<Object> errObj = Error::newObj();
 				errObj->Set(String::New("code"),Number::New(-1));
-				errObj->Set(String::New("errString"),String::New(GBKToUtf8("参数错误，请检查!")));
+				errObj->Set(String::New("errString"),String::New(GBK2UTF8("参数错误，请检查!").c_str()));
 				return errObj;
 			}
 			if (fun(args))
 			{
 				Handle<Value> argv[2];
 				v8::Persistent<v8::Function> callback;
-				argv[0] = String::New(GBKToUtf8("参数错误，请检查!"));
+				argv[0] = String::New(GBK2UTF8("参数错误，请检查!").c_str());
 				node::MakeCallback(Context::GetCurrent()->Global(), callback, 2, argv);
 			}
 		}
@@ -592,7 +613,7 @@ Handle<Value> PspaceNode::read(const Arguments& args)
 			{
 				Local<Object> errObj = Error::newObj();
 				errObj->Set(String::New("code"),Number::New(-1));
-				errObj->Set(String::New("errString"),String::New(GBKToUtf8("参数错误，请检查!")));
+				errObj->Set(String::New("errString"),String::New(GBK2UTF8("参数错误，请检查!").c_str()));
 				return errObj;
 			}
 			if (fun(args))
@@ -600,7 +621,7 @@ Handle<Value> PspaceNode::read(const Arguments& args)
 				Handle<Value> argv[2];
 				Local<Function> fun = Local<Function>::Cast(args[args.Length()-1]);
 				v8::Persistent<v8::Function> callback = Persistent<Function>::New(fun);
-				argv[0] = String::New(GBKToUtf8("参数错误，请检查!"));
+				argv[0] = String::New(GBK2UTF8("参数错误，请检查!").c_str());
 				argv[1] = Undefined();
 				node::MakeCallback(Context::GetCurrent()->Global(), callback, 2, argv);
 			}
@@ -661,7 +682,7 @@ Handle<Value> PspaceNode::read(const Arguments& args)
 			{
 				Local<Object> errObj = Error::newObj();
 				errObj->Set(String::New("code"),Number::New(-1));
-				errObj->Set(String::New("errString"),String::New(GBKToUtf8("参数错误，请检查!")));
+				errObj->Set(String::New("errString"),String::New(GBK2UTF8("参数错误，请检查!").c_str()));
 				return errObj;
 			}
 			if (fun(args))
@@ -669,7 +690,7 @@ Handle<Value> PspaceNode::read(const Arguments& args)
 				Handle<Value> argv[2];
 				Local<Function> fun = Local<Function>::Cast(args[args.Length()-1]);
 				v8::Persistent<v8::Function> callback = Persistent<Function>::New(fun);
-				argv[0] = String::New(GBKToUtf8("参数错误，请检查!"));
+				argv[0] = String::New(GBK2UTF8("参数错误，请检查!").c_str());
 				argv[1] = Undefined();
 				node::MakeCallback(Context::GetCurrent()->Global(), callback, 2, argv);
 			}
@@ -693,7 +714,7 @@ Handle<Value> PspaceNode::write(const Arguments& args)
 			{
 				Local<Object> errObj = Error::newObj();
 				errObj->Set(String::New("code"),Number::New(-1));
-				errObj->Set(String::New("errString"),String::New(GBKToUtf8("参数错误，请检查!")));
+				errObj->Set(String::New("errString"),String::New(GBK2UTF8("参数错误，请检查!").c_str()));
 				return errObj;
 			}
 			if (fun(args))
@@ -701,7 +722,7 @@ Handle<Value> PspaceNode::write(const Arguments& args)
 				Handle<Value> argv[2];
 				Local<Function> fun = Local<Function>::Cast(args[args.Length()-1]);
 				v8::Persistent<v8::Function> callback = Persistent<Function>::New(fun);
-				argv[0] = String::New(GBKToUtf8("参数错误，请检查!"));
+				argv[0] = String::New(GBK2UTF8("参数错误，请检查!").c_str());
 				argv[1] = Undefined();
 				node::MakeCallback(Context::GetCurrent()->Global(), callback, 2, argv);
 			}
@@ -734,7 +755,7 @@ Handle<Value> PspaceNode::write(const Arguments& args)
 		{
 			Local<Object> errObj = Error::newObj();
 			errObj->Set(String::New("code"),Number::New(-1));
-			errObj->Set(String::New("errString"),String::New(GBKToUtf8("参数错误，请检查!")));
+			errObj->Set(String::New("errString"),String::New(GBK2UTF8("参数错误，请检查!").c_str()));
 			return errObj;
 		}
 		if (fun(args))
@@ -742,7 +763,7 @@ Handle<Value> PspaceNode::write(const Arguments& args)
 			Handle<Value> argv[2];
 			Local<Function> fun = Local<Function>::Cast(args[args.Length()-1]);
 			v8::Persistent<v8::Function> callback = Persistent<Function>::New(fun);
-			argv[0] = String::New(GBKToUtf8("参数错误，请检查!"));
+			argv[0] = String::New(GBK2UTF8("参数错误，请检查!").c_str());
 			argv[1] = Undefined();
 			node::MakeCallback(Context::GetCurrent()->Global(), callback, 2, argv);
 		}
@@ -775,7 +796,6 @@ void PspaceNode::subValueWork(uv_work_t* req)
 					tagIDs,sbton->Real_CallbackFunction, (PSVOID*)0, &nSubscribeID, &(sbton->subData_), &pAPIErrors);
 				if (PSERR(nRet) && nRet != PSERR_FAIL_IN_BATCH)
 				{
-					psAPI_Memory_FreeAndNull((PSVOID**)&tagIDs);
 					sbton->code_ = nRet;
 					sbton->errString = new std::string(psAPI_Commom_GetErrorDesc(nRet));
 					psAPI_Memory_FreeAndNull((PSVOID**)&tagIDs);
@@ -791,7 +811,6 @@ void PspaceNode::subValueWork(uv_work_t* req)
 				sbton->tagName = sbton->getTagName(sbton->id);
 				psAPI_Memory_FreeAndNull((PSVOID**)&tagIDs);
 				
-			    
 			}
 		}	
 	}catch(PsException &ex) {
@@ -811,12 +830,10 @@ void PspaceNode::aftersubValue(uv_work_t* req, int status)
 	try {
 		if(sbaton->errString){
 			Handle<Value> argv[4];
-			char *err = GBKToUtf8(sbaton->errString->c_str());
-			argv[0] = Exception::Error(String::New(err));
+			argv[0] = Exception::Error(String::New(GBK2UTF8(sbaton->errString->c_str()).c_str()));
 			argv[1] = Undefined();
 			argv[2] = Undefined();
 			argv[3] = Undefined();
-			delete []err;
 			node::MakeCallback(Context::GetCurrent()->Global(),sbaton->callback, 4, argv);
 		}else{
 			Handle<Value> argv[4];
@@ -826,12 +843,10 @@ void PspaceNode::aftersubValue(uv_work_t* req, int status)
 			for (int i=0;i<sbaton->tagCount_;i++)
 			{
 				Local<Object> tmpObj = Object::New();
-				char * tagName = GBKToUtf8(sbaton->tagName_[i]);
-				std::string tmpStr= tagName; 
+				std::string tmpStr= GBK2UTF8(sbaton->tagName_[i]); 
 				tmpObj->Set(String::New("name"),String::New(replace_all(tmpStr,"\\","/").c_str()));
 				tmpObj->Set(String::New("value"),getRealObj(sbaton->subData_+i));
 				arrObj1->Set(i,tmpObj);
-				delete []tagName;
 			}
 			
 			argv[2] = arrObj1;
@@ -839,7 +854,6 @@ void PspaceNode::aftersubValue(uv_work_t* req, int status)
 			node::MakeCallback(Context::GetCurrent()->Global(),sbaton->callback, 4, argv);
 			
 			int r;
-			
 			timerMap[sbaton->subID] = sbaton->timer;
 			sbaton->timer->data = sbaton;
 			r = uv_timer_init(uv_default_loop(), sbaton->timer);  
@@ -866,8 +880,8 @@ void PspaceNode::aftersubValue(uv_work_t* req, int status)
 		node::MakeCallback(Context::GetCurrent()->Global(), sbaton->callback, 4, argv);
 	}
 	scope.Close(Undefined());
-	delete sbaton;
-	
+	FREE_MEMORY(sbaton);
+    FREE_MEMORY(req);
 	
 }
 /*
@@ -942,12 +956,13 @@ Handle<Value> PspaceNode::delSubAll(const Arguments& args)
 	
 	HandleScope scope;
 	PspaceNode* ps = ObjectWrap::Unwrap<PspaceNode>(args.This());
-	DelSubBaton* baton;
+	DelSubBaton* baton = NULL;
+    uv_work_t* req = NULL;
 	try {
 		Handle<Object> robj = Object::New();
 		baton = new DelSubBaton(ps,NULL);
 		baton->subID = args[0]->ToUint32()->Value(); 
-		uv_work_t* req = new uv_work_t();
+		req = new uv_work_t();
 		req->data = baton;
 		
 		baton->psNode->Ref();
@@ -958,12 +973,14 @@ Handle<Value> PspaceNode::delSubAll(const Arguments& args)
 		if(baton->errString) {
 			Local<Object> errObj = Error::newObj();
 			errObj->Set(String::New("code"),Number::New(baton->code_));
-			std:string *s =baton->errString;
-			errObj->Set(String::New("errString"),String::New(GBKToUtf8(s->c_str())));
-			delete baton;
+			errObj->Set(String::New("errString"),String::New(GBK2UTF8(baton->errString->c_str()).c_str()));
+            FREE_MEMORY(baton);
+            FREE_MEMORY(req);
 			return errObj;
 		}
 		//成功
+        FREE_MEMORY(baton);
+        FREE_MEMORY(req);
 		return scope.Close(Boolean::New(true));
 	} catch(PsException &ex) {
 		return ThrowException(Exception::Error(String::New(ex.what())));
@@ -976,7 +993,8 @@ Handle<Value> PspaceNode::delSub(const Arguments& args)
 	HandleScope scope;
 	PspaceNode* ps = ObjectWrap::Unwrap<PspaceNode>(args.This());
 	
-	DelSubBaton* bat;
+	DelSubBaton* bat = NULL;
+    uv_work_t* req = NULL;
 	try {
 		Handle<Object> robj = Object::New();
 		bat = new DelSubBaton(ps,NULL);
@@ -997,7 +1015,7 @@ Handle<Value> PspaceNode::delSub(const Arguments& args)
 			bat->tagName_[i][strlen(bat->tagName_[i])] = 0;
 			
 		}
-		uv_work_t* req = new uv_work_t();
+		req = new uv_work_t();
 		req->data = bat;
 		bat->psNode->Ref();
 		delSubWork(req);
@@ -1006,12 +1024,14 @@ Handle<Value> PspaceNode::delSub(const Arguments& args)
 		if(bat->errString) {
 			Local<Object> errObj = Error::newObj();
 			errObj->Set(String::New("code"),Number::New(bat->code_));
-			errObj->Set(String::New("errString"),String::New(GBKToUtf8(bat->errString->c_str())));
-			delete bat;
+			errObj->Set(String::New("errString"),String::New(GBK2UTF8(bat->errString->c_str()).c_str()));
+			FREE_MEMORY(bat);
+            FREE_MEMORY(req);
 			return errObj;
 		}
 		//  成功
-		delete bat;
+		FREE_MEMORY(bat);
+        FREE_MEMORY(req);
 		return scope.Close(Boolean::New(true));
 	} catch(PsException &ex) {
 		return ThrowException(Exception::Error(String::New(ex.what())));
@@ -1072,11 +1092,10 @@ Handle<Value> PspaceNode::subValueAsy(const Arguments& args)
 	PspaceNode* ps = ObjectWrap::Unwrap<PspaceNode>(args.This());
 	REQ_ARRAY_ARG(0,tagArr);
 	REQ_FUN_ARG(1, callback);
-	SubBaton* sbaton;
+	SubBaton* sbaton = NULL;
 	try {
 		sbaton = new SubBaton(ps, &callback);
 		sbaton->tagCount_ = tagArr->Length();
-		//bat->tagID_ = new PSUINT32[tagArr->Length()];
 		sbaton->tagName_ = new PSSTR[sbaton->tagCount_];
 		for (int i=0;i<sbaton->tagCount_;i++)
 		{
@@ -1089,11 +1108,11 @@ Handle<Value> PspaceNode::subValueAsy(const Arguments& args)
 			strcpy(sbaton->tagName_[i],str);
 			sbaton->tagName_[i][strlen(sbaton->tagName_[i])] = 0;
 		}
-		//sbaton->id = sbaton->getTagID(UTF8ToGBK(replace_all(result[0],"/","\\").c_str()).c_str(),ps->hHanle_);
 	} catch(PsException &ex) {
 		return scope.Close(ThrowException(Exception::Error(String::New(ex.what()))));
 	}
-	uv_work_t* req = new uv_work_t();
+	uv_work_t* req = NULL;
+    req = new uv_work_t();
 	req->data = sbaton;
 	uv_queue_work(uv_default_loop(), req, subValueWork, (uv_after_work_cb)aftersubValue);
 	ps->Ref();
@@ -1148,10 +1167,10 @@ void PspaceNode::subPropsWork(uv_work_t* req)
 					{
 						sbton->code_ = nRet;
 						sbton->errString = new std::string(psAPI_Commom_GetErrorDesc(nRet));
-						psAPI_Memory_FreeAndNull((PSVOID**)pAPIErrors);
+						psAPI_Memory_FreeAndNull((PSVOID**)&pAPIErrors);
 					}
 					sbton->subID = nSubscribeID;
-				//psAPI_Memory_FreeAndNull((PSVOID**)pAPIErrors);
+                    psAPI_Memory_FreeAndNull((PSVOID**)tagID);
 			}
 		}	
 	}catch(PsException &ex) {
@@ -1171,7 +1190,7 @@ void PspaceNode::aftersubProps(uv_work_t* req, int status)
 	try {
 		if(sbaton->errString){
 			Handle<Value> argv[3];
-			argv[0] = Exception::Error(String::New(GBKToUtf8(sbaton->errString->c_str())));
+			argv[0] = Exception::Error(String::New(GBK2UTF8(sbaton->errString->c_str()).c_str()));
 			argv[1] = Undefined();
 			argv[2] = Undefined();
 		}else{
@@ -1200,7 +1219,8 @@ void PspaceNode::aftersubProps(uv_work_t* req, int status)
 		argv[1] = Undefined();
 		node::MakeCallback(Context::GetCurrent()->Global(), sbaton->callback, 3, argv);
 	}
-	delete sbaton;
+    FREE_MEMORY(sbaton);
+    FREE_MEMORY(req);
 }
 
 Handle<Value> PspaceNode::subPropsAsy(const Arguments& args)
@@ -1211,7 +1231,7 @@ Handle<Value> PspaceNode::subPropsAsy(const Arguments& args)
 	REQ_ARRAY_ARG(0,tagArr);
 	REQ_FUN_ARG(1, callback);
 	
-	SubBaton* sbaton;
+	SubBaton* sbaton = NULL;
 	try {
 		sbaton = new SubBaton(ps, &callback);
 		sbaton->tagCount_ = tagArr->Length();
@@ -1231,7 +1251,8 @@ Handle<Value> PspaceNode::subPropsAsy(const Arguments& args)
 	} catch(PsException &ex) {
 		return scope.Close(ThrowException(Exception::Error(String::New(ex.what()))));
 	}
-	uv_work_t* req = new uv_work_t();
+	uv_work_t* req = NULL;
+    req = new uv_work_t();
 	req->data = sbaton;
 	uv_queue_work(uv_default_loop(), req, subPropsWork, (uv_after_work_cb)aftersubProps);
 	ps->Ref();
@@ -1243,17 +1264,18 @@ Handle<Value> PspaceNode::tagAddSyn(const Arguments& args)
 	//std::cout<<"asfdasfas"<<std::endl;
 	HandleScope scope;
 	PspaceNode* ps = ObjectWrap::Unwrap<PspaceNode>(args.This());
-	Tag* t;
+	Tag* t = NULL;
 	try { 
 		t = new Tag(ps,NULL);
 		String::Utf8Value str(args[0]);
 		const char * pstr = ToCString(str);
 		std::vector<std::string> result=split(pstr,"/");
 		int len = result.size();
-		//std::string ss = result[0];
-		//std::cout<<result[0]<<" "<<std::cout<<result[1]<<std::endl;
 		//要添加的测点名称
-		t->tagName = result[len-1];
+        if (len>=1)
+        {
+            t->tagName = result[len-1];
+        }
 		//获取父节点
 		t->parentTagId_ = t->getParentID(result,t->psNode->hHanle_);
 		REQ_OBJECT_ARG(1,propObj);
@@ -1296,7 +1318,7 @@ Handle<Value> PspaceNode::tagAddSyn(const Arguments& args)
 				Local<Object> errObj = Error::newObj();
 				errObj->Set(String::New("code"),Number::New(-1));
 				std::string *s =t->errString;
-				errObj->Set(String::New("errString"),String::New(GBKToUtf8("测点长名不需要提供了!")));
+				errObj->Set(String::New("errString"),String::New(GBK2UTF8("测点长名不需要提供了!").c_str()));
 				delete t;
 				return errObj;
 			}
@@ -1516,7 +1538,7 @@ Handle<Value> PspaceNode::tagAddSyn(const Arguments& args)
 						Local<Object> errObj = Error::newObj();
 						errObj->Set(String::New("code"),Number::New(-1));
 						std::string *s =t->errString;
-						errObj->Set(String::New("errString"),String::New(GBKToUtf8("数据类型为空或有误!")));
+						errObj->Set(String::New("errString"),String::New(GBK2UTF8("数据类型为空或有误!").c_str()));
 						delete t;
 						return errObj;
 					}
@@ -1533,15 +1555,11 @@ Handle<Value> PspaceNode::tagAddSyn(const Arguments& args)
 			Local<Object> errObj = Error::newObj();
 			errObj->Set(String::New("code"),Number::New(t->code_));
 			string *s =t->errString;
-			errObj->Set(String::New("errString"),String::New(GBKToUtf8(s->c_str())));
+			errObj->Set(String::New("errString"),String::New(GBK2UTF8(s->c_str()).c_str()));
 			delete t;
 			return errObj;
 		}
-		//成功返回测点长名
-		//std::cout<<t->id<<std::endl;
-		//默认加点后保存历史
-		//t->id = t->getTagID(UTF8ToGBK(replace_all(result[0],"/","\\").c_str()).c_str(),t->psNode->hHanle_);
-		//std::cout<<t->id<<std::endl;
+
 		saveHis(t->psNode->hHanle_,t->id);
 		
 		delete t;
@@ -1890,7 +1908,7 @@ void PspaceNode::afterTagAdd(uv_work_t* req, int status)
 		if(t->errString){
 			//std::cout<<"err:"<<(t->errString->c_str())<<std::endl;
 			Handle<Value> argv[3];
-			argv[0] = Exception::Error(String::New(GBKToUtf8(t->errString->c_str())));
+			argv[0] = Exception::Error(String::New(GBK2UTF8(t->errString->c_str()).c_str()));
 			argv[1] = Undefined();
 			argv[2] = Undefined();
 			node::MakeCallback(Context::GetCurrent()->Global(), t->callback, 3, argv);
@@ -1970,7 +1988,7 @@ Handle<Value> PspaceNode::tagDelSyn(const Arguments& args)
 			errObj->Set(String::New("code"),Number::New(t->code_));
 			std:string *s =t->errString;
 			//std::cout<<s->c_str()<<std::endl;
-			errObj->Set(String::New("errString"),String::New(GBKToUtf8(s->c_str())));
+			errObj->Set(String::New("errString"),String::New(GBK2UTF8(s->c_str()).c_str()));
 			delete t;
 			return errObj;
 		}
@@ -2040,7 +2058,7 @@ void PspaceNode::afterTagDel(uv_work_t* req, int status)
 	try {
 		if(t->errString){
 			Handle<Value> argv[2];
-			argv[0] = Exception::Error(String::New(GBKToUtf8(t->errString->c_str())));
+			argv[0] = Exception::Error(String::New(GBK2UTF8(t->errString->c_str()).c_str()));
 			argv[1] = Undefined();
 		}else{
 			Handle<Value> argv[2];
@@ -2056,7 +2074,7 @@ void PspaceNode::afterTagDel(uv_work_t* req, int status)
 		node::MakeCallback(Context::GetCurrent()->Global(), t->callback, 2, argv);
 	} catch(const exception &ex) {
 		Handle<Value> argv[2];
-		argv[0] = Exception::Error(String::New(GBKToUtf8(t->errString->c_str())));
+		argv[0] = Exception::Error(String::New(GBK2UTF8(t->errString->c_str()).c_str()));
 		argv[1] = Undefined();
 		node::MakeCallback(Context::GetCurrent()->Global(), t->callback, 3, argv);
 	}
@@ -2081,7 +2099,7 @@ Handle<Value> PspaceNode::del(const Arguments& args)
 		{
 			Local<Object> errObj = Error::newObj();
 			errObj->Set(String::New("code"),Number::New(-1));
-			errObj->Set(String::New("errString"),String::New(GBKToUtf8("参数错误，请检查!")));
+			errObj->Set(String::New("errString"),String::New(GBK2UTF8("参数错误，请检查!").c_str()));
 			return errObj;
 		}
 		if (fun(args))
@@ -2089,7 +2107,7 @@ Handle<Value> PspaceNode::del(const Arguments& args)
 			Handle<Value> argv[2];
 			Local<Function> fun = Local<Function>::Cast(args[args.Length()-1]);
 			v8::Persistent<v8::Function> callback = Persistent<Function>::New(fun);
-			argv[0] = String::New(GBKToUtf8("参数错误，请检查!"));
+			argv[0] = String::New(GBK2UTF8("参数错误，请检查!").c_str());
 			argv[1] = Undefined();
 			node::MakeCallback(Context::GetCurrent()->Global(), callback, 2, argv);
 		}
@@ -2236,7 +2254,7 @@ Handle<Value> PspaceNode::setTagPropsSyn(const Arguments& args)
 					Local<Object> errObj = Error::newObj();
 					errObj->Set(String::New("code"),Number::New(-1));
 					std:string *s =t->errString;
-					errObj->Set(String::New("errString"),String::New(GBKToUtf8("数据类型为空或有误!")));
+					errObj->Set(String::New("errString"),String::New(GBK2UTF8("数据类型为空或有误!").c_str()));
 					delete t;
 					return errObj;
 				}
@@ -2252,7 +2270,7 @@ Handle<Value> PspaceNode::setTagPropsSyn(const Arguments& args)
 			Local<Object> errObj = Error::newObj();
 			errObj->Set(String::New("code"),Number::New(t->code_));
 			string *s =t->errString;
-			errObj->Set(String::New("errString"),String::New(GBKToUtf8(s->c_str())));
+			errObj->Set(String::New("errString"),String::New(GBK2UTF8(s->c_str()).c_str()));
 			delete t;
 			return errObj;
 		}
@@ -2450,7 +2468,7 @@ void PspaceNode::afterTagsetTagprops(uv_work_t* req, int status)
 	try {
 		if(ts->errString){
 			Handle<Value> argv[3];
-			argv[0] = Exception::Error(String::New(GBKToUtf8(ts->errString->c_str())));
+			argv[0] = Exception::Error(String::New(GBK2UTF8(ts->errString->c_str()).c_str()));
 			argv[1] = Undefined();
 			argv[2] = Undefined();
 			node::MakeCallback(Context::GetCurrent()->Global(), ts->callback, 3, argv);
@@ -2512,7 +2530,7 @@ Handle<Value> PspaceNode::getTagPropsSyn(const Arguments& args)
 			Local<Object> errObj = Error::newObj();
 			errObj->Set(String::New("code"),Number::New(t->code_));
 			string *s =t->errString;
-			errObj->Set(String::New("errString"),String::New(GBKToUtf8(s->c_str())));
+			errObj->Set(String::New("errString"),String::New(GBK2UTF8(s->c_str()).c_str()));
 			delete t;
 			return errObj;
 		}
@@ -2600,14 +2618,14 @@ Handle<Value> PspaceNode::getTagPropsSyn(const Arguments& args)
 				{
 					assert(t->pPropValues_[i].DataType == PSDATATYPE_WSTRING);
 					assert(t->pPropValues_[i].String.Data != PSNULL);
-					valObj->Set(String::New(idStr),String::New((GBKToUtf8(t->pPropValues_[i].String.Data))));
+					valObj->Set(String::New(idStr),String::New((GBK2UTF8(t->pPropValues_[i].String.Data).c_str())));
 				}
 				break;
 			case  PSDATATYPE_STRING:
 				{
 					assert(t->pPropValues_[i].DataType == PSDATATYPE_STRING);
 					assert(t->pPropValues_[i].String.Data != PSNULL);
-					valObj->Set(String::New(idStr),String::New((GBKToUtf8(t->pPropValues_[i].String.Data))));
+					valObj->Set(String::New(idStr),String::New((GBK2UTF8(t->pPropValues_[i].String.Data)).c_str()));
 				}
 				break;
 			default:
@@ -2615,7 +2633,7 @@ Handle<Value> PspaceNode::getTagPropsSyn(const Arguments& args)
 					Local<Object> errObj = Error::newObj();
 					errObj->Set(String::New("code"),Number::New(-1));
 					std:string *s =t->errString;
-					errObj->Set(String::New("errString"),String::New(GBKToUtf8("数据类型为空或有误!")));
+					errObj->Set(String::New("errString"),String::New(GBK2UTF8("数据类型为空或有误!").c_str()));
 					delete t;
 					return errObj;
 				}
@@ -2704,7 +2722,7 @@ Handle<Value> PspaceNode::getSignalPropsSyn(const Arguments& args)
 			Local<Object> errObj = Error::newObj();
 			errObj->Set(String::New("code"),Number::New(t->code_));
 			string *s =t->errString;
-			errObj->Set(String::New("errString"),String::New(GBKToUtf8(s->c_str())));
+			errObj->Set(String::New("errString"),String::New(GBK2UTF8(s->c_str()).c_str()));
 			delete t;
 			return errObj;
 		}
@@ -2787,14 +2805,14 @@ Handle<Value> PspaceNode::getSignalPropsSyn(const Arguments& args)
 				{
 					assert(t->pPropValues_[0].DataType == PSDATATYPE_WSTRING);
 					assert(t->pPropValues_[0].String.Data != PSNULL);
-					valObj->Set(String::New(result[1].c_str()),String::New((GBKToUtf8(t->pPropValues_[0].String.Data))));
+					valObj->Set(String::New(result[1].c_str()),String::New((GBK2UTF8(t->pPropValues_[0].String.Data).c_str())));
 				}
 				break;
 			case  PSDATATYPE_STRING:
 				{
 					assert(t->pPropValues_[0].DataType == PSDATATYPE_STRING);
 					assert(t->pPropValues_[0].String.Data != PSNULL);
-					valObj->Set(String::New(result[1].c_str()),String::New((GBKToUtf8(t->pPropValues_[0].String.Data))));
+					valObj->Set(String::New(result[1].c_str()),String::New((GBK2UTF8(t->pPropValues_[0].String.Data).c_str())));
 				}
 				break;
 			default:
@@ -2802,7 +2820,7 @@ Handle<Value> PspaceNode::getSignalPropsSyn(const Arguments& args)
 					Local<Object> errObj = Error::newObj();
 					errObj->Set(String::New("code"),Number::New(-1));
 					std:string *s =t->errString;
-					errObj->Set(String::New("errString"),String::New(GBKToUtf8("数据类型为空或有误!")));
+					errObj->Set(String::New("errString"),String::New(GBK2UTF8("数据类型为空或有误!").c_str()));
 					delete t;
 					return errObj;
 				}
@@ -2844,7 +2862,7 @@ Handle<Value> PspaceNode::getSignalpropsAsy(const Arguments& args)
 		if (t->pPropIds_[0] == PSPROPID_UNUSED)
 		{
 			Handle<Value> argv[2];
-			argv[0] = Exception::Error(String::New(GBKToUtf8("参数错误，请检查!")));
+			argv[0] = Exception::Error(String::New(GBK2UTF8("参数错误，请检查!").c_str()));
 			argv[1] = Undefined();
 			node::MakeCallback(Context::GetCurrent()->Global(), t->callback, 2, argv);
 		}
@@ -2866,7 +2884,7 @@ void PspaceNode::aftergetSignalTagprops(uv_work_t* req, int status)
 	try {
 		if(t->errString){
 			Handle<Value> argv[2];
-			argv[0] = Exception::Error(String::New(GBKToUtf8(t->errString->c_str())));
+			argv[0] = Exception::Error(String::New(GBK2UTF8(t->errString->c_str()).c_str()));
 			argv[1] = Undefined();
 			node::MakeCallback(Context::GetCurrent()->Global(), t->callback, 2, argv);
 		}else{
@@ -2952,20 +2970,20 @@ void PspaceNode::aftergetSignalTagprops(uv_work_t* req, int status)
 				{
 					assert(t->pPropValues_[0].DataType == PSDATATYPE_WSTRING);
 					assert(t->pPropValues_[0].String.Data != PSNULL);
-					valObj->Set(String::New(t->propArr[0]),String::New((GBKToUtf8(t->pPropValues_[0].String.Data))));
+					valObj->Set(String::New(t->propArr[0]),String::New((GBK2UTF8(t->pPropValues_[0].String.Data).c_str())));
 				}
 				break;
 			case  PSDATATYPE_STRING:
 				{
 					assert(t->pPropValues_[0].DataType == PSDATATYPE_STRING);
 					assert(t->pPropValues_[0].String.Data != PSNULL);
-					valObj->Set(String::New(t->propArr[0]),String::New((GBKToUtf8(t->pPropValues_[0].String.Data))));
+					valObj->Set(String::New(t->propArr[0]),String::New((GBK2UTF8(t->pPropValues_[0].String.Data).c_str())));
 				}
 				break;
 			default:
 				{
 					Handle<Value> argv[2];
-					argv[0] = Exception::Error(String::New(GBKToUtf8("数据类型为空或有错误!")));
+					argv[0] = Exception::Error(String::New(GBK2UTF8("数据类型为空或有错误!").c_str()));
 					argv[1] = Undefined();
 					node::MakeCallback(Context::GetCurrent()->Global(), t->callback, 2, argv);
 				}
@@ -3027,7 +3045,7 @@ void PspaceNode::aftergetTagprops(uv_work_t* req, int status)
 	try {
 		if(t->errString){
 			Handle<Value> argv[3];
-			argv[0] = Exception::Error(String::New(GBKToUtf8(t->errString->c_str())));
+			argv[0] = Exception::Error(String::New(GBK2UTF8(t->errString->c_str()).c_str()));
 			argv[1] = Undefined();
 			argv[2] = Undefined();
 			node::MakeCallback(Context::GetCurrent()->Global(), t->callback, 3, argv);
@@ -3120,19 +3138,19 @@ void PspaceNode::aftergetTagprops(uv_work_t* req, int status)
 						{
 							assert(t->pPropValues_[i].DataType == PSDATATYPE_WSTRING);
 							assert(t->pPropValues_[i].String.Data != PSNULL);
-							valObj->Set(String::New(t->propArr[i]),String::New((GBKToUtf8(t->pPropValues_[i].String.Data))));
+							valObj->Set(String::New(t->propArr[i]),String::New((GBK2UTF8(t->pPropValues_[i].String.Data)).c_str()));
 						}
 						break;
 					case  PSDATATYPE_STRING:
 						{
 							assert(t->pPropValues_[i].DataType == PSDATATYPE_STRING);
 							assert(t->pPropValues_[i].String.Data != PSNULL);
-							valObj->Set(String::New(t->propArr[i]),String::New((GBKToUtf8(t->pPropValues_[i].String.Data))));
+							valObj->Set(String::New(t->propArr[i]),String::New((GBK2UTF8(t->pPropValues_[i].String.Data).c_str())));
 						}
 						break;
 					default:
 						{
-							argv[0] = String::New(GBKToUtf8("数据类型为空或不存在!"));
+							argv[0] = String::New(GBK2UTF8("数据类型为空或不存在!").c_str());
 						}
 					}
 			}
@@ -3274,7 +3292,7 @@ Handle<Value> PspaceNode::hisSyn(const Arguments& args)
 			t->errString = new std::string("参数错误!");
 			Local<Object> errObj = Error::newObj();
 			errObj->Set(String::New("code"),Number::New(-1));
-			errObj->Set(String::New("errString"),String::New(GBKToUtf8("参数错误!")));
+			errObj->Set(String::New("errString"),String::New(GBK2UTF8("参数错误!").c_str()));
 			return errObj;
 		}
 		if (t->id==PSTAGID_UNUSED)
@@ -3283,7 +3301,7 @@ Handle<Value> PspaceNode::hisSyn(const Arguments& args)
 			t->errString = new std::string("tag not found!");
 			Local<Object> errObj = Error::newObj();
 			errObj->Set(String::New("code"),Number::New(-1));
-			errObj->Set(String::New("errString"),String::New(GBKToUtf8("测点不存在!")));
+			errObj->Set(String::New("errString"),String::New(GBK2UTF8("测点不存在!").c_str()));
 			return errObj;
 		}
 		uv_work_t* req = new uv_work_t();
@@ -3307,7 +3325,7 @@ Handle<Value> PspaceNode::hisSyn(const Arguments& args)
 			Local<Object> errObj = Error::newObj();
 			errObj->Set(String::New("code"),Number::New(t->code_));
 			std:string *s =t->errString;
-			errObj->Set(String::New("errString"),String::New(GBKToUtf8(s->c_str())));
+			errObj->Set(String::New("errString"),String::New(GBK2UTF8(s->c_str()).c_str()));
 			delete t;
 			return errObj;
 		}
@@ -3497,7 +3515,7 @@ void PspaceNode::afterHis(uv_work_t* req, int status)
 	try {
 		if(t->errString){
 			Handle<Value> argv[3];
-			argv[0] = Exception::Error(String::New(GBKToUtf8(t->errString->c_str())));
+			argv[0] = Exception::Error(String::New(GBK2UTF8(t->errString->c_str()).c_str()));
 			argv[1] = Undefined();
 			argv[2] = Undefined();
 			node::MakeCallback(Context::GetCurrent()->Global(), t->callback, 3, argv);
@@ -3642,7 +3660,7 @@ Handle<Value> PspaceNode::readHisAtTimeSyn(const Arguments& args)
 			errObj->Set(String::New("code"),Number::New(t->code_));
 			std:string *s =t->errString;
 			//std::cout<<s->c_str()<<std::endl;
-			errObj->Set(String::New("errString"),String::New(GBKToUtf8(s->c_str())));
+			errObj->Set(String::New("errString"),String::New(GBK2UTF8(s->c_str()).c_str()));
 			delete t;
 			return errObj;
 		}
@@ -3775,7 +3793,7 @@ void PspaceNode::afterReadHisAtTime(uv_work_t* req,int status)
 	try {
 		if(t->errString){
 			Handle<Value> argv[2];
-			argv[0] = Exception::Error(String::New(GBKToUtf8(t->errString->c_str())));
+			argv[0] = Exception::Error(String::New(GBK2UTF8(t->errString->c_str()).c_str()));
 			argv[1] = Undefined();
 			node::MakeCallback(Context::GetCurrent()->Global(), t->callback,2, argv);
 		}else{
@@ -3859,7 +3877,7 @@ Handle<Value> PspaceNode::readHisRawSyn(const Arguments& args)
 			Local<Object> errObj = Error::newObj();
 			errObj->Set(String::New("code"),Number::New(t->code_));
 			std:string *s =t->errString;
-			errObj->Set(String::New("errString"),String::New(GBKToUtf8(s->c_str())));
+			errObj->Set(String::New("errString"),String::New(GBK2UTF8(s->c_str()).c_str()));
 			delete t;
 			return errObj;
 		}
@@ -3975,7 +3993,7 @@ void PspaceNode::afterReadHisRaw(uv_work_t* req,int status)
 	try {
 		if(t->errString){
 			Handle<Value> argv[2];
-			argv[0] = Exception::Error(String::New(GBKToUtf8(t->errString->c_str())));
+			argv[0] = Exception::Error(String::New(GBK2UTF8(t->errString->c_str()).c_str()));
 			argv[1] = Undefined();
 			node::MakeCallback(Context::GetCurrent()->Global(), t->callback,2, argv);
 		}else{
@@ -4074,7 +4092,7 @@ Handle<Value> PspaceNode::readHisProcessSyn(const Arguments& args)
 			t->errString = new std::string("参数错误!");
 			Local<Object> errObj = Error::newObj();
 			errObj->Set(String::New("code"),Number::New(-1));
-			errObj->Set(String::New("errString"),String::New(GBKToUtf8("参数错误!")));
+			errObj->Set(String::New("errString"),String::New(GBK2UTF8("参数错误!").c_str()));
 			return errObj;
 		}
 		if (t->id==PSTAGID_UNUSED)
@@ -4096,7 +4114,7 @@ Handle<Value> PspaceNode::readHisProcessSyn(const Arguments& args)
 			Local<Object> errObj = Error::newObj();
 			errObj->Set(String::New("code"),Number::New(t->code_));
 			std:string *s =t->errString;
-			errObj->Set(String::New("errString"),String::New(GBKToUtf8(s->c_str())));
+			errObj->Set(String::New("errString"),String::New(GBK2UTF8(s->c_str()).c_str()));
 			delete t;
 			return errObj;
 		}
@@ -4522,7 +4540,7 @@ Handle<Value> PspaceNode::alarmRealSyn(const Arguments& args)
 			t->errString = new std::string("参数错误!");
 			Local<Object> errObj = Error::newObj();
 			errObj->Set(String::New("code"),Number::New(-1));
-			errObj->Set(String::New("errString"),String::New(GBKToUtf8("参数错误!")));
+			errObj->Set(String::New("errString"),String::New(GBK2UTF8("参数错误!").c_str()));
 			return errObj;
 		}
 		if (t->id==PSTAGID_UNUSED)
@@ -4544,7 +4562,7 @@ Handle<Value> PspaceNode::alarmRealSyn(const Arguments& args)
 			Local<Object> errObj = Error::newObj();
 			errObj->Set(String::New("code"),Number::New(t->code_));
 			std:string *s =t->errString;
-			errObj->Set(String::New("errString"),String::New(GBKToUtf8(s->c_str())));
+			errObj->Set(String::New("errString"),String::New(GBK2UTF8(s->c_str()).c_str()));
 			delete t;
 			return errObj;
 		}
@@ -4900,7 +4918,7 @@ void PspaceNode::afterAlarmReal(uv_work_t* req,int status)
 	try {
 		if(t->errString){
 			Handle<Value> argv[2];
-			argv[0] = Exception::Error(String::New(GBKToUtf8(t->errString->c_str())));
+			argv[0] = Exception::Error(String::New(GBK2UTF8(t->errString->c_str()).c_str()));
 			argv[1] = Undefined();
 			node::MakeCallback(Context::GetCurrent()->Global(), t->callback,2, argv);
 		}else{
@@ -5247,7 +5265,7 @@ Handle<Value> PspaceNode::hisAlarmSyn(const Arguments& args)
 			t->code_ = -1;
 			t->errString = new std::string("参数错误!");
 			robj->Set(String::New("code"),Number::New(-1));
-			robj->Set(String::New("errString"),String::New(GBKToUtf8("参数错误!")));
+			robj->Set(String::New("errString"),String::New(GBK2UTF8("参数错误!").c_str()));
 			return robj;
 		}
 		if (t->id==PSTAGID_UNUSED)
@@ -5269,7 +5287,7 @@ Handle<Value> PspaceNode::hisAlarmSyn(const Arguments& args)
 			Local<Object> errObj = Error::newObj();
 			errObj->Set(String::New("code"),Number::New(t->code_));
 			std:string *s =t->errString;
-			errObj->Set(String::New("errString"),String::New(GBKToUtf8(s->c_str())));
+			errObj->Set(String::New("errString"),String::New(GBK2UTF8(s->c_str()).c_str()));
 			delete t;
 			return errObj;
 		}
@@ -5695,7 +5713,7 @@ Handle<Value> PspaceNode::ackAlarmSyn(const Arguments& args)
 			t->errString = new std::string("参数错误!");
 			Local<Object> errObj = Error::newObj();
 			errObj->Set(String::New("code"),Number::New(-1));
-			errObj->Set(String::New("errString"),String::New(GBKToUtf8("参数错误!")));
+			errObj->Set(String::New("errString"),String::New(GBK2UTF8("参数错误!").c_str()));
 			return errObj;
 		}
 		uv_work_t* req = new uv_work_t();
@@ -5708,7 +5726,7 @@ Handle<Value> PspaceNode::ackAlarmSyn(const Arguments& args)
 			Local<Object> errObj = Error::newObj();
 			errObj->Set(String::New("code"),Number::New(t->code_));
 			std:string *s =t->errString;
-			errObj->Set(String::New("errString"),String::New(GBKToUtf8(s->c_str())));
+			errObj->Set(String::New("errString"),String::New(GBK2UTF8(s->c_str()).c_str()));
 			delete t;
 			return errObj;
 		}
@@ -5784,7 +5802,7 @@ Handle<Value> PspaceNode::ackAlarmAsy(const Arguments& args)
 			t->code_ = -1;
 			t->errString = new std::string("参数错误!");
 			robj->Set(String::New("code"),Number::New(-1));
-			robj->Set(String::New("errString"),String::New(GBKToUtf8("参数错误!")));
+			robj->Set(String::New("errString"),String::New(GBK2UTF8("参数错误!").c_str()));
 			return robj;
 		}
 		
@@ -5835,7 +5853,7 @@ void PspaceNode::afterAckAlarm(uv_work_t* req,int status)
 	try {
 		if(t->errString){
 			Handle<Value> argv[2];
-			argv[0] = Exception::Error(String::New(GBKToUtf8(t->errString->c_str())));
+			argv[0] = Exception::Error(String::New(GBK2UTF8(t->errString->c_str()).c_str()));
 			argv[1] = Undefined();
 			node::MakeCallback(Context::GetCurrent()->Global(), t->callback,2, argv);
 		}else{
@@ -5919,7 +5937,7 @@ void PspaceNode::batchWriteWork(uv_work_t* req)
 			if ( PSERR(nRet))
 			{
 				t->code_ = nRet;
-				t->errString = new std::string(GBKToUtf8(psAPI_Commom_GetErrorDesc(nRet)));
+				t->errString = new std::string(GBK2UTF8(psAPI_Commom_GetErrorDesc(nRet)).c_str());
 				//std::cout<<psAPI_Commom_GetErrorDesc(nRet)<<std::endl;
 			}		
 		}	
@@ -5940,7 +5958,7 @@ void PspaceNode::afterBatchRead(uv_work_t* req, int status)
 	try {
 		if(bat->errString){
 			Handle<Value> argv[2];
-			argv[0] = Exception::Error(String::New(GBKToUtf8(bat->errString->c_str())));
+			argv[0] = Exception::Error(String::New(GBK2UTF8(bat->errString->c_str()).c_str()));
 			argv[1] = Undefined();
 			node::MakeCallback(Context::GetCurrent()->Global(), bat->callback, 2, argv);
 		}else{
@@ -5967,7 +5985,7 @@ void PspaceNode::afterBatchRead(uv_work_t* req, int status)
 		node::MakeCallback(Context::GetCurrent()->Global(), bat->callback, 2, argv);
 	} catch(const exception &ex) {
 		Handle<Value> argv[2];
-		argv[0] = Exception::Error(String::New(GBKToUtf8(bat->errString->c_str())));
+		argv[0] = Exception::Error(String::New(GBK2UTF8(bat->errString->c_str()).c_str()));
 		argv[1] = Undefined();
 		node::MakeCallback(Context::GetCurrent()->Global(), bat->callback, 2, argv);
 	}
@@ -6001,7 +6019,7 @@ void PspaceNode::afterBatchWrite(uv_work_t* req, int status)
 		node::MakeCallback(Context::GetCurrent()->Global(), bat->callback, 2, argv);
 	} catch(const exception &ex) {
 		Handle<Value> argv[2];
-		argv[0] = Exception::Error(String::New(GBKToUtf8(bat->errString->c_str())));
+		argv[0] = Exception::Error(String::New(GBK2UTF8(bat->errString->c_str()).c_str()));
 		argv[1] = Undefined();
 		node::MakeCallback(Context::GetCurrent()->Global(), bat->callback, 2, argv);
 	}
@@ -6044,7 +6062,7 @@ Handle<Value> PspaceNode::batRealReadSyn(const Arguments& args)
 		if(bat->errString) {
 			Local<Object> errObj = Error::newObj();
 			errObj->Set(String::New("code"),Number::New(bat->code_));
-			errObj->Set(String::New("errString"),String::New(GBKToUtf8(bat->errString->c_str())));
+			errObj->Set(String::New("errString"),String::New(GBK2UTF8(bat->errString->c_str()).c_str()));
 			free(req->loop);
 			delete req;
 			delete bat;
@@ -6373,7 +6391,7 @@ Handle<Value> PspaceNode::querySyn(const Arguments& args)
 				Local<Object> errObj = Error::newObj();
 				errObj->Set(String::New("code"),Number::New(-1));
 				std::string *s =t->errString_;
-				errObj->Set(String::New("errString"),String::New(GBKToUtf8("起始测点不存在!")));
+				errObj->Set(String::New("errString"),String::New(GBK2UTF8("起始测点不存在!").c_str()));
 				//delete t;
 				return errObj;
 			}
@@ -6563,7 +6581,7 @@ Handle<Value> PspaceNode::querySyn(const Arguments& args)
 							Local<Object> errObj = Error::newObj();
 							errObj->Set(String::New("code"),Number::New(-1));
 							std::string *s =t->errString_;
-							errObj->Set(String::New("errString"),String::New(GBKToUtf8("数据类型为空或有误!")));
+							errObj->Set(String::New("errString"),String::New(GBK2UTF8("数据类型为空或有误!").c_str()));
 							delete t;
 							return errObj;
 						}
@@ -6599,7 +6617,7 @@ Handle<Value> PspaceNode::querySyn(const Arguments& args)
 			Local<Object> errObj = Error::newObj();
 			errObj->Set(String::New("code"),Number::New(t->code_));
 			std:string *s =t->errString_;
-			errObj->Set(String::New("errString"),String::New(GBKToUtf8(s->c_str())));
+			errObj->Set(String::New("errString"),String::New(GBK2UTF8(s->c_str()).c_str()));
 			delete t;
 			return errObj;
 		}
@@ -6643,7 +6661,7 @@ Handle<Value> PspaceNode::queryAsy(const Arguments& args)
 			if (isExit(t->psNode_->hHanle_,t->tagID_))
 			{
 				Handle<Value> argv[2];
-				argv[0] = Exception::Error(String::New(GBKToUtf8("起始测点不存在!")));
+				argv[0] = Exception::Error(String::New(GBK2UTF8("起始测点不存在!").c_str()));
 				argv[1] = Undefined();
 				node::MakeCallback(Context::GetCurrent()->Global(), t->callback_, 2, argv);
 			}
@@ -6829,7 +6847,7 @@ Handle<Value> PspaceNode::queryAsy(const Arguments& args)
 					default:
 						{
 							Handle<Value> argv[2];
-							argv[0] = Exception::Error(String::New(GBKToUtf8("数据类型有错误!")));
+							argv[0] = Exception::Error(String::New(GBK2UTF8("数据类型有错误!").c_str()));
 							argv[1] = Undefined();
 							node::MakeCallback(Context::GetCurrent()->Global(), t->callback_, 3, argv);
 						}
@@ -6848,7 +6866,7 @@ Handle<Value> PspaceNode::queryAsy(const Arguments& args)
 		if (t->tagID_ == PSTAGID_UNUSED)
 		{
 			Handle<Value> argv[2];
-			argv[0] = Exception::Error(String::New(GBKToUtf8("起始测点不存在!")));
+			argv[0] = Exception::Error(String::New(GBK2UTF8("起始测点不存在!").c_str()));
 			argv[1] = Undefined();
 			node::MakeCallback(Context::GetCurrent()->Global(), t->callback_, 3, argv);
 		}
@@ -6879,7 +6897,7 @@ void PspaceNode::queryWork(uv_work_t* req)
 			if (PSERR(nRet))
 			{
 				t->code_ = nRet;
-				t->errString_ = new std::string(GBKToUtf8(psAPI_Commom_GetErrorDesc(nRet)));
+				t->errString_ = new std::string(GBK2UTF8(psAPI_Commom_GetErrorDesc(nRet)).c_str());
 			}
 		}	
 	}catch(PsException &ex) {
@@ -6941,7 +6959,7 @@ void PspaceNode::afterQueryWork(uv_work_t* req)
 		node::MakeCallback(Context::GetCurrent()->Global(), bat->callback_, 2, argv);
 	} catch(const exception &ex) {
 		Handle<Value> argv[2];
-		argv[0] = Exception::Error(String::New(GBKToUtf8(bat->errString_->c_str())));
+		argv[0] = Exception::Error(String::New(GBK2UTF8(bat->errString_->c_str()).c_str()));
 		argv[1] = Undefined();
 		node::MakeCallback(Context::GetCurrent()->Global(), bat->callback_, 2, argv);
 	}

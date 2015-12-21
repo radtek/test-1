@@ -297,19 +297,21 @@ std::string GBK2UTF8(const char* strGBK)
 	return strTemp;  
 			 
 }
-char* GBKToUtf8(const char* strGBK)
-{ 
-	int len=MultiByteToWideChar(CP_ACP, 0, (LPCCH)strGBK, -1, NULL,0); 
-	unsigned short * wszUtf8 = new unsigned short[len+1]; 
-	memset(wszUtf8, 0, len * 2 + 2); 
-	MultiByteToWideChar(CP_ACP, 0, (LPCCH)strGBK, -1, (LPWSTR)wszUtf8, len); 
-	len = WideCharToMultiByte(CP_UTF8, 0, (LPCWSTR)wszUtf8, -1, NULL, 0, NULL, NULL); 
-	char *szUtf8=new char[len + 1]; 
-	memset(szUtf8, 0, len + 1); 
-	WideCharToMultiByte (CP_UTF8, 0, (LPCWSTR)wszUtf8, -1, (LPSTR)szUtf8, len, NULL,NULL);
-	delete []wszUtf8;
-	return szUtf8; 
-}
+//char* GBKToUtf8(const char* strGBK)
+//{ 
+//    std::string strAnsi("");
+//	int len=MultiByteToWideChar(CP_ACP, 0, (LPCCH)strGBK, -1, NULL,0); 
+//	unsigned short * wszUtf8 = new unsigned short[len+1]; 
+//	memset(wszUtf8, 0, len * 2 + 2); 
+//	MultiByteToWideChar(CP_ACP, 0, (LPCCH)strGBK, -1, (LPWSTR)wszUtf8, len); 
+//	len = WideCharToMultiByte(CP_UTF8, 0, (LPCWSTR)wszUtf8, -1, NULL, 0, NULL, NULL); 
+//	char *szUtf8=new char[len + 1]; 
+//	memset(szUtf8, 0, len + 1); 
+//	WideCharToMultiByte (CP_UTF8, 0, (LPCWSTR)wszUtf8, -1, (LPSTR)szUtf8, len, NULL,NULL);
+//	delete []wszUtf8;
+//
+//	return szUtf8; 
+//}
 
 PS_TAG_PROP_ENUM finType(map<std::string,PS_TAG_PROP_ENUM> &m,std::string key)
 {
@@ -426,12 +428,14 @@ std::string ws2s(const std::wstring& ws)
 
 const char* str2Upper(const char *s)
 {
-	char *str = new char[70];
-	strcpy(str,s);
-	int i = -1;
-	while(str[i++]) 
-		str[i] = toupper(str[i]);
-	return str;
+    std::string strTemp = s;
+    transform(strTemp.begin(),strTemp.end(),strTemp.begin(),::toupper);
+    /*char *str = new char[70];
+    strcpy(str,s);
+    int i = -1;
+    while(str[i++]) 
+    str[i] = toupper(str[i]);*/
+	return strTemp.c_str();
 
 }
 
@@ -503,9 +507,7 @@ Local<Object> getRealObj(PS_DATA *psData)
 	case PSDATATYPE_STRING:
 	case PSDATATYPE_WSTRING:
 		{
-			char * strData = GBKToUtf8(psData->Value.String.Data);
-			robj->Set(String::New("value"),String::New(strData));
-			delete []strData;
+			robj->Set(String::New("value"),String::New(GBK2UTF8(psData->Value.String.Data).c_str()));
 		}
 		
 		break;
@@ -550,7 +552,7 @@ Local<Object> getpropValue(PS_VARIANT *val,Local<Object> robj)
 	case PSDATATYPE_STRING:
 	case PSDATATYPE_WSTRING:
 		{
-			robj->Set(String::New("value"),String::New(GBKToUtf8(val->String.Data)));
+			robj->Set(String::New("value"),String::New(GBK2UTF8(val->String.Data).c_str()));
 		}
 		break;
 	case PSDATATYPE_BLOB: 
@@ -595,7 +597,7 @@ Local<Object> getPropObj(PS_TAG_PROP_LIST *var,Local<Array> arr)
 			break;
 		case PSDATATYPE_STRING:
 		case PSDATATYPE_WSTRING:
-			robj->Set(String::New(idStr),String::New(GBKToUtf8(var->PropValues[i].String.Data)));
+			robj->Set(String::New(idStr),String::New(GBK2UTF8(var->PropValues[i].String.Data).c_str()));
 			break;
 		case PSDATATYPE_BLOB: 
 			robj->Set(String::New(idStr),Undefined());

@@ -53,40 +53,39 @@ Handle<Value> Client::connectSync(const Arguments& args)
 	{
 
 		String::Utf8Value host(args[0]);
-		const char * hostName = ToCString(host);
-		baton.hostname_ = hostName;
+		baton.hostname_ = ToCString(host);
 
 		String::Utf8Value use(args[1]);
-		const char * user = ToCString(use);
-		baton.user_ = user;
+		baton.user_ = ToCString(use);
 
 		String::Utf8Value pass(args[2]);
-		const char * password = ToCString(pass);
-		baton.password_ = password;
+		baton.password_ = ToCString(pass);
 		if (args.Length()==4)
 		{
 			baton.port_ = args[3]->ToUint32()->Value();
 		}
 	}
+    uv_work_t* req = new uv_work_t();
 	try {
-		uv_work_t* req = new uv_work_t();
 		req->data = &baton;
 		baton.client_->Ref();
 		connectWork(req);
 		baton.client_->Unref();
+        delete req;
 		///if (PSERR(nRet))
 		if(baton.errString_)
 		{
 			Local<Object> errObj = Error::newObj();
 			errObj->Set(String::New("code"),Number::New(baton.code_));
-			errObj->Set(String::New("errString"),String::New(GBKToUtf8(baton.errString_->c_str())));
+			errObj->Set(String::New("errString"),String::New(GBK2UTF8(baton.errString_->c_str()).c_str()));
 			return scope.Close(errObj);	
 		}
 		
 	} catch(PsException &ex) {
-		return scope.Close(ThrowException(Exception::Error(String::New(GBKToUtf8(ex.what())))));
+        delete req;
+		return scope.Close(ThrowException(Exception::Error(String::New(GBK2UTF8(ex.what()).c_str()))));
 	} catch (const std::exception& ex) {
-		
+		delete req;
 		return scope.Close(ThrowException(Exception::Error(String::New(ex.what()))));
 	}
 	Handle<Object> ps = PspaceNode::constructorTemplate->GetFunction()->NewInstance();
@@ -110,20 +109,14 @@ void Client::connectWork(uv_work_t* req)
 		if (PSERR(nRet))
 		{
 			baton->code_ = nRet;
-			std::string *s = new std::string(psAPI_Commom_GetErrorDesc(nRet));
-			baton->errString_ = s;
+			baton->errString_ = new std::string(psAPI_Commom_GetErrorDesc(nRet));
 		}
 		else
 		{
-			//setHandle(hServer);
-			//baton->client_->handle_ = hServer;
 			baton->handle_ = hServer;
 		}	
 	} catch(PsException &ex) {
-		//strcpy(baton->errString_,ex.what());
-		std::string *s = new std::string(ex.what());
-		///baton->errString_ = s;
-		baton->errString_ = s;
+		baton->errString_ = new std::string(ex.what());
 	}
 }
 
@@ -135,8 +128,8 @@ void Client::afterConnect(uv_work_t* req, int status)
 
 	Handle<Value> argv[2];
 	if(baton->code_!=0) {
-		///argv[0] = Exception::Error(String::New(GBKToUtf8((baton->errString_)->c_str())));
-		argv[0] = String::New(GBKToUtf8(baton->errString_->c_str()));
+		///argv[0] = Exception::Error(String::New(GBK2UTF8((baton->errString_)->c_str())));
+		argv[0] = String::New(GBK2UTF8(baton->errString_->c_str()).c_str());
 		argv[1] = Undefined();
 	} else {
 		argv[0] = Undefined();
@@ -147,6 +140,7 @@ void Client::afterConnect(uv_work_t* req, int status)
 	}
 	node::MakeCallback(Context::GetCurrent()->Global(), baton->callback_, 2, argv);
 	delete baton;
+    delete req;
 }
 Handle<Value> Client::connect(const Arguments& args)
 {
@@ -182,22 +176,20 @@ Handle<Value> Client::connect(const Arguments& args)
 				REQ_FUN_ARG(k, callback);
 				baton = new ConnectBaton(client,&callback);
 				String::Utf8Value host(args[0]);
-				const char * hostName = ToCString(host);
-				baton->hostname_ = hostName;
+				baton->hostname_ =  ToCString(host);
 				
 				String::Utf8Value use(args[1]);
-				const char * user = ToCString(use);
-				baton->user_ = user;
+				baton->user_ = ToCString(use);
 
 				String::Utf8Value pass(args[2]);
-				const char * password = ToCString(pass);
-				baton->password_ = password;
+				baton->password_ =ToCString(pass);
 				if (args.Length()==5)
 				{
 					baton->port_ = args[3]->ToUint32()->Value();
 				}
 		}
-		client->Ref();
+		//client->Ref();
+        baton->client_->Ref();
 		uv_work_t* req = new uv_work_t();
 		req->data = baton;
 		uv_queue_work(uv_default_loop(), req, connectWork, (uv_after_work_cb)afterConnect);
