@@ -263,7 +263,7 @@ private:
 	PSSTR  *tagName_;
 	PS_VARIANT *dataValues_;
 	PS_TIME *timeStamps_;
-	PSUINT32 **qualitys_;
+	PSUINT32 *qualitys_;
 	std::string *errString;
 	PS_DATA *realData_;	
 };

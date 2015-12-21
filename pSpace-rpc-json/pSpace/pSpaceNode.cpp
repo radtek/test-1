@@ -804,7 +804,7 @@ void PspaceNode::subValueWork(uv_work_t* req)
 				{
 					sbton->code_ = nRet;
 					sbton->errString = new std::string(psAPI_Commom_GetErrorDesc(nRet));
-					psAPI_Memory_FreeAndNull((PSVOID**)pAPIErrors);
+					psAPI_Memory_FreeAndNull((PSVOID**)&pAPIErrors);
 					psAPI_Memory_FreeAndNull((PSVOID**)&tagIDs);
 				}
 				sbton->subID = nSubscribeID;
@@ -1072,7 +1072,7 @@ void PspaceNode::delSubWork(uv_work_t* req)
 					delBaton->errString = new std::string(psAPI_Commom_GetErrorDesc(n));
 					
 				}
-				psAPI_Memory_FreeAndNull((PSVOID**)pAPIErrors);
+				psAPI_Memory_FreeAndNull((PSVOID**)&pAPIErrors);
 				psAPI_Memory_FreeAndNull((PSVOID**)&tagIDs);
 			}
 			psAPI_Memory_FreeAndNull((PSVOID**)&tagIDs);
@@ -5885,29 +5885,33 @@ void PspaceNode::afterAckAlarm(uv_work_t* req,int status)
 
 void PspaceNode::batchReadWork(uv_work_t* req)
 {
-	BatchBaton* t = static_cast<BatchBaton*>(req->data);
-	t->code_  = PSRET_OK;
-	t->errString = NULL;
-	PSAPIStatus nRet  = PSRET_OK;
-	PSAPIStatus *pAPIErrors = PSNULL;
-	try {
-		if(t->psNode->hHanle_ == PSHANDLE_UNUSED) {
-			throw PsException("Connection already closed");
-		}else{
-			PSUINT32 *tagIDs = *(t->getTagIDList(t->tagName_,t->psNode->hHanle_,t->tagCount_));
-			
-			nRet = psAPI_Real_ReadList(t->psNode->hHanle_, t->tagCount_, 
-										tagIDs, 
-										&(t->realData_), &pAPIErrors);
-			if ( PSERR(nRet) )
-			{
-				t->code_ = nRet;
-				t->errString = new std::string(psAPI_Commom_GetErrorDesc(nRet));
-				//std::cout<<t->errString->c_str()<<std::endl;
-			}
-			//std::cout<<(t->realData_+1)->Value.Double<<std::endl;
-			psAPI_Memory_FreeAndNull((PSVOID**)&tagIDs);
-			psAPI_Memory_FreeAndNull((PSVOID**)&pAPIErrors);
+    BatchBaton* t = static_cast<BatchBaton*>(req->data);
+    t->code_  = PSRET_OK;
+    t->errString = NULL;
+    PSAPIStatus nRet  = PSRET_OK;
+    PSAPIStatus *pAPIErrors = PSNULL;
+    try {
+        if(t->psNode->hHanle_ == PSHANDLE_UNUSED) {
+            throw PsException("Connection already closed");
+        }else{
+            PSUINT32 *tagIDs = *(t->getTagIDList(t->tagName_,t->psNode->hHanle_,t->tagCount_));
+
+            nRet = psAPI_Real_ReadList(t->psNode->hHanle_, t->tagCount_, 
+                tagIDs, 
+                &(t->realData_), &pAPIErrors);
+
+            if (PSERR(nRet) && nRet != PSERR_FAIL_IN_BATCH)
+            {
+                t->code_ = nRet;
+                t->errString = new std::string(psAPI_Commom_GetErrorDesc(nRet));
+            } 
+            if (nRet == PSERR_FAIL_IN_BATCH)
+            {
+                t->code_ = nRet;
+                t->errString = new std::string(psAPI_Commom_GetErrorDesc(nRet));
+                psAPI_Memory_FreeAndNull((PSVOID**)&pAPIErrors);
+            }
+            psAPI_Memory_FreeAndNull((PSVOID**)&tagIDs);
 		}	
 	}catch(PsException &ex) {
 		t->errString = new string(ex.what());
@@ -5929,17 +5933,23 @@ void PspaceNode::batchWriteWork(uv_work_t* req)
 		if(t->psNode->hHanle_ == PSHANDLE_UNUSED) {
 			throw PsException("Connection already closed");
 		}else{
-		
-			//std::cout<<PSTIME2STR(*(t->timeStamps_[1]))<<std::endl;
+            PSUINT32 *tagIDs = *(t->getTagIDList(t->tagName_,t->psNode->hHanle_,t->tagCount_));
+
 			nRet = psAPI_Real_WriteList(t->psNode->hHanle_, t->tagCount_, 
-				*(t->getTagIDList(t->tagName_,t->psNode->hHanle_,t->tagCount_)),
-				t->dataValues_,t->timeStamps_, *(t->qualitys_), &pAPIErrors);
-			if ( PSERR(nRet))
-			{
-				t->code_ = nRet;
-				t->errString = new std::string(GBK2UTF8(psAPI_Commom_GetErrorDesc(nRet)).c_str());
-				//std::cout<<psAPI_Commom_GetErrorDesc(nRet)<<std::endl;
-			}		
+				tagIDs,t->dataValues_,t->timeStamps_, t->qualitys_, &pAPIErrors);
+
+            if (PSERR(nRet) && nRet != PSERR_FAIL_IN_BATCH)
+            {
+                t->code_ = nRet;
+                t->errString = new std::string(psAPI_Commom_GetErrorDesc(nRet));
+            } 
+            if (nRet == PSERR_FAIL_IN_BATCH)
+            {
+                t->code_ = nRet;
+                t->errString = new std::string(psAPI_Commom_GetErrorDesc(nRet));
+                psAPI_Memory_FreeAndNull((PSVOID**)&pAPIErrors);
+            }
+            psAPI_Memory_FreeAndNull((PSVOID**)&tagIDs);
 		}	
 	}catch(PsException &ex) {
 		t->errString = new string(ex.what());
@@ -5968,11 +5978,6 @@ void PspaceNode::afterBatchRead(uv_work_t* req, int status)
 			Local<Array> arrObj = Array::New(bat->tagCount_);
 			for (int n=0;n<bat->tagCount_;n++)
 			{
-				//Local<Object> testObj = Object::New();
-				//PS_TIME *d = new PS_TIME[1];
-				//string s = "2012-02-12 23:34.343";
-				//STR2PSTIME(d,s);
-				//PSTIME2V8DATE(*d);
 				arrObj->Set(n,getRealObj(bat->realData_+n));		
 			}
 			argv[1] = arrObj;
@@ -5983,13 +5988,18 @@ void PspaceNode::afterBatchRead(uv_work_t* req, int status)
 		argv[0] = Exception::Error(String::New(ex.what()));
 		argv[1] = Undefined();
 		node::MakeCallback(Context::GetCurrent()->Global(), bat->callback, 2, argv);
+        FREE_MEMORY(bat);
+        FREE_MEMORY(req);
 	} catch(const exception &ex) {
 		Handle<Value> argv[2];
 		argv[0] = Exception::Error(String::New(GBK2UTF8(bat->errString->c_str()).c_str()));
 		argv[1] = Undefined();
 		node::MakeCallback(Context::GetCurrent()->Global(), bat->callback, 2, argv);
+        FREE_MEMORY(bat);
+        FREE_MEMORY(req);
 	}
-	delete bat;
+    FREE_MEMORY(bat);
+    FREE_MEMORY(req);
 	scope.Close(Undefined());
 }
 
@@ -6017,14 +6027,18 @@ void PspaceNode::afterBatchWrite(uv_work_t* req, int status)
 		argv[0] = Exception::Error(String::New(ex.what()));
 		argv[1] = Undefined();
 		node::MakeCallback(Context::GetCurrent()->Global(), bat->callback, 2, argv);
+        FREE_MEMORY(bat);
+        FREE_MEMORY(req);
 	} catch(const exception &ex) {
 		Handle<Value> argv[2];
 		argv[0] = Exception::Error(String::New(GBK2UTF8(bat->errString->c_str()).c_str()));
 		argv[1] = Undefined();
 		node::MakeCallback(Context::GetCurrent()->Global(), bat->callback, 2, argv);
+        FREE_MEMORY(bat);
+        FREE_MEMORY(req);
 	}
-	delete bat;
-
+    FREE_MEMORY(bat);
+    FREE_MEMORY(req);
 
 }
 
@@ -6032,7 +6046,8 @@ Handle<Value> PspaceNode::batRealReadSyn(const Arguments& args)
 {
 	HandleScope scope;
 	PspaceNode* ps = ObjectWrap::Unwrap<PspaceNode>(args.This());
-	BatchBaton* bat;
+	BatchBaton* bat = NULL;
+    uv_work_t* req = NULL;
 	try {
 		//Handle<Object> robj = Object::New();
 		bat = new BatchBaton(ps,NULL);
@@ -6044,16 +6059,13 @@ Handle<Value> PspaceNode::batRealReadSyn(const Arguments& args)
 			String::Utf8Value iStr(tagArr->Get(i));
 			const char* IDStr = ToCString(iStr);
 			std::vector<std::string> result=split(IDStr,".");
-			//bat->tagName_[i] = (PSSTR)replace_all(result[0],"/","\\").c_str();
-			string utf8Name = UTF8ToGBK(replace_all(result[0],"/","\\"));
-			const char* str = utf8Name.c_str();
-			//std::cout<<"str:"<<str<<std::endl;
+			const char* str =  UTF8ToGBK(replace_all(result[0],"/","\\")).c_str();
 			bat->tagName_[i] = new char[strlen(str)+1];
 			strcpy(bat->tagName_[i],str);
 			bat->tagName_[i][strlen(bat->tagName_[i])] = 0;
 
 		}
-		uv_work_t* req = new uv_work_t();
+		req = new uv_work_t();
 		req->data = bat;
 		bat->psNode->Ref();
 		batchReadWork(req);
@@ -6063,9 +6075,8 @@ Handle<Value> PspaceNode::batRealReadSyn(const Arguments& args)
 			Local<Object> errObj = Error::newObj();
 			errObj->Set(String::New("code"),Number::New(bat->code_));
 			errObj->Set(String::New("errString"),String::New(GBK2UTF8(bat->errString->c_str()).c_str()));
-			free(req->loop);
-			delete req;
-			delete bat;
+			FREE_MEMORY(bat);
+            FREE_MEMORY(req);
 			return scope.Close(errObj);
 		}
 		//  成功
@@ -6074,13 +6085,12 @@ Handle<Value> PspaceNode::batRealReadSyn(const Arguments& args)
 		{
 			arrObj->Set(n,getRealObj(bat->realData_+n));		
 		}
-		//delete req->data;
-		free(req->loop);
-		delete req;
-		delete bat;
+        FREE_MEMORY(bat);
+        FREE_MEMORY(req);
 		return scope.Close(arrObj);
 	} catch(PsException &ex) {
-		delete bat;
+        FREE_MEMORY(bat);
+        FREE_MEMORY(req);
 		return ThrowException(Exception::Error(String::New(ex.what())));
 	}	
 }
@@ -6091,7 +6101,8 @@ Handle<Value> PspaceNode::batRealReadAsy(const Arguments& args)
 	PspaceNode* ps = ObjectWrap::Unwrap<PspaceNode>(args.This());
 	REQ_ARRAY_ARG(0,tagArr);
 	REQ_FUN_ARG(args.Length()-1, callback);
-	BatchBaton* bat;
+	BatchBaton* bat = NULL;
+    uv_work_t* req  = NULL;
 	try {
 		bat = new BatchBaton(ps, &callback);
 		bat->tagCount_ = tagArr->Length();
@@ -6107,21 +6118,25 @@ Handle<Value> PspaceNode::batRealReadAsy(const Arguments& args)
 			strcpy(bat->tagName_[i],str);
 			bat->tagName_[i][strlen(bat->tagName_[i])] = 0;
 		}
-	} catch(PsException &ex) {
-		return scope.Close(ThrowException(Exception::Error(String::New(ex.what()))));
-	}
-	uv_work_t* req = new uv_work_t();
-	req->data = bat;
-	uv_queue_work(uv_default_loop(), req, batchReadWork, (uv_after_work_cb)afterBatchRead);
-	ps->Ref();
-	return scope.Close(Undefined());
+	    req = new uv_work_t();
+	    req->data = bat;
+	    uv_queue_work(uv_default_loop(), req, batchReadWork, (uv_after_work_cb)afterBatchRead);
+	    ps->Ref();
+	    return scope.Close(Undefined());
+
+    } catch(PsException &ex) {
+        FREE_MEMORY(bat);
+        FREE_MEMORY(req);
+        return scope.Close(ThrowException(Exception::Error(String::New(ex.what()))));
+    }
 }
 
 Handle<Value> PspaceNode::batRealWriteSyn(const Arguments& args)
 {
 	HandleScope scope;
 	PspaceNode* ps = ObjectWrap::Unwrap<PspaceNode>(args.This());
-	BatchBaton* bat;
+	BatchBaton* bat = NULL;
+    uv_work_t* req = NULL;
 	try {
 		bat = new BatchBaton(ps,NULL);
 		REQ_OBJECT_ARG(0,dataObj);
@@ -6129,7 +6144,7 @@ Handle<Value> PspaceNode::batRealWriteSyn(const Arguments& args)
 		bat->tagCount_ = keys->Length();
 		//bat->tagID_ = new PSUINT32[keys->Length()];
 		bat->tagName_ = new PSSTR[bat->tagCount_];
-		bat->qualitys_ = new PSUINT32*[keys->Length()];
+		bat->qualitys_ = new PSUINT32[keys->Length()];
 		bat->dataValues_ = new PS_VARIANT[keys->Length()];
 		bat->timeStamps_ = new PS_TIME [keys->Length()];
 		for (int i=0;i<bat->tagCount_;i++)
@@ -6140,11 +6155,8 @@ Handle<Value> PspaceNode::batRealWriteSyn(const Arguments& args)
 			const char* str = replace_all(result[0],"/","\\").c_str();
 			bat->tagName_[i] = new char[strlen(str)+1];
 			strcpy(bat->tagName_[i],str);
-			bat->tagName_[i][strlen(bat->tagName_[i])] = 0;
-			//bat->tagID_[i] = bat->getTagID(UTF8ToGBK(replace_all(result[0],"/","\\").c_str()).c_str(),ps->hHanle_);
-			
-			bat->qualitys_[i]= NULL;
-			//bat->timeStamps_[i]=NULL;
+			bat->tagName_[i][strlen(bat->tagName_[i])] = 0;	
+			bat->qualitys_[i]= PS_QUALITY_UNCERTAIN;
 			PS_TIME tmpTime;
 			SYSTEMTIME st;
 			GetLocalTime(&st);
@@ -6184,8 +6196,7 @@ Handle<Value> PspaceNode::batRealWriteSyn(const Arguments& args)
 				{
 					String::Utf8Value str(valObj->Get(String::New("quality")));
 					const char* pstr = ToCString(str);
-					bat->qualitys_[i] = new PSUINT32[sizeof(PSUINT32)];
-					*(bat->qualitys_[i]) = bat->getQuality(pstr);
+					bat->qualitys_[i] = bat->getQuality(pstr);
 				}
 				//时间戳
 				if (valObj->Has(v8::String::New("time"))) 
@@ -6227,7 +6238,7 @@ Handle<Value> PspaceNode::batRealWriteSyn(const Arguments& args)
 				}
 			}
 		}
-		uv_work_t* req = new uv_work_t();
+		req = new uv_work_t();
 		req->data = bat;
 		bat->psNode->Ref();
 		
@@ -6239,13 +6250,17 @@ Handle<Value> PspaceNode::batRealWriteSyn(const Arguments& args)
 			Local<Object> errObj = Error::newObj();
 			errObj->Set(String::New("code"),Number::New(bat->code_));
 			errObj->Set(String::New("errString"),String::New((bat->errString->c_str())));
-			delete bat;
+            FREE_MEMORY(bat);
+            FREE_MEMORY(req);
 			return errObj;
 		}
 		//  成功
+        FREE_MEMORY(bat);
+        FREE_MEMORY(req);
 		return scope.Close(Boolean::New(true));
-		delete bat;
 	} catch(PsException &ex) {
+        FREE_MEMORY(bat);
+        FREE_MEMORY(req);
 		return ThrowException(Exception::Error(String::New(ex.what())));
 	}	
 }
@@ -6262,16 +6277,14 @@ Handle<Value> PspaceNode::batRealWriteAsy(const Arguments& args)
 		REQ_OBJECT_ARG(0,dataObj);
 		Handle<Array> keys = dataObj->GetOwnPropertyNames();
 		bat->tagCount_ = keys->Length();
-		//bat->tagID_ = new PSUINT32[keys->Length()];
 		bat->tagName_ = new PSSTR[bat->tagCount_];
-		bat->qualitys_ = new PSUINT32*[keys->Length()];
+		bat->qualitys_ = new PSUINT32[keys->Length()];
 		bat->dataValues_ = new PS_VARIANT[keys->Length()];
 		for (int i=0;i<bat->tagCount_;i++)
 		{
 			String::Utf8Value iStr(keys->Get(i));
 			const char* IDStr = ToCString(iStr);
 			std::vector<std::string> result=split(IDStr,".");
-			//bat->tagID_[i] = bat->getTagID(UTF8ToGBK(replace_all(result[0],"/","\\").c_str()).c_str(),ps->hHanle_);
 			const char* str = replace_all(result[0],"/","\\").c_str();
 			bat->tagName_[i] = new char[strlen(str)+1];
 			strcpy(bat->tagName_[i],str);
@@ -6282,7 +6295,7 @@ Handle<Value> PspaceNode::batRealWriteAsy(const Arguments& args)
 			tmpTime.Millisec=st.wMilliseconds;
 			tmpTime.Second = time(NULL);
 			bat->timeStamps_[i] = tmpTime;
-			bat->qualitys_[i]= NULL;
+			bat->qualitys_[i]= PS_QUALITY_UNCERTAIN;
 			if(dataObj->Get(String::New(IDStr))->IsObject()){
 				Local<Object> valObj = dataObj->Get(String::New(IDStr))->ToObject();
 				if(valObj->Has(v8::String::New("value")))
@@ -6315,8 +6328,7 @@ Handle<Value> PspaceNode::batRealWriteAsy(const Arguments& args)
 				{
 					String::Utf8Value str(valObj->Get(String::New("quality")));
 					const char* pstr = ToCString(str);
-					bat->qualitys_[i] = new PSUINT32[sizeof(PSUINT32)];
-					*(bat->qualitys_[i]) = bat->getQuality(pstr);
+					bat->qualitys_[i] = bat->getQuality(pstr);
 				}
 				//时间戳
 				if (valObj->Has(v8::String::New("time"))) 

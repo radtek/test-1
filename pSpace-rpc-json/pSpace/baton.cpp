@@ -1023,7 +1023,6 @@ BatchBaton::~BatchBaton()
     for (int i=0;i<this->tagCount_;i++)
     {
       delete []tagName_[i];
-      delete []qualitys_[i];
     }
     this->tagCount_=0;
     if (this->tagName_ != PSNULL)
