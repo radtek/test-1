@@ -6059,9 +6059,9 @@ Handle<Value> PspaceNode::batRealReadSyn(const Arguments& args)
 			String::Utf8Value iStr(tagArr->Get(i));
 			const char* IDStr = ToCString(iStr);
 			std::vector<std::string> result=split(IDStr,".");
-			const char* str =  UTF8ToGBK(replace_all(result[0],"/","\\")).c_str();
-			bat->tagName_[i] = new char[strlen(str)+1];
-			strcpy(bat->tagName_[i],str);
+            std::string strtemp = UTF8ToGBK(replace_all(result[0],"/","\\"));
+			bat->tagName_[i] = new char[strtemp.length()+1];
+			strcpy(bat->tagName_[i],strtemp.c_str());
 			bat->tagName_[i][strlen(bat->tagName_[i])] = 0;
 
 		}

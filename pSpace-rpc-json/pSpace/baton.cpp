@@ -67,22 +67,27 @@ PSUINT32** Baton::getTagIDList(PSSTR *tagNames,PSHANDLE h,int tagCount)
 	PSAPIStatus *pAPIErrors = PSNULL;
 	PSUINT32 *pTagIds = PSNULL;
 	nRet = psAPI_Tag_GetIdListByLongName(h, tagCount, tagNames, &pTagIds, &pAPIErrors);
-	if (PSERR(nRet))
-	{
-		
-		psAPI_Memory_FreeAndNull((PSVOID**)&pAPIErrors);
-		return NULL;
-	}
-	psAPI_Memory_FreeAndNull((PSVOID**)&pAPIErrors);
+
+    if (PSERR(nRet) && nRet != PSERR_FAIL_IN_BATCH)
+    {
+        return &pTagIds;
+    } 
+    if (nRet == PSERR_FAIL_IN_BATCH)
+    {
+        for (int n = 0; n < tagCount; n++)
+        {
+            string strtrmp = tagNames[n];
+            strtrmp.append(psAPI_Commom_GetErrorDesc(pAPIErrors[n]));
+            printf("\t²âµã:%s ·µ»Ø %s\n", tagNames[n], psAPI_Commom_GetErrorDesc(pAPIErrors[n]));
+        }
+        psAPI_Memory_FreeAndNull((PSVOID**)&pAPIErrors);
+        return &pTagIds;
+    }
 	for (int i=0;i<tagCount;i++)
 	{
 		id2TagName_[pTagIds[i]] = tagNames[i];
 	}
 	return &pTagIds;
-	
-	
-
-
 }
 
 std::string Baton::getTagName(PSUINT32 nTagID)
