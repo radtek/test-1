@@ -222,6 +222,7 @@ private:
 	std::string *errString;
 	std::string tagName;
 	PspaceNode *psNode;
+    PSUINT32 nMaxNumOfReturnValues_;
 };
 
 class Alarm:public Baton{

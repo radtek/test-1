@@ -3855,7 +3855,11 @@ Handle<Value> PspaceNode::readHisRawSyn(const Arguments& args)
 		std::vector<std::string> result=split(pstr,".");
 		t->id = t->getTagID(UTF8ToGBK(replace_all(result[0],"/","\\").c_str()).c_str(),ps->hHanle_);
 		t->tagName = t->getTagName(t->id);
-
+        //added by chengxh at 2016-1-15 for 查询原始数据
+        if (args.Length()>=4)
+        {
+            t->nMaxNumOfReturnValues_ =  args[4]->ToUint32()->Value();
+        }
 		t->bBounds_ = args[3]->ToBoolean()->Value();
 		String::Utf8Value tStr(args[1]);
 		Local<Date> date  =  Local<Date>::Cast(args[1]);
@@ -3950,7 +3954,7 @@ void PspaceNode::readHisRawWork(uv_work_t* req)
 			throw PsException("Connection already closed");
 		}else{
 			PSAPIStatus *pAPIErrors = PSNULL;
-			nRet = psAPI_His_ReadRaw(t->psNode->hHanle_, t->startTime_, t->endTime_, 0, t->bBounds_, t->tagCount_, 
+			nRet = psAPI_His_ReadRaw(t->psNode->hHanle_, t->startTime_, t->endTime_, t->nMaxNumOfReturnValues_, t->bBounds_, t->tagCount_, 
 				t->tagIds_, &(t->pHisDataList_), &pAPIErrors);
 
 			if (PSERR(nRet) && nRet != PSERR_FAIL_IN_BATCH)

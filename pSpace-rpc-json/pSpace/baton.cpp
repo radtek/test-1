@@ -78,7 +78,7 @@ PSUINT32** Baton::getTagIDList(PSSTR *tagNames,PSHANDLE h,int tagCount)
         {
             string strtrmp = tagNames[n];
             strtrmp.append(psAPI_Commom_GetErrorDesc(pAPIErrors[n]));
-            printf("\t测点:%s 返回 %s\n", tagNames[n], psAPI_Commom_GetErrorDesc(pAPIErrors[n]));
+            //printf("\t测点:%s 返回 %s\n", tagNames[n], psAPI_Commom_GetErrorDesc(pAPIErrors[n]));
         }
         psAPI_Memory_FreeAndNull((PSVOID**)&pAPIErrors);
         return &pTagIds;
@@ -948,6 +948,7 @@ TagHis::TagHis(PspaceNode* psNode,v8::Handle<v8::Function>* callback)
 	this->nNumTimeStamps_ = 0;
 	this->dataStatus_ = NULL;
 	this->timeStatusLen_ = 0;
+    this->nMaxNumOfReturnValues_ = 0;
 	
 }
 TagHis::~TagHis()
