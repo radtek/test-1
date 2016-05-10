@@ -1,4 +1,4 @@
-var addon = require('pSpace');
+﻿var addon = require('pSpace');
 var configure = require('configure');
 var async = require("async");
 var iconv = require('iconv-lite');
@@ -25,15 +25,15 @@ function readCsv(done){
       var typeBuffer = new Buffer(confData[i].type, 'binary');
       var type = iconv.decode(typeBuffer, 'gbk');
       var exists = ps_con.isExists(strName);
-      if(exists && !exists.hasOwnProperty("errString")){
+
+      //if(exists){
         data[strName] = {};
         data[strName]["type"] = type;
         data[strName]["last"] = null;
-      }else{
-        if(!exists || exists.hasOwnProperty("errString"))
-          console.log("测点不存在或者测点长名不合法：",strName);
-          logger.warn("测点不存在或者测点长名不合法：",strName);
-      }
+      //}else{
+        //if(!exists)
+        //  logger.warn("测点不存在：",strName);
+      //}
     }
     logger.info("配置文件加载完毕.");
     console.log("配置文件加载完毕!");
@@ -80,7 +80,8 @@ function getProps(name,callback){
 	var prop = ["TagType","OnMessage","OffMessage","ValueAlarmClass"];
 	//如果是开关量,保存属性，否则返回错误
 	var tagName = name+'.props';
-	var res = ps_con.read(tagName,prop);
+	var res = ps_con.read(tagName,prop)
+	
 	if(res instanceof ps.Err){
 		callback(res.errString,null);
 	}else{
@@ -112,6 +113,50 @@ function formatValue (value,done) {
             value[i].value.value=0;
           }
           value[i]['props'] = prop;
+		  var longnm = value[i].name;
+		  var len = longnm.length;
+		  var mark2 = longnm.substr(len - 2, 2);
+		  var mark1 = longnm.substr(len - 1, 1);
+		  var currentnm;
+		  var limitnm;
+		  
+		  if(mark2 == "HH")
+		  {
+			  currentnm = longnm.substring(0, len - 2);
+			  limitnm = currentnm + "SHH";
+		  }
+		  else if(mark2 == "LL")
+		  {
+			  currentnm = longnm.substring(0, len - 2);
+			  limitnm = currentnm + "SLL";
+		  }
+		  else if(mark1 == "H")
+		  {
+			  currentnm = longnm.substring(0, len - 1);
+			  limitnm = currentnm + "SH";
+		  }
+		  else if(mark1 == "L")
+		  {
+			  currentnm = longnm.substring(0, len - 1);
+			  limitnm = currentnm + "SL";
+		  }
+		  
+		  var currentpv = ps_con.read(currentnm + ".pv");
+		  if(currentpv.hasOwnProperty("errString"))
+		  {
+		  }
+		  else
+		  {
+			  value[i]['current'] = currentpv.value;			  
+		  }
+		  var limitpv = ps_con.read(currentnm + ".pv");
+		  if(limitpv.hasOwnProperty("errString"))
+		  {
+		  }
+		  else
+		  {
+			  value[i]['limit'] = limitpv.value;
+		  }
         }
       });
     }
@@ -132,10 +177,11 @@ function formatValue (value,done) {
   });
  }
 function sub(done){
-  if(ps.isConnected()){
+  if(ps.isConnected()){	
     ps_con.sub(Object.keys(data),function(err,subid,curVal,value){
       if(err){
-        //console.log("sub error");   
+        //console.log("sub error"); 
+		logger.error("订阅失败:",err);
         done("订阅失败",null);
       }else{
         if(curVal){
@@ -143,6 +189,7 @@ function sub(done){
             if(err){
               done(err);
             }else{
+			console.log("初始化表::");
               sqlExec.init(mysql_con,data,val,logger,done);
             }
           });
@@ -173,12 +220,12 @@ function work(sqlCon){
       mysqlConnect(done);
     },
     function(done){
-      var create = "create table IF NOT EXISTS "+configure.tableName+"(tagname varchar(255) not null,value float not null,time datetime not null,type char(30) not null,level int not null,describle varchar(255) not null, PRIMARY KEY(tagname));";
+      var create = "create table IF NOT EXISTS "+configure.tableName+"(tagname varchar(255) not null,value float not null,time datetime not null,type char(30) not null,level int not null,describle varchar(255) not null,limitvalue double not null,currentvalue double not null, PRIMARY KEY(tagname));";//
       sqlExec.execSql(mysql_con,create,logger,done);
 	   
     },
     function(done){
-      //开始订阅
+      //开始订阅	  
       sub(done);
     }
     ],function(err,result){

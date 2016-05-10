@@ -1,0 +1,40 @@
+
+1、配置pspace和mysql相关信息
+  配置文件目录：./AlarmTrigger/node_modules/configure   //根据此路径找到configure ，用记事本打开并配置pspace和mysql以及Tag（报警测点）的相关信息
+  pspace配置：
+  var pSpace ={
+		"hostname":"localhost:8889",
+		"user":"admin",
+		"password":"admin888"
+	};
+
+  mysql配置：
+   var mysql = {
+ 	host: 'localhost',
+    user: 'root',
+    password: '123456',
+    database: 'alarmservice',//数据库名称
+    port: 3306
+    };
+
+  
+  测点配置：
+  var configurePath = "C:/Users/zdh/Desktop/昆仑燃气报警改造/AlarmTrigger/tag.csv";     //把报警组件中的Tag文件（配置报警测点）的路径配置到此处
+  
+
+2、配置测点
+  配置文件在当前目录下 tag.csv文件           //在报警组件中的Tag文件中新增或者修改报警测点
+
+
+3、 //启动报警组件
+
+
+  1).开始->运行->输入cmd
+
+  2).打开AlarmTrigger目录
+     输入：cd C:\Users\gao\Desktop\AlarmTrigger
+
+  3).测试执行
+    输入：node AlarmTrigger.js
+
+
