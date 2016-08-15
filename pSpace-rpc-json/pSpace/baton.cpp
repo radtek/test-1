@@ -20,8 +20,10 @@ protected:
 private:
 };
 //std::list<SubBaton::CallbackData> SubBaton::callbackData_;
-std::map<PSUINT32,list<SubBaton::CallbackData>> SubBaton::mapData_;
-std::map<PSUINT32,list<SubBaton::CallbackProp>> SubBaton::mapPropData_;
+std::map<PSUINT32,std::list<SubBaton::CallbackData>> SubBaton::mapData_;
+std::map<PSUINT32,std::list<SubBaton::CallbackProp>> SubBaton::mapPropData_;
+uv_mutex_t SubBaton::mutex_real;
+uv_mutex_t SubBaton::mutex_tag;
 //SubBaton* SubBaton::this_ = NULL;
 
 //std::map<PSUINT32,SubBaton::CallbackOtherProp> SubBaton::propsOther_;
@@ -630,6 +632,9 @@ SubBaton::SubBaton(PspaceNode* psNode,v8::Handle<v8::Function>* callback)
 	this->subData_ = PSNULL;
 	this->tagCount_ = 0;
 	this->timer = new uv_timer_t();  
+    uv_mutex_init(&mutex_real);
+    uv_mutex_init(&mutex_tag);
+    
 }
 SubBaton::~SubBaton()
 {
@@ -646,7 +651,8 @@ SubBaton::~SubBaton()
 	uv_timer_stop(timer);
     delete this->timer;
     this->timer = NULL;
-	
+	uv_mutex_destroy(&mutex_real);
+    uv_mutex_destroy(&mutex_tag);
     if (subData_!=NULL)
 	{
 		psAPI_Memory_FreeDataList(&subData_, tagCount_);
@@ -662,6 +668,7 @@ SubBaton::~SubBaton()
 
 list<SubBaton::CallbackData> SubBaton::getSubMapData(PSUINT32 subid)
 {
+    uv_mutex_lock(&mutex_real);
 	std::map<PSUINT32,list<SubBaton::CallbackData>>::iterator iter = mapData_.find(subid);
 	list<SubBaton::CallbackData> tmp;
 	if (iter !=mapData_.end())
@@ -669,11 +676,13 @@ list<SubBaton::CallbackData> SubBaton::getSubMapData(PSUINT32 subid)
 		tmp = iter->second;
 		mapData_.erase(iter);
 	}
+    uv_mutex_unlock(&mutex_real);
 	return tmp;
 }
 
 list<SubBaton::CallbackProp> SubBaton::getSubMapPropData(PSUINT32 subid)
 {
+    uv_mutex_lock(&mutex_tag);
 	std::map<PSUINT32,list<SubBaton::CallbackProp>>::iterator iter = mapPropData_.find(subid);
 	list<SubBaton::CallbackProp> tmp;
 	if (iter !=mapPropData_.end())
@@ -690,7 +699,7 @@ list<SubBaton::CallbackProp> SubBaton::getSubMapPropData(PSUINT32 subid)
 	}
 	//SubBaton::CallbackProp callBackData = tmp.front();
 	//std::cout<<"getData:"<<callBackData.propData.String.Data<<std::endl;
-	
+	uv_mutex_unlock(&mutex_tag);
 	return tmp;
 }
 
@@ -751,27 +760,37 @@ PSVOID PSAPI SubBaton::Real_CallbackFunction(
 	PSIN PS_DATA *pRealDataList
 	)
 {
-	list<CallbackData> pushTmp;
-	for (int n = 0; n < nCount; n++)
-	{
-		SubBaton::CallbackData callBackData;
-		//字符串类型变量单独处理
-		callBackData.tagID = *(pTagIds+n);
-		if ((pRealDataList+n)->Value.DataType==PSDATATYPE_STRING )
-		{
-			callBackData.date.Quality = (pRealDataList+n)->Quality;
-			callBackData.date.Time = (pRealDataList+n)->Time;
-			callBackData.date.Value.DataType = (pRealDataList+n)->Value.DataType;
-			callBackData.date.Value.String.Data = new char[strlen((pRealDataList+n)->Value.String.Data)+1];
-			strcpy(callBackData.date.Value.String.Data,(pRealDataList+n)->Value.String.Data);
-			callBackData.date.Value.String.Data[strlen(callBackData.date.Value.String.Data)] = 0;
-		}else{
-			callBackData.date = *(pRealDataList+n);
-		}
-		pushTmp.push_back(callBackData);
-	}
-	mapData_.insert(map<PSUINT32,list<CallbackData>>::value_type(nSubscribeId,pushTmp));
-	
+    list<CallbackData> pushTmp;
+    for (int n = 0; n < nCount; n++)
+    {
+        SubBaton::CallbackData callBackData;
+        //字符串类型变量单独处理
+        callBackData.tagID = *(pTagIds+n);
+        if ((pRealDataList+n)->Value.DataType==PSDATATYPE_STRING )
+        {
+            callBackData.date.Quality = (pRealDataList+n)->Quality;
+            callBackData.date.Time = (pRealDataList+n)->Time;
+            callBackData.date.Value.DataType = (pRealDataList+n)->Value.DataType;
+            callBackData.date.Value.String.Data = new char[strlen((pRealDataList+n)->Value.String.Data)+1];
+            strcpy(callBackData.date.Value.String.Data,(pRealDataList+n)->Value.String.Data);
+            callBackData.date.Value.String.Data[strlen(callBackData.date.Value.String.Data)] = 0;
+        }else{
+            callBackData.date = *(pRealDataList+n);
+        }
+        pushTmp.push_back(callBackData);
+    }
+    
+    uv_mutex_lock(&mutex_real);
+    std::map<PSUINT32,std::list<SubBaton::CallbackData>>::iterator iter = mapData_.find(nSubscribeId);
+    if (iter == mapData_.end())
+    {
+        mapData_.insert(map<PSUINT32,list<CallbackData>>::value_type(nSubscribeId,pushTmp));
+    }else
+    {
+        iter->second.splice(iter->second.end(),pushTmp);
+    }
+	uv_mutex_unlock(&mutex_real);
+    
 }
 
 PSVOID PSAPI SubBaton::Tag_CallbackFunction( PSIN PSHANDLE hServer,
@@ -787,8 +806,6 @@ PSVOID PSAPI SubBaton::Tag_CallbackFunction( PSIN PSHANDLE hServer,
 	for (int n = 0; n < nPropCount; n++)
 	{
 		CallbackProp proData;
-		////
-		//proData.propData = NULL;
 		
 		proData.changeType = nChangeType;
 		proData.propID = *(pPropIds+n);
@@ -804,11 +821,18 @@ PSVOID PSAPI SubBaton::Tag_CallbackFunction( PSIN PSHANDLE hServer,
 		proData.tagID = nTagId;
 		dataTmp.push_back(proData);
 		
-		Sleep(1);
+		//Sleep(1);
 	}
-	mapPropData_.insert(map<PSUINT32,list<CallbackProp>>::value_type(nSubscribeId,dataTmp));
-	//SubBaton::CallbackProp callBackData = dataTmp.front();
-	//std::cout<<"callBackData:"<<callBackData->propData->String.Data<<std::endl;
+    uv_mutex_lock(&mutex_tag);
+    std::map<PSUINT32,list<SubBaton::CallbackProp>>::iterator iter = mapPropData_.find(nSubscribeId);
+    if (iter == mapPropData_.end())
+    {
+        mapPropData_.insert(map<PSUINT32,list<CallbackProp>>::value_type(nSubscribeId,dataTmp));
+    }else
+    {
+        iter->second.splice(iter->second.end(),dataTmp);
+    }
+    uv_mutex_unlock(&mutex_tag);
 	
 } 
 

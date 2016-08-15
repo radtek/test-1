@@ -861,7 +861,7 @@ void PspaceNode::aftersubValue(uv_work_t* req, int status)
 			assert(!uv_is_active((uv_handle_t *) sbaton->timer));  
 			assert(!uv_is_closing((uv_handle_t *) sbaton->timer));   
 			//r = uv_timer_start(sbaton->timer, timer_cb, 0, 500); 
-			r = uv_timer_start(sbaton->timer, sbaton->timer_cb, 0, 500);
+			r = uv_timer_start(sbaton->timer, sbaton->timer_cb, 0, 100);
 			r = uv_run(uv_default_loop(), UV_RUN_DEFAULT);  
 		}
 	} catch(PsException &ex) {
@@ -1202,7 +1202,7 @@ void PspaceNode::aftersubProps(uv_work_t* req, int status)
 			assert(!uv_is_active((uv_handle_t *) sbaton->timer));  
 			assert(!uv_is_closing((uv_handle_t *) sbaton->timer));   
 			//r = uv_timer_start(sbaton->timer, timer_cb, 0, 500); 
-			r = uv_timer_start(sbaton->timer, sbaton->time_propCb, 0, 500);
+			r = uv_timer_start(sbaton->timer, sbaton->time_propCb, 0, 100);
 			
 			r = uv_run(uv_default_loop(), UV_RUN_DEFAULT); 
 		}

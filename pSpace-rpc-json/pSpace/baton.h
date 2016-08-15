@@ -152,6 +152,10 @@ private:
 	static void timer_cb(uv_timer_t *handle,int status);
 
 	static void time_propCb(uv_timer_t *handle,int status);
+
+    static uv_mutex_t mutex_real;
+
+    static uv_mutex_t mutex_tag;
 };
 
 class DelSubBaton:public Baton{
