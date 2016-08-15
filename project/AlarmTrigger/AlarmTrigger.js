@@ -18,6 +18,7 @@ var data = {};
 //读取配置文件并填充字典
 function readCsv(done){
   logger.info("开始加载配置文件。");
+  console.info("开始加载配置文件。");
   read.readFile(configure.configurePath,function(err,confData){
     for(var i in confData){
       var longName = new Buffer(confData[i].tagname, 'binary');
@@ -47,6 +48,7 @@ function handleError () {
   var conn = ps.open(configure.pSpace);
   if(conn instanceof ps.Err){
     logger.error("pSpace连接断开.");
+    console.error("pSpace连接断开!");
     return;
   }else{
     ps_con = conn;
@@ -77,7 +79,7 @@ function getProps(name,callback){
 	}
 	//没有属性，从pSpace中查询返回
 	//先判断测点是否是开关量
-	var prop = ["TagType","OnMessage","OffMessage","ValueAlarmClass"];
+	var prop = ["TagType","OnMessage","OffMessage","ValueAlarmClass","Description"];
 	//如果是开关量,保存属性，否则返回错误
 	var tagName = name+'.props';
 	var res = ps_con.read(tagName,prop)
@@ -87,8 +89,8 @@ function getProps(name,callback){
 	}else{
 		if(res.TagType===1){
 			var tmp = new Object();
-			tmp.on = res.OnMessage;
-			tmp.off = res.OffMessage;
+			tmp.on = res.Description;
+			tmp.off = res.Description;
 			tmp.level = res.ValueAlarmClass;
 			propData[name] = tmp;
 			callback(null,propData[name]);
@@ -119,7 +121,7 @@ function formatValue (value,done) {
 		  var mark1 = longnm.substr(len - 1, 1);
 		  var currentnm;
 		  var limitnm;
-		  
+		  var b = true;
 		  if(mark2 == "HH")
 		  {
 			  currentnm = longnm.substring(0, len - 2);
@@ -140,22 +142,31 @@ function formatValue (value,done) {
 			  currentnm = longnm.substring(0, len - 1);
 			  limitnm = currentnm + "SL";
 		  }
-		  
+		  else b = false;
+		  if(b)
+		  {
 		  var currentpv = ps_con.read(currentnm + ".pv");
 		  if(currentpv.hasOwnProperty("errString"))
 		  {
+			console.log("查询"+currentnm+"实时值失败！");
 		  }
 		  else
 		  {
 			  value[i]['current'] = currentpv.value;			  
 		  }
-		  var limitpv = ps_con.read(currentnm + ".pv");
+		  var limitpv = ps_con.read(limitnm + ".pv");
 		  if(limitpv.hasOwnProperty("errString"))
 		  {
 		  }
 		  else
 		  {
 			  value[i]['limit'] = limitpv.value;
+		  }
+		  }
+		  else
+		  {
+			value[i]['current'] = 1;
+			value[i]['limit'] = 1;
 		  }
         }
       });
@@ -172,16 +183,18 @@ function formatValue (value,done) {
       done(err);
     }else{
      logger.info("mysql连接完毕。"); 
+     console.info("mysql连接完毕。"); 
      done();
     }
   });
  }
+
 function sub(done){
   if(ps.isConnected()){	
     ps_con.sub(Object.keys(data),function(err,subid,curVal,value){
       if(err){
-        //console.log("sub error"); 
-		logger.error("订阅失败:",err);
+        console.error("订阅失败:", err); 
+		    logger.error("订阅失败:",err);
         done("订阅失败",null);
       }else{
         if(curVal){
@@ -189,7 +202,7 @@ function sub(done){
             if(err){
               done(err);
             }else{
-			console.log("初始化表::");
+			        console.log("初始化表::");
               sqlExec.init(mysql_con,data,val,logger,done);
             }
           });
@@ -198,6 +211,9 @@ function sub(done){
                 if(err){
                   done(err);
                 }else{
+
+                  //console.debug("subscrible data: ", data);
+
                   sqlExec.update(mysql_con,data,val,logger,done);
                 }
               });
@@ -222,21 +238,25 @@ function work(sqlCon){
     function(done){
       var create = "create table IF NOT EXISTS "+configure.tableName+"(tagname varchar(255) not null,value float not null,time datetime not null,type char(30) not null,level int not null,describle varchar(255) not null,limitvalue double not null,currentvalue double not null, PRIMARY KEY(tagname));";//
       sqlExec.execSql(mysql_con,create,logger,done);
-	   
     },
     function(done){
+      console.info("开始订阅");
       //开始订阅	  
       sub(done);
     }
     ],function(err,result){
       if(err){
-	  //如果整个流程中某一步失败，需要做什么
+        debugger
+	      //如果整个流程中某一步失败，需要做什么
 		    logger.warn("失败，将重新启动程序.");
+        console.warn("失败，将重新启动程序.");
+
          //重启之前关闭setInterval
          if(intervalID!=undefined){
    
           clearInterval(intervalID);
          }
+
          //重启之前关闭关闭pSpace连接
          if(ps.isConnected()){
           //删除所有订阅

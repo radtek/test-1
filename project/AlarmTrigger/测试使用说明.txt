@@ -29,10 +29,10 @@
 3、 //启动报警组件
 
 
-  1).开始->运行->输入cmd
+  1).开始->运行->输入cmd  T:
 
   2).打开AlarmTrigger目录
-     输入：cd C:\Users\gao\Desktop\AlarmTrigger
+     输入：cd T:\AlarmTrigger
 
   3).测试执行
     输入：node AlarmTrigger.js
