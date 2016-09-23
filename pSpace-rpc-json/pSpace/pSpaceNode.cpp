@@ -4580,7 +4580,7 @@ Handle<Value> PspaceNode::alarmRealSyn(const Arguments& args)
 			obj->Set(String::New("TagId"),Int32::New(t->alarms_[n].TagId));
 			obj->Set(String::New("AppType"),Int32::New(t->alarms_[n].AppType));
 			obj->Set(String::New("AlarmLevel "),Int32::New(t->alarms_[n].AlarmLevel));
-			obj->Set(String::New("AlarmContent"),String::New(t->alarms_[n].AlarmContent));
+			obj->Set(String::New("AlarmContent"),String::New(GBK2UTF8(t->alarms_[n].AlarmContent).c_str()));
 			obj->Set(String::New("AlarmValue"),String::New(t->alarms_[n].AlarmValue));
 			obj->Set(String::New("AlarmAckUserName"),String::New(t->alarms_[n].AlarmAckUserName));
 			obj->Set(String::New("AlarmTopic"),Int32::New(t->alarms_[n].AlarmTopic));
@@ -4939,7 +4939,7 @@ void PspaceNode::afterAlarmReal(uv_work_t* req,int status)
 				obj->Set(String::New("TagId"),Int32::New(t->alarms_[n].TagId));
 				obj->Set(String::New("AppType"),Int32::New(t->alarms_[n].AppType));
 				obj->Set(String::New("AlarmLevel "),Int32::New(t->alarms_[n].AlarmLevel));
-				obj->Set(String::New("AlarmContent"),String::New(t->alarms_[n].AlarmContent));
+				obj->Set(String::New("AlarmContent"),String::New(GBK2UTF8(t->alarms_[n].AlarmContent).c_str()));
 				obj->Set(String::New("AlarmValue"),String::New(t->alarms_[n].AlarmValue));
 				obj->Set(String::New("AlarmAckUserName"),String::New(t->alarms_[n].AlarmAckUserName));
 				obj->Set(String::New("AlarmTopic"),Int32::New(t->alarms_[n].AlarmTopic));
@@ -5305,7 +5305,7 @@ Handle<Value> PspaceNode::hisAlarmSyn(const Arguments& args)
 			obj->Set(String::New("TagId"),Int32::New(t->alarms_[n].TagId));
 			obj->Set(String::New("AppType"),Int32::New(t->alarms_[n].AppType));
 			obj->Set(String::New("AlarmLevel "),Int32::New(t->alarms_[n].AlarmLevel));
-			obj->Set(String::New("AlarmContent"),String::New(t->alarms_[n].AlarmContent));
+			obj->Set(String::New("AlarmContent"),String::New(GBK2UTF8(t->alarms_[n].AlarmContent).c_str()));
 			obj->Set(String::New("AlarmValue"),String::New(t->alarms_[n].AlarmValue));
 			obj->Set(String::New("AlarmAckUserName"),String::New(t->alarms_[n].AlarmAckUserName));
 			obj->Set(String::New("AlarmTopic"),Int32::New(t->alarms_[n].AlarmTopic));
