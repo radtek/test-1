@@ -30,6 +30,7 @@ void PspaceNode::init(Handle<Object> target) {
 	constructorTemplate->SetClassName(String::NewSymbol("PspaceNode"));
 
 	NODE_SET_PROTOTYPE_METHOD(constructorTemplate,"close",close);
+    NODE_SET_PROTOTYPE_METHOD(constructorTemplate,"isConnected",isConnected);
 	NODE_SET_PROTOTYPE_METHOD(constructorTemplate,"realReadSyn",realReadSyn);
 	NODE_SET_PROTOTYPE_METHOD(constructorTemplate,"read",read);
 	NODE_SET_PROTOTYPE_METHOD(constructorTemplate,"write",write);
@@ -90,6 +91,33 @@ Handle<Value> PspaceNode::close(const Arguments& args)
 	}
 }
 
+Handle<Value> PspaceNode::isConnected(const Arguments& args)
+{
+    HandleScope scope;
+    try {
+        PSAPIStatus nRet = PSRET_OK;
+        PSBOOL bConnected = PSFALSE;
+        PspaceNode* ps = ObjectWrap::Unwrap<PspaceNode>(args.This());
+        nRet = psAPI_Server_IsConnected(ps->hHanle_,&bConnected);
+        if (PSERR(nRet) )
+        {
+            return scope.Close(Boolean::New(false));
+        }
+        if (bConnected)
+        {
+            return scope.Close(Boolean::New(true));
+        }
+        else
+        {
+            return scope.Close(Boolean::New(false));
+        }
+        
+    } catch (const exception& ex) {
+          return scope.Close(ThrowException(Exception::Error(String::New(ex.what()))));
+    }
+    
+
+}
 PSHANDLE PspaceNode::getHandle()
 {
 	return hHanle_;

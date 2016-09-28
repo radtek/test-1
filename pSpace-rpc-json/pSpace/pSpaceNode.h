@@ -39,7 +39,7 @@ private:
 public:
 	void setConnection(PSHANDLE environment);
 	static Handle<Value> close(const Arguments& args);
-	//static Handle<Value> isConnected(const Arguments& args);
+	static Handle<Value> isConnected(const Arguments& args);
 	
 	PSHANDLE getHandle();
 	static Persistent<FunctionTemplate> constructorTemplate;
