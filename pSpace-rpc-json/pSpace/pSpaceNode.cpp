@@ -4585,6 +4585,7 @@ Handle<Value> PspaceNode::alarmRealSyn(const Arguments& args)
 			return errObj;
 		}
 		uv_work_t* req = new uv_work_t();
+		GuardPtr<uv_work_t> reqgd(&req);
 		req->data = t;
 		t->psNode->Ref();
 		alarmWork(req);
