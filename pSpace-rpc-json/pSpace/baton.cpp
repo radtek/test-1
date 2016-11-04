@@ -599,6 +599,7 @@ RealReadBaton::RealReadBaton(PspaceNode*psNode,v8::Handle<v8::Function>* callbac
 	this->id = PSTAGID_UNUSED;
 	this->tagName = "";
 	this->realData_ = PSNULL;
+	this->pAPIErrors = PSNULL;
 	this->quality_ = PS_QUALITY_GOOD;
 	this->time_ = PSNULL;
 }
@@ -611,6 +612,10 @@ RealReadBaton::~RealReadBaton()
      {
          psAPI_Memory_FreeDataList(&this->realData_, 1);
      }
+	 if (this->pAPIErrors != PSNULL)
+	 {
+		 psAPI_Memory_FreeAndNull((PSVOID**)&pAPIErrors);
+	 }
      if (this->varData_.DataType == PSDATATYPE_STRING)
      {
          delete this->varData_.String.Data;
@@ -1038,6 +1043,7 @@ BatchBaton::BatchBaton(PspaceNode* psNode,v8::Handle<v8::Function>* callback)
 	this->code_ = PSRET_OK;
 	this->errString = NULL;
 	this->realData_ = PSNULL;
+	this->pAPIErrors = PSNULL;
 	this->dataValues_ = NULL;
 	this->timeStamps_ = NULL;
 	this->qualitys_ = NULL;

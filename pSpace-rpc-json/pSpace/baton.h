@@ -59,6 +59,7 @@ private:
 	std::string *errString;
 	std::string tagName;
 	PS_DATA *realData_;	
+	PSAPIStatus *pAPIErrors;
 	PS_VARIANT varData_;
 	PS_TIME *time_;
 	PSUINT32 quality_;
@@ -271,6 +272,7 @@ private:
 	PSUINT32 *qualitys_;
 	std::string *errString;
 	PS_DATA *realData_;	
+	PSAPIStatus *pAPIErrors;
 };
 
 class TagQuery: public Baton{

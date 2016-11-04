@@ -5922,7 +5922,7 @@ void PspaceNode::batchReadWork(uv_work_t* req)
     t->code_  = PSRET_OK;
     t->errString = NULL;
     PSAPIStatus nRet  = PSRET_OK;
-    PSAPIStatus *pAPIErrors = PSNULL;
+    //PSAPIStatus *pAPIErrors = PSNULL;
     try {
         if(t->psNode->hHanle_ == PSHANDLE_UNUSED) {
             throw PsException("Connection already closed");
@@ -5931,8 +5931,8 @@ void PspaceNode::batchReadWork(uv_work_t* req)
 
             nRet = psAPI_Real_ReadList(t->psNode->hHanle_, t->tagCount_, 
                 tagIDs, 
-                &(t->realData_), &pAPIErrors);
-
+                &(t->realData_), &t->pAPIErrors);
+			//读取整个实时数据列表出错
             if (PSERR(nRet) && nRet != PSERR_FAIL_IN_BATCH)
             {
                 t->code_ = nRet;
@@ -5942,7 +5942,7 @@ void PspaceNode::batchReadWork(uv_work_t* req)
             {
                 t->code_ = nRet;
                 t->errString = new std::string(psAPI_Commom_GetErrorDesc(nRet));
-                psAPI_Memory_FreeAndNull((PSVOID**)&pAPIErrors);
+                //psAPI_Memory_FreeAndNull((PSVOID**)&pAPIErrors);
             }
             psAPI_Memory_FreeAndNull((PSVOID**)&tagIDs);
 		}	
@@ -6103,24 +6103,55 @@ Handle<Value> PspaceNode::batRealReadSyn(const Arguments& args)
 		bat->psNode->Ref();
 		batchReadWork(req);
 		bat->psNode->Unref();
-		//如果失败
-		if(bat->errString) {
+		if (PSERR(bat->code_) && bat->code_ != PSERR_FAIL_IN_BATCH)//出现了除操作集元素以外的错误
+		{
+			Local<Array> arrObj = Array::New(1);
 			Local<Object> errObj = Error::newObj();
 			errObj->Set(String::New("code"),Number::New(bat->code_));
 			errObj->Set(String::New("errString"),String::New(GBK2UTF8(bat->errString->c_str()).c_str()));
+			arrObj->Set(0,errObj);
 			FREE_MEMORY(bat);
-            FREE_MEMORY(req);
-			return scope.Close(errObj);
+			FREE_MEMORY(req);
+			return scope.Close(arrObj);
 		}
-		//  成功
-		Local<Array> arrObj = Array::New(bat->tagCount_);
-		for (int n=0;n<bat->tagCount_;n++)
+		else if(bat->code_ ==  PSERR_FAIL_IN_BATCH)//部分错误
 		{
-			arrObj->Set(n,getRealObj(bat->realData_+n));		
+ 			Local<Array> arrObj = Array::New(bat->tagCount_);
+			//“操作集中有出错的元素“
+			Local<Object> errObj1 = Error::newObj();
+			errObj1->Set(String::New("code"),Number::New(bat->code_));
+			errObj1->Set(String::New("errString"),String::New(GBK2UTF8(bat->errString->c_str()).c_str()));
+			arrObj->Set(0,errObj1);
+ 			for (int n=0;n<bat->tagCount_;n++)
+			{
+				if (bat->pAPIErrors[n])//如果第n个点错误
+				{
+					//对应操作集中每个元素，有错：显示具体的错误信息； 没错:显示具体测点的pv值
+					Local<Object> errObj = Error::newObj();
+					errObj->Set(String::New("code"),Number::New(bat->pAPIErrors[n]));
+					bat->errString = new std::string(psAPI_Commom_GetErrorDesc(bat->pAPIErrors[n]));
+					errObj->Set(String::New("errString"),String::New(GBK2UTF8(bat->errString->c_str()).c_str()));
+					arrObj->Set(n+1,errObj);
+				} 
+				else{
+					arrObj->Set(n+1,getRealObj(bat->realData_+n));
+				}
+
+			}
+			psAPI_Memory_FreeAndNull((PSVOID**)&bat->pAPIErrors);
+			FREE_MEMORY(bat);
+			FREE_MEMORY(req);
+			return scope.Close(arrObj);
+		}else{//正确
+			Local<Array> arrObj = Array::New(bat->tagCount_);
+			for (int n=0;n<bat->tagCount_;n++)
+			{
+				arrObj->Set(n,getRealObj(bat->realData_+n));
+			}
+			FREE_MEMORY(bat);
+			FREE_MEMORY(req);
+			return scope.Close(arrObj);
 		}
-        FREE_MEMORY(bat);
-        FREE_MEMORY(req);
-		return scope.Close(arrObj);
 	} catch(PsException &ex) {
         FREE_MEMORY(bat);
         FREE_MEMORY(req);
