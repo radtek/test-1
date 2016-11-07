@@ -359,9 +359,17 @@ Handle<Value> PspaceNode::realWriteSyn(const Arguments& args)
 			}
 			if(settings->Has(v8::String::New("quality")))
 			{
-				String::Utf8Value str(settings->Get(String::New("quality")));
-				const char * pstr1 = ToCString(str);
-				rbaton->quality_ = (PS_QUALITY_ENUM)rbaton->getQuality(pstr1);
+                Local<Value> qObj = settings->Get(String::New("quality"));
+                if (qObj->IsInt32())
+                {
+                    GET_INTER(settings, "quality", rbaton->quality_);
+                }
+                else if (qObj->IsString())
+                {
+                    String::Utf8Value str(settings->Get(String::New("quality")));
+                    const char * pstr1 = ToCString(str);
+                    rbaton->quality_ = (PS_QUALITY_ENUM)rbaton->getQuality(pstr1);
+                }
 			}
 			//时间戳
 			if (settings->Has(v8::String::New("time"))) 
@@ -523,9 +531,17 @@ Handle<Value> PspaceNode::realWriteAsy(const Arguments& args)
 			
 			if(settings->Has(v8::String::New("quality")))
 			{
-				String::Utf8Value str(settings->Get(String::New("quality")));
-				const char * pstr1 = ToCString(str);
-				rbaton->quality_ = (PS_QUALITY_ENUM)rbaton->getQuality(pstr1);
+                Local<Value> qObj = settings->Get(String::New("quality"));
+                if (qObj->IsInt32())
+                {
+                    GET_INTER(settings, "quality", rbaton->quality_);
+                }
+                else if (qObj->IsString())
+                {
+                    String::Utf8Value str(settings->Get(String::New("quality")));
+                    const char * pstr1 = ToCString(str);
+                    rbaton->quality_ = (PS_QUALITY_ENUM)rbaton->getQuality(pstr1);
+                }
 			}
 			//时间戳
 			if (settings->Has(v8::String::New("time"))) 
@@ -3266,9 +3282,17 @@ Handle<Value> PspaceNode::hisSyn(const Arguments& args)
 				}
 				if (settings->Has(String::New("quality")))
 				{
-					std::string str1 = "";
-					OBJ_GET_STRING(settings, "quality",str1);
-					t->pQualities_[i] = (PS_QUALITY_ENUM)t->getQuality(str1.c_str());
+                    Local<Value> qObj = settings->Get(String::New("quality"));
+                    if (qObj->IsInt32())
+                    {
+                        GET_INTER(settings, "quality", t->pQualities_[i]);
+                    }
+                    else if (qObj->IsString())
+                    {
+                        std::string str1 = "";
+                        OBJ_GET_STRING(settings, "quality",str1);
+                        t->pQualities_[i] = (PS_QUALITY_ENUM)t->getQuality(str1.c_str());
+                    }
 				}
 				t->tagIds_[i] = t->id;
 			}
@@ -4312,7 +4336,7 @@ Handle<Value> PspaceNode::alarmRealSyn(const Arguments& args)
 			t->filterField_.TagId = PSTRUE;
 			t->filter_.TagId = t->id;
 			//filterField和filter为0的情况
-			if (0==filterField->ToInt32()->Value())
+			if (filterField->IsInt32()&&0==filterField->ToInt32()->Value())
 			{
 				PS_ALARM_FILTER_FIELD tmpFilterField = {0};
 				PS_ALARM_FILTER tmpFilter = {0};
@@ -4445,7 +4469,7 @@ Handle<Value> PspaceNode::alarmRealSyn(const Arguments& args)
 			t->filterField_.TagId = PSTRUE;
 			t->filter_.TagId = t->id;
 			//filterField和filter为0的情况
-			if (0==obj1->ToInt32()->Value() && 0==obj2->ToInt32()->Value())
+			if (obj1->IsInt32() && obj2->IsInt32() && 0==obj1->ToInt32()->Value() && 0==obj2->ToInt32()->Value())
 			{
 				PS_ALARM_FILTER_FIELD tmpFilterField = {0};
 				PS_ALARM_FILTER tmpFilter = {0};
@@ -4649,7 +4673,7 @@ Handle<Value> PspaceNode::alarmRealAsy(const Arguments& args)
 			t->filterField_.TagId = PSTRUE;
 			t->filter_.TagId = t->id;
 			//filterField和filter为0的情况
-			if (0==filterField->ToInt32()->Value())
+			if (filterField->IsInt32() && 0==filterField->ToInt32()->Value())
 			{
 				
 				PS_ALARM_FILTER_FIELD tmpFilterField = {0};
@@ -4786,7 +4810,7 @@ Handle<Value> PspaceNode::alarmRealAsy(const Arguments& args)
 			t->filterField_.TagId = PSTRUE;
 			t->filter_.TagId = t->id;
 			//filterField和filter为0的情况
-			if (0==obj1->ToInt32()->Value() && 0==obj2->ToInt32()->Value())
+			if (obj1->IsInt32() && obj2->IsInt32() && 0==obj1->ToInt32()->Value() && 0==obj2->ToInt32()->Value())
 			{
 				PS_ALARM_FILTER_FIELD tmpFilterField = {0};
 				PS_ALARM_FILTER tmpFilter = {0};
@@ -5032,7 +5056,7 @@ Handle<Value> PspaceNode::hisAlarmSyn(const Arguments& args)
 			t->filterField_.TagId = PSTRUE;
 			t->filter_.TagId = t->id;
 			//filterField和filter为0的情况
-			if (0==filterField->ToInt32()->Value())
+			if (filterField->IsInt32() && 0==filterField->ToInt32()->Value())
 			{
 				PS_ALARM_FILTER_FIELD tmpFilterField = {0};
 				PS_ALARM_FILTER tmpFilter = {0};
@@ -5172,7 +5196,7 @@ Handle<Value> PspaceNode::hisAlarmSyn(const Arguments& args)
 			t->filterField_.TagId = PSTRUE;
 			t->filter_.TagId = t->id;
 			//filterField和filter为0的情况
-			if (0==obj1->ToInt32()->Value() && 0==obj2->ToInt32()->Value())
+			if (obj1->IsInt32() && obj2->IsInt32() && 0==obj1->ToInt32()->Value() && 0==obj2->ToInt32()->Value())
 			{
 				PS_ALARM_FILTER_FIELD tmpFilterField = {0};
 				PS_ALARM_FILTER tmpFilter = {0};
@@ -5313,7 +5337,7 @@ Handle<Value> PspaceNode::hisAlarmSyn(const Arguments& args)
 		uv_work_t* req = new uv_work_t();
 		req->data = t;
 		t->psNode->Ref();
-		alarmWork(req);
+		hisAlarmWork(req);
 		t->psNode->Unref();
 		//如果失败
 		if(t->errString) {
@@ -5383,7 +5407,7 @@ Handle<Value> PspaceNode::hisAlarmAsy(const Arguments& args)
 			t->filterField_.TagId = PSTRUE;
 			t->filter_.TagId = t->id;
 			//filterField和filter为0的情况
-			if (0==filterField->ToInt32()->Value())
+			if (filterField->IsInt32() && 0==filterField->ToInt32()->Value())
 			{
 				PS_ALARM_FILTER_FIELD tmpFilterField = {0};
 				PS_ALARM_FILTER tmpFilter = {0};
@@ -5526,7 +5550,7 @@ Handle<Value> PspaceNode::hisAlarmAsy(const Arguments& args)
 			t->filterField_.TagId = PSTRUE;
 			t->filter_.TagId = t->id;
 			//filterField和filter为0的情况
-			if (0==obj1->ToInt32()->Value() && 0==obj2->ToInt32()->Value())
+			if (obj1->IsInt32() && obj2->IsInt32() && 0==obj1->ToInt32()->Value() && 0==obj2->ToInt32()->Value())
 			{
 				PS_ALARM_FILTER_FIELD tmpFilterField = {0};
 				PS_ALARM_FILTER tmpFilter = {0};
@@ -6258,9 +6282,17 @@ Handle<Value> PspaceNode::batRealWriteSyn(const Arguments& args)
 				}
 				if(valObj->Has(v8::String::New("quality")))
 				{
-					String::Utf8Value str(valObj->Get(String::New("quality")));
-					const char* pstr = ToCString(str);
-					bat->qualitys_[i] = bat->getQuality(pstr);
+                    Local<Value> qObj = valObj->Get(String::New("quality"));
+                    if (qObj->IsInt32())
+                    {
+                        GET_INTER(valObj, "quality", bat->qualitys_[i]);
+                    }
+                    else if (qObj->IsString())
+                    {
+                        String::Utf8Value str(valObj->Get(String::New("quality")));
+					    const char* pstr = ToCString(str);
+				    	bat->qualitys_[i] = bat->getQuality(pstr);
+                    }
 				}
 				//时间戳
 				if (valObj->Has(v8::String::New("time"))) 
@@ -6390,9 +6422,17 @@ Handle<Value> PspaceNode::batRealWriteAsy(const Arguments& args)
 				}
 				if(valObj->Has(v8::String::New("quality")))
 				{
-					String::Utf8Value str(valObj->Get(String::New("quality")));
-					const char* pstr = ToCString(str);
-					bat->qualitys_[i] = bat->getQuality(pstr);
+                    Local<Value> qObj = valObj->Get(String::New("quality"));
+                    if (qObj->IsInt32())
+                    {
+                        GET_INTER(valObj, "quality", bat->qualitys_[i]);
+                    }
+                    else if (qObj->IsString())
+                    {
+                        String::Utf8Value str(valObj->Get(String::New("quality")));
+                        const char* pstr = ToCString(str);
+                        bat->qualitys_[i] = bat->getQuality(pstr);
+                    }
 				}
 				//时间戳
 				if (valObj->Has(v8::String::New("time"))) 
