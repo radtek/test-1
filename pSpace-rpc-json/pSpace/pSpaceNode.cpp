@@ -2683,9 +2683,11 @@ Handle<Value> PspaceNode::getTagPropsSyn(const Arguments& args)
 				}
 		  }
 		}
-		return valObj;
 		psAPI_Memory_FreeValueList(&(t->pPropValues_), t->propCount_);
 		delete t;
+		return valObj;
+// 		psAPI_Memory_FreeValueList(&(t->pPropValues_), t->propCount_);
+// 		delete t;
 	} catch(PsException &ex) {
 		return ThrowException(Exception::Error(String::New(ex.what())));
 	}		
@@ -2869,9 +2871,11 @@ Handle<Value> PspaceNode::getSignalPropsSyn(const Arguments& args)
 					return errObj;
 				}
 			}
-		return valObj;
 		psAPI_Memory_FreeValueList(&(t->pPropValues_), t->propCount_);
 		delete t;
+		return valObj;
+// 		psAPI_Memory_FreeValueList(&(t->pPropValues_), t->propCount_);
+// 		delete t;
 	} catch(PsException &ex) {
 		return ThrowException(Exception::Error(String::New(ex.what())));
 	}		
