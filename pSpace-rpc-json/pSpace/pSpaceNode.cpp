@@ -5950,7 +5950,7 @@ void PspaceNode::batchReadWork(uv_work_t* req)
     t->code_  = PSRET_OK;
     t->errString = NULL;
     PSAPIStatus nRet  = PSRET_OK;
-    //PSAPIStatus *pAPIErrors = PSNULL;
+    PSAPIStatus *pAPIErrors = PSNULL;
     try {
         if(t->psNode->hHanle_ == PSHANDLE_UNUSED) {
             throw PsException("Connection already closed");
@@ -5970,7 +5970,7 @@ void PspaceNode::batchReadWork(uv_work_t* req)
             {
                 t->code_ = nRet;
                 t->errString = new std::string(psAPI_Commom_GetErrorDesc(nRet));
-                //psAPI_Memory_FreeAndNull((PSVOID**)&pAPIErrors);
+                //psAPI_Memory_FreeAndNull((PSVOID**)&t->pAPIErrors);
             }
             psAPI_Memory_FreeAndNull((PSVOID**)&tagIDs);
 		}	
@@ -6150,6 +6150,7 @@ Handle<Value> PspaceNode::batRealReadSyn(const Arguments& args)
 			errObj1->Set(String::New("code"),Number::New(bat->code_));
 			errObj1->Set(String::New("errString"),String::New(GBK2UTF8(bat->errString->c_str()).c_str()));
 			arrObj->Set(0,errObj1);
+			int rightCount = 0;
  			for (int n=0;n<bat->tagCount_;n++)
 			{
 				if (bat->pAPIErrors[n])//如果第n个点错误
@@ -6162,11 +6163,13 @@ Handle<Value> PspaceNode::batRealReadSyn(const Arguments& args)
 					arrObj->Set(n+1,errObj);
 				} 
 				else{
+					rightCount += 1;
 					arrObj->Set(n+1,getRealObj(bat->realData_+n));
 				}
 
 			}
 			psAPI_Memory_FreeAndNull((PSVOID**)&bat->pAPIErrors);
+			psAPI_Memory_FreeDataList(&bat->realData_, rightCount);
 			FREE_MEMORY(bat);
 			FREE_MEMORY(req);
 			return scope.Close(arrObj);
@@ -6176,6 +6179,7 @@ Handle<Value> PspaceNode::batRealReadSyn(const Arguments& args)
 			{
 				arrObj->Set(n,getRealObj(bat->realData_+n));
 			}
+			psAPI_Memory_FreeDataList(&bat->realData_, bat->tagCount_);
 			FREE_MEMORY(bat);
 			FREE_MEMORY(req);
 			return scope.Close(arrObj);
