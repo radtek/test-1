@@ -1,0 +1,5 @@
+华为演示系统，功能
+1.从tag_path读取点表，如果pSpace不存在这些点添加到pSpace
+2.data_path里面每一行数据以write_timer_ms间隔写道pSpace
+3.触发TIA024500A 固定高限72.6报警，VIA024502X动态高限报警
+4.动态高限是当前的12个tag写到predict_path，由APMC平台计算写入到predict_path文件第二行再读取
