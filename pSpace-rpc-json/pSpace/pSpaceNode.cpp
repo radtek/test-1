@@ -349,7 +349,8 @@ Handle<Value> PspaceNode::realWriteSyn(const Arguments& args)
 				{
 					rbaton->varData_.DataType = PSDATATYPE_STRING;
 					String::Utf8Value tmpStr(settings->Get(String::New("value")));
-					const char *pstr = ToCString(tmpStr);
+                    std::string strTemp = UTF8ToGBK(ToCString(tmpStr));
+					const char *pstr = strTemp.c_str();
 					rbaton->varData_.String.Data = new char[strlen(pstr)+1];
 					strcpy(rbaton->varData_.String.Data,pstr);
 					rbaton->varData_.String.Data[strlen(pstr)]=0;
@@ -397,7 +398,8 @@ Handle<Value> PspaceNode::realWriteSyn(const Arguments& args)
 			{
 				rbaton->varData_.DataType = PSDATATYPE_STRING;
 				String::Utf8Value tmpStr(valObj);
-				const char *pstr = ToCString(tmpStr);
+                std::string strTemp = UTF8ToGBK(ToCString(tmpStr));
+                const char *pstr = strTemp.c_str();
 				rbaton->varData_.String.Data = new char[strlen(pstr)+1];
 				strcpy(rbaton->varData_.String.Data,pstr);
 				rbaton->varData_.String.Data[strlen(pstr)]=0;
@@ -520,7 +522,8 @@ Handle<Value> PspaceNode::realWriteAsy(const Arguments& args)
 				{
 					rbaton->varData_.DataType = PSDATATYPE_STRING;
 					String::Utf8Value tmpStr(settings->Get(String::New("value")));
-					const char *pstr = ToCString(tmpStr);
+                    std::string strTemp = UTF8ToGBK(ToCString(tmpStr));
+                    const char *pstr = strTemp.c_str();
 					rbaton->varData_.String.Data = new char[strlen(pstr)+1];
 					strcpy(rbaton->varData_.String.Data,pstr);
 					rbaton->varData_.String.Data[strlen(pstr)]=0;
@@ -573,7 +576,8 @@ Handle<Value> PspaceNode::realWriteAsy(const Arguments& args)
 			{
 				rbaton->varData_.DataType = PSDATATYPE_STRING;
 				String::Utf8Value tmpStr(valObj);
-				const char *pstr = ToCString(tmpStr);
+                std::string strTemp = UTF8ToGBK(ToCString(tmpStr));
+                const char *pstr = strTemp.c_str();
 				rbaton->varData_.String.Data = new char[strlen(pstr)+1];
 				strcpy(rbaton->varData_.String.Data,pstr);
 				rbaton->varData_.String.Data[strlen(pstr)]=0;
