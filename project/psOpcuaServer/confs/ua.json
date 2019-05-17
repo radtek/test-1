@@ -1,0 +1,14 @@
+{
+	"pspace":{
+		"host":"196.168.65.103",
+		"port":8889,
+		"user":"admin",
+		"pass":"admin888"
+	},
+	"server":{
+		"port":4334,
+		"resourcePath":"ua/pspace",
+		"productName":"pspaceOPCUAServer",
+		"buildNumber":"1234"
+	}
+}

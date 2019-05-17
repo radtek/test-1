@@ -1,0 +1,2 @@
+[2019-05-17T16:22:30.600] [INFO] req - 初始化获取pspace数据成功 {psCode:0}
+[2019-05-17T16:22:30.749] [INFO] req - the primary server endpoint url is opc.tcp://GOD-PC:4334/ua/pspace
