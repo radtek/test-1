@@ -8,8 +8,17 @@ const sconf = JSON.parse(fs.readFileSync("./confs/ua.json")).server;
 const log4jsconf = JSON.parse(fs.readFileSync("./confs/log4js.json")).log;
 const log4jslevel = JSON.parse(fs.readFileSync("./confs/log4js.json")).level;
 
+const getFactory = require("node-opcua-factory/src/factories_factories").getFactory;
+const DataValue = getFactory("DataValue");
+const Variant = require("node-opcua-variant").Variant;
+const VariantArrayType = require("node-opcua-variant").VariantArrayType;
+const StatusCodes = require("node-opcua-status-code").StatusCodes;
+
 const dataTrans = require("./src/transformDataType");
 const ps2ua = dataTrans.ps2ua;
+const qualityTrans = require("./src/transfromQualityCode");
+const qualityTransPs2ua = qualityTrans.qualityPs2ua;
+const qualityTransUa2ps = qualityTrans.qualityUa2ps;
 
 
 var uaserver;
@@ -38,7 +47,7 @@ function run(parJson,tagMap,parentId){
 		j.psIsLeaf = 0;
 	}
 
-	j.uaNodeId = "ns=1;i="+ parJson.layerId;
+	j.uaNodeId = "ns=1;s=ps"+ parJson.layerId;
 	j.uaBrowseName = parJson.layerName;
 	j.uaParentNodeId = p.uaNodeId;
 	tagMap.set(j.psId,j);
@@ -48,6 +57,17 @@ function run(parJson,tagMap,parentId){
 		}
 	}
 }
+
+var userManager = {
+	isValidUser:function(userName,password){
+		for(let i=0; i<sconf.userManager.length;i++){
+			if(userName===sconf.userManager[i].userName && password===sconf.userManager[i].password){
+				return true;
+			}
+		}
+		return false;
+	}
+};
 
 
 function initTagInfos(retJson,tagNodeMap){
@@ -106,24 +126,38 @@ function initUaAddressspace(retJsonTagInfos,tagNodeMap){
 				browseName:obj.uaBrowseName,
 				dataType:obj.uaDataType,
 				value: {  
-					get: function () { 
-						return new opcua.Variant({dataType:obj.uaDataType, value: obj.value }); 
+					timestamped_get:function(){
+						let dataValue = new DataValue({
+							value: new Variant({
+								dataType: obj.uaDataType,
+								arrayType: VariantArrayType.Scalar,
+								dimensions: null,
+								value:obj.value}),
+								serverTimestamp: new Date(obj.time),
+								serverPicoseconds: 0,
+								sourceTimestamp: new Date(obj.time),
+								sourcePicoseconds: 0,
+								statusCode: qualityTransPs2ua(obj.quality)});
+						return dataValue;
 					},
-					set: (variant) => {
-						if(obj.uaDataType == opcua.DataType.Double){
-							obj.value = parseFloat(variant.value);
-							let j = {};
-							j.psId = obj.psId;
-							j.writeData = variant;
-							writeEvent.emit('writeMsg',j);
-						}else{
-							obj.value = variant.value;
-							let j = {};
-							j.psId = obj.psId;
-							j.writeData = variant;
-							writeEvent.emit('writeMsg',j);
-						}
-						return opcua.StatusCodes.Good;
+					timestamped_set:async function(dataValue,callback){
+					if(obj.uaDataType == opcua.DataType.Double){
+						obj.value = parseFloat(dataValue.value.value);
+					}else{
+						obj.value = dataValue.value.value;
+					}
+					obj.time = new Date(dataValue.sourceTimestamp);
+					let quality = qualityTransUa2ps(dataValue.statusCode);
+					retJson = await db.getRealWrite({'id':obj.psId,'time':obj.time,'data':{'dataType':obj.psDataType,'value':obj.value},"quality":quality});
+					if(retJson.retCode==0){
+						let info = "setdata success [" + obj.psId + "] {dataType:" + obj.psDataType +",value:"+obj.value  +"}";
+						reqlogger.info(info);
+					}else{
+						let errMsg = "setdata error [" + obj.psId + "] {dataType:" + obj.psDataType +",value:"+obj.value  +"}" + " {psCode:" + retJson.retCode+"}";
+						errlogger.error(errMsg);
+					}
+						let status = qualityTransPs2ua(retJson.retCode);
+						callback(null,status);
 					}
 				}
 			});
@@ -171,9 +205,7 @@ async function business(){
 	
 	initTagInfos(retJsonTagInfos,tagNodeMap);
 
-	let tagLeafIds;
-	
-	tagLeafIds = getLeafsIds(retJsonTagInfos);
+	let tagLeafIds = getLeafsIds(retJsonTagInfos);
 
 	let retJson = await db.getTagListProps({'tagIds':tagLeafIds,'propIds':[30,13]});
 	
@@ -234,28 +266,17 @@ async function business(){
 		}
 	});
 
-
-	writeEvent = new events.EventEmitter();
-	writeEvent.on('writeMsg',async (data)=>{
-		let obj = tagNodeMap.get(data.psId);
-		let tn = new Date();
-		retJson = await db.getRealWrite({'id':data.psId,'time':tn.toLocaleString(),'data':{'dataType':obj.psDataType,'value':data.writeData.value},"quality":192});
-		if(retJson.retCode==0){
-			let info = "setdata success [" + data.psId + "] {dataType:" + obj.psDataType +",value:"+data.writeData.value +"}";
-			reqlogger.info(info);
-		}else{
-			let errMsg = "setdata error [" + data.psId + "] {dataType:" + obj.psDataType +",value:"+data.writeData.value +"}" + " {psCode:" + retJson.retCode+"}";
-			errlogger.error(errMsg);
-		}
-		
-	});
-
 	uaserver = new opcua.OPCUAServer({
 		port: sconf.port, 
 		resourcePath: sconf.resourcePath,
+		applicationName: sconf.applicationName,
+		userManager:userManager,
+		allowAnonymous:false,
 		buildInfo : {
 			productName:sconf.productName,
 			buildNumber:sconf.buildNumber,
+			manufacturerName:sconf.manufacturerName,
+			productUri:sconf.productUrl,
 			buildDate: new Date()
 		}
 	});

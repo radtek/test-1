@@ -8,7 +8,20 @@
 	"server":{
 		"port":4334,
 		"resourcePath":"ua/pspace",
+		"applicationName": "nodeopcuaForpspace",
+		"manufacturerName":"sundway",
+		"productUrl":"likong",
 		"productName":"pspaceOPCUAServer",
-		"buildNumber":"1234"
+		"buildNumber":"1234",
+		"userManager":[
+			{
+			"userName":"admin",
+			"password":"admin888"
+			},
+			{
+			"userName":"system",
+			"password":"admin888"
+			}
+		]
 	}
 }
