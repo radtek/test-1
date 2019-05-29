@@ -41,17 +41,12 @@ function run(parJson,tagMap,parentId){
 	j.psId = parJson.layerId;
 	j.psShortName = parJson.layerName;
 	j.psParentId = p.psId;
-	if(parJson.childern==undefined){
-		j.psIsLeaf = 1;
-	}else{
-		j.psIsLeaf = 0;
-	}
-
 	j.uaNodeId = "ns=1;s=ps"+ parJson.layerId;
 	j.uaBrowseName = parJson.layerName;
 	j.uaParentNodeId = p.uaNodeId;
 	tagMap.set(j.psId,j);
 	if(parJson.childern!=undefined){
+		j.psIsLeaf = 0;
 		for(let k=0; k<parJson.childern.length;k++){
 			run(parJson.childern[k],tagMap,j.psId);
 		}
@@ -80,7 +75,6 @@ function initTagInfos(retJson,tagNodeMap){
 		j.uaNodeId="s=pspace";
 		j.uaBrowseName = "pspace";
 		tagNodeMap.set(j.psId,j);
-	
 		if(retJson.childern!=undefined){
 			for(let i=0; i<retJson.childern.length;i++){
 				run(retJson.childern[i],tagNodeMap,0);
@@ -162,6 +156,7 @@ function initUaAddressspace(retJsonTagInfos,tagNodeMap){
 				}
 			});
 	
+			obj.quality = 32;
 			obj.uaNode=n;
 			n.db = db;
 			n.tagId = obj.psId;
@@ -202,12 +197,11 @@ async function business(){
 	let tagNodeMap = new Map();
 
 	retJsonTagInfos = await db.getLayerInfo();
-	
 	initTagInfos(retJsonTagInfos,tagNodeMap);
 
 	let tagLeafIds = getLeafsIds(retJsonTagInfos);
 
-	let retJson = await db.getTagListProps({'tagIds':tagLeafIds,'propIds':[30,13]});
+	let retJson = await db.getTagListProps({'tagIds':tagLeafIds,'propIds':[30,13,11]});
 	
 	if(retJson.retCode!=0){
 		console.log("get attributes error!");
@@ -215,42 +209,31 @@ async function business(){
 		process.exit(0);
 	}
 
+	let tagLeafIds_ = [];
+
 	for(let i=0;i<retJson.tagCount;i++){
 		let obj = tagNodeMap.get(tagLeafIds[i]);
-		if(retJson.tagPropList[i][0].data==1){
-			obj.isHistory = 1;
-		}else{
-			obj.isHistory = 0;
-		}
-		
-		obj.psDataType = retJson.tagPropList[i][1].data;
-		obj.uaDataType = ps2ua(obj.psDataType);
-		
-	}
-
-	retJson = await db.getRealReadList(tagLeafIds);
-
-	if(retJson.retCode==0){
-		let info = "初始化获取pspace数据成功 {psCode:" + retJson.retCode+"}";
-		reqlogger.info(info);
-		for(let i=0; i<retJson.dataList.length;i++){
-			let obj = tagNodeMap.get(tagLeafIds[i]);
-			obj.time = retJson.dataList[i].time;
-			obj.quality = retJson.dataList[i].quality;
-			if(retJson.dataList[i].psvalue.type!=0){
-				obj.psDataType = retJson.dataList[i].psvalue.type;
-				obj.value = retJson.dataList[i].psvalue.value;
+		if(obj != undefined){
+			if(retJson.tagPropList[i][0].data==1){
+				obj.isHistory = 1;
 			}else{
-				obj.value = 0;
+				obj.isHistory = 0;
 			}
-		}
-	}else{
-		let errMsg = "初始化获取pspace数据错误 {psCode:" + retJson.retCode+"}";
-		errlogger.error(errMsg);
-		process.exit(0);
+
+			obj.psDataType = retJson.tagPropList[i][1].data;
+			obj.uaDataType = ps2ua(obj.psDataType);
+
+			if(retJson.tagPropList[i][2].data==1)
+			{
+				obj.psIsLeaf = 0;
+			}else{
+				obj.psIsLeaf = 1;
+				tagLeafIds_.push(tagLeafIds[i]);
+			}
+		}	
 	}
 
-	retJson = await db.subRealData(tagLeafIds);
+	retJson = await db.subRealData(tagLeafIds_);
 	if(retJson.retCode!=0){
 		console.log("subscription error...");
 		errlogger.error("subscription error...");
@@ -260,9 +243,11 @@ async function business(){
 	db.on('dataChange',function(data){
 		for(let i=0; i<data.tagDataList.length;i++){
 			let obj = tagNodeMap.get(data.tagDataList[i].id);
-			obj.value = data.tagDataList[i].value;
-			obj.quality = data.tagDataList[i].quality;
-			obj.time = data.tagDataList[i].pstime;
+			if(obj !=undefined){
+				obj.value = data.tagDataList[i].value;
+				obj.quality = data.tagDataList[i].quality;
+				obj.time = data.tagDataList[i].pstime;
+			}
 		}
 	});
 
