@@ -196,7 +196,7 @@ async function business(){
 	if(!ret){
 		console.log("pspace login fail...");
 		errlogger.error("pspace login fail...");
-		exit(1);
+		process.exit(1);
 	}
 	
 	let tagNodeMap = new Map();
@@ -212,7 +212,7 @@ async function business(){
 	if(retJson.retCode!=0){
 		console.log("get attributes error!");
 		errlogger.error("get attributes error!");
-		exit(0);
+		process.exit(0);
 	}
 
 	for(let i=0;i<retJson.tagCount;i++){
@@ -247,14 +247,14 @@ async function business(){
 	}else{
 		let errMsg = "初始化获取pspace数据错误 {psCode:" + retJson.retCode+"}";
 		errlogger.error(errMsg);
-		exit(0);
+		process.exit(0);
 	}
 
 	retJson = await db.subRealData(tagLeafIds);
 	if(retJson.retCode!=0){
 		console.log("subscription error...");
 		errlogger.error("subscription error...");
-		exit(0);
+		process.exit(0);
 	}
 
 	db.on('dataChange',function(data){
