@@ -1,5 +1,4 @@
 const fs=require('fs');
-const events = require('events');
 const log4js = require('log4js');
 const opcua = require("node-opcua");
 const FRtdb = require('frtdb');
@@ -12,7 +11,6 @@ const getFactory = require("node-opcua-factory/src/factories_factories").getFact
 const DataValue = getFactory("DataValue");
 const Variant = require("node-opcua-variant").Variant;
 const VariantArrayType = require("node-opcua-variant").VariantArrayType;
-const StatusCodes = require("node-opcua-status-code").StatusCodes;
 
 const dataTrans = require("./src/transformDataType");
 const ps2ua = dataTrans.ps2ua;
@@ -20,13 +18,21 @@ const qualityTrans = require("./src/transfromQualityCode");
 const qualityTransPs2ua = qualityTrans.qualityPs2ua;
 const qualityTransUa2ps = qualityTrans.qualityUa2ps;
 
+const SecurityPolicy = require("node-opcua-secure-channel").SecurityPolicy;
+const MessageSecurityMode = require("node-opcua-service-secure-channel").MessageSecurityMode;
+
 
 var uaserver;
 var retJsonTagInfos;
 var addressSpace;
 var namespace;
 var db;
-var writeEvent;
+var tags = [];
+var tagLeafIds;
+var tagNodeMap = new Map();
+var anonymous = false;
+var interval = parseInt(sconf.realDataFlushTime);
+var version = "1.0.0.1";
 
 log4js.configure(log4jsconf);
 
@@ -64,6 +70,9 @@ var userManager = {
 	}
 };
 
+if(sconf.userManager.length==0){
+	anonymous = true;
+}
 
 function initTagInfos(retJson,tagNodeMap){
 	if(retJson.layerId==0){
@@ -101,6 +110,7 @@ function getLeafsIds(tagJson){
 	return ret;
 }
 
+
 function initUaAddressspace(retJsonTagInfos,tagNodeMap){
 	let obj = tagNodeMap.get(retJsonTagInfos.layerId);
 	if(retJsonTagInfos.layerId==0){
@@ -122,16 +132,16 @@ function initUaAddressspace(retJsonTagInfos,tagNodeMap){
 				value: {  
 					timestamped_get:function(){
 						let dataValue = new DataValue({
-							value: new Variant({
-								dataType: obj.uaDataType,
-								arrayType: VariantArrayType.Scalar,
-								dimensions: null,
-								value:obj.value}),
-								serverTimestamp: new Date(obj.time),
-								serverPicoseconds: 0,
-								sourceTimestamp: new Date(obj.time),
-								sourcePicoseconds: 0,
-								statusCode: qualityTransPs2ua(obj.quality)});
+						value: new Variant({
+						dataType: obj.uaDataType,
+						arrayType: VariantArrayType.Scalar,
+						dimensions: null,
+						value:obj.value}),
+						serverTimestamp: new Date(obj.time),
+						serverPicoseconds: 0,
+						sourceTimestamp: new Date(obj.time),
+						sourcePicoseconds: 0,
+						statusCode: qualityTransPs2ua(obj.quality)});
 						return dataValue;
 					},
 					timestamped_set:async function(dataValue,callback){
@@ -156,9 +166,10 @@ function initUaAddressspace(retJsonTagInfos,tagNodeMap){
 				}
 			});
 	
-			obj.quality = 32;
 			obj.uaNode=n;
 			n.db = db;
+			n.uaps = true;
+			n.isSub = false;
 			n.tagId = obj.psId;
 			n.uaDataType_ = obj.uaDataType;
 			n.errlogger = errlogger;
@@ -175,6 +186,40 @@ function initUaAddressspace(retJsonTagInfos,tagNodeMap){
 		}
 	}
 }
+
+
+async function flushRealValue(){
+	retJson = await db.getRealReadList(tags);
+	if(retJson.retCode==0 || retJson.retCode==-19997){
+		for(let i=0; i<retJson.dataList.length;i++){
+			let obj = tagNodeMap.get(tags[i]);
+			obj.time = retJson.dataList[i].time;
+			obj.quality = retJson.dataList[i].quality;
+			if(retJson.dataList[i].psvalue.type!=0){
+				if(retJson.dataList[i].psvalue.type==1){
+					obj.psDataType = retJson.dataList[i].psvalue.type;
+					if(retJson.dataList[i].psvalue.value){
+						obj.value = true;
+					}else{
+						obj.value = false;
+					}
+					
+				}else{
+					obj.psDataType = retJson.dataList[i].psvalue.type;
+					obj.value = retJson.dataList[i].psvalue.value;
+				}
+			}else{
+				obj.value = 0;
+				obj.quality = 32;
+			}
+		}
+	}else{
+		let errMsg = "刷新获取pspace数据错误 {psCode:" + retJson.retCode+"}";
+		errlogger.error(errMsg);
+	}
+}
+
+
 
 async function business(){
     let options = {
@@ -194,12 +239,10 @@ async function business(){
 		process.exit(1);
 	}
 	
-	let tagNodeMap = new Map();
-
 	retJsonTagInfos = await db.getLayerInfo();
 	initTagInfos(retJsonTagInfos,tagNodeMap);
 
-	let tagLeafIds = getLeafsIds(retJsonTagInfos);
+	tagLeafIds = getLeafsIds(retJsonTagInfos);
 
 	let retJson = await db.getTagListProps({'tagIds':tagLeafIds,'propIds':[30,13,11]});
 	
@@ -208,8 +251,6 @@ async function business(){
 		errlogger.error("get attributes error!");
 		process.exit(0);
 	}
-
-	let tagLeafIds_ = [];
 
 	for(let i=0;i<retJson.tagCount;i++){
 		let obj = tagNodeMap.get(tagLeafIds[i]);
@@ -228,35 +269,72 @@ async function business(){
 				obj.psIsLeaf = 0;
 			}else{
 				obj.psIsLeaf = 1;
-				tagLeafIds_.push(tagLeafIds[i]);
+				tags.push(tagLeafIds[i]);
 			}
 		}	
 	}
 
-	retJson = await db.subRealData(tagLeafIds_);
-	if(retJson.retCode!=0){
-		console.log("subscription error...");
-		errlogger.error("subscription error...");
-		process.exit(0);
+	retJson = await db.getRealReadList(tags);
+	if(retJson.retCode==0 || retJson.retCode==-19997){
+		let info = "初始化获取pspace数据成功 {psCode:" + retJson.retCode+"}";
+		reqlogger.info(info);
+		for(let i=0; i<retJson.dataList.length;i++){
+			let obj = tagNodeMap.get(tags[i]);
+			obj.time = retJson.dataList[i].time;
+			obj.quality = retJson.dataList[i].quality;
+			if(retJson.dataList[i].psvalue.type!=0){
+				if(retJson.dataList[i].psvalue.type==1){
+					obj.psDataType = retJson.dataList[i].psvalue.type;
+					if(retJson.dataList[i].psvalue.value){
+						obj.value = true;
+					}else{
+						obj.value = false;
+					}
+					
+				}else{
+					obj.psDataType = retJson.dataList[i].psvalue.type;
+					obj.value = retJson.dataList[i].psvalue.value;
+				}
+			}else{
+				obj.value = 0;
+				obj.quality = 32;
+			}
+		}
+	}else{
+		let errMsg = "初始化获取pspace数据错误 {psCode:" + retJson.retCode+"}";
+		errlogger.error(errMsg);
+		exit(0);
 	}
 
 	db.on('dataChange',function(data){
 		for(let i=0; i<data.tagDataList.length;i++){
 			let obj = tagNodeMap.get(data.tagDataList[i].id);
 			if(obj !=undefined){
-				obj.value = data.tagDataList[i].value;
-				obj.quality = data.tagDataList[i].quality;
-				obj.time = data.tagDataList[i].pstime;
+				if(obj.psDataType==1){
+					if(data.tagDataList[i].value){
+						obj.value = true;
+					}else{
+						obj.value = false;
+					}
+					obj.quality = data.tagDataList[i].quality;
+					obj.time = data.tagDataList[i].pstime;
+				}else{
+					obj.value = data.tagDataList[i].value;
+					obj.quality = data.tagDataList[i].quality;
+					obj.time = data.tagDataList[i].pstime;
+				}
+
 			}
 		}
 	});
 
-	uaserver = new opcua.OPCUAServer({
+
+	options = {
 		port: sconf.port, 
 		resourcePath: sconf.resourcePath,
 		applicationName: sconf.applicationName,
 		userManager:userManager,
-		allowAnonymous:false,
+		allowAnonymous:anonymous,
 		buildInfo : {
 			productName:sconf.productName,
 			buildNumber:sconf.buildNumber,
@@ -264,21 +342,65 @@ async function business(){
 			productUri:sconf.productUrl,
 			buildDate: new Date()
 		}
-	});
+	};
+
+	if(sconf.securityPolicies.length>0){
+		options.securityPolicies = [];
+	}
+
+	for(let i=0;i<sconf.securityPolicies.length;i++){
+		switch(sconf.securityPolicies[i]){
+			case "None":
+				options.securityPolicies.push(SecurityPolicy.None);
+				break;
+			case "Basic128Rsa15":
+				options.securityPolicies.push(SecurityPolicy.Basic128Rsa15);
+				break;
+			case "Basic256":
+				options.securityPolicies.push(SecurityPolicy.Basic256);
+				break;
+			default:
+				break;
+		}
+	}
+
+	if(sconf.securityModes.length>0){
+		options.securityModes = [];
+	}
+
+	for(let i=0;i<sconf.securityModes.length;i++){
+		switch(sconf.securityModes[i]){
+			case "None":
+				options.securityModes.push(MessageSecurityMode.NONE);
+				break;
+			case "Sign":
+				options.securityModes.push(MessageSecurityMode.SIGN);
+				break;
+			case "Signandencrypt":
+				options.securityModes.push(MessageSecurityMode.SIGNANDENCRYPT);
+				break;
+			default:
+				break;
+		}
+	}
+
+	uaserver = new opcua.OPCUAServer(options);
 
 	uaserver.initialize(()=>{
 		addressSpace = uaserver.engine.addressSpace;
 		namespace = addressSpace.getOwnNamespace();
 		initUaAddressspace(retJsonTagInfos,tagNodeMap);
+		uaserver.start(()=>{
+			console.log("server is now listening ... ( press CTRL+C to stop)");
+			console.log("port ", uaserver.endpoints[0].port);
+			const endpointUrl = uaserver.endpoints[0].endpointDescriptions()[0].endpointUrl;
+			console.log(" the primary server endpoint url is ", endpointUrl );
+			let info = "the primary server endpoint url is " + endpointUrl;
+			reqlogger.info(info);
+			setInterval(async function(){
+				await flushRealValue();
+			}, interval*1000);
+		});
 	})
-
-	uaserver.start(()=>{
-		console.log("server is now listening ... ( press CTRL+C to stop)");
-		console.log("port ", uaserver.endpoints[0].port);
-		const endpointUrl = uaserver.endpoints[0].endpointDescriptions()[0].endpointUrl;
-		console.log(" the primary server endpoint url is ", endpointUrl );
-		let info = "the primary server endpoint url is " + endpointUrl;
-		reqlogger.info(info);
-	});
 }
 business();

@@ -13,6 +13,10 @@
 		"productUrl":"likong",
 		"productName":"pspaceOPCUAServer",
 		"buildNumber":"1234",
+		"securityPolicies":[
+			],
+		"securityModes":[
+			],
 		"userManager":[
 			{
 			"userName":"admin",
@@ -22,6 +26,7 @@
 			"userName":"system",
 			"password":"admin888"
 			}
-		]
+		],
+		"realDataFlushTime":10
 	}
 }
