@@ -1,0 +1,29 @@
+{
+	"ef5":{
+		"host":"196.168.65.103",
+		"port":2006,
+		"user":"admin",
+		"pass":"admin888"
+	},
+	"server":{
+		"port":4334,
+		"resourcePath":"ua/ef5",
+		"applicationName": "ef5",
+		"manufacturerName":"sundway",
+		"productUrl":"likong",
+		"productName":"Ef5OPCUAServer",
+		"buildNumber":"1234",
+		"securityPolicies":[
+			],
+		"securityModes":[
+			],
+		"userManager":[
+			{
+				"userName":"admin",
+				"password":"admin888"
+			}
+	
+		],
+		"realDataFlushTime":10
+	}
+}
