@@ -34,7 +34,7 @@
   "dependencies": {
     "async": "~0.2.0",
     "readable-stream": "~1.0.2",
-    "semver": "~1.1.4"
+    "semver": "~6.3.0"
   },
   "devDependencies": {
     "vows": "0.7.0",
